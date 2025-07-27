@@ -1,26 +1,40 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0f;
+  --foreground: #e6e6f0;
+  --werewolf-gold: #ffd700;
+  --werewolf-silver: #c0c0c0;
+  --moon-glow: #b8860b;
+  --blood-red: #8b0000;
+  --wolf-gray: #2c2c34;
+  --midnight: #1a1a2e;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-werewolf-gold: var(--werewolf-gold);
+  --color-werewolf-silver: var(--werewolf-silver);
+  --color-moon-glow: var(--moon-glow);
+  --color-blood-red: var(--blood-red);
+  --color-wolf-gray: var(--wolf-gray);
+  --color-midnight: var(--midnight);
 }
 
 body {
-  background: var(--background);
+  background: linear-gradient(135deg, var(--background) 0%, var(--midnight) 100%);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  min-height: 100vh;
+}
+
+.moon-glow {
+  box-shadow: 0 0 20px rgba(184, 134, 11, 0.3);
+}
+
+.werewolf-card {
+  background: linear-gradient(145deg, var(--wolf-gray), var(--midnight));
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
