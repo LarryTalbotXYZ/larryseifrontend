@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { Moon } from 'lucide-react';
 import TradingInterface from '@/components/TradingInterface';
@@ -15,10 +16,10 @@ export default function Dashboard() {
       {/* Header */}
       <header className="border-b border-[#ffd700]/20 backdrop-blur-sm">
         <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
+          <Link href="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
             <Moon className="w-8 h-8 text-[#ffd700] moon-glow" />
             <h1 className="text-2xl font-bold text-[#ffd700]">LARRY TALBOT</h1>
-          </div>
+          </Link>
           <ConnectButton.Custom>
             {({ openConnectModal, account, mounted }) => {
               const ready = mounted;
