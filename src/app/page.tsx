@@ -18,6 +18,9 @@ export default function Home() {
             <h1 className="text-2xl font-bold text-[#ffd700]">LARRY TALBOT</h1>
           </Link>
           <div className="flex items-center space-x-4">
+            <Link href="/docs" className="text-[#e6e6f0] hover:text-[#ffd700] transition-colors">
+              Docs
+            </Link>
             <Link href="/dashboard" className="text-[#e6e6f0] hover:text-[#ffd700] transition-colors">
               Dashboard
             </Link>

@@ -20,7 +20,11 @@ export default function Dashboard() {
             <Moon className="w-8 h-8 text-[#ffd700] moon-glow" />
             <h1 className="text-2xl font-bold text-[#ffd700]">LARRY TALBOT</h1>
           </Link>
-          <ConnectButton.Custom>
+          <div className="flex items-center space-x-4">
+            <Link href="/docs" className="text-[#e6e6f0] hover:text-[#ffd700] transition-colors">
+              Docs
+            </Link>
+            <ConnectButton.Custom>
             {({ openConnectModal, account, mounted }) => {
               const ready = mounted;
               const connected = ready && account;
@@ -63,6 +67,7 @@ export default function Dashboard() {
               );
             }}
           </ConnectButton.Custom>
+          </div>
         </div>
       </header>
 
