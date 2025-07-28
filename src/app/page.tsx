@@ -13,15 +13,15 @@ export default function Home() {
       {/* Header */}
       <header className="border-b border-[#ffd700]/20 backdrop-blur-sm">
         <div className="container mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
-            <Moon className="w-8 h-8 text-[#ffd700] moon-glow" />
-            <h1 className="text-2xl font-bold text-[#ffd700]">LARRY TALBOT</h1>
+          <Link href="/" className="flex items-center space-x-2 sm:space-x-3 hover:opacity-80 transition-opacity">
+            <Moon className="w-6 h-6 sm:w-8 sm:h-8 text-[#ffd700] moon-glow" />
+            <h1 className="text-lg sm:text-xl lg:text-2xl font-bold text-[#ffd700]">LARRY TALBOT</h1>
           </Link>
-          <div className="flex items-center space-x-4">
-            <Link href="/docs" className="text-[#e6e6f0] hover:text-[#ffd700] transition-colors">
+          <div className="flex items-center space-x-2 sm:space-x-4">
+            <Link href="/docs" className="text-[#e6e6f0] hover:text-[#ffd700] transition-colors text-sm sm:text-base">
               Docs
             </Link>
-            <Link href="/dashboard" className="text-[#e6e6f0] hover:text-[#ffd700] transition-colors">
+            <Link href="/dashboard" className="text-[#e6e6f0] hover:text-[#ffd700] transition-colors text-sm sm:text-base hidden sm:inline">
               Dashboard
             </Link>
             <ConnectButton />
