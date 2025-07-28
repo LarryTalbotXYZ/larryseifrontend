@@ -272,7 +272,7 @@ export default function Home() {
                     <li>Market volatility can cause rapid value changes</li>
                     <li>Regulatory risks in DeFi protocols</li>
                   </ul>
-                  <p className="text-[#8b0000] font-semibold">Only invest what you can afford to lose. The werewolf's curse is powerful, but not without danger.</p>
+                  <p className="text-[#8b0000] font-semibold">Only invest what you can afford to lose. The werewolf&apos;s curse is powerful, but not without danger.</p>
                 </div>
               </div>
             </div>

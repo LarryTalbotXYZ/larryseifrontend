@@ -6,7 +6,6 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { Moon } from 'lucide-react';
 import TradingInterface from '@/components/TradingInterface';
 import LoanDashboard from '@/components/LoanDashboard';
-import { useLarryContract } from '@/hooks/useLarryContract';
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState('buy');

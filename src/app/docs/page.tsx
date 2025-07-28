@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { Moon, ArrowLeft, Shield, Zap, DollarSign, TrendingUp, AlertTriangle, Clock, Users } from 'lucide-react';
+import { Moon, ArrowLeft, Shield, Zap, DollarSign, TrendingUp, AlertTriangle, Users } from 'lucide-react';
 
 export default function Docs() {
   return (
@@ -61,7 +61,7 @@ export default function Docs() {
 
           <h3 className="text-2xl font-bold text-[#ffd700] mb-4">Intrinsic Value Mechanism</h3>
           <div className="space-y-4 text-[#e6e6f0]/90">
-            <p>Each LARRY token is <strong className="text-[#ffd700]">backed by SEI tokens</strong> deposited in the protocol's smart contract. This SEI token pool ensures real, liquid value behind each token.</p>
+            <p>Each LARRY token is <strong className="text-[#ffd700]">backed by SEI tokens</strong> deposited in the protocol&apos;s smart contract. This SEI token pool ensures real, liquid value behind each token.</p>
             <p>Through burning mechanisms and accumulated fees, <strong className="text-[#ffd700]">the ratio of SEI per LARRY can only increase</strong>, creating deflationary pressure that benefits long-term holders.</p>
             <p>The werewolf curse ensures that when the moon is full (liquidations occur), the pack grows stronger through strategic token burning.</p>
           </div>
@@ -101,7 +101,7 @@ export default function Docs() {
           </h2>
           
           <div className="space-y-6 text-[#e6e6f0]/90">
-            <p>LARRY's leverage system allows advanced traders to amplify their positions by borrowing SEI against their LARRY holdings.</p>
+            <p>LARRY&apos;s leverage system allows advanced traders to amplify their positions by borrowing SEI against their LARRY holdings.</p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
@@ -221,7 +221,7 @@ export default function Docs() {
               <li>Potential total loss of invested capital</li>
               <li>Regulatory risks in DeFi protocols</li>
             </ul>
-            <p className="text-[#8b0000] font-semibold">Please proceed with due diligence and only invest what you can afford to lose. The werewolf's curse is powerful, but not without danger.</p>
+            <p className="text-[#8b0000] font-semibold">Please proceed with due diligence and only invest what you can afford to lose. The werewolf&apos;s curse is powerful, but not without danger.</p>
           </div>
         </section>
 
