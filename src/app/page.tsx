@@ -56,7 +56,7 @@ export default function Home() {
             <div className="werewolf-card p-6 rounded-xl">
               <TrendingUp className="w-8 h-8 text-[#ffd700] mx-auto mb-4" />
               <h3 className="text-2xl font-bold text-[#ffd700] mb-2">
-                ${currentPrice ? currentPrice.toFixed(6) : '0.000000'}
+                {currentPrice ? `${currentPrice.toFixed(6)} SEI` : '0.000000 SEI'}
               </h3>
               <p className="text-[#e6e6f0]/70">Current Price</p>
             </div>
