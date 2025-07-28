@@ -102,14 +102,14 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
   }
 
   return (
-    <div className="werewolf-card p-8 rounded-2xl">
+    <div className="werewolf-card p-4 sm:p-6 lg:p-8 rounded-2xl">
       {/* Tab Navigation */}
-      <div className="flex space-x-4 mb-8">
+      <div className="grid grid-cols-2 sm:flex sm:space-x-4 gap-2 sm:gap-0 mb-6 sm:mb-8">
         {['buy', 'sell', 'leverage', 'borrow'].map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`px-6 py-3 rounded-lg font-semibold capitalize transition-all ${
+            className={`px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold capitalize transition-all text-sm sm:text-base ${
               activeTab === tab
                 ? 'bg-[#ffd700] text-[#0a0a0f]'
                 : 'bg-[#2c2c34] text-[#e6e6f0] hover:bg-[#3c3c44]'
@@ -121,14 +121,14 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
       </div>
 
       {/* User Balances */}
-      <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/10 mb-6">
+      <div className="bg-[#1a1a2e] p-3 sm:p-4 rounded-lg border border-[#ffd700]/10 mb-4 sm:mb-6">
         <div className="flex justify-between items-center mb-2">
-          <span className="text-[#e6e6f0]/70">Your LARRY Balance:</span>
-          <span className="text-[#ffd700] font-semibold">{balance} LARRY</span>
+          <span className="text-[#e6e6f0]/70 text-sm sm:text-base">Your LARRY Balance:</span>
+          <span className="text-[#ffd700] font-semibold text-sm sm:text-base">{balance} LARRY</span>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-[#e6e6f0]/70">Your SEI Balance:</span>
-          <span className="text-[#c0c0c0] font-semibold">
+          <span className="text-[#e6e6f0]/70 text-sm sm:text-base">Your SEI Balance:</span>
+          <span className="text-[#c0c0c0] font-semibold text-sm sm:text-base">
             {seiBalance ? parseFloat(formatEther(seiBalance.value)).toFixed(4) : '0.0000'} SEI
           </span>
         </div>
@@ -147,24 +147,24 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
                 placeholder="0.0"
                 value={inputAmount}
                 onChange={(e) => setInputAmount(e.target.value)}
-                className="w-full bg-[#1a1a2e] border border-[#ffd700]/20 rounded-lg px-4 py-3 pr-16 text-[#e6e6f0] placeholder-[#e6e6f0]/50 focus:border-[#ffd700] focus:outline-none"
+                className="w-full bg-[#1a1a2e] border border-[#ffd700]/20 rounded-lg px-3 sm:px-4 py-2 sm:py-3 pr-12 sm:pr-16 text-[#e6e6f0] placeholder-[#e6e6f0]/50 focus:border-[#ffd700] focus:outline-none text-sm sm:text-base"
               />
               <button
                 onClick={handleMaxClick}
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-[#ffd700] text-[#0a0a0f] px-3 py-1 rounded text-sm font-semibold hover:bg-[#b8860b] transition-colors"
+                className="absolute right-1 sm:right-2 top-1/2 transform -translate-y-1/2 bg-[#ffd700] text-[#0a0a0f] px-2 sm:px-3 py-1 rounded text-xs sm:text-sm font-semibold hover:bg-[#b8860b] transition-colors"
               >
                 Max
               </button>
             </div>
           </div>
-          <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/10">
-            <div className="flex justify-between text-sm">
+          <div className="bg-[#1a1a2e] p-3 sm:p-4 rounded-lg border border-[#ffd700]/10">
+            <div className="flex justify-between text-xs sm:text-sm">
               <span className="text-[#e6e6f0]/70">You will receive:</span>
               <span className="text-[#ffd700] font-semibold">
                 {outputAmount} {activeTab === 'buy' ? 'LARRY' : 'SEI'}
               </span>
             </div>
-            <div className="flex justify-between text-sm mt-2">
+            <div className="flex justify-between text-xs sm:text-sm mt-2">
               <span className="text-[#e6e6f0]/70">Fee:</span>
               <span className="text-[#e6e6f0]">0.1%</span>
             </div>
@@ -172,7 +172,7 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
           <button
             onClick={handleTrade}
             disabled={isPending || !inputAmount}
-            className="w-full bg-gradient-to-r from-[#ffd700] to-[#b8860b] text-[#0a0a0f] py-4 rounded-lg font-bold text-lg hover:from-[#b8860b] hover:to-[#ffd700] transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-gradient-to-r from-[#ffd700] to-[#b8860b] text-[#0a0a0f] py-3 sm:py-4 rounded-lg font-bold text-base sm:text-lg hover:from-[#b8860b] hover:to-[#ffd700] transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isPending ? 'Processing...' : `${activeTab === 'buy' ? 'Buy' : 'Sell'} LARRY`}
           </button>
@@ -189,7 +189,7 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
               placeholder="0.0"
               value={inputAmount}
               onChange={(e) => setInputAmount(e.target.value)}
-              className="w-full bg-[#1a1a2e] border border-[#ffd700]/20 rounded-lg px-4 py-3 text-[#e6e6f0] placeholder-[#e6e6f0]/50 focus:border-[#ffd700] focus:outline-none"
+              className="w-full bg-[#1a1a2e] border border-[#ffd700]/20 rounded-lg px-3 sm:px-4 py-2 sm:py-3 text-[#e6e6f0] placeholder-[#e6e6f0]/50 focus:border-[#ffd700] focus:outline-none text-sm sm:text-base"
             />
           </div>
           <div>
@@ -200,15 +200,15 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
               max="365"
               value={days}
               onChange={(e) => setDays(e.target.value)}
-              className="w-full bg-[#1a1a2e] border border-[#ffd700]/20 rounded-lg px-4 py-3 text-[#e6e6f0] placeholder-[#e6e6f0]/50 focus:border-[#ffd700] focus:outline-none"
+              className="w-full bg-[#1a1a2e] border border-[#ffd700]/20 rounded-lg px-3 sm:px-4 py-2 sm:py-3 text-[#e6e6f0] placeholder-[#e6e6f0]/50 focus:border-[#ffd700] focus:outline-none text-sm sm:text-base"
             />
           </div>
-          <div className="bg-[#8b0000]/20 p-4 rounded-lg border border-[#8b0000]/40">
-            <div className="flex justify-between text-sm">
+          <div className="bg-[#8b0000]/20 p-3 sm:p-4 rounded-lg border border-[#8b0000]/40">
+            <div className="flex justify-between text-xs sm:text-sm">
               <span className="text-[#e6e6f0]/70">Interest Rate:</span>
               <span className="text-[#8b0000] font-semibold">3.9% APR</span>
             </div>
-            <div className="flex justify-between text-sm mt-2">
+            <div className="flex justify-between text-xs sm:text-sm mt-2">
               <span className="text-[#e6e6f0]/70">Leverage Fee:</span>
               <span className="text-[#e6e6f0]">1%</span>
             </div>
@@ -234,7 +234,7 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
               placeholder="0.0"
               value={inputAmount}
               onChange={(e) => setInputAmount(e.target.value)}
-              className="w-full bg-[#1a1a2e] border border-[#ffd700]/20 rounded-lg px-4 py-3 text-[#e6e6f0] placeholder-[#e6e6f0]/50 focus:border-[#ffd700] focus:outline-none"
+              className="w-full bg-[#1a1a2e] border border-[#ffd700]/20 rounded-lg px-3 sm:px-4 py-2 sm:py-3 text-[#e6e6f0] placeholder-[#e6e6f0]/50 focus:border-[#ffd700] focus:outline-none text-sm sm:text-base"
             />
           </div>
           <div>
@@ -245,15 +245,15 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
               max="365"
               value={days}
               onChange={(e) => setDays(e.target.value)}
-              className="w-full bg-[#1a1a2e] border border-[#ffd700]/20 rounded-lg px-4 py-3 text-[#e6e6f0] placeholder-[#e6e6f0]/50 focus:border-[#ffd700] focus:outline-none"
+              className="w-full bg-[#1a1a2e] border border-[#ffd700]/20 rounded-lg px-3 sm:px-4 py-2 sm:py-3 text-[#e6e6f0] placeholder-[#e6e6f0]/50 focus:border-[#ffd700] focus:outline-none text-sm sm:text-base"
             />
           </div>
-          <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/10">
-            <div className="flex justify-between text-sm">
+          <div className="bg-[#1a1a2e] p-3 sm:p-4 rounded-lg border border-[#ffd700]/10">
+            <div className="flex justify-between text-xs sm:text-sm">
               <span className="text-[#e6e6f0]/70">Required LARRY Collateral:</span>
               <span className="text-[#ffd700] font-semibold">{outputAmount} LARRY</span>
             </div>
-            <div className="flex justify-between text-sm mt-2">
+            <div className="flex justify-between text-xs sm:text-sm mt-2">
               <span className="text-[#e6e6f0]/70">Interest Fee:</span>
               <span className="text-[#e6e6f0]">3.9% APR</span>
             </div>

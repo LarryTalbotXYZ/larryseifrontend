@@ -12,7 +12,7 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-br from-[#0a0a0f] via-[#1a1a2e] to-[#0a0a0f]">
       {/* Header */}
       <header className="border-b border-[#ffd700]/20 backdrop-blur-sm">
-        <div className="container mx-auto px-6 py-4 flex items-center justify-between">
+        <div className="container mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
             <Moon className="w-8 h-8 text-[#ffd700] moon-glow" />
             <h1 className="text-2xl font-bold text-[#ffd700]">LARRY TALBOT</h1>
@@ -30,18 +30,18 @@ export default function Home() {
       </header>
 
       {/* Hero Section */}
-      <section className="container mx-auto px-6 py-20 text-center">
+      <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-20 text-center">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-6xl font-bold mb-6 bg-gradient-to-r from-[#ffd700] via-[#c0c0c0] to-[#ffd700] bg-clip-text text-transparent">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-[#ffd700] via-[#c0c0c0] to-[#ffd700] bg-clip-text text-transparent">
             Transform Under the Moon
           </h2>
-          <p className="text-xl text-[#e6e6f0]/80 mb-12 leading-relaxed">
+          <p className="text-lg sm:text-xl text-[#e6e6f0]/80 mb-12 leading-relaxed px-4 sm:px-0">
             Larry Talbot rises on Sei Network. Buy, leverage, and borrow LARRY tokens 
             with the power of the werewolf. When the moon is full, fortunes are made.
           </p>
           
           {/* CTA Button */}
-          <Link href="/dashboard" className="inline-flex items-center bg-gradient-to-r from-[#ffd700] to-[#b8860b] text-[#0a0a0f] px-8 py-4 rounded-lg font-bold text-lg hover:from-[#b8860b] hover:to-[#ffd700] transition-all transform hover:scale-105 mb-16">
+          <Link href="/dashboard" className="inline-flex items-center bg-gradient-to-r from-[#ffd700] to-[#b8860b] text-[#0a0a0f] px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-bold text-base sm:text-lg hover:from-[#b8860b] hover:to-[#ffd700] transition-all transform hover:scale-105 mb-16">
             Launch App
             <ArrowRight className="w-5 h-5 ml-2" />
           </Link>
@@ -70,13 +70,13 @@ export default function Home() {
       </section>
 
       {/* How It Works */}
-      <section className="container mx-auto px-6 py-20 border-t border-[#ffd700]/20">
-        <div className="text-center mb-16">
-          <h3 className="text-4xl font-bold text-[#ffd700] mb-4">How LARRY Works</h3>
-          <p className="text-xl text-[#e6e6f0]/80">Understanding the werewolf-powered DeFi protocol</p>
+      <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-20 border-t border-[#ffd700]/20">
+        <div className="text-center mb-12 sm:mb-16">
+          <h3 className="text-3xl sm:text-4xl font-bold text-[#ffd700] mb-4">How LARRY Works</h3>
+          <p className="text-lg sm:text-xl text-[#e6e6f0]/80 px-4 sm:px-0">Understanding the werewolf-powered DeFi protocol</p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-12 sm:mb-16">
           <div className="werewolf-card p-8 rounded-xl">
             <TrendingUp className="w-12 h-12 text-[#ffd700] mb-6" />
             <h4 className="text-2xl font-bold text-[#ffd700] mb-4">SEI-Backed Tokens</h4>
@@ -102,13 +102,13 @@ export default function Home() {
       </section>
 
       {/* Trading Features */}
-      <section className="container mx-auto px-6 py-20 border-t border-[#ffd700]/20">
-        <div className="text-center mb-16">
-          <h3 className="text-4xl font-bold text-[#ffd700] mb-4">Trading Features</h3>
-          <p className="text-xl text-[#e6e6f0]/80">Advanced DeFi tools for the modern werewolf</p>
+      <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-20 border-t border-[#ffd700]/20">
+        <div className="text-center mb-12 sm:mb-16">
+          <h3 className="text-3xl sm:text-4xl font-bold text-[#ffd700] mb-4">Trading Features</h3>
+          <p className="text-lg sm:text-xl text-[#e6e6f0]/80 px-4 sm:px-0">Advanced DeFi tools for the modern werewolf</p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           <div className="werewolf-card p-8 rounded-xl">
             <Zap className="w-12 h-12 text-[#ffd700] mb-6" />
             <h4 className="text-2xl font-bold text-[#ffd700] mb-4">Leverage Trading</h4>
@@ -152,10 +152,10 @@ export default function Home() {
       </section>
 
       {/* Contract Information */}
-      <section className="container mx-auto px-6 py-20 border-t border-[#ffd700]/20">
-        <div className="text-center mb-16">
-          <h3 className="text-4xl font-bold text-[#ffd700] mb-4">Contract Details</h3>
-          <p className="text-xl text-[#e6e6f0]/80">Deployed on Sei Network</p>
+      <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-20 border-t border-[#ffd700]/20">
+        <div className="text-center mb-12 sm:mb-16">
+          <h3 className="text-3xl sm:text-4xl font-bold text-[#ffd700] mb-4">Contract Details</h3>
+          <p className="text-lg sm:text-xl text-[#e6e6f0]/80 px-4 sm:px-0">Deployed on Sei Network</p>
         </div>
         
         <div className="max-w-4xl mx-auto">
@@ -181,20 +181,20 @@ export default function Home() {
             
             <div className="mt-6 bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
               <h4 className="text-[#ffd700] font-semibold mb-2">Contract Address</h4>
-              <p className="text-[#e6e6f0] font-mono text-sm break-all">0x888d81e3ea5E8362B5f69188CBCF34Fa8da4b888</p>
+              <p className="text-[#e6e6f0] font-mono text-xs sm:text-sm break-all">0x888d81e3ea5E8362B5f69188CBCF34Fa8da4b888</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Tokenomics */}
-      <section className="container mx-auto px-6 py-20 border-t border-[#ffd700]/20">
-        <div className="text-center mb-16">
-          <h3 className="text-4xl font-bold text-[#ffd700] mb-4">Tokenomics</h3>
-          <p className="text-xl text-[#e6e6f0]/80">Deflationary mechanics benefit the pack</p>
+      <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-20 border-t border-[#ffd700]/20">
+        <div className="text-center mb-12 sm:mb-16">
+          <h3 className="text-3xl sm:text-4xl font-bold text-[#ffd700] mb-4">Tokenomics</h3>
+          <p className="text-lg sm:text-xl text-[#e6e6f0]/80 px-4 sm:px-0">Deflationary mechanics benefit the pack</p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           <div className="werewolf-card p-8 rounded-xl text-center">
             <Target className="w-12 h-12 text-[#ffd700] mx-auto mb-6" />
             <h4 className="text-xl font-bold text-[#ffd700] mb-4">Burning Mechanisms</h4>
@@ -228,13 +228,13 @@ export default function Home() {
       </section>
 
       {/* Features */}
-      <section className="container mx-auto px-6 py-20 border-t border-[#ffd700]/20">
-        <div className="text-center mb-16">
-          <h3 className="text-4xl font-bold text-[#ffd700] mb-4">The Wolf&apos;s Arsenal</h3>
-          <p className="text-xl text-[#e6e6f0]/80">Advanced DeFi features for the modern trader</p>
+      <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-20 border-t border-[#ffd700]/20">
+        <div className="text-center mb-12 sm:mb-16">
+          <h3 className="text-3xl sm:text-4xl font-bold text-[#ffd700] mb-4">The Wolf&apos;s Arsenal</h3>
+          <p className="text-lg sm:text-xl text-[#e6e6f0]/80 px-4 sm:px-0">Advanced DeFi features for the modern trader</p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           <div className="werewolf-card p-8 rounded-xl text-center">
             <Moon className="w-12 h-12 text-[#ffd700] mx-auto mb-6 moon-glow" />
             <h4 className="text-xl font-bold text-[#ffd700] mb-4">Moon-Backed Value</h4>
@@ -256,7 +256,7 @@ export default function Home() {
       </section>
 
       {/* Risk Warning */}
-      <section className="container mx-auto px-6 py-20 border-t border-[#8b0000]/40">
+      <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-20 border-t border-[#8b0000]/40">
         <div className="max-w-4xl mx-auto">
           <div className="bg-[#8b0000]/20 p-8 rounded-xl border border-[#8b0000]/40">
             <div className="flex items-start mb-4">
@@ -282,10 +282,10 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="border-t border-[#ffd700]/20 py-8">
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-4 sm:px-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-[#e6e6f0]/60">© 2024 Larry Talbot. The curse of the werewolf lives on Sei Network.</p>
-            <div className="flex items-center space-x-6">
+            <div className="flex items-center space-x-4 sm:space-x-6">
               <a 
                 href="https://t.me/btbfinance" 
                 target="_blank" 

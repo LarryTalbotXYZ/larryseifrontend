@@ -14,7 +14,7 @@ export default function Dashboard() {
     <div className="min-h-screen bg-gradient-to-br from-[#0a0a0f] via-[#1a1a2e] to-[#0a0a0f]">
       {/* Header */}
       <header className="border-b border-[#ffd700]/20 backdrop-blur-sm">
-        <div className="container mx-auto px-6 py-4 flex items-center justify-between">
+        <div className="container mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
             <Moon className="w-8 h-8 text-[#ffd700] moon-glow" />
             <h1 className="text-2xl font-bold text-[#ffd700]">LARRY TALBOT</h1>
@@ -71,21 +71,21 @@ export default function Dashboard() {
       </header>
 
       {/* Dashboard Header */}
-      <section className="container mx-auto px-6 py-8">
+      <section className="container mx-auto px-4 sm:px-6 py-6 sm:py-8">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-[#ffd700] mb-8">Dashboard</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-[#ffd700] mb-6 sm:mb-8">Dashboard</h2>
         </div>
       </section>
 
       {/* Loan Dashboard */}
-      <section className="container mx-auto px-6">
+      <section className="container mx-auto px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
           <LoanDashboard />
         </div>
       </section>
 
       {/* Trading Interface */}
-      <section className="container mx-auto px-6 pb-20">
+      <section className="container mx-auto px-4 sm:px-6 pb-12 sm:pb-20">
         <div className="max-w-2xl mx-auto">
           <TradingInterface activeTab={activeTab} setActiveTab={setActiveTab} />
         </div>
@@ -93,10 +93,10 @@ export default function Dashboard() {
 
       {/* Footer */}
       <footer className="border-t border-[#ffd700]/20 py-8">
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-4 sm:px-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-[#e6e6f0]/60">© 2024 Larry Talbot. The curse of the werewolf lives on Sei Network.</p>
-            <div className="flex items-center space-x-6">
+            <div className="flex items-center space-x-4 sm:space-x-6">
               <a 
                 href="https://t.me/btbfinance" 
                 target="_blank" 

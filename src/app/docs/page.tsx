@@ -9,7 +9,7 @@ export default function Docs() {
     <div className="min-h-screen bg-gradient-to-br from-[#0a0a0f] via-[#1a1a2e] to-[#0a0a0f]">
       {/* Header */}
       <header className="border-b border-[#ffd700]/20 backdrop-blur-sm">
-        <div className="container mx-auto px-6 py-4 flex items-center justify-between">
+        <div className="container mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
             <Moon className="w-8 h-8 text-[#ffd700] moon-glow" />
             <h1 className="text-2xl font-bold text-[#ffd700]">LARRY TALBOT</h1>
@@ -24,30 +24,30 @@ export default function Docs() {
       </header>
 
       {/* Documentation Content */}
-      <div className="container mx-auto px-6 py-12 max-w-4xl">
+      <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12 max-w-4xl">
         <Link href="/" className="inline-flex items-center text-[#ffd700] hover:text-[#b8860b] transition-colors mb-8">
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to Home
         </Link>
 
-        <h1 className="text-5xl font-bold text-[#ffd700] mb-4">LARRY Token Documentation</h1>
-        <p className="text-xl text-[#e6e6f0]/80 mb-12">Understanding the werewolf-powered DeFi protocol on Sei Network</p>
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#ffd700] mb-4">LARRY Token Documentation</h1>
+        <p className="text-lg sm:text-xl text-[#e6e6f0]/80 mb-8 sm:mb-12">Understanding the werewolf-powered DeFi protocol on Sei Network</p>
 
         {/* Token Info Section */}
-        <section className="werewolf-card p-8 rounded-xl mb-8">
-          <h2 className="text-3xl font-bold text-[#ffd700] mb-6 flex items-center">
-            <Shield className="w-8 h-8 mr-3" />
+        <section className="werewolf-card p-4 sm:p-6 lg:p-8 rounded-xl mb-6 sm:mb-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-[#ffd700] mb-4 sm:mb-6 flex items-center">
+            <Shield className="w-6 h-6 sm:w-8 sm:h-8 mr-3" />
             Token Information
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
             <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
               <h3 className="text-[#ffd700] font-semibold mb-2">Network</h3>
               <p className="text-[#e6e6f0]">Sei Network</p>
             </div>
             <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
               <h3 className="text-[#ffd700] font-semibold mb-2">Contract Address</h3>
-              <p className="text-[#e6e6f0] font-mono text-sm break-all">0x888d81e3ea5E8362B5f69188CBCF34Fa8da4b888</p>
+              <p className="text-[#e6e6f0] font-mono text-xs sm:text-sm break-all">0x888d81e3ea5E8362B5f69188CBCF34Fa8da4b888</p>
             </div>
             <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
               <h3 className="text-[#ffd700] font-semibold mb-2">Max Total Supply</h3>
@@ -59,7 +59,7 @@ export default function Docs() {
             </div>
           </div>
 
-          <h3 className="text-2xl font-bold text-[#ffd700] mb-4">Intrinsic Value Mechanism</h3>
+          <h3 className="text-xl sm:text-2xl font-bold text-[#ffd700] mb-4">Intrinsic Value Mechanism</h3>
           <div className="space-y-4 text-[#e6e6f0]/90">
             <p>Each LARRY token is <strong className="text-[#ffd700]">backed by SEI tokens</strong> deposited in the protocol&apos;s smart contract. This SEI token pool ensures real, liquid value behind each token.</p>
             <p>Through burning mechanisms and accumulated fees, <strong className="text-[#ffd700]">the ratio of SEI per LARRY can only increase</strong>, creating deflationary pressure that benefits long-term holders.</p>
@@ -68,7 +68,7 @@ export default function Docs() {
         </section>
 
         {/* How It Works Section */}
-        <section className="werewolf-card p-8 rounded-xl mb-8">
+        <section className="werewolf-card p-4 sm:p-6 lg:p-8 rounded-xl mb-6 sm:mb-8">
           <h2 className="text-3xl font-bold text-[#ffd700] mb-6 flex items-center">
             <TrendingUp className="w-8 h-8 mr-3" />
             How LARRY Works
@@ -94,7 +94,7 @@ export default function Docs() {
         </section>
 
         {/* Leverage Section */}
-        <section className="werewolf-card p-8 rounded-xl mb-8">
+        <section className="werewolf-card p-4 sm:p-6 lg:p-8 rounded-xl mb-6 sm:mb-8">
           <h2 className="text-3xl font-bold text-[#ffd700] mb-6 flex items-center">
             <Zap className="w-8 h-8 mr-3" />
             Leverage Trading
@@ -103,7 +103,7 @@ export default function Docs() {
           <div className="space-y-6 text-[#e6e6f0]/90">
             <p>LARRY&apos;s leverage system allows advanced traders to amplify their positions by borrowing SEI against their LARRY holdings.</p>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
                 <h3 className="text-[#ffd700] font-semibold mb-2">Leverage Fee</h3>
                 <p>Reduced from 2.5% to 1% for leveraged positions</p>
@@ -127,7 +127,7 @@ export default function Docs() {
         </section>
 
         {/* Loans Section */}
-        <section className="werewolf-card p-8 rounded-xl mb-8">
+        <section className="werewolf-card p-4 sm:p-6 lg:p-8 rounded-xl mb-6 sm:mb-8">
           <h2 className="text-3xl font-bold text-[#ffd700] mb-6 flex items-center">
             <DollarSign className="w-8 h-8 mr-3" />
             Borrowing & Loans
@@ -136,7 +136,7 @@ export default function Docs() {
           <div className="space-y-6 text-[#e6e6f0]/90">
             <p>Users can borrow SEI tokens using LARRY as collateral, unlocking liquidity without selling their position.</p>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
                 <h3 className="text-[#ffd700] font-semibold mb-2">Loan-to-Value</h3>
                 <p>Up to 99% of LARRY value</p>
@@ -165,7 +165,7 @@ export default function Docs() {
         </section>
 
         {/* Tokenomics Section */}
-        <section className="werewolf-card p-8 rounded-xl mb-8">
+        <section className="werewolf-card p-4 sm:p-6 lg:p-8 rounded-xl mb-6 sm:mb-8">
           <h2 className="text-3xl font-bold text-[#ffd700] mb-6 flex items-center">
             <Users className="w-8 h-8 mr-3" />
             Tokenomics & Mechanisms
@@ -184,7 +184,7 @@ export default function Docs() {
 
             <div>
               <h3 className="text-xl font-bold text-[#ffd700] mb-3">💰 Fee Structure</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
                   <h4 className="text-[#ffd700] font-semibold mb-2">Trading Fees</h4>
                   <p>Buy: 0.1% | Sell: 0.1%</p>
@@ -207,7 +207,7 @@ export default function Docs() {
         </section>
 
         {/* Risk Disclaimer */}
-        <section className="bg-[#8b0000]/20 p-8 rounded-xl border border-[#8b0000]/40 mb-8">
+        <section className="bg-[#8b0000]/20 p-4 sm:p-6 lg:p-8 rounded-xl border border-[#8b0000]/40 mb-6 sm:mb-8">
           <h2 className="text-2xl font-bold text-[#8b0000] mb-4 flex items-center">
             <AlertTriangle className="w-6 h-6 mr-3" />
             Risk Disclaimer
