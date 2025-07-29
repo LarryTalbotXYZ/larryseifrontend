@@ -36,8 +36,8 @@ export default function Home() {
             Transform Under the Moon
           </h2>
           <p className="text-lg sm:text-xl text-[#e6e6f0]/80 mb-12 leading-relaxed px-4 sm:px-0">
-            Larry Talbot rises on Sei Network. Buy, leverage, and borrow LARRY tokens 
-            with the power of the werewolf. When the moon is full, fortunes are made.
+            Larry Talbot builds v3,3 voting power on every network with each trade. Your fees become 
+            governance tokens, directing emissions back to LARRY pools. The flywheel strengthens across all chains.
           </p>
           
           {/* CTA Button */}
@@ -73,29 +73,29 @@ export default function Home() {
       <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-20 border-t border-[#ffd700]/20">
         <div className="text-center mb-12 sm:mb-16">
           <h3 className="text-3xl sm:text-4xl font-bold text-[#ffd700] mb-4">How LARRY Works</h3>
-          <p className="text-lg sm:text-xl text-[#e6e6f0]/80 px-4 sm:px-0">Understanding the werewolf-powered DeFi protocol</p>
+          <p className="text-lg sm:text-xl text-[#e6e6f0]/80 px-4 sm:px-0">Building v3,3 governance power across all networks</p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-12 sm:mb-16">
           <div className="werewolf-card p-8 rounded-xl">
             <TrendingUp className="w-12 h-12 text-[#ffd700] mb-6" />
-            <h4 className="text-2xl font-bold text-[#ffd700] mb-4">SEI-Backed Tokens</h4>
-            <p className="text-[#e6e6f0]/80 mb-4">Every LARRY token is backed by SEI deposits in the smart contract, ensuring intrinsic value.</p>
+            <h4 className="text-2xl font-bold text-[#ffd700] mb-4">Fees → v3,3 Power</h4>
+            <p className="text-[#e6e6f0]/80 mb-4">Every trading fee automatically purchases and locks governance tokens for maximum voting power.</p>
             <ul className="text-[#e6e6f0]/70 space-y-2 text-sm">
-              <li>• Price = Total SEI Backing ÷ Total LARRY Supply</li>
-              <li>• Deflationary mechanics through token burning</li>
-              <li>• Protocol fees increase backing ratio over time</li>
+              <li>• 0.05% fee on all DEX trading volume</li>
+              <li>• 100% of fees buy governance tokens</li>
+              <li>• Auto-lock for maximum voting periods</li>
             </ul>
           </div>
           
           <div className="werewolf-card p-8 rounded-xl">
             <Repeat className="w-12 h-12 text-[#ffd700] mb-6" />
-            <h4 className="text-2xl font-bold text-[#ffd700] mb-4">Buy & Sell</h4>
-            <p className="text-[#e6e6f0]/80 mb-4">Simple trading with built-in price protection and liquidity.</p>
+            <h4 className="text-2xl font-bold text-[#ffd700] mb-4">Vote → Higher APR</h4>
+            <p className="text-[#e6e6f0]/80 mb-4">veAERO votes direct AERO emissions to LARRY pools, boosting liquidity rewards.</p>
             <ul className="text-[#e6e6f0]/70 space-y-2 text-sm">
-              <li>• 0.1% trading fee on buy/sell</li>
-              <li>• Instant liquidity from contract backing</li>
-              <li>• Max buttons for easy position sizing</li>
+              <li>• Weekly epoch voting on Aerodrome</li>
+              <li>• All votes go to LARRY/ETH pool</li>
+              <li>• Higher APR attracts more liquidity</li>
             </ul>
           </div>
         </div>
@@ -187,42 +187,131 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Tokenomics */}
+      {/* LARRY v3,3 Flywheel */}
       <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-20 border-t border-[#ffd700]/20">
         <div className="text-center mb-12 sm:mb-16">
-          <h3 className="text-3xl sm:text-4xl font-bold text-[#ffd700] mb-4">Tokenomics</h3>
-          <p className="text-lg sm:text-xl text-[#e6e6f0]/80 px-4 sm:px-0">Deflationary mechanics benefit the pack</p>
+          <h3 className="text-3xl sm:text-4xl font-bold text-[#ffd700] mb-4">LARRY v3,3 Flywheel</h3>
+          <p className="text-lg sm:text-xl text-[#e6e6f0]/80 px-4 sm:px-0">Building voting power on every network with v3,3 DEXs</p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-          <div className="werewolf-card p-8 rounded-xl text-center">
-            <Target className="w-12 h-12 text-[#ffd700] mx-auto mb-6" />
-            <h4 className="text-xl font-bold text-[#ffd700] mb-4">Burning Mechanisms</h4>
-            <ul className="text-[#e6e6f0]/70 space-y-2 text-sm">
-              <li>• Liquidated loans burn collateral</li>
-              <li>• Flash close burns LARRY</li>
-              <li>• Initial 1% burn on launch</li>
-            </ul>
+        {/* Flywheel Visualization */}
+        <div className="max-w-5xl mx-auto mb-12">
+          <div className="werewolf-card p-8 rounded-xl">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+              <div className="space-y-6">
+                <div className="flex items-center space-x-4 p-4 bg-[#1a1a2e] rounded-lg border border-[#ffd700]/20">
+                  <div className="w-8 h-8 bg-[#ffd700] rounded-full flex items-center justify-center text-[#0a0a0f] font-bold text-sm">1</div>
+                  <div>
+                    <div className="text-[#ffd700] font-semibold">LARRY Trading Fees</div>
+                    <div className="text-[#e6e6f0]/70 text-sm">0.05% of all trading volume</div>
+                  </div>
+                </div>
+                
+                <div className="flex items-center space-x-4 p-4 bg-[#1a1a2e] rounded-lg border border-[#ffd700]/20">
+                  <div className="w-8 h-8 bg-[#ffd700] rounded-full flex items-center justify-center text-[#0a0a0f] font-bold text-sm">2</div>
+                  <div>
+                    <div className="text-[#ffd700] font-semibold">Buy v3,3 Tokens</div>
+                    <div className="text-[#e6e6f0]/70 text-sm">100% of fees → governance tokens</div>
+                  </div>
+                </div>
+                
+                <div className="flex items-center space-x-4 p-4 bg-[#1a1a2e] rounded-lg border border-[#ffd700]/20">
+                  <div className="w-8 h-8 bg-[#ffd700] rounded-full flex items-center justify-center text-[#0a0a0f] font-bold text-sm">3</div>
+                  <div>
+                    <div className="text-[#ffd700] font-semibold">Lock for Power</div>
+                    <div className="text-[#e6e6f0]/70 text-sm">Max lock periods for voting power</div>
+                  </div>
+                </div>
+                
+                <div className="flex items-center space-x-4 p-4 bg-[#1a1a2e] rounded-lg border border-[#ffd700]/20">
+                  <div className="w-8 h-8 bg-[#ffd700] rounded-full flex items-center justify-center text-[#0a0a0f] font-bold text-sm">4</div>
+                  <div>
+                    <div className="text-[#ffd700] font-semibold">Vote Emissions</div>
+                    <div className="text-[#e6e6f0]/70 text-sm">Direct rewards to LARRY pools</div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="text-center space-y-6">
+                <div className="relative">
+                  <div className="w-32 h-32 mx-auto border-4 border-[#ffd700] rounded-full flex items-center justify-center bg-gradient-to-br from-[#ffd700]/20 to-transparent">
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-[#ffd700]">∞</div>
+                      <div className="text-xs text-[#e6e6f0]/70">FLYWHEEL</div>
+                    </div>
+                  </div>
+                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-[#ffd700] rounded-full animate-pulse"></div>
+                </div>
+                
+                <div className="space-y-2">
+                  <div className="text-[#ffd700] font-semibold">Higher APR → More Liquidity</div>
+                  <div className="text-[#e6e6f0]/70 text-sm">→ More Trading → More Fees</div>
+                  <div className="text-[#e6e6f0]/70 text-sm">→ More Tokens → More Voting Power</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Flywheel Benefits */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 sm:gap-8">
+          <div className="werewolf-card p-6 rounded-xl text-center">
+            <div className="w-12 h-12 bg-[#ffd700]/20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <DollarSign className="w-6 h-6 text-[#ffd700]" />
+            </div>
+            <h4 className="text-lg font-bold text-[#ffd700] mb-2">Fee Conversion</h4>
+            <div className="text-[#e6e6f0]/70 text-sm">100% of trading fees automatically purchase governance tokens</div>
           </div>
           
-          <div className="werewolf-card p-8 rounded-xl text-center">
-            <BarChart3 className="w-12 h-12 text-[#ffd700] mx-auto mb-6" />
-            <h4 className="text-xl font-bold text-[#ffd700] mb-4">Fee Structure</h4>
-            <ul className="text-[#e6e6f0]/70 space-y-2 text-sm">
-              <li>• Buy/Sell: 0.1% each</li>
-              <li>• Leverage: 1% + 3.9% APR</li>
-              <li>• Flash Close: 1%</li>
-            </ul>
+          <div className="werewolf-card p-6 rounded-xl text-center">
+            <div className="w-12 h-12 bg-[#ffd700]/20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Target className="w-6 h-6 text-[#ffd700]" />
+            </div>
+            <h4 className="text-lg font-bold text-[#ffd700] mb-2">Max Voting Power</h4>
+            <div className="text-[#e6e6f0]/70 text-sm">Optimal lock periods for maximum governance influence</div>
           </div>
           
-          <div className="werewolf-card p-8 rounded-xl text-center">
-            <Clock className="w-12 h-12 text-[#ffd700] mx-auto mb-6" />
-            <h4 className="text-xl font-bold text-[#ffd700] mb-4">Liquidation</h4>
-            <ul className="text-[#e6e6f0]/70 space-y-2 text-sm">
-              <li>• Daily at 00:00 UTC</li>
-              <li>• Expired loans liquidated</li>
-              <li>• Collective burning process</li>
-            </ul>
+          <div className="werewolf-card p-6 rounded-xl text-center">
+            <div className="w-12 h-12 bg-[#ffd700]/20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <TrendingUp className="w-6 h-6 text-[#ffd700]" />
+            </div>
+            <h4 className="text-lg font-bold text-[#ffd700] mb-2">Boost Rewards</h4>
+            <div className="text-[#e6e6f0]/70 text-sm">Direct emissions to LARRY pools for higher APR</div>
+          </div>
+          
+          <div className="werewolf-card p-6 rounded-xl text-center">
+            <div className="w-12 h-12 bg-[#ffd700]/20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Repeat className="w-6 h-6 text-[#ffd700]" />
+            </div>
+            <h4 className="text-lg font-bold text-[#ffd700] mb-2">Self-Reinforcing</h4>
+            <div className="text-[#e6e6f0]/70 text-sm">Each transaction strengthens the flywheel</div>
+          </div>
+        </div>
+        
+        {/* Why This Matters */}
+        <div className="mt-12">
+          <div className="werewolf-card p-8 rounded-xl">
+            <h4 className="text-2xl font-bold text-[#ffd700] mb-6 text-center">Why v3,3 Flywheel &gt; Static Tokens</h4>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="space-y-4">
+                <h5 className="text-lg font-semibold text-[#ffd700]">Traditional Tokens:</h5>
+                <ul className="text-[#e6e6f0]/70 space-y-2 text-sm">
+                  <li>• Sit idle in wallets</li>
+                  <li>• No direct utility beyond trading</li>
+                  <li>• Value depends on speculation</li>
+                  <li>• Don't generate sustainable yield</li>
+                </ul>
+              </div>
+              <div className="space-y-4">
+                <h5 className="text-lg font-semibold text-[#10b981]">LARRY's v3,3 Strategy:</h5>
+                <ul className="text-[#e6e6f0]/70 space-y-2 text-sm">
+                  <li>• Actively builds governance power on any network</li>
+                  <li>• Directs emissions to increase liquidity APR</li>
+                  <li>• Creates sustainable yield for LPs</li>
+                  <li>• Self-reinforcing growth mechanism</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </section>
