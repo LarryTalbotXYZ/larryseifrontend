@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { Moon, Zap, TrendingUp, Shield, Coins, Users, ArrowRight, DollarSign, Clock, Target, Repeat, AlertTriangle, BarChart3 } from 'lucide-react';
+import { Moon, Zap, TrendingUp, Shield, Coins, Users, ArrowRight, DollarSign, Target, Repeat, AlertTriangle } from 'lucide-react';
 import { useLarryContract } from '@/hooks/useLarryContract';
 
 export default function Home() {
@@ -91,10 +91,10 @@ export default function Home() {
           <div className="werewolf-card p-8 rounded-xl">
             <Repeat className="w-12 h-12 text-[#ffd700] mb-6" />
             <h4 className="text-2xl font-bold text-[#ffd700] mb-4">Vote → Higher APR</h4>
-            <p className="text-[#e6e6f0]/80 mb-4">veAERO votes direct AERO emissions to LARRY pools, boosting liquidity rewards.</p>
+            <p className="text-[#e6e6f0]/80 mb-4">Governance votes direct emissions to LARRY pools across networks, boosting liquidity rewards.</p>
             <ul className="text-[#e6e6f0]/70 space-y-2 text-sm">
-              <li>• Weekly epoch voting on Aerodrome</li>
-              <li>• All votes go to LARRY/ETH pool</li>
+              <li>• Regular epoch voting on v3,3 DEXs</li>
+              <li>• All votes go to LARRY pools</li>
               <li>• Higher APR attracts more liquidity</li>
             </ul>
           </div>
