@@ -299,11 +299,11 @@ export default function Home() {
                   <li>• Sit idle in wallets</li>
                   <li>• No direct utility beyond trading</li>
                   <li>• Value depends on speculation</li>
-                  <li>• Don't generate sustainable yield</li>
+                  <li>• Don&apos;t generate sustainable yield</li>
                 </ul>
               </div>
               <div className="space-y-4">
-                <h5 className="text-lg font-semibold text-[#10b981]">LARRY's v3,3 Strategy:</h5>
+                <h5 className="text-lg font-semibold text-[#10b981]">LARRY&apos;s v3,3 Strategy:</h5>
                 <ul className="text-[#e6e6f0]/70 space-y-2 text-sm">
                   <li>• Actively builds governance power on any network</li>
                   <li>• Directs emissions to increase liquidity APR</li>
