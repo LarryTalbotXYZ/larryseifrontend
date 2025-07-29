@@ -6,7 +6,7 @@ import { Moon, Zap, TrendingUp, Shield, Coins, Users, ArrowRight, DollarSign, Ta
 import { useLarryContract } from '@/hooks/useLarryContract';
 
 export default function Home() {
-  const { currentPrice } = useLarryContract();
+  const { currentPrice, buyFeePercent, sellFeePercent, leverageFeePercent } = useLarryContract();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0a0a0f] via-[#1a1a2e] to-[#0a0a0f]">
@@ -82,7 +82,7 @@ export default function Home() {
             <h4 className="text-2xl font-bold text-[#ffd700] mb-4">Fees → v3,3 Power</h4>
             <p className="text-[#e6e6f0]/80 mb-4">Every trading fee automatically purchases and locks governance tokens for maximum voting power.</p>
             <ul className="text-[#e6e6f0]/70 space-y-2 text-sm">
-              <li>• 0.05% fee on all DEX trading volume</li>
+              <li>• {buyFeePercent}% fee on all DEX trading volume</li>
               <li>• 100% of fees buy governance tokens</li>
               <li>• Auto-lock for maximum voting periods</li>
             </ul>
@@ -115,7 +115,7 @@ export default function Home() {
             <p className="text-[#e6e6f0]/80 mb-4">Amplify your positions with up to 99% collateralization.</p>
             <div className="grid grid-cols-2 gap-4 mb-4">
               <div className="bg-[#1a1a2e] p-3 rounded border border-[#ffd700]/20">
-                <div className="text-[#ffd700] font-bold">1%</div>
+                <div className="text-[#ffd700] font-bold">{leverageFeePercent}%</div>
                 <div className="text-[#e6e6f0]/70 text-sm">Leverage Fee</div>
               </div>
               <div className="bg-[#1a1a2e] p-3 rounded border border-[#ffd700]/20">
@@ -203,7 +203,7 @@ export default function Home() {
                   <div className="w-8 h-8 bg-[#ffd700] rounded-full flex items-center justify-center text-[#0a0a0f] font-bold text-sm">1</div>
                   <div>
                     <div className="text-[#ffd700] font-semibold">LARRY Trading Fees</div>
-                    <div className="text-[#e6e6f0]/70 text-sm">0.05% of all trading volume</div>
+                    <div className="text-[#e6e6f0]/70 text-sm">{buyFeePercent}% of all trading volume</div>
                   </div>
                 </div>
                 

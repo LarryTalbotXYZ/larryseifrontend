@@ -14,7 +14,7 @@ interface TradingInterfaceProps {
 
 export default function TradingInterface({ activeTab, setActiveTab }: TradingInterfaceProps) {
   const { address, isConnected } = useAccount();
-  const { buyLarry, sellLarry, openLeverage, createLoan, isPending, isConfirmed } = useLarryContract();
+  const { buyLarry, sellLarry, openLeverage, createLoan, isPending, isConfirmed, buyFeePercent, sellFeePercent, leverageFeePercent } = useLarryContract();
   const { balance } = useUserLarryData(address);
   const { useBuyAmount, useSellAmount } = useTradeCalculations();
   
@@ -166,7 +166,7 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
             </div>
             <div className="flex justify-between text-xs sm:text-sm mt-2">
               <span className="text-[#e6e6f0]/70">Fee:</span>
-              <span className="text-[#e6e6f0]">0.1%</span>
+              <span className="text-[#e6e6f0]">{activeTab === 'buy' ? buyFeePercent : sellFeePercent}%</span>
             </div>
           </div>
           <button
@@ -210,7 +210,7 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
             </div>
             <div className="flex justify-between text-xs sm:text-sm mt-2">
               <span className="text-[#e6e6f0]/70">Leverage Fee:</span>
-              <span className="text-[#e6e6f0]">1%</span>
+              <span className="text-[#e6e6f0]">{leverageFeePercent}%</span>
             </div>
           </div>
           <button

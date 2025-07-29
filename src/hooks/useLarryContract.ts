@@ -21,10 +21,33 @@ export function useLarryContract() {
     functionName: 'getBacking',
   });
 
+  const { data: buyFeeRaw } = useReadContract({
+    address: LARRY_CONTRACT_ADDRESS,
+    abi: LARRY_ABI,
+    functionName: 'getBuyFee',
+  });
+
+  const { data: sellFeeRaw } = useReadContract({
+    address: LARRY_CONTRACT_ADDRESS,
+    abi: LARRY_ABI,
+    functionName: 'sell_fee',
+  });
+
+  const { data: leverageFeeRaw } = useReadContract({
+    address: LARRY_CONTRACT_ADDRESS,
+    abi: LARRY_ABI,
+    functionName: 'buy_fee_leverage',
+  });
+
   // Calculate current price
   const currentPrice = totalSupply && backing 
     ? parseFloat(formatEther(backing as bigint)) / parseFloat(formatEther(totalSupply as bigint))
     : 0;
+
+  // Calculate fee percentages (contract uses 10000 as base)
+  const buyFeePercent = buyFeeRaw ? ((10000 - Number(buyFeeRaw)) / 100).toFixed(2) : '0.10';
+  const sellFeePercent = sellFeeRaw ? ((10000 - Number(sellFeeRaw)) / 100).toFixed(2) : '0.10';
+  const leverageFeePercent = leverageFeeRaw ? (Number(leverageFeeRaw) / 100).toFixed(2) : '1.00';
 
   // Contract write functions
   const buyLarry = (amount: string, receiver: `0x${string}`) => {
@@ -108,6 +131,11 @@ export function useLarryContract() {
     totalSupply,
     backing,
     currentPrice,
+    
+    // Fees
+    buyFeePercent,
+    sellFeePercent,
+    leverageFeePercent,
     
     // Actions
     buyLarry,
