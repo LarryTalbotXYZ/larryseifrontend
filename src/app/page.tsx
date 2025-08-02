@@ -291,24 +291,24 @@ export default function Home() {
         {/* Why This Matters */}
         <div className="mt-12">
           <div className="werewolf-card p-8 rounded-xl">
-            <h4 className="text-2xl font-bold text-[#ffd700] mb-6 text-center">Why v3,3 Flywheel &gt; Static Tokens</h4>
+            <h4 className="text-2xl font-bold text-[#ffd700] mb-6 text-center">Why Volatility Strategy &gt; Static Tokens</h4>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="space-y-4">
-                <h5 className="text-lg font-semibold text-[#ffd700]">Traditional Tokens:</h5>
+                <h5 className="text-lg font-semibold text-[#ffd700]">Traditional DeFi:</h5>
                 <ul className="text-[#e6e6f0]/70 space-y-2 text-sm">
-                  <li>• Sit idle in wallets</li>
-                  <li>• No direct utility beyond trading</li>
-                  <li>• Value depends on speculation</li>
-                  <li>• Don&apos;t generate sustainable yield</li>
+                  <li>• Relies on speculation for growth</li>
+                  <li>• Equal fees for all participants</li>
+                  <li>• Limited arbitrage opportunities</li>
+                  <li>• Doesn&apos;t benefit from volatility</li>
                 </ul>
               </div>
               <div className="space-y-4">
-                <h5 className="text-lg font-semibold text-[#10b981]">LARRY&apos;s v3,3 Strategy:</h5>
+                <h5 className="text-lg font-semibold text-[#10b981]">LARRY&apos;s Arbitrage Strategy:</h5>
                 <ul className="text-[#e6e6f0]/70 space-y-2 text-sm">
-                  <li>• Actively builds governance power on any network</li>
-                  <li>• Directs emissions to increase liquidity APR</li>
-                  <li>• Creates sustainable yield for LPs</li>
-                  <li>• Self-reinforcing growth mechanism</li>
+                  <li>• Profits from market volatility and inefficiencies</li>
+                  <li>• Fee-free trading for optimal execution</li>
+                  <li>• Creates sustainable yield for liquidity providers</li>
+                  <li>• Self-reinforcing growth through activity</li>
                 </ul>
               </div>
             </div>
