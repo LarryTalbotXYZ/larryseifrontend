@@ -30,204 +30,466 @@ export default function Docs() {
           Back to Home
         </Link>
 
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#ffd700] mb-4">LARRY Token Documentation</h1>
-        <p className="text-lg sm:text-xl text-[#e6e6f0]/80 mb-8 sm:mb-12">Understanding the werewolf-powered DeFi protocol on Sei Network</p>
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#ffd700] mb-4">🐺 LARRY on SEI</h1>
+        <p className="text-lg sm:text-xl text-[#e6e6f0]/80 mb-8 sm:mb-12">Built by BTB Finance - A deflationary, fully-backed token with fee-free arbitrage opportunities</p>
 
-        {/* Token Info Section */}
+        {/* What is LARRY Section */}
         <section className="werewolf-card p-4 sm:p-6 lg:p-8 rounded-xl mb-6 sm:mb-8">
           <h2 className="text-2xl sm:text-3xl font-bold text-[#ffd700] mb-4 sm:mb-6 flex items-center">
             <Shield className="w-6 h-6 sm:w-8 sm:h-8 mr-3" />
-            Token Information
+            What is LARRY?
           </h2>
           
+          <div className="space-y-4 text-[#e6e6f0]/90 mb-6">
+            <ul className="space-y-2 list-disc list-inside ml-4">
+              <li>A token fully backed by <strong className="text-[#ffd700]">SEI</strong> inside the smart contract</li>
+              <li>Designed for <strong className="text-[#ffd700]">liquidity providers</strong> — LARRY incentivizes USDC/LARRY pools on Yaka and Dragon</li>
+              <li>Built to <strong className="text-[#ffd700]">increase in price</strong> with every buy/sell/borrow</li>
+              <li>Enables <strong className="text-[#ffd700]">looping strategies</strong>: buy → borrow → buy again (repeat)</li>
+              <li>Has a <strong className="text-[#ffd700]">deflationary supply</strong> through liquidations and burn mechanics</li>
+              <li><strong className="text-[#ffd700]">Whitelisted addresses</strong> for fee-free arbitrage opportunities</li>
+              <li>Helps grow <strong className="text-[#ffd700]">LP depth</strong> on SEI through strategic incentives</li>
+            </ul>
+          </div>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
             <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
               <h3 className="text-[#ffd700] font-semibold mb-2">Network</h3>
-              <p className="text-[#e6e6f0]">Sei Network</p>
+              <p className="text-[#e6e6f0]">SEI Network</p>
             </div>
             <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
-              <h3 className="text-[#ffd700] font-semibold mb-2">Contract Address</h3>
-              <p className="text-[#e6e6f0] font-mono text-xs sm:text-sm break-all">0x888d81e3ea5E8362B5f69188CBCF34Fa8da4b888</p>
+              <h3 className="text-[#ffd700] font-semibold mb-2">Owned By</h3>
+              <p className="text-[#e6e6f0]">BTB Finance</p>
             </div>
             <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
-              <h3 className="text-[#ffd700] font-semibold mb-2">Max Total Supply</h3>
-              <p className="text-[#e6e6f0]">1,000,000,000 LARRY</p>
+              <h3 className="text-[#ffd700] font-semibold mb-2">Loops Supported</h3>
+              <p className="text-[#e6e6f0]">✅ (Buy → Borrow → Buy)</p>
             </div>
             <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
-              <h3 className="text-[#ffd700] font-semibold mb-2">Token Symbol</h3>
-              <p className="text-[#e6e6f0]">LARRY</p>
+              <h3 className="text-[#ffd700] font-semibold mb-2">Supply Type</h3>
+              <p className="text-[#e6e6f0]">Deflationary</p>
             </div>
           </div>
 
-          <h3 className="text-xl sm:text-2xl font-bold text-[#ffd700] mb-4">Intrinsic Value Mechanism</h3>
+          <h3 className="text-xl sm:text-2xl font-bold text-[#ffd700] mb-4">LARRY Price Mechanism</h3>
           <div className="space-y-4 text-[#e6e6f0]/90">
-            <p>Each LARRY token is <strong className="text-[#ffd700]">backed by SEI tokens</strong> deposited in the protocol&apos;s smart contract. This SEI token pool ensures real, liquid value behind each token.</p>
-            <p>Through burning mechanisms and accumulated fees, <strong className="text-[#ffd700]">the ratio of SEI per LARRY can only increase</strong>, creating deflationary pressure that benefits long-term holders.</p>
-            <p>The werewolf curse ensures that when the moon is full (liquidations occur), the pack grows stronger through strategic token burning.</p>
+            <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
+              <code className="text-[#ffd700] text-lg">price = (SEI in contract + total borrowed SEI) / total LARRY supply</code>
+            </div>
+            <p>So when:</p>
+            <ul className="space-y-2 list-disc list-inside ml-4">
+              <li>Users <strong className="text-[#ffd700]">buy</strong> LARRY → SEI enters the contract → price goes up</li>
+              <li>Users <strong className="text-[#ffd700]">sell</strong> LARRY → LARRY burns → supply goes down → price goes up</li>
+              <li><strong className="text-[#ffd700]">Borrowing fees</strong>, <strong className="text-[#ffd700]">interest</strong>, and <strong className="text-[#ffd700]">liquidation proceeds</strong> stay in the contract → price goes up</li>
+            </ul>
           </div>
         </section>
 
-        {/* How It Works Section */}
+        {/* Looping Strategy Section */}
         <section className="werewolf-card p-4 sm:p-6 lg:p-8 rounded-xl mb-6 sm:mb-8">
           <h2 className="text-3xl font-bold text-[#ffd700] mb-6 flex items-center">
             <TrendingUp className="w-8 h-8 mr-3" />
-            How LARRY Works
+            🔁 How Looping Works
           </h2>
           
           <div className="space-y-6 text-[#e6e6f0]/90">
-            <div>
-              <h3 className="text-xl font-bold text-[#ffd700] mb-3">🌙 Buying LARRY</h3>
-              <p>When you buy LARRY tokens, you send SEI to the smart contract. The contract mints new LARRY tokens based on the current backing ratio. A small fee (0.1%) goes to the protocol treasury.</p>
-            </div>
+            <p className="text-lg">Start with 1000 SEI (@ $0.50):</p>
             
-            <div>
-              <h3 className="text-xl font-bold text-[#ffd700] mb-3">🐺 Selling LARRY</h3>
-              <p>When you sell LARRY tokens, the contract burns your tokens and returns the equivalent SEI value. This burning mechanism helps maintain scarcity and supports the token price.</p>
-            </div>
-            
-            <div>
-              <h3 className="text-xl font-bold text-[#ffd700] mb-3">⚡ Price Calculation</h3>
-              <p>The LARRY price is determined by: <code className="bg-[#1a1a2e] px-2 py-1 rounded text-[#ffd700]">Total SEI Backing ÷ Total LARRY Supply</code></p>
-              <p>This ensures every LARRY token has intrinsic value backed by real SEI deposits.</p>
-            </div>
-          </div>
-        </section>
-
-        {/* Leverage Section */}
-        <section className="werewolf-card p-4 sm:p-6 lg:p-8 rounded-xl mb-6 sm:mb-8">
-          <h2 className="text-3xl font-bold text-[#ffd700] mb-6 flex items-center">
-            <Zap className="w-8 h-8 mr-3" />
-            Leverage Trading
-          </h2>
-          
-          <div className="space-y-6 text-[#e6e6f0]/90">
-            <p>LARRY&apos;s leverage system allows advanced traders to amplify their positions by borrowing SEI against their LARRY holdings.</p>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-              <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
-                <h3 className="text-[#ffd700] font-semibold mb-2">Leverage Fee</h3>
-                <p>Reduced from 2.5% to 1% for leveraged positions</p>
-              </div>
-              <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
-                <h3 className="text-[#ffd700] font-semibold mb-2">Maximum Duration</h3>
-                <p>Up to 365 days</p>
-              </div>
-            </div>
-
-            <div className="bg-[#8b0000]/20 p-4 rounded-lg border border-[#8b0000]/40">
-              <div className="flex items-start">
-                <AlertTriangle className="w-6 h-6 text-[#8b0000] mr-3 mt-1 flex-shrink-0" />
-                <div>
-                  <h4 className="text-[#8b0000] font-bold mb-2">Critical Warning</h4>
-                  <p className="text-[#e6e6f0]/90">Using leverage carries significant risks. It is possible to lose all of your collateral. Please understand the risks before trading.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Loans Section */}
-        <section className="werewolf-card p-4 sm:p-6 lg:p-8 rounded-xl mb-6 sm:mb-8">
-          <h2 className="text-3xl font-bold text-[#ffd700] mb-6 flex items-center">
-            <DollarSign className="w-8 h-8 mr-3" />
-            Borrowing & Loans
-          </h2>
-          
-          <div className="space-y-6 text-[#e6e6f0]/90">
-            <p>Users can borrow SEI tokens using LARRY as collateral, unlocking liquidity without selling their position.</p>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
-                <h3 className="text-[#ffd700] font-semibold mb-2">Loan-to-Value</h3>
-                <p>Up to 99% of LARRY value</p>
-              </div>
-              <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
-                <h3 className="text-[#ffd700] font-semibold mb-2">Duration</h3>
-                <p>1 - 365 days</p>
-              </div>
-              <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
-                <h3 className="text-[#ffd700] font-semibold mb-2">Interest Rate</h3>
-                <p>3.9% APR</p>
-              </div>
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse border border-[#ffd700]/20">
+                <thead>
+                  <tr className="bg-[#1a1a2e]">
+                    <th className="border border-[#ffd700]/20 p-3 text-[#ffd700] text-left">Step</th>
+                    <th className="border border-[#ffd700]/20 p-3 text-[#ffd700] text-left">Action</th>
+                    <th className="border border-[#ffd700]/20 p-3 text-[#ffd700] text-left">SEI Used</th>
+                    <th className="border border-[#ffd700]/20 p-3 text-[#ffd700] text-left">LARRY Received</th>
+                    <th className="border border-[#ffd700]/20 p-3 text-[#ffd700] text-left">Comment</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="border border-[#ffd700]/20 p-3">1</td>
+                    <td className="border border-[#ffd700]/20 p-3">Buy LARRY</td>
+                    <td className="border border-[#ffd700]/20 p-3">1000</td>
+                    <td className="border border-[#ffd700]/20 p-3">~996.25</td>
+                    <td className="border border-[#ffd700]/20 p-3">0.25% fee, price increases</td>
+                  </tr>
+                  <tr className="bg-[#1a1a2e]/50">
+                    <td className="border border-[#ffd700]/20 p-3">2</td>
+                    <td className="border border-[#ffd700]/20 p-3">Borrow SEI</td>
+                    <td className="border border-[#ffd700]/20 p-3">~986</td>
+                    <td className="border border-[#ffd700]/20 p-3">996.25 LARRY</td>
+                    <td className="border border-[#ffd700]/20 p-3">99% LTV, borrow against LARRY</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-[#ffd700]/20 p-3">3</td>
+                    <td className="border border-[#ffd700]/20 p-3">Buy more LARRY</td>
+                    <td className="border border-[#ffd700]/20 p-3">986</td>
+                    <td className="border border-[#ffd700]/20 p-3">~982</td>
+                    <td className="border border-[#ffd700]/20 p-3">More price increase</td>
+                  </tr>
+                  <tr className="bg-[#1a1a2e]/50">
+                    <td className="border border-[#ffd700]/20 p-3">4</td>
+                    <td className="border border-[#ffd700]/20 p-3">Borrow again</td>
+                    <td className="border border-[#ffd700]/20 p-3">~972</td>
+                    <td className="border border-[#ffd700]/20 p-3">982 LARRY</td>
+                    <td className="border border-[#ffd700]/20 p-3">Repeat</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-[#ffd700]/20 p-3">...</td>
+                    <td className="border border-[#ffd700]/20 p-3">Continue looping</td>
+                    <td className="border border-[#ffd700]/20 p-3">...</td>
+                    <td className="border border-[#ffd700]/20 p-3 text-2xl">🚀</td>
+                    <td className="border border-[#ffd700]/20 p-3">Watch your LARRY stack grow</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
 
-            <div>
-              <h3 className="text-xl font-bold text-[#ffd700] mb-3">🕛 Liquidation Process</h3>
-              <p>If a loan defaults (expires without repayment), the LARRY collateral is burned. This burning increases the SEI/LARRY ratio, benefiting all remaining token holders.</p>
-              <p className="text-[#c0c0c0] mt-2">Liquidated positions are burned collectively at 00:00 UTC daily - when the werewolf transformation is complete.</p>
-            </div>
-
-            <div>
-              <h3 className="text-xl font-bold text-[#ffd700] mb-3">⚡ Flash Close</h3>
-              <p>Users can instantly close their position by burning their LARRY collateral to redeem underlying SEI tokens, subject to a 1% fee and applicable interest rates.</p>
-            </div>
-          </div>
-        </section>
-
-        {/* Tokenomics Section */}
-        <section className="werewolf-card p-4 sm:p-6 lg:p-8 rounded-xl mb-6 sm:mb-8">
-          <h2 className="text-3xl font-bold text-[#ffd700] mb-6 flex items-center">
-            <Users className="w-8 h-8 mr-3" />
-            Tokenomics & Mechanisms
-          </h2>
-          
-          <div className="space-y-6 text-[#e6e6f0]/90">
-            <div>
-              <h3 className="text-xl font-bold text-[#ffd700] mb-3">🔥 Deflationary Mechanics</h3>
-              <ul className="space-y-2 list-disc list-inside ml-4">
-                <li>Liquidated loan collateral is permanently burned</li>
-                <li>Flash close positions burn LARRY to release SEI</li>
-                <li>Protocol fees accumulate, increasing backing ratio</li>
-                <li>Maximum supply cap ensures scarcity</li>
+            <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
+              <h4 className="text-[#ffd700] font-bold mb-2">Every loop:</h4>
+              <ul className="space-y-1 list-disc list-inside ml-4">
+                <li>More SEI gets locked in the contract</li>
+                <li>LARRY price increases</li>
+                <li>You accumulate more LARRY</li>
+                <li>Treasury strengthens</li>
               </ul>
             </div>
 
-            <div>
-              <h3 className="text-xl font-bold text-[#ffd700] mb-3">💰 Fee Structure</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
-                  <h4 className="text-[#ffd700] font-semibold mb-2">Trading Fees</h4>
-                  <p>Buy: 0.1% | Sell: 0.1%</p>
-                </div>
-                <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
-                  <h4 className="text-[#ffd700] font-semibold mb-2">Leverage Fee</h4>
-                  <p>1% + 3.9% APR interest</p>
-                </div>
-                <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
-                  <h4 className="text-[#ffd700] font-semibold mb-2">Flash Close Fee</h4>
-                  <p>1% of collateral value</p>
-                </div>
-                <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
-                  <h4 className="text-[#ffd700] font-semibold mb-2">Loan Extension</h4>
-                  <p>3.9% APR × extension days</p>
-                </div>
+            <p className="text-lg">You can <strong className="text-[#ffd700]">unwind</strong> anytime by selling LARRY back into SEI. The protocol always honors redemption based on current backing.</p>
+          </div>
+        </section>
+
+        {/* Fees & Deflation Section */}
+        <section className="werewolf-card p-4 sm:p-6 lg:p-8 rounded-xl mb-6 sm:mb-8">
+          <h2 className="text-3xl font-bold text-[#ffd700] mb-6 flex items-center">
+            <Zap className="w-8 h-8 mr-3" />
+            🔥 Fees & Deflation
+          </h2>
+          
+          <div className="space-y-6 text-[#e6e6f0]/90">
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse border border-[#ffd700]/20">
+                <thead>
+                  <tr className="bg-[#1a1a2e]">
+                    <th className="border border-[#ffd700]/20 p-3 text-[#ffd700] text-left">Action</th>
+                    <th className="border border-[#ffd700]/20 p-3 text-[#ffd700] text-left">Fee</th>
+                    <th className="border border-[#ffd700]/20 p-3 text-[#ffd700] text-left">Team Share</th>
+                    <th className="border border-[#ffd700]/20 p-3 text-[#ffd700] text-left">Protocol Share</th>
+                    <th className="border border-[#ffd700]/20 p-3 text-[#ffd700] text-left">Purpose</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="border border-[#ffd700]/20 p-3">Buy/Sell</td>
+                    <td className="border border-[#ffd700]/20 p-3">0.1%</td>
+                    <td className="border border-[#ffd700]/20 p-3">~0.05%</td>
+                    <td className="border border-[#ffd700]/20 p-3">~0.05%</td>
+                    <td className="border border-[#ffd700]/20 p-3">BTB incentivizes DEX LPs</td>
+                  </tr>
+                  <tr className="bg-[#1a1a2e]/50">
+                    <td className="border border-[#ffd700]/20 p-3">Borrow</td>
+                    <td className="border border-[#ffd700]/20 p-3">~3.9% APR + fees</td>
+                    <td className="border border-[#ffd700]/20 p-3">~30%</td>
+                    <td className="border border-[#ffd700]/20 p-3">~70%</td>
+                    <td className="border border-[#ffd700]/20 p-3">Interest stays in contract</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-[#ffd700]/20 p-3">Liquidation</td>
+                    <td className="border border-[#ffd700]/20 p-3">100% LARRY burned</td>
+                    <td className="border border-[#ffd700]/20 p-3">0%</td>
+                    <td className="border border-[#ffd700]/20 p-3">SEI retained</td>
+                    <td className="border border-[#ffd700]/20 p-3">Deflationary burn + backing strength</td>
+                  </tr>
+                  <tr className="bg-[#1a1a2e]/50">
+                    <td className="border border-[#ffd700]/20 p-3">Whitelisted</td>
+                    <td className="border border-[#ffd700]/20 p-3">0%</td>
+                    <td className="border border-[#ffd700]/20 p-3">0%</td>
+                    <td className="border border-[#ffd700]/20 p-3">0%</td>
+                    <td className="border border-[#ffd700]/20 p-3">Fee-free trading for arbitrageurs</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
+              <p><strong className="text-[#ffd700]">BTB Finance</strong> uses collected fees to <strong className="text-[#ffd700]">incentivize liquidity providers</strong> on <strong className="text-[#ffd700]">Yaka Swap</strong> and <strong className="text-[#ffd700]">Dragon Swap</strong> for USDC/LARRY pools. This creates deeper liquidity and better trading conditions for all users.</p>
+            </div>
+          </div>
+        </section>
+
+        {/* YAKA Integration Section */}
+        <section className="werewolf-card p-4 sm:p-6 lg:p-8 rounded-xl mb-6 sm:mb-8">
+          <h2 className="text-3xl font-bold text-[#ffd700] mb-6 flex items-center">
+            <DollarSign className="w-8 h-8 mr-3" />
+            🧩 Arbitrage & Volatility Strategy
+          </h2>
+          
+          <div className="space-y-6 text-[#e6e6f0]/90">
+            <p><strong className="text-[#ffd700]">BTB Finance</strong> maintains <strong className="text-[#ffd700]">whitelisted addresses</strong> that trade <strong className="text-[#ffd700]">fee-free</strong>, allowing for optimal arbitrage execution. This creates:</p>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
+                <h3 className="text-[#ffd700] font-semibold mb-2">⚡ Instant arbitrage</h3>
+                <p>When price opportunities arise</p>
+              </div>
+              <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
+                <h3 className="text-[#ffd700] font-semibold mb-2">💹 Higher volatility rewards</h3>
+                <p>More trading = more fees</p>
+              </div>
+              <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
+                <h3 className="text-[#ffd700] font-semibold mb-2">🧪 Enhanced LP rewards</h3>
+                <p>On Yaka and Dragon Swap</p>
+              </div>
+            </div>
+
+            <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
+              <h4 className="text-[#ffd700] font-bold mb-2">As market volatility increases:</h4>
+              <ul className="space-y-1 list-disc list-inside ml-4">
+                <li>More trading opportunities emerge</li>
+                <li>Whitelisted addresses capture arbitrage before others</li>
+                <li>More fees flow to liquidity providers</li>
+                <li><strong className="text-[#ffd700]">Price stability improves</strong> through efficient arbitrage</li>
+              </ul>
+            </div>
+
+            <p className="text-lg text-center">This is a <strong className="text-[#ffd700]">profitable flywheel</strong> of volatility → arbitrage → fees → LP rewards → repeat 🔁</p>
+          </div>
+        </section>
+
+        {/* Who Should Use LARRY Section */}
+        <section className="werewolf-card p-4 sm:p-6 lg:p-8 rounded-xl mb-6 sm:mb-8">
+          <h2 className="text-3xl font-bold text-[#ffd700] mb-6 flex items-center">
+            <Users className="w-8 h-8 mr-3" />
+            🧠 Who Should Use LARRY?
+          </h2>
+          
+          <div className="space-y-6 text-[#e6e6f0]/90">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
+                <h3 className="text-[#ffd700] font-semibold mb-2 flex items-center">
+                  🧑‍🌾 Liquidity Providers
+                </h3>
+                <p>Earn boosted APR from YAKA votes</p>
+              </div>
+              <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
+                <h3 className="text-[#ffd700] font-semibold mb-2 flex items-center">
+                  💹 Traders
+                </h3>
+                <p>Accumulate LARRY early, benefit from price rise</p>
+              </div>
+              <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
+                <h3 className="text-[#ffd700] font-semibold mb-2 flex items-center">
+                  🧪 Loopers
+                </h3>
+                <p>Use LARRY to safely leverage SEI over time</p>
+              </div>
+              <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
+                <h3 className="text-[#ffd700] font-semibold mb-2 flex items-center">
+                  🧰 Protocols
+                </h3>
+                <p>Use LARRY as a backed, deflationary, price-positive asset</p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Risk Disclaimer */}
+        {/* Built for SEI Section */}
+        <section className="werewolf-card p-4 sm:p-6 lg:p-8 rounded-xl mb-6 sm:mb-8">
+          <h2 className="text-3xl font-bold text-[#ffd700] mb-6 flex items-center">
+            <Zap className="w-8 h-8 mr-3" />
+            🛠️ Built for SEI by BTB Finance
+          </h2>
+          
+          <div className="space-y-4 text-[#e6e6f0]/90">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
+                <h3 className="text-[#ffd700] font-semibold mb-2">Ultra-low gas fees on SEI</h3>
+                <p>Perfect for looping and arbitrage</p>
+              </div>
+              <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
+                <h3 className="text-[#ffd700] font-semibold mb-2">Near-instant finality</h3>
+                <p>Safe liquidations and MEV capture</p>
+              </div>
+              <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
+                <h3 className="text-[#ffd700] font-semibold mb-2">Dual DEX incentives</h3>
+                <p>Yaka Swap + Dragon Swap LPs</p>
+              </div>
+              <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
+                <h3 className="text-[#ffd700] font-semibold mb-2">Whitelisted arbitrage</h3>
+                <p>Fee-free trading for optimal execution</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Smart Contract Analysis */}
+        <section className="werewolf-card p-4 sm:p-6 lg:p-8 rounded-xl mb-6 sm:mb-8">
+          <h2 className="text-3xl font-bold text-[#ffd700] mb-6 flex items-center">
+            <Shield className="w-8 h-8 mr-3" />
+            📋 Smart Contract Features
+          </h2>
+          
+          <div className="space-y-6 text-[#e6e6f0]/90">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
+                <h3 className="text-[#ffd700] font-semibold mb-2">🏷️ Whitelisted Addresses</h3>
+                <p>Fee-free trading for BTB Finance arbitrage operations</p>
+              </div>
+              <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
+                <h3 className="text-[#ffd700] font-semibold mb-2">🔒 Max Supply Cap</h3>
+                <p>1 billion LARRY tokens maximum supply</p>
+              </div>
+              <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
+                <h3 className="text-[#ffd700] font-semibold mb-2">💰 Dynamic Pricing</h3>
+                <p>Price = (Contract Balance + Total Borrowed) / Total Supply</p>
+              </div>
+              <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
+                <h3 className="text-[#ffd700] font-semibold mb-2">🔥 Auto Liquidation</h3>
+                <p>Daily liquidation at midnight UTC burns expired collateral</p>
+              </div>
+            </div>
+            
+            <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
+              <h4 className="text-[#ffd700] font-bold mb-2">Key Contract Mechanisms:</h4>
+              <ul className="space-y-1 list-disc list-inside ml-4">
+                <li><strong>Safety Checks:</strong> Price cannot decrease by more than 10,000 wei per transaction</li>
+                <li><strong>Leverage Options:</strong> Up to 99% LTV with 365-day maximum duration</li>
+                <li><strong>Flash Close:</strong> Instant position closure with 1% fee</li>
+                <li><strong>Fee Distribution:</strong> ~30% to BTB Finance, ~70% stays in contract</li>
+                <li><strong>Collateral Management:</strong> Contract holds all borrowed LARRY as collateral</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* Liquidation System Section */}
+        <section className="werewolf-card p-4 sm:p-6 lg:p-8 rounded-xl mb-6 sm:mb-8">
+          <h2 className="text-3xl font-bold text-[#ffd700] mb-6 flex items-center">
+            <AlertTriangle className="w-8 h-8 mr-3" />
+            🔍 Built-in Liquidation System
+          </h2>
+          
+          <div className="space-y-4 text-[#e6e6f0]/90">
+            <ul className="space-y-2 list-disc list-inside ml-4">
+              <li>If a user over-loops or if price drops, their LARRY is liquidated</li>
+              <li>All LARRY is <strong className="text-[#ffd700]">burned</strong>, and the SEI is retained in the protocol</li>
+              <li>This reduces supply and increases price — even during market stress</li>
+              <li><strong className="text-[#ffd700]">Automated process:</strong> Liquidations happen daily at 00:00 UTC</li>
+            </ul>
+          </div>
+        </section>
+
+        {/* Price Simulation Section */}
+        <section className="werewolf-card p-4 sm:p-6 lg:p-8 rounded-xl mb-6 sm:mb-8">
+          <h2 className="text-3xl font-bold text-[#ffd700] mb-6 flex items-center">
+            <TrendingUp className="w-8 h-8 mr-3" />
+            📈 Price Simulation Example
+          </h2>
+          
+          <div className="space-y-4 text-[#e6e6f0]/90">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
+                <h3 className="text-[#ffd700] font-semibold mb-2">1M LARRY supply</h3>
+              </div>
+              <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
+                <h3 className="text-[#ffd700] font-semibold mb-2">500K SEI in contract</h3>
+              </div>
+              <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
+                <h3 className="text-[#ffd700] font-semibold mb-2">Initial price = 0.50 SEI</h3>
+              </div>
+            </div>
+            
+            <p>User buys 1000 SEI worth of LARRY → 0.25% fee → 997.5 SEI goes into contract → new price is slightly higher</p>
+            <p>More users loop → backing grows → supply inflates slower → <strong className="text-[#ffd700]">price increases continuously</strong></p>
+          </div>
+        </section>
+
+        {/* Summary Section */}
+        <section className="werewolf-card p-4 sm:p-6 lg:p-8 rounded-xl mb-6 sm:mb-8">
+          <h2 className="text-3xl font-bold text-[#ffd700] mb-6 flex items-center">
+            <TrendingUp className="w-8 h-8 mr-3" />
+            🚀 Summary
+          </h2>
+          
+          <div className="space-y-6 text-[#e6e6f0]/90">
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse border border-[#ffd700]/20">
+                <thead>
+                  <tr className="bg-[#1a1a2e]">
+                    <th className="border border-[#ffd700]/20 p-3 text-[#ffd700] text-left">Feature</th>
+                    <th className="border border-[#ffd700]/20 p-3 text-[#ffd700] text-left">LARRY Token</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="border border-[#ffd700]/20 p-3">Backed By</td>
+                    <td className="border border-[#ffd700]/20 p-3">SEI</td>
+                  </tr>
+                  <tr className="bg-[#1a1a2e]/50">
+                    <td className="border border-[#ffd700]/20 p-3">Loops Supported</td>
+                    <td className="border border-[#ffd700]/20 p-3">✅ (Buy → Borrow → Buy)</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-[#ffd700]/20 p-3">Deflationary Supply</td>
+                    <td className="border border-[#ffd700]/20 p-3">✅ Via daily liquidation burns</td>
+                  </tr>
+                  <tr className="bg-[#1a1a2e]/50">
+                    <td className="border border-[#ffd700]/20 p-3">Liquidity Incentives</td>
+                    <td className="border border-[#ffd700]/20 p-3">✅ via YAKA votes</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-[#ffd700]/20 p-3">Fee Usage</td>
+                    <td className="border border-[#ffd700]/20 p-3">Flows to Yaka & Dragon Swap LPs</td>
+                  </tr>
+                  <tr className="bg-[#1a1a2e]/50">
+                    <td className="border border-[#ffd700]/20 p-3">Price Mechanism</td>
+                    <td className="border border-[#ffd700]/20 p-3">Always increasing with activity</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-[#ffd700]/20 p-3">Built On</td>
+                    <td className="border border-[#ffd700]/20 p-3">SEI</td>
+                  </tr>
+                  <tr className="bg-[#1a1a2e]/50">
+                    <td className="border border-[#ffd700]/20 p-3">Owned By</td>
+                    <td className="border border-[#ffd700]/20 p-3">BTB Finance</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div className="text-center space-y-4">
+              <p className="text-2xl font-bold text-[#ffd700]">LARRY isn&apos;t just a token. It&apos;s a liquidity machine.</p>
+              <p className="text-xl">Backed. Deflationary. Loopable. On SEI.</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Risk Warning */}
         <section className="bg-[#8b0000]/20 p-4 sm:p-6 lg:p-8 rounded-xl border border-[#8b0000]/40 mb-6 sm:mb-8">
           <h2 className="text-2xl font-bold text-[#8b0000] mb-4 flex items-center">
             <AlertTriangle className="w-6 h-6 mr-3" />
-            Risk Disclaimer
+            ⚠️ Important Notice
           </h2>
           <div className="space-y-4 text-[#e6e6f0]/90">
-            <p><strong className="text-[#8b0000]">This is not financial advice.</strong> LARRY tokens and the associated DeFi protocol carry significant risks.</p>
-            <ul className="space-y-2 list-disc list-inside ml-4">
-              <li>Smart contract risks and potential bugs</li>
-              <li>Liquidation risks for leveraged positions</li>
-              <li>Market volatility can cause rapid value changes</li>
-              <li>Potential total loss of invested capital</li>
-              <li>Regulatory risks in DeFi protocols</li>
-            </ul>
-            <p className="text-[#8b0000] font-semibold">Please proceed with due diligence and only invest what you can afford to lose. The werewolf&apos;s curse is powerful, but not without danger.</p>
+            <p><strong className="text-[#8b0000]">This is not financial advice.</strong> LARRY tokens and looping strategies carry significant risks including potential total loss of invested capital.</p>
+            <p className="text-[#8b0000] font-semibold">Please understand the risks and only invest what you can afford to lose.</p>
           </div>
         </section>
 
         {/* Footer */}
         <div className="text-center py-8">
-          <div className="flex flex-col items-center space-y-4">
+          <div className="flex flex-col items-center space-y-6">
+            <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
+              <p className="text-[#ffd700] font-semibold mb-2">Want to see more?</p>
+              <ul className="space-y-1 text-[#e6e6f0]/80 text-sm">
+                <li>• Smart contract source code</li>
+                <li>• Frontend widgets for the loop/unwind UI</li>
+                <li>• Real-time price chart integrations</li>
+                <li>• Loop calculators and risk metrics</li>
+              </ul>
+            </div>
+            
             <div className="flex items-center space-x-6">
               <a 
                 href="https://t.me/btbfinance" 
@@ -252,7 +514,9 @@ export default function Docs() {
                 <span>@btb_finance</span>
               </a>
             </div>
-            <p className="text-[#e6e6f0]/60">© 2024 Larry Talbot. The curse of the werewolf lives on Sei Network.</p>
+            
+            <p className="text-[#e6e6f0]/60">LARRY by BTB Finance - The volatility-driven liquidity machine on SEI.</p>
+            
             <Link href="/dashboard" className="inline-flex items-center bg-gradient-to-r from-[#ffd700] to-[#b8860b] text-[#0a0a0f] px-6 py-3 rounded-lg font-bold hover:from-[#b8860b] hover:to-[#ffd700] transition-all">
               Start Trading
             </Link>
