@@ -6,7 +6,7 @@ import { Moon, Zap, TrendingUp, Shield, Coins, Users, ArrowRight, DollarSign, Ta
 import { useLarryContract } from '@/hooks/useLarryContract';
 
 export default function Home() {
-  const { currentPrice, buyFeePercent, sellFeePercent, leverageFeePercent } = useLarryContract();
+  const { currentPrice, buyFeePercent, leverageFeePercent } = useLarryContract();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0a0a0f] via-[#1a1a2e] to-[#0a0a0f]">

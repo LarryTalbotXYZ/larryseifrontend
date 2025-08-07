@@ -126,6 +126,15 @@ export function useLarryContract() {
     });
   };
 
+  const borrowMore = (ethAmount: string) => {
+    writeContract({
+      address: LARRY_CONTRACT_ADDRESS,
+      abi: LARRY_ABI,
+      functionName: 'borrowMore',
+      args: [parseEther(ethAmount)],
+    });
+  };
+
   return {
     // Data
     totalSupply,
@@ -142,6 +151,7 @@ export function useLarryContract() {
     sellLarry,
     openLeverage,
     createLoan,
+    borrowMore,
     repayLoan,
     closeLoan,
     flashClose,
@@ -167,18 +177,20 @@ export function useUserLarryData(address: `0x${string}` | undefined) {
   const { data: loanData } = useReadContract({
     address: LARRY_CONTRACT_ADDRESS,
     abi: LARRY_ABI,
-    functionName: 'Loans',
+    functionName: 'getLoanByAddress',
     args: address ? [address] : undefined,
   });
 
+  const hasActiveLoan = loanData && Array.isArray(loanData) && loanData.length >= 3 && Number(loanData[0]) > 0;
+
   return {
     balance: balance ? formatEther(balance as bigint) : '0',
-    loan: loanData && Array.isArray(loanData) && loanData.length >= 4 ? {
+    loan: hasActiveLoan ? {
       collateral: formatEther(loanData[0] as bigint),
       borrowed: formatEther(loanData[1] as bigint),
       endDate: new Date(Number(loanData[2]) * 1000),
-      numberOfDays: Number(loanData[3]),
     } : null,
+    hasActiveLoan: !!hasActiveLoan,
   };
 }
 

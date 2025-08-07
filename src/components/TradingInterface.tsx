@@ -14,8 +14,8 @@ interface TradingInterfaceProps {
 
 export default function TradingInterface({ activeTab, setActiveTab }: TradingInterfaceProps) {
   const { address, isConnected } = useAccount();
-  const { buyLarry, sellLarry, openLeverage, createLoan, isPending, isConfirmed, buyFeePercent, sellFeePercent, leverageFeePercent, currentPrice } = useLarryContract();
-  const { balance } = useUserLarryData(address);
+  const { buyLarry, sellLarry, openLeverage, createLoan, borrowMore, isPending, isConfirmed, buyFeePercent, sellFeePercent } = useLarryContract();
+  const { balance, loan, hasActiveLoan } = useUserLarryData(address);
   const { useBuyAmount, useSellAmount, useBorrowCollateral, useLeverageFee } = useTradeCalculations();
   
   // Get SEI balance for buy max button
@@ -42,7 +42,14 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
   const { data: leverageFeeData } = useLeverageFee(inputAmount, parseInt(days));
   
   // Calculate leverage quote
-  const [leverageQuote, setLeverageQuote] = useState<any>(null);
+  const [leverageQuote, setLeverageQuote] = useState<{
+    ethPosition: string;
+    requiredEth: string;
+    leverageRatio: string;
+    borrowAmount: string;
+    totalFee: string;
+    apr: string;
+  } | null>(null);
   
   // Calculate maximum borrowable amount based on LARRY balance
   useEffect(() => {
@@ -120,7 +127,11 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
           }
           break;
         case 'borrow':
-          createLoan(inputAmount, parseInt(days));
+          if (hasActiveLoan) {
+            borrowMore(inputAmount);
+          } else {
+            createLoan(inputAmount, parseInt(days));
+          }
           break;
       }
     } catch (error) {
@@ -185,7 +196,7 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
                 : 'bg-[#2c2c34] text-[#e6e6f0] hover:bg-[#3c3c44]'
             }`}
           >
-            {tab}
+            {tab === 'borrow' && hasActiveLoan ? 'borrow more' : tab}
           </button>
         ))}
       </div>
@@ -280,7 +291,7 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
               </button>
             </div>
             <p className="text-xs text-[#e6e6f0]/60 mt-1">
-              This is the total SEI position size you want to leverage. You'll only pay fees + 1% collateral.
+              This is the total SEI position size you want to leverage. You&apos;ll only pay fees + 1% collateral.
             </p>
           </div>
 
@@ -314,7 +325,7 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
               </div>
               <hr className="border-[#8b0000]/40" />
               <div className="flex justify-between text-xs sm:text-sm">
-                <span className="text-[#e6e6f0]/70">SEI You'll Borrow:</span>
+                <span className="text-[#e6e6f0]/70">SEI You&apos;ll Borrow:</span>
                 <span className="font-medium text-[#c0c0c0]">{leverageQuote.borrowAmount} SEI</span>
               </div>
               <div className="flex justify-between text-xs sm:text-sm">
@@ -355,6 +366,28 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
       {/* Borrow Interface */}
       {activeTab === 'borrow' && (
         <div className="space-y-6">
+          {/* Current Loan Info (if exists) */}
+          {hasActiveLoan && loan && (
+            <div className="bg-blue-900/20 p-3 sm:p-4 rounded-lg border border-blue-500/40">
+              <div className="flex justify-between items-center mb-2">
+                <h4 className="text-blue-300 font-semibold">Current Loan</h4>
+                <span className="text-xs text-blue-200">
+                  Expires: {loan.endDate.toLocaleDateString()}
+                </span>
+              </div>
+              <div className="grid grid-cols-2 gap-4 text-xs sm:text-sm">
+                <div>
+                  <span className="text-[#e6e6f0]/70">Borrowed:</span>
+                  <div className="text-blue-300 font-semibold">{parseFloat(loan.borrowed).toFixed(4)} SEI</div>
+                </div>
+                <div>
+                  <span className="text-[#e6e6f0]/70">Collateral:</span>
+                  <div className="text-blue-300 font-semibold">{parseFloat(loan.collateral).toFixed(4)} LARRY</div>
+                </div>
+              </div>
+            </div>
+          )}
+          
           {/* Borrow Limits Info */}
           <div className="bg-[#1a1a2e] p-3 sm:p-4 rounded-lg border border-[#ffd700]/10">
             <div className="flex justify-between text-xs sm:text-sm mb-2">
@@ -362,16 +395,21 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
               <span className="text-[#ffd700] font-semibold">{balance} LARRY</span>
             </div>
             <div className="flex justify-between text-xs sm:text-sm">
-              <span className="text-[#e6e6f0]/70">Max Borrowable:</span>
+              <span className="text-[#e6e6f0]/70">{hasActiveLoan ? 'Additional Borrowable:' : 'Max Borrowable:'}</span>
               <span className="text-[#c0c0c0] font-semibold">{maxBorrowAmount} SEI</span>
             </div>
             <div className="text-xs text-[#e6e6f0]/60 mt-2">
-              99% collateralization required - you can borrow up to 99% of your LARRY value
+              {hasActiveLoan 
+                ? 'You can borrow more using your existing loan position'
+                : '99% collateralization required - you can borrow up to 99% of your LARRY value'
+              }
             </div>
           </div>
           
           <div>
-            <label className="block text-[#e6e6f0] mb-2 font-medium">SEI to Borrow</label>
+            <label className="block text-[#e6e6f0] mb-2 font-medium">
+              {hasActiveLoan ? 'Additional SEI to Borrow' : 'SEI to Borrow'}
+            </label>
             <div className="relative">
               <input
                 type="number"
@@ -395,27 +433,33 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
             )}
           </div>
           
-          <div>
-            <label className="block text-[#e6e6f0] mb-2 font-medium">Loan Duration (Days)</label>
-            <input
-              type="number"
-              placeholder="30"
-              max="365"
-              value={days}
-              onChange={(e) => setDays(e.target.value)}
-              className="w-full bg-[#1a1a2e] border border-[#ffd700]/20 rounded-lg px-3 sm:px-4 py-2 sm:py-3 text-[#e6e6f0] placeholder-[#e6e6f0]/50 focus:border-[#ffd700] focus:outline-none text-sm sm:text-base"
-            />
-          </div>
+          {!hasActiveLoan && (
+            <div>
+              <label className="block text-[#e6e6f0] mb-2 font-medium">Loan Duration (Days)</label>
+              <input
+                type="number"
+                placeholder="30"
+                max="365"
+                value={days}
+                onChange={(e) => setDays(e.target.value)}
+                className="w-full bg-[#1a1a2e] border border-[#ffd700]/20 rounded-lg px-3 sm:px-4 py-2 sm:py-3 text-[#e6e6f0] placeholder-[#e6e6f0]/50 focus:border-[#ffd700] focus:outline-none text-sm sm:text-base"
+              />
+            </div>
+          )}
           
           <div className="bg-[#1a1a2e] p-3 sm:p-4 rounded-lg border border-[#ffd700]/10">
             <div className="flex justify-between text-xs sm:text-sm">
-              <span className="text-[#e6e6f0]/70">Required LARRY Collateral:</span>
+              <span className="text-[#e6e6f0]/70">
+                {hasActiveLoan ? 'Additional LARRY Collateral:' : 'Required LARRY Collateral:'}
+              </span>
               <span className="text-[#ffd700] font-semibold">{requiredCollateral} LARRY</span>
             </div>
-            <div className="flex justify-between text-xs sm:text-sm mt-2">
-              <span className="text-[#e6e6f0]/70">Interest Rate:</span>
-              <span className="text-[#e6e6f0]">3.9% APR</span>
-            </div>
+            {!hasActiveLoan && (
+              <div className="flex justify-between text-xs sm:text-sm mt-2">
+                <span className="text-[#e6e6f0]/70">Interest Rate:</span>
+                <span className="text-[#e6e6f0]">3.9% APR</span>
+              </div>
+            )}
             <div className="flex justify-between text-xs sm:text-sm mt-2">
               <span className="text-[#e6e6f0]/70">You will receive:</span>
               <span className="text-[#c0c0c0]">{inputAmount ? (parseFloat(inputAmount) * 0.99).toFixed(4) : '0'} SEI</span>
@@ -430,7 +474,7 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
             {isPending ? 'Processing...' : 
              parseFloat(inputAmount) > parseFloat(maxBorrowAmount) ? 'Insufficient Collateral' :
              parseFloat(requiredCollateral) > parseFloat(balance) ? 'Insufficient LARRY Balance' :
-             'Create Loan'}
+             hasActiveLoan ? 'Borrow More' : 'Create Loan'}
           </button>
         </div>
       )}
