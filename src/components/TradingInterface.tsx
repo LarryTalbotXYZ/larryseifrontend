@@ -16,7 +16,7 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
   const { address, isConnected } = useAccount();
   const { buyLarry, sellLarry, openLeverage, createLoan, isPending, isConfirmed, buyFeePercent, sellFeePercent, leverageFeePercent, currentPrice } = useLarryContract();
   const { balance } = useUserLarryData(address);
-  const { useBuyAmount, useSellAmount, useBorrowCollateral } = useTradeCalculations();
+  const { useBuyAmount, useSellAmount, useBorrowCollateral, useLeverageFee } = useTradeCalculations();
   
   // Get SEI balance for buy max button
   const { data: seiBalance } = useBalance({
@@ -38,6 +38,12 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
   // Get exact required LARRY collateral from contract
   const { data: exactCollateralData } = useBorrowCollateral(inputAmount);
   
+  // Get leverage fee for current input
+  const { data: leverageFeeData } = useLeverageFee(inputAmount, parseInt(days));
+  
+  // Calculate leverage quote
+  const [leverageQuote, setLeverageQuote] = useState<any>(null);
+  
   // Calculate maximum borrowable amount based on LARRY balance
   useEffect(() => {
     if (larryValueInETH && parseFloat(balance) > 0) {
@@ -49,6 +55,30 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
       setMaxBorrowAmount('0');
     }
   }, [balance, larryValueInETH]);
+
+  // Calculate leverage quote when input changes
+  useEffect(() => {
+    if (leverageFeeData && inputAmount && activeTab === 'leverage') {
+      const ethPosition = parseFloat(inputAmount);
+      const leverageFee = parseFloat(formatEther(leverageFeeData as bigint));
+      const userETH = ethPosition - leverageFee;
+      const overCollateralization = userETH / 100;
+      const totalFees = leverageFee + overCollateralization;
+      const borrowAmount = userETH * 0.99;
+      const leverageRatio = ethPosition / totalFees;
+      
+      setLeverageQuote({
+        ethPosition: ethPosition.toFixed(4),
+        requiredEth: totalFees.toFixed(4),
+        leverageRatio: leverageRatio.toFixed(1),
+        borrowAmount: borrowAmount.toFixed(4),
+        totalFee: totalFees.toFixed(4),
+        apr: '3.9'
+      });
+    } else if (activeTab === 'leverage') {
+      setLeverageQuote(null);
+    }
+  }, [inputAmount, leverageFeeData, activeTab, days]);
 
   // Calculate output amounts and collateral requirements when input changes
   useEffect(() => {
@@ -85,7 +115,9 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
           sellLarry(inputAmount);
           break;
         case 'leverage':
-          openLeverage(inputAmount, parseInt(days));
+          if (leverageQuote) {
+            openLeverage(inputAmount, parseInt(days), leverageQuote.requiredEth);
+          }
           break;
         case 'borrow':
           createLoan(inputAmount, parseInt(days));
@@ -106,6 +138,15 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
     } else if (activeTab === 'sell') {
       // For selling, use LARRY balance
       setInputAmount(balance);
+    } else if (activeTab === 'leverage') {
+      // For leverage, calculate max position size based on available fees
+      if (seiBalance) {
+        const availableBalance = Math.max(0, parseFloat(formatEther(seiBalance.value)) - 0.01);
+        // Estimate max position where fees = available balance
+        // Since fees are roughly 20-25% of position, max position = available * 4
+        const estimatedMaxPosition = availableBalance * 4;
+        setInputAmount(estimatedMaxPosition.toFixed(4));
+      }
     }
   };
 
@@ -211,16 +252,38 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
       {/* Leverage Interface */}
       {activeTab === 'leverage' && (
         <div className="space-y-6">
-          <div>
-            <label className="block text-[#e6e6f0] mb-2 font-medium">SEI Amount</label>
-            <input
-              type="number"
-              placeholder="0.0"
-              value={inputAmount}
-              onChange={(e) => setInputAmount(e.target.value)}
-              className="w-full bg-[#1a1a2e] border border-[#ffd700]/20 rounded-lg px-3 sm:px-4 py-2 sm:py-3 text-[#e6e6f0] placeholder-[#e6e6f0]/50 focus:border-[#ffd700] focus:outline-none text-sm sm:text-base"
-            />
+          {/* Balance Info */}
+          <div className="bg-[#1a1a2e] p-3 sm:p-4 rounded-lg border border-[#ffd700]/10">
+            <div className="flex justify-between text-xs sm:text-sm">
+              <span className="text-[#e6e6f0]/70">Your SEI Balance:</span>
+              <span className="text-[#c0c0c0] font-semibold">
+                {seiBalance ? parseFloat(formatEther(seiBalance.value)).toFixed(4) : '0.0000'} SEI
+              </span>
+            </div>
           </div>
+
+          <div>
+            <label className="block text-[#e6e6f0] mb-2 font-medium">SEI Position Size</label>
+            <div className="relative">
+              <input
+                type="number"
+                placeholder="Enter SEI amount for leveraged position"
+                value={inputAmount}
+                onChange={(e) => setInputAmount(e.target.value)}
+                className="w-full bg-[#1a1a2e] border border-[#ffd700]/20 rounded-lg px-3 sm:px-4 py-2 sm:py-3 pr-12 sm:pr-16 text-[#e6e6f0] placeholder-[#e6e6f0]/50 focus:border-[#ffd700] focus:outline-none text-sm sm:text-base"
+              />
+              <button
+                onClick={handleMaxClick}
+                className="absolute right-1 sm:right-2 top-1/2 transform -translate-y-1/2 bg-[#ffd700] text-[#0a0a0f] px-2 sm:px-3 py-1 rounded text-xs sm:text-sm font-semibold hover:bg-[#b8860b] transition-colors"
+              >
+                Max
+              </button>
+            </div>
+            <p className="text-xs text-[#e6e6f0]/60 mt-1">
+              This is the total SEI position size you want to leverage. You'll only pay fees + 1% collateral.
+            </p>
+          </div>
+
           <div>
             <label className="block text-[#e6e6f0] mb-2 font-medium">Loan Duration (Days)</label>
             <input
@@ -232,23 +295,59 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
               className="w-full bg-[#1a1a2e] border border-[#ffd700]/20 rounded-lg px-3 sm:px-4 py-2 sm:py-3 text-[#e6e6f0] placeholder-[#e6e6f0]/50 focus:border-[#ffd700] focus:outline-none text-sm sm:text-base"
             />
           </div>
-          <div className="bg-[#8b0000]/20 p-3 sm:p-4 rounded-lg border border-[#8b0000]/40">
-            <div className="flex justify-between text-xs sm:text-sm">
-              <span className="text-[#e6e6f0]/70">Interest Rate:</span>
-              <span className="text-[#8b0000] font-semibold">3.9% APR</span>
+
+          {leverageQuote && (
+            <div className="bg-[#8b0000]/20 p-3 sm:p-4 rounded-lg border border-[#8b0000]/40 space-y-3">
+              <div className="flex justify-between text-xs sm:text-sm">
+                <span className="text-[#e6e6f0]/70">Position Size:</span>
+                <span className="font-medium text-[#ffd700]">{leverageQuote.ethPosition} SEI</span>
+              </div>
+              <div className="flex justify-between text-xs sm:text-sm">
+                <span className="text-[#e6e6f0]/70">Your Payment:</span>
+                <span className="font-medium text-[#8b0000]">{leverageQuote.requiredEth} SEI</span>
+              </div>
+              <div className="flex justify-between text-xs sm:text-sm">
+                <span className="font-semibold text-base text-[#e6e6f0]">Leverage:</span>
+                <span className="font-bold text-base text-[#ffd700]">
+                  {leverageQuote.leverageRatio}x
+                </span>
+              </div>
+              <hr className="border-[#8b0000]/40" />
+              <div className="flex justify-between text-xs sm:text-sm">
+                <span className="text-[#e6e6f0]/70">SEI You'll Borrow:</span>
+                <span className="font-medium text-[#c0c0c0]">{leverageQuote.borrowAmount} SEI</span>
+              </div>
+              <div className="flex justify-between text-xs sm:text-sm">
+                <span className="text-[#e6e6f0]/70">Total Fee:</span>
+                <span className="font-medium text-[#c0c0c0]">{leverageQuote.totalFee} SEI</span>
+              </div>
+              <div className="text-xs text-[#e6e6f0]/60 mt-2">
+                <p>Interest APR: {leverageQuote.apr}%</p>
+                <p>Loan Duration: {days} days</p>
+              </div>
             </div>
-            <div className="flex justify-between text-xs sm:text-sm mt-2">
-              <span className="text-[#e6e6f0]/70">Leverage Fee:</span>
-              <span className="text-[#e6e6f0]">{leverageFeePercent}%</span>
+          )}
+
+          {/* Warning */}
+          <div className="bg-yellow-500/20 p-3 sm:p-4 rounded-lg border border-yellow-500/40">
+            <div className="flex items-start space-x-3">
+              <div className="text-sm text-yellow-200">
+                <p className="font-semibold mb-1">How LARRY Leverage Works</p>
+                <p>You specify a SEI position size. The protocol mints LARRY as collateral and borrows most of the SEI for your position. You only pay fees + 1% collateral. If the loan expires, your LARRY collateral is liquidated.</p>
+              </div>
             </div>
           </div>
+
           <button
             onClick={handleTrade}
-            disabled={isPending || !inputAmount}
+            disabled={isPending || !inputAmount || !leverageQuote || (leverageQuote && parseFloat(leverageQuote.requiredEth) > parseFloat(formatEther(seiBalance?.value || BigInt(0))))}
             className="w-full bg-gradient-to-r from-[#8b0000] to-[#b8860b] text-white py-4 rounded-lg font-bold text-lg hover:from-[#a00000] hover:to-[#d4af00] transition-all transform hover:scale-105 disabled:opacity-50"
           >
             <Zap className="w-5 h-5 inline mr-2" />
-            {isPending ? 'Processing...' : 'Open Leveraged Position'}
+            {isPending ? 'Processing...' : 
+             !leverageQuote ? 'Enter Position Size' :
+             (leverageQuote && parseFloat(leverageQuote.requiredEth) > parseFloat(formatEther(seiBalance?.value || BigInt(0)))) ? 'Insufficient Balance' :
+             'Open Leveraged Position'}
           </button>
         </div>
       )}

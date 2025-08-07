@@ -69,13 +69,13 @@ export function useLarryContract() {
     });
   };
 
-  const openLeverage = (ethAmount: string, days: number) => {
+  const openLeverage = (ethAmount: string, days: number, totalFees?: string) => {
     writeContract({
       address: LARRY_CONTRACT_ADDRESS,
       abi: LARRY_ABI,
       functionName: 'leverage',
       args: [parseEther(ethAmount), BigInt(days)],
-      value: parseEther(ethAmount), // This should include fees
+      value: totalFees ? parseEther(totalFees) : parseEther('0'), // Send only fees as msg.value
     });
   };
 
