@@ -4,9 +4,10 @@ import Link from 'next/link';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { Moon, Zap, TrendingUp, Shield, Coins, Users, ArrowRight, DollarSign, Target, Repeat, AlertTriangle } from 'lucide-react';
 import { useLarryContract } from '@/hooks/useLarryContract';
+import { formatEther } from 'viem';
 
 export default function Home() {
-  const { currentPrice, buyFeePercent, leverageFeePercent } = useLarryContract();
+  const { currentPrice, buyFeePercent, leverageFeePercent, backing } = useLarryContract();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0a0a0f] via-[#1a1a2e] to-[#0a0a0f]">
@@ -47,7 +48,7 @@ export default function Home() {
           </Link>
           
           {/* Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-16">
             <div className="werewolf-card p-6 rounded-xl">
               <Coins className="w-8 h-8 text-[#ffd700] mx-auto mb-4" />
               <h3 className="text-2xl font-bold text-[#ffd700] mb-2">1B LARRY</h3>
@@ -59,6 +60,13 @@ export default function Home() {
                 {currentPrice ? `${currentPrice.toFixed(6)} SEI` : '0.000000 SEI'}
               </h3>
               <p className="text-[#e6e6f0]/70">Current Price</p>
+            </div>
+            <div className="werewolf-card p-6 rounded-xl">
+              <DollarSign className="w-8 h-8 text-[#ffd700] mx-auto mb-4" />
+              <h3 className="text-2xl font-bold text-[#ffd700] mb-2">
+                {backing ? `${parseFloat(formatEther(backing as bigint)).toFixed(2)} SEI` : '0.00 SEI'}
+              </h3>
+              <p className="text-[#e6e6f0]/70">TVL</p>
             </div>
             <div className="werewolf-card p-6 rounded-xl">
               <Shield className="w-8 h-8 text-[#ffd700] mx-auto mb-4" />
