@@ -220,10 +220,20 @@ export function useTradeCalculations() {
     });
   };
 
+  const useBorrowCollateral = (ethAmount: string) => {
+    return useReadContract({
+      address: LARRY_CONTRACT_ADDRESS,
+      abi: LARRY_ABI,
+      functionName: 'ETHtoLARRYNoTradeCeil',
+      args: ethAmount ? [parseEther(ethAmount)] : undefined,
+    });
+  };
+
   return {
     useBuyAmount,
     useSellAmount,
     useLeverageFee,
     useExtensionFee,
+    useBorrowCollateral,
   };
 }

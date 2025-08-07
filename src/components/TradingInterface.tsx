@@ -14,9 +14,9 @@ interface TradingInterfaceProps {
 
 export default function TradingInterface({ activeTab, setActiveTab }: TradingInterfaceProps) {
   const { address, isConnected } = useAccount();
-  const { buyLarry, sellLarry, openLeverage, createLoan, isPending, isConfirmed, buyFeePercent, sellFeePercent, leverageFeePercent } = useLarryContract();
+  const { buyLarry, sellLarry, openLeverage, createLoan, isPending, isConfirmed, buyFeePercent, sellFeePercent, leverageFeePercent, currentPrice } = useLarryContract();
   const { balance } = useUserLarryData(address);
-  const { useBuyAmount, useSellAmount } = useTradeCalculations();
+  const { useBuyAmount, useSellAmount, useBorrowCollateral } = useTradeCalculations();
   
   // Get SEI balance for buy max button
   const { data: seiBalance } = useBalance({
@@ -26,14 +26,35 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
   const [inputAmount, setInputAmount] = useState('');
   const [days, setDays] = useState('30');
   const [outputAmount, setOutputAmount] = useState('0');
+  const [requiredCollateral, setRequiredCollateral] = useState('0');
+  const [maxBorrowAmount, setMaxBorrowAmount] = useState('0');
 
   const { data: buyData } = useBuyAmount(inputAmount);
   const { data: sellData } = useSellAmount(inputAmount);
+  
+  // Get LARRY value in ETH for max borrow calculation
+  const { data: larryValueInETH } = useSellAmount(balance);
+  
+  // Get exact required LARRY collateral from contract
+  const { data: exactCollateralData } = useBorrowCollateral(inputAmount);
+  
+  // Calculate maximum borrowable amount based on LARRY balance
+  useEffect(() => {
+    if (larryValueInETH && parseFloat(balance) > 0) {
+      // User can borrow up to 99% of their LARRY collateral value in ETH
+      const larryValueETH = parseFloat(formatEther(larryValueInETH as bigint));
+      const maxBorrow = (larryValueETH * 0.99).toFixed(4);
+      setMaxBorrowAmount(maxBorrow);
+    } else {
+      setMaxBorrowAmount('0');
+    }
+  }, [balance, larryValueInETH]);
 
-  // Calculate output amounts when input changes
+  // Calculate output amounts and collateral requirements when input changes
   useEffect(() => {
     if (!inputAmount || inputAmount === '0') {
       setOutputAmount('0');
+      setRequiredCollateral('0');
       return;
     }
 
@@ -41,8 +62,16 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
       setOutputAmount(formatEther(buyData as bigint));
     } else if (activeTab === 'sell' && sellData) {
       setOutputAmount(formatEther(sellData as bigint));
+    } else if (activeTab === 'borrow') {
+      // Use exact contract calculation for required LARRY collateral
+      if (exactCollateralData) {
+        const requiredLarryCollateral = formatEther(exactCollateralData as bigint);
+        setRequiredCollateral(requiredLarryCollateral);
+      } else {
+        setRequiredCollateral('0');
+      }
     }
-  }, [inputAmount, activeTab, buyData, sellData]);
+  }, [inputAmount, activeTab, buyData, sellData, exactCollateralData]);
 
   const handleTrade = async () => {
     if (!address || !inputAmount) return;
@@ -227,16 +256,46 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
       {/* Borrow Interface */}
       {activeTab === 'borrow' && (
         <div className="space-y-6">
+          {/* Borrow Limits Info */}
+          <div className="bg-[#1a1a2e] p-3 sm:p-4 rounded-lg border border-[#ffd700]/10">
+            <div className="flex justify-between text-xs sm:text-sm mb-2">
+              <span className="text-[#e6e6f0]/70">Your LARRY Balance:</span>
+              <span className="text-[#ffd700] font-semibold">{balance} LARRY</span>
+            </div>
+            <div className="flex justify-between text-xs sm:text-sm">
+              <span className="text-[#e6e6f0]/70">Max Borrowable:</span>
+              <span className="text-[#c0c0c0] font-semibold">{maxBorrowAmount} SEI</span>
+            </div>
+            <div className="text-xs text-[#e6e6f0]/60 mt-2">
+              99% collateralization required - you can borrow up to 99% of your LARRY value
+            </div>
+          </div>
+          
           <div>
             <label className="block text-[#e6e6f0] mb-2 font-medium">SEI to Borrow</label>
-            <input
-              type="number"
-              placeholder="0.0"
-              value={inputAmount}
-              onChange={(e) => setInputAmount(e.target.value)}
-              className="w-full bg-[#1a1a2e] border border-[#ffd700]/20 rounded-lg px-3 sm:px-4 py-2 sm:py-3 text-[#e6e6f0] placeholder-[#e6e6f0]/50 focus:border-[#ffd700] focus:outline-none text-sm sm:text-base"
-            />
+            <div className="relative">
+              <input
+                type="number"
+                placeholder="0.0"
+                value={inputAmount}
+                max={maxBorrowAmount}
+                onChange={(e) => setInputAmount(e.target.value)}
+                className="w-full bg-[#1a1a2e] border border-[#ffd700]/20 rounded-lg px-3 sm:px-4 py-2 sm:py-3 pr-12 sm:pr-16 text-[#e6e6f0] placeholder-[#e6e6f0]/50 focus:border-[#ffd700] focus:outline-none text-sm sm:text-base"
+              />
+              <button
+                onClick={() => setInputAmount(maxBorrowAmount)}
+                className="absolute right-1 sm:right-2 top-1/2 transform -translate-y-1/2 bg-[#ffd700] text-[#0a0a0f] px-2 sm:px-3 py-1 rounded text-xs sm:text-sm font-semibold hover:bg-[#b8860b] transition-colors"
+              >
+                Max
+              </button>
+            </div>
+            {inputAmount && parseFloat(inputAmount) > parseFloat(maxBorrowAmount) && (
+              <div className="text-red-400 text-xs mt-1">
+                Cannot borrow more than {maxBorrowAmount} SEI with current LARRY balance
+              </div>
+            )}
           </div>
+          
           <div>
             <label className="block text-[#e6e6f0] mb-2 font-medium">Loan Duration (Days)</label>
             <input
@@ -248,22 +307,31 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
               className="w-full bg-[#1a1a2e] border border-[#ffd700]/20 rounded-lg px-3 sm:px-4 py-2 sm:py-3 text-[#e6e6f0] placeholder-[#e6e6f0]/50 focus:border-[#ffd700] focus:outline-none text-sm sm:text-base"
             />
           </div>
+          
           <div className="bg-[#1a1a2e] p-3 sm:p-4 rounded-lg border border-[#ffd700]/10">
             <div className="flex justify-between text-xs sm:text-sm">
               <span className="text-[#e6e6f0]/70">Required LARRY Collateral:</span>
-              <span className="text-[#ffd700] font-semibold">{outputAmount} LARRY</span>
+              <span className="text-[#ffd700] font-semibold">{requiredCollateral} LARRY</span>
             </div>
             <div className="flex justify-between text-xs sm:text-sm mt-2">
-              <span className="text-[#e6e6f0]/70">Interest Fee:</span>
+              <span className="text-[#e6e6f0]/70">Interest Rate:</span>
               <span className="text-[#e6e6f0]">3.9% APR</span>
             </div>
+            <div className="flex justify-between text-xs sm:text-sm mt-2">
+              <span className="text-[#e6e6f0]/70">You will receive:</span>
+              <span className="text-[#c0c0c0]">{inputAmount ? (parseFloat(inputAmount) * 0.99).toFixed(4) : '0'} SEI</span>
+            </div>
           </div>
+          
           <button
             onClick={handleTrade}
-            disabled={isPending || !inputAmount}
-            className="w-full bg-gradient-to-r from-[#c0c0c0] to-[#ffd700] text-[#0a0a0f] py-4 rounded-lg font-bold text-lg hover:from-[#d0d0d0] hover:to-[#b8860b] transition-all transform hover:scale-105 disabled:opacity-50"
+            disabled={isPending || !inputAmount || parseFloat(inputAmount) > parseFloat(maxBorrowAmount) || parseFloat(requiredCollateral) > parseFloat(balance)}
+            className="w-full bg-gradient-to-r from-[#c0c0c0] to-[#ffd700] text-[#0a0a0f] py-4 rounded-lg font-bold text-lg hover:from-[#d0d0d0] hover:to-[#b8860b] transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {isPending ? 'Processing...' : 'Create Loan'}
+            {isPending ? 'Processing...' : 
+             parseFloat(inputAmount) > parseFloat(maxBorrowAmount) ? 'Insufficient Collateral' :
+             parseFloat(requiredCollateral) > parseFloat(balance) ? 'Insufficient LARRY Balance' :
+             'Create Loan'}
           </button>
         </div>
       )}
