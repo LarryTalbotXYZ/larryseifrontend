@@ -351,11 +351,12 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
 
           <button
             onClick={handleTrade}
-            disabled={isPending || !inputAmount || !leverageQuote || (leverageQuote && parseFloat(leverageQuote.requiredEth) > parseFloat(formatEther(seiBalance?.value || BigInt(0))))}
+            disabled={isPending || !inputAmount || !leverageQuote || (leverageQuote && parseFloat(leverageQuote.requiredEth) > parseFloat(formatEther(seiBalance?.value || BigInt(0)))) || hasActiveLoan}
             className="w-full bg-gradient-to-r from-[#8b0000] to-[#b8860b] text-white py-4 rounded-lg font-bold text-lg hover:from-[#a00000] hover:to-[#d4af00] transition-all transform hover:scale-105 disabled:opacity-50"
           >
             <Zap className="w-5 h-5 inline mr-2" />
             {isPending ? 'Processing...' : 
+             hasActiveLoan ? 'Close Existing Loan to Use Leverage' :
              !leverageQuote ? 'Enter Position Size' :
              (leverageQuote && parseFloat(leverageQuote.requiredEth) > parseFloat(formatEther(seiBalance?.value || BigInt(0)))) ? 'Insufficient Balance' :
              'Open Leveraged Position'}
