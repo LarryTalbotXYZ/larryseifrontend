@@ -24,7 +24,7 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
   });
   
   const [inputAmount, setInputAmount] = useState('');
-  const [days, setDays] = useState('30');
+  const [days, setDays] = useState('365');
   const [outputAmount, setOutputAmount] = useState('0');
   const [requiredCollateral, setRequiredCollateral] = useState('0');
   const [maxBorrowAmount, setMaxBorrowAmount] = useState('0');
@@ -299,7 +299,7 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
             <label className="block text-[#e6e6f0] mb-2 font-medium">Loan Duration (Days)</label>
             <input
               type="number"
-              placeholder="30"
+              placeholder="365"
               max="365"
               value={days}
               onChange={(e) => setDays(e.target.value)}
@@ -438,7 +438,7 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
               <label className="block text-[#e6e6f0] mb-2 font-medium">Loan Duration (Days)</label>
               <input
                 type="number"
-                placeholder="30"
+                placeholder="365"
                 max="365"
                 value={days}
                 onChange={(e) => setDays(e.target.value)}
