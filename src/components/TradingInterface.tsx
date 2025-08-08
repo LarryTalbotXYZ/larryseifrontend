@@ -14,7 +14,7 @@ interface TradingInterfaceProps {
 
 export default function TradingInterface({ activeTab, setActiveTab }: TradingInterfaceProps) {
   const { address, isConnected } = useAccount();
-  const { buyLarry, sellLarry, openLeverage, createLoan, borrowMore, isPending, isConfirmed, buyFeePercent, sellFeePercent } = useLarryContract();
+  const { buyLarry, sellLarry, openLeverage, createLoan, borrowMore, isPending, isConfirmed, buyFeePercent, sellFeePercent, leverageFeePercent } = useLarryContract();
   const { balance, loan, hasActiveLoan } = useUserLarryData(address);
   const { useBuyAmount, useSellAmount, useBorrowCollateral, useLeverageFee } = useTradeCalculations();
   
@@ -28,6 +28,9 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
   const [outputAmount, setOutputAmount] = useState('0');
   const [requiredCollateral, setRequiredCollateral] = useState('0');
   const [maxBorrowAmount, setMaxBorrowAmount] = useState('0');
+  const [isMaxCalibrating, setIsMaxCalibrating] = useState(false);
+  const [maxTargetPayment, setMaxTargetPayment] = useState(0);
+  const [maxIter, setMaxIter] = useState(0);
 
   const { data: buyData } = useBuyAmount(inputAmount);
   const { data: sellData } = useSellAmount(inputAmount);
@@ -150,16 +153,62 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
       // For selling, use LARRY balance
       setInputAmount(balance);
     } else if (activeTab === 'leverage') {
-      // For leverage, calculate max position size based on available fees
+      // For leverage, set position size so that required payment ~= available balance
       if (seiBalance) {
         const availableBalance = Math.max(0, parseFloat(formatEther(seiBalance.value)) - 0.01);
-        // Estimate max position where fees = available balance
-        // Since fees are roughly 20-25% of position, max position = available * 4
-        const estimatedMaxPosition = availableBalance * 4;
+        const daysNum = parseInt(days) || 0;
+        const aprPercent = 3.9; // matches display APR
+        const interestPercent = aprPercent * (daysNum / 365);
+        const baseLeverageFeePercent = parseFloat(leverageFeePercent || '1');
+        // Effective payment factor as fraction of position: 0.01 (1% collateral) + 0.99 * (fees% + interest%)
+        const effectivePaymentFactor = 0.01 + 0.99 * ((baseLeverageFeePercent + interestPercent) / 100);
+        const estimatedMaxPosition = effectivePaymentFactor > 0 ? availableBalance / effectivePaymentFactor : 0;
+        setMaxTargetPayment(availableBalance);
+        setMaxIter(0);
+        setIsMaxCalibrating(true);
         setInputAmount(estimatedMaxPosition.toFixed(4));
       }
     }
   };
+
+  // Calibrate leverage Max to contract-accurate payment using leverageFeeData
+  useEffect(() => {
+    if (!isMaxCalibrating) return;
+    if (!inputAmount) return;
+    if (!leverageFeeData) return;
+
+    const available = maxTargetPayment;
+    const position = parseFloat(inputAmount);
+    const fee = parseFloat(formatEther(leverageFeeData as bigint));
+    const userETH = Math.max(0, position - fee);
+    const payment = fee + userETH / 100; // 1% collateral on userETH
+
+    const tolerance = 0.005; // 0.5%
+    const diff = available - payment;
+
+    if (Math.abs(diff) / (available || 1) <= tolerance || maxIter >= 6) {
+      // Final clamp to ensure we don't exceed available balance
+      if (payment > available && payment > 0) {
+        const clampScale = (available / payment) * 0.995; // slight safety margin
+        const clampedPos = position * clampScale;
+        setInputAmount(clampedPos.toFixed(4));
+      }
+      setIsMaxCalibrating(false);
+      return;
+    }
+
+    if (payment === 0) {
+      setIsMaxCalibrating(false);
+      return;
+    }
+
+    const scale = available / payment;
+    // Nudge scaling a bit to avoid oscillation
+    const safety = diff > 0 ? 1.05 : 0.98; // if under target, scale up a bit more; if over, scale slightly less
+    const newPos = position * scale * safety;
+    setInputAmount(newPos.toFixed(4));
+    setMaxIter((i) => i + 1);
+  }, [isMaxCalibrating, leverageFeeData, inputAmount, maxTargetPayment, maxIter]);
 
   if (!isConnected) {
     return (
