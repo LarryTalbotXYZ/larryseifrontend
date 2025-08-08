@@ -296,14 +296,24 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
           </div>
 
           <div>
-            <label className="block text-[#e6e6f0] mb-2 font-medium">Loan Duration (Days)</label>
+            <label className="block text-[#e6e6f0] mb-2 font-medium">Loan Duration (Days): <span className="text-[#ffd700] font-semibold">{days}</span></label>
+            <input
+              type="range"
+              min="1"
+              max="365"
+              step="1"
+              value={days}
+              onChange={(e) => setDays(e.target.value)}
+              className="w-full accent-[#ffd700]"
+            />
             <input
               type="number"
               placeholder="365"
+              min="1"
               max="365"
               value={days}
               onChange={(e) => setDays(e.target.value)}
-              className="w-full bg-[#1a1a2e] border border-[#ffd700]/20 rounded-lg px-3 sm:px-4 py-2 sm:py-3 text-[#e6e6f0] placeholder-[#e6e6f0]/50 focus:border-[#ffd700] focus:outline-none text-sm sm:text-base"
+              className="mt-2 w-full bg-[#1a1a2e] border border-[#ffd700]/20 rounded-lg px-3 sm:px-4 py-2 sm:py-3 text-[#e6e6f0] placeholder-[#e6e6f0]/50 focus:border-[#ffd700] focus:outline-none text-sm sm:text-base"
             />
           </div>
 
@@ -436,14 +446,24 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
           
           {!hasActiveLoan && (
             <div>
-              <label className="block text-[#e6e6f0] mb-2 font-medium">Loan Duration (Days)</label>
+              <label className="block text-[#e6e6f0] mb-2 font-medium">Loan Duration (Days): <span className="text-[#ffd700] font-semibold">{days}</span></label>
+              <input
+                type="range"
+                min="1"
+                max="365"
+                step="1"
+                value={days}
+                onChange={(e) => setDays(e.target.value)}
+                className="w-full accent-[#ffd700]"
+              />
               <input
                 type="number"
                 placeholder="365"
+                min="1"
                 max="365"
                 value={days}
                 onChange={(e) => setDays(e.target.value)}
-                className="w-full bg-[#1a1a2e] border border-[#ffd700]/20 rounded-lg px-3 sm:px-4 py-2 sm:py-3 text-[#e6e6f0] placeholder-[#e6e6f0]/50 focus:border-[#ffd700] focus:outline-none text-sm sm:text-base"
+                className="mt-2 w-full bg-[#1a1a2e] border border-[#ffd700]/20 rounded-lg px-3 sm:px-4 py-2 sm:py-3 text-[#e6e6f0] placeholder-[#e6e6f0]/50 focus:border-[#ffd700] focus:outline-none text-sm sm:text-base"
               />
             </div>
           )}
