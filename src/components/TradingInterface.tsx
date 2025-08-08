@@ -263,16 +263,6 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
       {/* Leverage Interface */}
       {activeTab === 'leverage' && (
         <div className="space-y-6">
-          {/* Balance Info */}
-          <div className="bg-[#1a1a2e] p-3 sm:p-4 rounded-lg border border-[#ffd700]/10">
-            <div className="flex justify-between text-xs sm:text-sm">
-              <span className="text-[#e6e6f0]/70">Your SEI Balance:</span>
-              <span className="text-[#c0c0c0] font-semibold">
-                {seiBalance ? parseFloat(formatEther(seiBalance.value)).toFixed(4) : '0.0000'} SEI
-              </span>
-            </div>
-          </div>
-
           <div>
             <label className="block text-[#e6e6f0] mb-2 font-medium">SEI Position Size</label>
             <div className="relative">
