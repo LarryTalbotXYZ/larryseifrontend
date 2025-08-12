@@ -3,12 +3,27 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useAccount, useReadContract, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
-import { parseEther, formatEther, formatUnits } from 'viem';
+import { parseEther, formatEther, formatUnits, createPublicClient, http } from 'viem';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import VeYakaABI from './abi.json';
 
 const VEYAKA_CONTRACT_ADDRESS = '0x2fB0DA76902E13810460A80045C3FC5170776543' as const;
 const YAKA_TOKEN_ADDRESS = '0x51121BCAE92E302f19D06C193C95E1f7b81a444b' as const;
+const VOTING_ESCROW_ADDRESS = '0x86a247Ef0Fc244565BCab93936E867407ac81580' as const;
+
+const publicClient = createPublicClient({
+  chain: {
+    id: 1329,
+    name: 'Sei Network',
+    network: 'sei',
+    nativeCurrency: { name: 'Sei', symbol: 'SEI', decimals: 18 },
+    rpcUrls: {
+      default: { http: ['https://evm-rpc.sei-apis.com'] },
+      public: { http: ['https://evm-rpc.sei-apis.com'] },
+    },
+  },
+  transport: http(),
+});
 
 // ERC20 ABI for token operations
 const ERC20_ABI = [
@@ -35,6 +50,52 @@ const ERC20_ABI = [
   }
 ] as const;
 
+// VotingEscrow ABI for NFT operations
+const VOTING_ESCROW_ABI = [
+  {
+    "inputs": [{"internalType": "address", "name": "owner", "type": "address"}],
+    "name": "balanceOf",
+    "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [{"internalType": "address", "name": "owner", "type": "address"}, {"internalType": "uint256", "name": "index", "type": "uint256"}],
+    "name": "tokenOfOwnerByIndex",
+    "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [{"internalType": "uint256", "name": "tokenId", "type": "uint256"}],
+    "name": "balanceOfNFT",
+    "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [{"internalType": "uint256", "name": "tokenId", "type": "uint256"}],
+    "name": "locked",
+    "outputs": [{"internalType": "int128", "name": "amount", "type": "int128"}, {"internalType": "uint256", "name": "end", "type": "uint256"}],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [{"internalType": "address", "name": "to", "type": "address"}, {"internalType": "uint256", "name": "tokenId", "type": "uint256"}],
+    "name": "approve",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [{"internalType": "uint256", "name": "tokenId", "type": "uint256"}],
+    "name": "getApproved",
+    "outputs": [{"internalType": "address", "name": "", "type": "address"}],
+    "stateMutability": "view",
+    "type": "function"
+  }
+] as const;
+
 export default function VeYakaPage() {
   const { address, isConnected } = useAccount();
   const [depositAmount, setDepositAmount] = useState('');
@@ -42,6 +103,8 @@ export default function VeYakaPage() {
   const [nftId, setNftId] = useState('');
   const [activeTab, setActiveTab] = useState<'deposit' | 'withdraw' | 'info'>('deposit');
   const [isApproving, setIsApproving] = useState(false);
+  const [userNFTs, setUserNFTs] = useState<{id: string, balance: string, endTime: string}[]>([]);
+  const [loadingNFTs, setLoadingNFTs] = useState(false);
 
   // Contract write hooks
   const { writeContract, data: hash, isPending: isWritePending, error: writeError } = useWriteContract();
@@ -113,18 +176,102 @@ export default function VeYakaPage() {
     args: address ? [address, VEYAKA_CONTRACT_ADDRESS] : undefined,
   }) as { data: bigint | undefined, refetch: () => void };
 
+  // Read user's NFT balance from VotingEscrow
+  const { data: nftBalance } = useReadContract({
+    address: VOTING_ESCROW_ADDRESS,
+    abi: VOTING_ESCROW_ABI,
+    functionName: 'balanceOf',
+    args: address ? [address] : undefined,
+  }) as { data: bigint | undefined };
+
+  // Read NFT approval status
+  const { data: nftApproved, refetch: refetchNftApproval } = useReadContract({
+    address: VOTING_ESCROW_ADDRESS,
+    abi: VOTING_ESCROW_ABI,
+    functionName: 'getApproved',
+    args: nftId ? [BigInt(nftId)] : undefined,
+  }) as { data: string | undefined, refetch: () => void };
+
   // Refetch allowances when transaction is confirmed
   useEffect(() => {
     if (isConfirmed) {
       refetchYakaAllowance();
       refetchLyYakaAllowance();
+      refetchNftApproval();
       // Small delay to ensure blockchain state is updated
       setTimeout(() => {
         refetchYakaAllowance();
         refetchLyYakaAllowance();
+        refetchNftApproval();
       }, 2000);
     }
-  }, [isConfirmed, refetchYakaAllowance, refetchLyYakaAllowance]);
+  }, [isConfirmed, refetchYakaAllowance, refetchLyYakaAllowance, refetchNftApproval]);
+
+  // Fetch user's NFTs
+  const fetchUserNFTs = async () => {
+    if (!address || !nftBalance || nftBalance === BigInt(0)) {
+      setUserNFTs([]);
+      return;
+    }
+
+    setLoadingNFTs(true);
+    try {
+      const nfts: {id: string, balance: string, endTime: string}[] = [];
+      const count = Number(nftBalance);
+      
+      // Fetch up to 10 NFTs (reasonable limit)
+      for (let i = 0; i < Math.min(count, 10); i++) {
+        try {
+          // Get NFT ID by index
+          const tokenId = await publicClient.readContract({
+            address: VOTING_ESCROW_ADDRESS,
+            abi: VOTING_ESCROW_ABI,
+            functionName: 'tokenOfOwnerByIndex',
+            args: [address, BigInt(i)],
+          }) as bigint;
+
+          // Get NFT balance
+          const nftBal = await publicClient.readContract({
+            address: VOTING_ESCROW_ADDRESS,
+            abi: VOTING_ESCROW_ABI,
+            functionName: 'balanceOfNFT',
+            args: [tokenId],
+          }) as bigint;
+
+          // Get lock info
+          const lockInfo = await publicClient.readContract({
+            address: VOTING_ESCROW_ADDRESS,
+            abi: VOTING_ESCROW_ABI,
+            functionName: 'locked',
+            args: [tokenId],
+          }) as [bigint, bigint];
+
+          if (nftBal > BigInt(0)) {
+            const endTime = new Date(Number(lockInfo[1]) * 1000);
+            nfts.push({
+              id: tokenId.toString(),
+              balance: formatEther(nftBal),
+              endTime: endTime.toLocaleDateString()
+            });
+          }
+        } catch (error) {
+          console.error(`Error fetching NFT ${i}:`, error);
+        }
+      }
+
+      setUserNFTs(nfts);
+    } catch (error) {
+      console.error('Error fetching NFTs:', error);
+      setUserNFTs([]);
+    } finally {
+      setLoadingNFTs(false);
+    }
+  };
+
+  // Fetch NFTs when address or nftBalance changes
+  useEffect(() => {
+    fetchUserNFTs();
+  }, [address, nftBalance]);
 
   // Handle YAKA token approval for deposits
   const handleApproveYaka = async () => {
@@ -159,6 +306,25 @@ export default function VeYakaPage() {
       });
     } catch (error) {
       console.error('lyYAKA approval error:', error);
+    } finally {
+      setIsApproving(false);
+    }
+  };
+
+  // Handle NFT approval for deposits
+  const handleApproveNFT = async () => {
+    if (!nftId || !address) return;
+    
+    setIsApproving(true);
+    try {
+      writeContract({
+        address: VOTING_ESCROW_ADDRESS,
+        abi: VOTING_ESCROW_ABI,
+        functionName: 'approve',
+        args: [VEYAKA_CONTRACT_ADDRESS, BigInt(nftId)],
+      });
+    } catch (error) {
+      console.error('NFT approval error:', error);
     } finally {
       setIsApproving(false);
     }
@@ -333,6 +499,12 @@ export default function VeYakaPage() {
                         formatEther((liquidTokenBalance as bigint * vaultInfo[3]) / parseEther('1')) : '0'} YAKA
                     </span>
                   </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">veYAKA NFTs</span>
+                    <span className="text-white font-medium">
+                      {nftBalance ? Number(nftBalance) : 0} NFTs
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -443,25 +615,85 @@ export default function VeYakaPage() {
                     <div className="border-t border-gray-700 pt-6">
                       <h3 className="text-xl font-semibold text-white mb-4">Deposit veYAKA NFT</h3>
                       <div className="space-y-4">
-                        <div>
-                          <label className="block text-sm font-medium text-gray-300 mb-2">
-                            NFT Token ID
-                          </label>
-                          <input
-                            type="number"
-                            value={nftId}
-                            onChange={(e) => setNftId(e.target.value)}
-                            placeholder="Enter NFT ID"
-                            className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-purple-500"
-                          />
-                        </div>
-                        <button
-                          onClick={handleDepositNFT}
-                          disabled={!nftId || !depositsEnabled || isWritePending || isConfirming}
-                          className="w-full py-3 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                        >
-                          {isWritePending || isConfirming ? 'Processing...' : 'Deposit NFT'}
-                        </button>
+                        {loadingNFTs ? (
+                          <div className="flex items-center justify-center py-4">
+                            <div className="animate-spin rounded-full h-6 w-6 border-2 border-purple-400 border-t-transparent"></div>
+                            <span className="ml-2 text-gray-300">Loading your NFTs...</span>
+                          </div>
+                        ) : userNFTs.length > 0 ? (
+                          <div>
+                            <label className="block text-sm font-medium text-gray-300 mb-2">
+                              Select Your veYAKA NFT
+                            </label>
+                            <select
+                              value={nftId}
+                              onChange={(e) => setNftId(e.target.value)}
+                              className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-purple-500"
+                            >
+                              <option value="">Select an NFT...</option>
+                              {userNFTs.map((nft) => (
+                                <option key={nft.id} value={nft.id}>
+                                  NFT #{nft.id} - {Number(nft.balance).toFixed(2)} YAKA (expires {nft.endTime})
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                        ) : (
+                          <div className="text-center py-4">
+                            <p className="text-gray-400">No veYAKA NFTs found in your wallet</p>
+                            <p className="text-gray-500 text-sm mt-1">You need veYAKA NFTs to use this option</p>
+                          </div>
+                        )}
+                        
+                        {userNFTs.length > 0 && (
+                          <>
+                            {/* NFT Approval and deposit buttons */}
+                            {nftId && nftApproved?.toLowerCase() !== VEYAKA_CONTRACT_ADDRESS.toLowerCase() ? (
+                              <button
+                                onClick={handleApproveNFT}
+                                disabled={!nftId || !depositsEnabled || isApproving || isWritePending || isConfirming}
+                                className="w-full py-3 bg-yellow-600 text-white rounded-lg font-medium hover:bg-yellow-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                              >
+                                {isApproving || isWritePending || isConfirming ? 'Processing...' : `Approve NFT #${nftId}`}
+                              </button>
+                            ) : (
+                              <button
+                                onClick={handleDepositNFT}
+                                disabled={!nftId || !depositsEnabled || isWritePending || isConfirming}
+                                className="w-full py-3 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                              >
+                                {isWritePending || isConfirming ? 'Processing...' : 'Deposit NFT'}
+                              </button>
+                            )}
+
+                            {/* NFT approval info */}
+                            {nftId && (
+                              <div className="bg-gray-700 rounded-lg p-3 text-sm text-gray-300">
+                                <div className="flex justify-between items-center">
+                                  <span>NFT #{nftId} Approved:</span>
+                                  <div className="flex items-center space-x-2">
+                                    <span>{nftApproved?.toLowerCase() === VEYAKA_CONTRACT_ADDRESS.toLowerCase() ? 'Yes' : 'No'}</span>
+                                    <button
+                                      onClick={() => refetchNftApproval()}
+                                      className="text-purple-400 hover:text-purple-300 text-xs"
+                                      title="Refresh approval"
+                                    >
+                                      ↻
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            )}
+                            
+                            <button
+                              onClick={fetchUserNFTs}
+                              disabled={loadingNFTs}
+                              className="w-full py-2 text-purple-400 hover:text-purple-300 text-sm transition-colors"
+                            >
+                              {loadingNFTs ? 'Refreshing...' : '↻ Refresh NFT List'}
+                            </button>
+                          </>
+                        )}
                       </div>
                     </div>
 
