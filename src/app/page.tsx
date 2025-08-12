@@ -22,6 +22,9 @@ export default function Home() {
             <Link href="/docs" className="text-[#e6e6f0] hover:text-[#ffd700] transition-colors text-sm sm:text-base">
               Docs
             </Link>
+            <Link href="/veyaka" className="text-[#e6e6f0] hover:text-[#ffd700] transition-colors text-sm sm:text-base hidden sm:inline">
+              VeYAKA
+            </Link>
             <Link href="/dashboard" className="text-[#e6e6f0] hover:text-[#ffd700] transition-colors text-sm sm:text-base hidden sm:inline">
               Dashboard
             </Link>
