@@ -805,21 +805,120 @@ export default function VeYakaPage() {
                 {activeTab === 'info' && (
                   <div className="space-y-6">
                     <div>
-                      <h3 className="text-xl font-semibold text-white mb-4">About VeYAKA Vault</h3>
-                      <div className="space-y-4 text-gray-300">
-                        <p>
-                          The VeYAKA Vault allows you to deposit YAKA tokens or veYAKA NFTs in exchange for 
-                          liquid lyYAKA tokens. This provides:
-                        </p>
-                        <ul className="list-disc list-inside space-y-2 ml-4">
-                          <li>Liquidity for your locked YAKA positions</li>
-                          <li>Continued exposure to YAKA governance rewards</li>
-                          <li>Ability to trade your position without unlocking</li>
-                          <li>Automatic lock extension and optimization</li>
-                        </ul>
+                      <h3 className="text-xl font-semibold text-white mb-4">How VeYAKA Liquid Staking Works</h3>
+                      <div className="space-y-6 text-gray-300">
+                        
+                        {/* Main Process Flow */}
+                        <div className="bg-gray-700 rounded-lg p-6 border border-purple-500/30">
+                          <h4 className="text-lg font-semibold text-purple-400 mb-4">🔄 The Process</h4>
+                          <div className="space-y-4">
+                            <div className="flex items-start space-x-3">
+                              <div className="w-6 h-6 bg-purple-600 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0 mt-0.5">1</div>
+                              <div>
+                                <p className="font-medium text-white">Deposit YAKA or veYAKA NFTs</p>
+                                <p className="text-sm text-gray-400">Your tokens get locked in the vault for 2 years (max voting power)</p>
+                              </div>
+                            </div>
+                            <div className="flex items-start space-x-3">
+                              <div className="w-6 h-6 bg-purple-600 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0 mt-0.5">2</div>
+                              <div>
+                                <p className="font-medium text-white">Receive lyYAKA Tokens</p>
+                                <p className="text-sm text-gray-400">Get liquid tokens representing your locked position - tradeable anytime!</p>
+                              </div>
+                            </div>
+                            <div className="flex items-start space-x-3">
+                              <div className="w-6 h-6 bg-purple-600 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0 mt-0.5">3</div>
+                              <div>
+                                <p className="font-medium text-white">Vault Auto-Manages Everything</p>
+                                <p className="text-sm text-gray-400">Contract automatically votes, claims fees, and compounds rewards</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Problem & Solution */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <div className="bg-red-900/20 border border-red-700/40 rounded-lg p-4">
+                            <h4 className="font-semibold text-red-400 mb-3">❌ The Problem Before</h4>
+                            <ul className="space-y-2 text-sm">
+                              <li>• veYAKA NFTs were locked for months/years</li>
+                              <li>• Impossible to sell your locked position</li>
+                              <li>• Had to manually vote every epoch</li>
+                              <li>• Manual fee claiming required</li>
+                              <li>• No liquidity for emergencies</li>
+                            </ul>
+                          </div>
+                          
+                          <div className="bg-green-900/20 border border-green-700/40 rounded-lg p-4">
+                            <h4 className="font-semibold text-green-400 mb-3">✅ The Solution Now</h4>
+                            <ul className="space-y-2 text-sm">
+                              <li>• lyYAKA tokens are fully liquid & tradeable</li>
+                              <li>• Sell your position anytime on DEXs</li>
+                              <li>• Automated voting for maximum rewards</li>
+                              <li>• Automatic fee claiming & compounding</li>
+                              <li>• Instant liquidity when you need it</li>
+                            </ul>
+                          </div>
+                        </div>
+
+                        {/* Benefits */}
+                        <div className="bg-gray-700 rounded-lg p-6">
+                          <h4 className="text-lg font-semibold text-white mb-4">🎯 Key Benefits</h4>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="space-y-3">
+                              <div>
+                                <p className="font-medium text-purple-400">💧 Instant Liquidity</p>
+                                <p className="text-sm text-gray-400">Trade lyYAKA tokens anytime on decentralized exchanges</p>
+                              </div>
+                              <div>
+                                <p className="font-medium text-purple-400">🤖 Set & Forget</p>
+                                <p className="text-sm text-gray-400">Contract handles all voting and fee claiming automatically</p>
+                              </div>
+                            </div>
+                            <div className="space-y-3">
+                              <div>
+                                <p className="font-medium text-purple-400">📈 Optimized Returns</p>
+                                <p className="text-sm text-gray-400">Maximum lock duration for highest voting rewards</p>
+                              </div>
+                              <div>
+                                <p className="font-medium text-purple-400">🔄 Auto-Compound</p>
+                                <p className="text-sm text-gray-400">Rewards automatically reinvested for compound growth</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* How Rewards Work */}
+                        <div className="bg-gray-700 rounded-lg p-6">
+                          <h4 className="text-lg font-semibold text-white mb-4">💰 How Rewards Work</h4>
+                          <div className="space-y-3">
+                            <p className="text-sm">
+                              <span className="font-medium text-purple-400">Voting Rewards:</span> Contract votes with all locked YAKA for maximum gauge rewards
+                            </p>
+                            <p className="text-sm">
+                              <span className="font-medium text-purple-400">Trading Fees:</span> Earns fees from DEX trading volume proportional to voting power  
+                            </p>
+                            <p className="text-sm">
+                              <span className="font-medium text-purple-400">Bribes:</span> Receives bribes from protocols wanting votes directed to their pools
+                            </p>
+                            <p className="text-sm">
+                              <span className="font-medium text-purple-400">Compounding:</span> All rewards automatically compound into more locked YAKA
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* Warning */}
+                        <div className="bg-yellow-900/20 border border-yellow-700/40 rounded-lg p-4">
+                          <h4 className="font-semibold text-yellow-400 mb-2">⚠️ Important Notes</h4>
+                          <ul className="space-y-1 text-sm">
+                            <li>• lyYAKA price may differ from underlying YAKA value</li>
+                            <li>• Withdrawals return veYAKA NFTs (still locked until expiry)</li>
+                            <li>• Smart contract risks apply - only deposit what you can afford</li>
+                          </ul>
+                        </div>
                         
                         <div className="bg-gray-700 rounded-lg p-4 mt-6">
-                          <h4 className="font-semibold text-white mb-2">Contract Addresses</h4>
+                          <h4 className="font-semibold text-white mb-2">📋 Contract Addresses</h4>
                           <div className="space-y-1 text-sm font-mono break-all">
                             <p><span className="text-gray-400">VeYAKA Vault:</span> {VEYAKA_CONTRACT_ADDRESS}</p>
                             <p><span className="text-gray-400">YAKA Token:</span> {YAKA_TOKEN_ADDRESS}</p>
