@@ -7,7 +7,7 @@ import { parseEther, formatEther, formatUnits, createPublicClient, http } from '
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import VeYakaABI from './abi.json';
 
-const VEYAKA_CONTRACT_ADDRESS = '0x9Ff8a56c9E393D0cC4093b15B70EcC67CfC577c6' as const;
+const VEYAKA_CONTRACT_ADDRESS = '0x9833F68daB132E432ac8Bca160f60b77af36A306' as const;
 const YAKA_TOKEN_ADDRESS = '0x51121BCAE92E302f19D06C193C95E1f7b81a444b' as const;
 const VOTING_ESCROW_ADDRESS = '0x86a247Ef0Fc244565BCab93936E867407ac81580' as const;
 
