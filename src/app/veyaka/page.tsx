@@ -409,6 +409,16 @@ export default function VeYakaPage() {
           <ConnectButton />
         </div>
 
+        {/* Alpha Notice */}
+        <div className="mb-6 bg-yellow-900/20 border border-yellow-600/40 rounded-lg p-3">
+          <p className="text-yellow-300 text-sm text-center">
+            ⚠️ This site is in alpha. If you find anything wrong, please report to dev: 
+            <a href="https://t.me/btbfinance" target="_blank" rel="noopener noreferrer" className="text-yellow-200 hover:text-yellow-100 underline ml-1">
+              t.me/btbfinance
+            </a>
+          </p>
+        </div>
+
         {!isConnected ? (
           <div className="text-center py-12">
             <p className="text-gray-300 text-lg">Connect your wallet to interact with VeYAKA Vault</p>
