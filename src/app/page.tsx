@@ -50,6 +50,7 @@ export default function Home() {
             <ArrowRight className="w-5 h-5 ml-2" />
           </Link>
           
+
           {/* Stats */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-16">
             <div className="werewolf-card p-6 rounded-xl">
@@ -122,8 +123,8 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           <div className="werewolf-card p-8 rounded-xl">
             <Zap className="w-12 h-12 text-[#ffd700] mb-6" />
-            <h4 className="text-2xl font-bold text-[#ffd700] mb-4">Leverage Trading</h4>
-            <p className="text-[#e6e6f0]/80 mb-4">Amplify your positions with up to 99% collateralization.</p>
+            <h4 className="text-2xl font-bold text-[#ffd700] mb-4">Extreme Leverage Loops</h4>
+            <p className="text-[#e6e6f0]/80 mb-4">Turn 500 SEI into 10,000 SEI exposure through recursive leverage.</p>
             <div className="grid grid-cols-2 gap-4 mb-4">
               <div className="bg-[#1a1a2e] p-3 rounded border border-[#ffd700]/20">
                 <div className="text-[#ffd700] font-bold">{leverageFeePercent}%</div>
@@ -299,6 +300,93 @@ export default function Home() {
           </div>
         </div>
         
+        {/* Leverage Loop Integration */}
+        <div className="mt-16 mb-12">
+          <div className="werewolf-card p-8 rounded-xl border-2 border-[#ffd700]/30">
+            <h4 className="text-2xl font-bold text-[#ffd700] mb-6 text-center">🚀 Leverage Loop: 500 SEI → 10,000 SEI Exposure</h4>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div className="space-y-4">
+                <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
+                  <div className="flex items-center space-x-3 mb-2">
+                    <div className="w-6 h-6 bg-[#ffd700] rounded-full flex items-center justify-center text-[#0a0a0f] font-bold text-xs">1</div>
+                    <div className="text-[#ffd700] font-semibold">Start with 500 SEI</div>
+                  </div>
+                  <div className="text-[#e6e6f0]/80 text-sm">Buy LARRY tokens with your initial capital</div>
+                  <div className="text-[#10b981] font-bold text-sm">Position: 500 SEI</div>
+                </div>
+                
+                <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
+                  <div className="flex items-center space-x-3 mb-2">
+                    <div className="w-6 h-6 bg-[#ffd700] rounded-full flex items-center justify-center text-[#0a0a0f] font-bold text-xs">2</div>
+                    <div className="text-[#ffd700] font-semibold">Leverage Loop #1</div>
+                  </div>
+                  <div className="text-[#e6e6f0]/80 text-sm">Use LARRY as collateral, borrow 495 SEI (99% LTV)</div>
+                  <div className="text-[#10b981] font-bold text-sm">Position: 995 SEI</div>
+                </div>
+                
+                <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
+                  <div className="flex items-center space-x-3 mb-2">
+                    <div className="w-6 h-6 bg-[#ffd700] rounded-full flex items-center justify-center text-[#0a0a0f] font-bold text-xs">3</div>
+                    <div className="text-[#ffd700] font-semibold">Repeat Process</div>
+                  </div>
+                  <div className="text-[#e6e6f0]/80 text-sm">Buy more LARRY, leverage again, compound exposure</div>
+                  <div className="text-[#10b981] font-bold text-sm">Keep looping...</div>
+                </div>
+                
+                <div className="bg-[#1a1a2e] p-4 rounded-lg border border-[#ffd700]/20">
+                  <div className="flex items-center space-x-3 mb-2">
+                    <div className="w-6 h-6 bg-[#ffd700] rounded-full flex items-center justify-center text-[#0a0a0f] font-bold text-xs">∞</div>
+                    <div className="text-[#ffd700] font-semibold">Final Result</div>
+                  </div>
+                  <div className="text-[#e6e6f0]/80 text-sm">Achieve massive leverage through recursive borrowing</div>
+                  <div className="text-[#10b981] font-bold text-lg">Position: ~10,000 SEI (20x)</div>
+                </div>
+              </div>
+              
+              <div className="space-y-6">
+                <div className="text-center">
+                  <div className="w-32 h-32 mx-auto border-4 border-[#10b981] rounded-full flex items-center justify-center bg-gradient-to-br from-[#10b981]/20 to-transparent">
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-[#10b981]">20x</div>
+                      <div className="text-xs text-[#e6e6f0]/70">LEVERAGE</div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-[#10b981]/10 border border-[#10b981]/30 rounded-lg p-4">
+                  <h5 className="text-[#10b981] font-semibold mb-3">💰 Profit Potential</h5>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-[#e6e6f0]/70">LARRY +10%:</span>
+                      <span className="text-[#10b981] font-bold">+200% Returns</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-[#e6e6f0]/70">LARRY +50%:</span>
+                      <span className="text-[#10b981] font-bold">+1000% Returns</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-[#8b0000]/10 border border-[#8b0000]/30 rounded-lg p-4">
+                  <h5 className="text-[#8b0000] font-semibold mb-3">⚠️ Risk</h5>
+                  <div className="space-y-1 text-xs text-[#e6e6f0]/70">
+                    <div>• Time-based loans - no price liquidation</div>
+                    <div>• Must repay by loan end date or lose collateral</div>
+                    <div>• {leverageFeePercent}% fee + 3.9% APR interest</div>
+                  </div>
+                </div>
+                
+                <div className="text-center">
+                  <Link href="/dashboard" className="inline-flex items-center bg-gradient-to-r from-[#10b981] to-[#059669] text-white px-4 py-2 rounded-lg font-semibold hover:from-[#059669] hover:to-[#10b981] transition-all text-sm">
+                    Try Leverage Loop
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
         {/* Why This Matters */}
         <div className="mt-12">
           <div className="werewolf-card p-8 rounded-xl">
@@ -367,8 +455,8 @@ export default function Home() {
                   <p><strong className="text-[#8b0000]">This is not financial advice.</strong> LARRY tokens and associated DeFi features carry significant risks:</p>
                   <ul className="space-y-2 list-disc list-inside ml-4">
                     <li>Smart contract risks and potential bugs</li>
-                    <li>High leverage can result in total loss of collateral</li>
-                    <li>Loan liquidations result in permanent loss</li>
+                    <li>Time-based loans: must repay by end date or lose collateral</li>
+                    <li>Loan defaults result in permanent collateral loss</li>
                     <li>Market volatility can cause rapid value changes</li>
                     <li>Regulatory risks in DeFi protocols</li>
                   </ul>
