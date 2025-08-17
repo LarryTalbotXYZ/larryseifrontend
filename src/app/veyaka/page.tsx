@@ -168,8 +168,8 @@ export default function VeYakaPage() {
     args: address ? [address, VEYAKA_CONTRACT_ADDRESS] : undefined,
   }) as { data: bigint | undefined, refetch: () => void };
 
-  // Read lyYAKA token allowance
-  const { data: lyYakaAllowance, refetch: refetchLyYakaAllowance } = useReadContract({
+  // Read Liquid YAKA (LYT) token allowance
+  const { data: lytAllowance, refetch: refetchLytAllowance } = useReadContract({
     address: '0xFEEc14a2E30999A84fF4D5750ffb6D3AEc681E79',
     abi: ERC20_ABI,
     functionName: 'allowance',
@@ -196,16 +196,16 @@ export default function VeYakaPage() {
   useEffect(() => {
     if (isConfirmed) {
       refetchYakaAllowance();
-      refetchLyYakaAllowance();
+      refetchLytAllowance();
       refetchNftApproval();
       // Small delay to ensure blockchain state is updated
       setTimeout(() => {
         refetchYakaAllowance();
-        refetchLyYakaAllowance();
+        refetchLytAllowance();
         refetchNftApproval();
       }, 2000);
     }
-  }, [isConfirmed, refetchYakaAllowance, refetchLyYakaAllowance, refetchNftApproval]);
+  }, [isConfirmed, refetchYakaAllowance, refetchLytAllowance, refetchNftApproval]);
 
   // Fetch user's NFTs
   const fetchUserNFTs = async () => {
@@ -292,8 +292,8 @@ export default function VeYakaPage() {
     }
   };
 
-  // Handle lyYAKA token approval for withdrawals
-  const handleApproveLyYaka = async () => {
+  // Handle Liquid YAKA (LYT) token approval for withdrawals
+  const handleApproveLyt = async () => {
     if (!withdrawAmount || !address) return;
     
     setIsApproving(true);
@@ -305,7 +305,7 @@ export default function VeYakaPage() {
         args: [VEYAKA_CONTRACT_ADDRESS, parseEther(withdrawAmount)],
       });
     } catch (error) {
-      console.error('lyYAKA approval error:', error);
+      console.error('Liquid YAKA (LYT) approval error:', error);
     } finally {
       setIsApproving(false);
     }
@@ -423,7 +423,7 @@ export default function VeYakaPage() {
                   <div className="flex justify-between">
                     <span className="text-gray-400">Total Liquid Supply</span>
                     <span className="text-white font-medium">
-                      {vaultInfo ? formatEther(vaultInfo[0]) : '0'} lyYAKA
+                      {vaultInfo ? formatEther(vaultInfo[0]) : '0'} Liquid YAKA (LYT)
                     </span>
                   </div>
                   <div className="flex justify-between">
@@ -487,7 +487,7 @@ export default function VeYakaPage() {
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-400">lyYAKA Tokens</span>
+                    <span className="text-gray-400">Liquid YAKA (LYT) Tokens</span>
                     <span className="text-white font-medium">
                       {liquidTokenBalance ? formatEther(liquidTokenBalance as bigint) : '0'}
                     </span>
@@ -605,7 +605,7 @@ export default function VeYakaPage() {
                           {depositAmount && vaultInfo && vaultInfo[0] > BigInt(0) && (
                             <div className="flex justify-between pt-2 border-t border-gray-600 mt-2">
                               <span>You will receive:</span>
-                              <span>~{formatEther((parseEther(depositAmount) * vaultInfo[0]) / vaultInfo[1])} lyYAKA</span>
+                              <span>~{formatEther((parseEther(depositAmount) * vaultInfo[0]) / vaultInfo[1])} Liquid YAKA (LYT)</span>
                             </div>
                           )}
                         </div>
@@ -729,7 +729,7 @@ export default function VeYakaPage() {
                       <div className="space-y-4">
                         <div>
                           <label className="block text-sm font-medium text-gray-300 mb-2">
-                            Amount (lyYAKA)
+                            Amount (Liquid YAKA (LYT))
                           </label>
                           <input
                             type="number"
@@ -749,13 +749,13 @@ export default function VeYakaPage() {
                           </p>
                         </div>
                         {/* Approval and withdraw buttons */}
-                        {withdrawAmount && lyYakaAllowance !== undefined && parseEther(withdrawAmount) > lyYakaAllowance ? (
+                        {withdrawAmount && lytAllowance !== undefined && parseEther(withdrawAmount) > lytAllowance ? (
                           <button
-                            onClick={handleApproveLyYaka}
+                            onClick={handleApproveLyt}
                             disabled={!withdrawAmount || !withdrawalsEnabled || isApproving || isWritePending || isConfirming}
                             className="w-full py-3 bg-yellow-600 text-white rounded-lg font-medium hover:bg-yellow-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                           >
-                            {isApproving || isWritePending || isConfirming ? 'Processing...' : `Approve ${withdrawAmount} lyYAKA`}
+                            {isApproving || isWritePending || isConfirming ? 'Processing...' : `Approve ${withdrawAmount} Liquid YAKA (LYT)`}
                           </button>
                         ) : (
                           <button
@@ -767,18 +767,18 @@ export default function VeYakaPage() {
                           </button>
                         )}
                         
-                        {/* lyYAKA Balance and allowance info */}
+                        {/* Liquid YAKA (LYT) Balance and allowance info */}
                         <div className="bg-gray-700 rounded-lg p-3 text-sm text-gray-300">
                           <div className="flex justify-between">
-                            <span>Your lyYAKA Balance:</span>
-                            <span>{liquidTokenBalance ? formatEther(liquidTokenBalance) : '0'} lyYAKA</span>
+                            <span>Your Liquid YAKA (LYT) Balance:</span>
+                            <span>{liquidTokenBalance ? formatEther(liquidTokenBalance) : '0'} Liquid YAKA (LYT)</span>
                           </div>
                           <div className="flex justify-between items-center">
                             <span>Current Allowance:</span>
                             <div className="flex items-center space-x-2">
-                              <span>{lyYakaAllowance ? formatEther(lyYakaAllowance) : '0'} lyYAKA</span>
+                              <span>{lytAllowance ? formatEther(lytAllowance) : '0'} Liquid YAKA (LYT)</span>
                               <button
-                                onClick={() => refetchLyYakaAllowance()}
+                                onClick={() => refetchLytAllowance()}
                                 className="text-purple-400 hover:text-purple-300 text-xs"
                                 title="Refresh allowance"
                               >
@@ -822,7 +822,7 @@ export default function VeYakaPage() {
                             <div className="flex items-start space-x-3">
                               <div className="w-6 h-6 bg-purple-600 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0 mt-0.5">2</div>
                               <div>
-                                <p className="font-medium text-white">Receive lyYAKA Tokens</p>
+                                <p className="font-medium text-white">Receive Liquid YAKA (LYT) Tokens</p>
                                 <p className="text-sm text-gray-400">Get liquid tokens representing your locked position - tradeable anytime!</p>
                               </div>
                             </div>
@@ -852,7 +852,7 @@ export default function VeYakaPage() {
                           <div className="bg-green-900/20 border border-green-700/40 rounded-lg p-4">
                             <h4 className="font-semibold text-green-400 mb-3">✅ The Solution Now</h4>
                             <ul className="space-y-2 text-sm">
-                              <li>• lyYAKA tokens are fully liquid & tradeable</li>
+                              <li>• Liquid YAKA (LYT) tokens are fully liquid & tradeable</li>
                               <li>• Sell your position anytime on DEXs</li>
                               <li>• Automated voting for maximum rewards</li>
                               <li>• Automatic fee claiming & compounding</li>
@@ -868,7 +868,7 @@ export default function VeYakaPage() {
                             <div className="space-y-3">
                               <div>
                                 <p className="font-medium text-purple-400">💧 Instant Liquidity</p>
-                                <p className="text-sm text-gray-400">Trade lyYAKA tokens anytime on decentralized exchanges</p>
+                                <p className="text-sm text-gray-400">Trade Liquid YAKA (LYT) tokens anytime on decentralized exchanges</p>
                               </div>
                               <div>
                                 <p className="font-medium text-purple-400">🤖 Set & Forget</p>
@@ -911,7 +911,7 @@ export default function VeYakaPage() {
                         <div className="bg-yellow-900/20 border border-yellow-700/40 rounded-lg p-4">
                           <h4 className="font-semibold text-yellow-400 mb-2">⚠️ Important Notes</h4>
                           <ul className="space-y-1 text-sm">
-                            <li>• lyYAKA price may differ from underlying YAKA value</li>
+                            <li>• Liquid YAKA (LYT) price may differ from underlying YAKA value</li>
                             <li>• Withdrawals return veYAKA NFTs (still locked until expiry)</li>
                             <li>• Smart contract risks apply - only deposit what you can afford</li>
                           </ul>
