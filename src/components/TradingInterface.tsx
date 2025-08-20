@@ -183,13 +183,13 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
     const userETH = Math.max(0, position - fee);
     const payment = fee + userETH / 100; // 1% collateral on userETH
 
-    const tolerance = 0.005; // 0.5%
+    const tolerance = 0.01; // 1% tolerance for better convergence
     const diff = available - payment;
 
-    if (Math.abs(diff) / (available || 1) <= tolerance || maxIter >= 6) {
+    if (Math.abs(diff) / (available || 1) <= tolerance || maxIter >= 5) {
       // Final clamp to ensure we don't exceed available balance
       if (payment > available && payment > 0) {
-        const clampScale = (available / payment) * 0.995; // slight safety margin
+        const clampScale = (available / payment) * 0.99; // 1% safety margin
         const clampedPos = position * clampScale;
         setInputAmount(clampedPos.toFixed(4));
       }
@@ -203,9 +203,9 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
     }
 
     const scale = available / payment;
-    // Nudge scaling a bit to avoid oscillation
-    const safety = diff > 0 ? 1.05 : 0.98; // if under target, scale up a bit more; if over, scale slightly less
-    const newPos = position * scale * safety;
+    // Apply conservative scaling to avoid overshooting
+    const conservativeScale = diff > 0 ? Math.min(scale, 1.02) : Math.max(scale, 0.98);
+    const newPos = position * conservativeScale;
     setInputAmount(newPos.toFixed(4));
     setMaxIter((i) => i + 1);
   }, [isMaxCalibrating, leverageFeeData, inputAmount, maxTargetPayment, maxIter]);
