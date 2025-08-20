@@ -390,23 +390,25 @@ export default function VeYakaPage() {
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
-        <div className="flex justify-between items-center mb-8">
-          <div className="flex items-center space-x-4">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-8 space-y-4 sm:space-y-0">
+          <div className="flex flex-col sm:flex-row sm:items-center space-y-4 sm:space-y-0 sm:space-x-6">
             <Link 
               href="/" 
-              className="flex items-center space-x-2 text-purple-400 hover:text-purple-300 transition-colors group"
+              className="inline-flex items-center space-x-3 px-6 py-3 bg-gradient-to-r from-purple-600/80 to-purple-700/80 border border-purple-500/40 rounded-xl text-white hover:from-purple-500 hover:to-purple-600 hover:border-purple-400/60 transition-all duration-300 group shadow-lg backdrop-blur-sm w-fit"
             >
-              <svg className="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              <svg className="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
               </svg>
-              <span className="text-sm font-medium">Back to Home</span>
+              <span className="font-semibold">Back to Home</span>
             </Link>
             <div>
-              <h1 className="text-4xl font-bold text-white mb-2">VeYAKA Vault</h1>
-              <p className="text-gray-300">Liquid staking for YAKA tokens with voting power</p>
+              <h1 className="text-3xl sm:text-4xl font-bold text-white mb-2">VeYAKA Vault</h1>
+              <p className="text-gray-300 text-sm sm:text-base">Liquid staking for YAKA tokens with voting power</p>
             </div>
           </div>
-          <ConnectButton />
+          <div className="flex justify-end">
+            <ConnectButton />
+          </div>
         </div>
 
         {/* Alpha Notice */}
