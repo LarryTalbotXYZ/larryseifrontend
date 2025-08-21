@@ -123,16 +123,23 @@ export default function Home() {
                   </div>
                   
                   <h1 className="text-3xl lg:text-5xl font-bold leading-tight">
-                    <span className="block text-white">Liquidity</span>
-                    <span className="block bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
+                    <span className="text-white">Liquidity </span>
+                    <span className="bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
                       Engineered
                     </span>
                   </h1>
                   
-                  <p className="text-lg lg:text-xl text-gray-400 leading-relaxed max-w-2xl">
-                    Advanced DeFi primitive that transforms trading fees into governance power, 
-                    directing emissions across all v3,3 networks through automated leverage strategies.
-                  </p>
+                  <div className="text-lg lg:text-xl text-gray-300 leading-relaxed max-w-2xl space-y-3">
+                    <p>
+                      <span className="text-yellow-400 font-semibold">First ever project</span> where prices never go down, always go up.
+                    </p>
+                    <p>
+                      Get <span className="text-yellow-400 font-semibold">100x leverage</span>: 1 SEI → 100 SEI exposure.
+                    </p>
+                    <p>
+                      Borrow <span className="text-yellow-400 font-semibold">99% of your LARRY balance</span> - revolutionary DeFi primitive.
+                    </p>
+                  </div>
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-4">
