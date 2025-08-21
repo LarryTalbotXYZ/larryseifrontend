@@ -112,24 +112,24 @@ export default function Home() {
 
       <main className="relative z-10">
         {/* Hero Section */}
-        <section className="px-6 lg:px-12 py-20 lg:py-32">
+        <section className="px-6 lg:px-12 py-8 lg:py-12">
           <div className="max-w-7xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              <div className="space-y-8">
-                <div className="space-y-6">
+            <div className="grid lg:grid-cols-2 gap-8 items-center">
+              <div className="space-y-4">
+                <div className="space-y-3">
                   <div className="inline-flex items-center bg-gray-800/50 rounded-full px-4 py-2 border border-gray-700">
                     <span className="w-2 h-2 bg-green-400 rounded-full mr-3 animate-pulse"></span>
                     <span className="text-sm text-gray-300">Live on Sei Network</span>
                   </div>
                   
-                  <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
+                  <h1 className="text-3xl lg:text-5xl font-bold leading-tight">
                     <span className="block text-white">Liquidity</span>
                     <span className="block bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
                       Engineered
                     </span>
                   </h1>
                   
-                  <p className="text-xl lg:text-2xl text-gray-400 leading-relaxed max-w-2xl">
+                  <p className="text-lg lg:text-xl text-gray-400 leading-relaxed max-w-2xl">
                     Advanced DeFi primitive that transforms trading fees into governance power, 
                     directing emissions across all v3,3 networks through automated leverage strategies.
                   </p>
