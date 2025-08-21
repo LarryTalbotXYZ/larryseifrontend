@@ -7,7 +7,7 @@ import { useLarryContract } from '@/hooks/useLarryContract';
 import { formatEther } from 'viem';
 
 export default function Home() {
-  const { currentPrice, buyFeePercent, leverageFeePercent, backing } = useLarryContract();
+  const { currentPrice, buyFeePercent, backing } = useLarryContract();
   const [mounted, setMounted] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 

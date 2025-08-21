@@ -516,7 +516,7 @@ export default function Docs() {
                 </div>
 
                 <div className="text-center space-y-4 py-8">
-                  <p className="text-3xl font-bold text-yellow-400">LARRY isn't just a token. It's a liquidity machine.</p>
+                  <p className="text-3xl font-bold text-yellow-400">LARRY isn&apos;t just a token. It&apos;s a liquidity machine.</p>
                   <p className="text-xl text-gray-300">Backed. Deflationary. Loopable. On SEI.</p>
                 </div>
               </div>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { useAccount, useReadContract, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
 import { parseEther, formatEther, formatUnits, createPublicClient, http } from 'viem';
@@ -115,11 +115,11 @@ export default function VeYakaPage() {
   });
 
   // Read contract data with error handling
-  const { data: vaultInfo, error: vaultInfoError } = useReadContract({
+  const { data: vaultInfo } = useReadContract({
     address: VEYAKA_CONTRACT_ADDRESS,
     abi: VeYakaABI,
     functionName: 'getVaultInfo',
-  }) as { data: [bigint, bigint, bigint, bigint, bigint] | undefined, error: Error | null };
+  }) as { data: [bigint, bigint, bigint, bigint, bigint] | undefined };
 
   const { data: mainNFTInfo } = useReadContract({
     address: VEYAKA_CONTRACT_ADDRESS,
@@ -127,17 +127,17 @@ export default function VeYakaPage() {
     functionName: 'getMainNFTLockInfo',
   }) as { data: [bigint, bigint, bigint, bigint, bigint] | undefined };
 
-  const { data: depositsEnabled, error: depositsError } = useReadContract({
+  const { data: depositsEnabled } = useReadContract({
     address: VEYAKA_CONTRACT_ADDRESS,
     abi: VeYakaABI,
     functionName: 'depositsEnabled',
-  }) as { data: boolean | undefined, error: Error | null };
+  }) as { data: boolean | undefined };
 
-  const { data: withdrawalsEnabled, error: withdrawalsError } = useReadContract({
+  const { data: withdrawalsEnabled } = useReadContract({
     address: VEYAKA_CONTRACT_ADDRESS,
     abi: VeYakaABI,
     functionName: 'withdrawalsEnabled',
-  }) as { data: boolean | undefined, error: Error | null };
+  }) as { data: boolean | undefined };
 
   const { data: minimumWithdrawal } = useReadContract({
     address: VEYAKA_CONTRACT_ADDRESS,
@@ -208,7 +208,7 @@ export default function VeYakaPage() {
   }, [isConfirmed, refetchYakaAllowance, refetchLytAllowance, refetchNftApproval]);
 
   // Fetch user's NFTs
-  const fetchUserNFTs = async () => {
+  const fetchUserNFTs = useCallback(async () => {
     if (!address || !nftBalance || nftBalance === BigInt(0)) {
       setUserNFTs([]);
       return;
@@ -266,12 +266,12 @@ export default function VeYakaPage() {
     } finally {
       setLoadingNFTs(false);
     }
-  };
+  }, [address, nftBalance]);
 
   // Fetch NFTs when address or nftBalance changes
   useEffect(() => {
     fetchUserNFTs();
-  }, [address, nftBalance]);
+  }, [address, nftBalance, fetchUserNFTs]);
 
   // Handle YAKA token approval for deposits
   const handleApproveYaka = async () => {
@@ -609,7 +609,7 @@ export default function VeYakaPage() {
                       ].map((tab) => (
                         <button
                           key={tab.id}
-                          onClick={() => setActiveTab(tab.id as any)}
+                          onClick={() => setActiveTab(tab.id as 'deposit' | 'withdraw' | 'info')}
                           className={`flex-1 py-4 px-6 text-sm font-medium transition-colors ${
                             activeTab === tab.id
                               ? 'text-purple-400 border-b-2 border-purple-400 bg-purple-500/10'
