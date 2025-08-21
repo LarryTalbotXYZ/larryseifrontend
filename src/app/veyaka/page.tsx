@@ -634,13 +634,21 @@ export default function VeYakaPage() {
                                 <label className="block text-sm font-medium text-gray-300 mb-2">
                                   Amount (YAKA)
                                 </label>
-                                <input
-                                  type="number"
-                                  value={depositAmount}
-                                  onChange={(e) => setDepositAmount(e.target.value)}
-                                  placeholder="0.0"
-                                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-purple-500 transition-colors"
-                                />
+                                <div className="relative">
+                                  <input
+                                    type="number"
+                                    value={depositAmount}
+                                    onChange={(e) => setDepositAmount(e.target.value)}
+                                    placeholder="0.0"
+                                    className="w-full px-4 py-3 pr-16 bg-gray-800 border border-gray-700 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-purple-500 transition-colors"
+                                  />
+                                  <button
+                                    onClick={() => yakaBalance && setDepositAmount(formatEther(yakaBalance))}
+                                    className="absolute right-2 top-1/2 -translate-y-1/2 px-3 py-1 bg-purple-600 hover:bg-purple-700 text-white text-xs rounded-lg transition-colors"
+                                  >
+                                    MAX
+                                  </button>
+                                </div>
                               </div>
                               
                               {depositAmount && yakaAllowance !== undefined && parseEther(depositAmount) > yakaAllowance ? (
@@ -753,13 +761,21 @@ export default function VeYakaPage() {
                               <label className="block text-sm font-medium text-gray-300 mb-2">
                                 Amount (Liquid YAKA)
                               </label>
-                              <input
-                                type="number"
-                                value={withdrawAmount}
-                                onChange={(e) => setWithdrawAmount(e.target.value)}
-                                placeholder="0.0"
-                                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-purple-500 transition-colors"
-                              />
+                              <div className="relative">
+                                <input
+                                  type="number"
+                                  value={withdrawAmount}
+                                  onChange={(e) => setWithdrawAmount(e.target.value)}
+                                  placeholder="0.0"
+                                  className="w-full px-4 py-3 pr-16 bg-gray-800 border border-gray-700 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-purple-500 transition-colors"
+                                />
+                                <button
+                                  onClick={() => liquidTokenBalance && setWithdrawAmount(formatEther(liquidTokenBalance))}
+                                  className="absolute right-2 top-1/2 -translate-y-1/2 px-3 py-1 bg-red-600 hover:bg-red-700 text-white text-xs rounded-lg transition-colors"
+                                >
+                                  MAX
+                                </button>
+                              </div>
                             </div>
                             
                             {withdrawAmount && lytAllowance !== undefined && parseEther(withdrawAmount) > lytAllowance ? (
