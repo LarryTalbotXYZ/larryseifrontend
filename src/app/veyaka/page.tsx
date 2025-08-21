@@ -305,13 +305,13 @@ export default function VeYakaPage() {
         args: [VEYAKA_CONTRACT_ADDRESS, parseEther(withdrawAmount)],
       });
     } catch (error) {
-      console.error('Liquid YAKA (LYT) approval error:', error);
+      console.error('LYT approval error:', error);
     } finally {
       setIsApproving(false);
     }
   };
 
-  // Handle NFT approval for deposits
+  // Handle NFT approval
   const handleApproveNFT = async () => {
     if (!nftId || !address) return;
     
@@ -330,7 +330,7 @@ export default function VeYakaPage() {
     }
   };
 
-  // Handle deposit
+  // Handle YAKA deposit
   const handleDeposit = async () => {
     if (!depositAmount || !address) return;
     
@@ -362,7 +362,7 @@ export default function VeYakaPage() {
     }
   };
 
-  // Handle withdraw
+  // Handle withdrawal
   const handleWithdraw = async () => {
     if (!withdrawAmount || !address) return;
     
@@ -374,7 +374,7 @@ export default function VeYakaPage() {
         args: [parseEther(withdrawAmount)],
       });
     } catch (error) {
-      console.error('Withdraw error:', error);
+      console.error('Withdrawal error:', error);
     }
   };
 
@@ -387,595 +387,594 @@ export default function VeYakaPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900">
-      <div className="container mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-8 space-y-4 sm:space-y-0">
-          <div className="flex flex-col sm:flex-row sm:items-center space-y-4 sm:space-y-0 sm:space-x-6">
-            <Link 
-              href="/" 
-              className="inline-flex items-center space-x-3 px-6 py-3 bg-gradient-to-r from-purple-600/80 to-purple-700/80 border border-purple-500/40 rounded-xl text-white hover:from-purple-500 hover:to-purple-600 hover:border-purple-400/60 transition-all duration-300 group shadow-lg backdrop-blur-sm w-fit"
-            >
-              <svg className="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
-              </svg>
-              <span className="font-semibold">Back to Home</span>
-            </Link>
-            <div>
-              <h1 className="text-3xl sm:text-4xl font-bold text-white mb-2">VeYAKA Vault</h1>
-              <p className="text-gray-300 text-sm sm:text-base">Liquid staking for YAKA tokens with voting power</p>
+    <div className="min-h-screen bg-black text-white overflow-hidden">
+      {/* Animated Background */}
+      <div className="fixed inset-0 z-0">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,_#1a1a2e_0%,_transparent_50%),radial-gradient(circle_at_80%_20%,_#16213e_0%,_transparent_50%),radial-gradient(circle_at_40%_40%,_#0f3460_0%,_transparent_50%)]"></div>
+        <div className="absolute inset-0 opacity-20">
+          {[...Array(30)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-1 h-1 bg-purple-400 rounded-full animate-pulse"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 3}s`,
+                animationDuration: `${2 + Math.random() * 2}s`
+              }}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Header */}
+      <nav className="relative z-10 flex justify-between items-center p-6 lg:px-12 border-b border-gray-800">
+        <div className="flex items-center space-x-6">
+          <Link href="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+            <div className="w-10 h-10 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center">
+              <span className="text-white font-bold text-lg">🏛️</span>
+            </div>
+            <span className="text-2xl font-bold tracking-tight">VeYAKA</span>
+          </Link>
+          
+          <div className="hidden md:flex items-center space-x-8">
+            <Link href="/" className="text-gray-300 hover:text-white transition-colors">Home</Link>
+            <Link href="/docs" className="text-gray-300 hover:text-white transition-colors">Docs</Link>
+            <Link href="/dashboard" className="text-gray-300 hover:text-white transition-colors">Trading</Link>
+            <span className="text-purple-400 font-medium">Liquid Staking</span>
+          </div>
+        </div>
+        
+        <ConnectButton />
+      </nav>
+
+      <main className="relative z-10">
+        {/* Header Section */}
+        <section className="px-6 lg:px-12 py-12">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-12">
+              <h1 className="text-4xl lg:text-6xl font-bold mb-6">
+                <span className="text-white">Liquid </span>
+                <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">Staking</span>
+              </h1>
+              <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+                Convert locked veYAKA positions into liquid tokens while maintaining full voting power and rewards
+              </p>
+            </div>
+
+            {/* Alpha Notice */}
+            <div className="max-w-2xl mx-auto mb-8">
+              <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-2xl p-4">
+                <div className="flex items-center justify-center space-x-3">
+                  <svg className="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.664-.833-2.464 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                  </svg>
+                  <p className="text-yellow-300 text-sm">
+                    Alpha version - Report issues to 
+                    <a href="https://t.me/btbfinance" target="_blank" rel="noopener noreferrer" className="text-yellow-200 hover:text-yellow-100 underline ml-1">
+                      t.me/btbfinance
+                    </a>
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="flex justify-end">
-            <ConnectButton />
-          </div>
-        </div>
-
-        {/* Alpha Notice */}
-        <div className="mb-6 bg-yellow-900/20 border border-yellow-600/40 rounded-lg p-3">
-          <p className="text-yellow-300 text-sm text-center">
-            ⚠️ This site is in alpha. If you find anything wrong, please report to dev: 
-            <a href="https://t.me/btbfinance" target="_blank" rel="noopener noreferrer" className="text-yellow-200 hover:text-yellow-100 underline ml-1">
-              t.me/btbfinance
-            </a>
-          </p>
-        </div>
+        </section>
 
         {!isConnected ? (
-          <div className="text-center py-12">
-            <p className="text-gray-300 text-lg">Connect your wallet to interact with VeYAKA Vault</p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Vault Stats */}
-            <div className="lg:col-span-1 space-y-6">
-              <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
-                <h3 className="text-xl font-semibold text-white mb-4">Vault Statistics</h3>
-                <div className="space-y-3">
-                  <div className="flex justify-between">
-                    <span className="text-gray-400">Total Liquid Supply</span>
-                    <span className="text-white font-medium">
-                      {vaultInfo ? formatEther(vaultInfo[0]) : '0'} Liquid YAKA (LYT)
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-400">Total Locked YAKA</span>
-                    <span className="text-white font-medium">
-                      {vaultInfo ? formatEther(vaultInfo[1]) : '0'} YAKA
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-400">Voting Power</span>
-                    <span className="text-white font-medium">
-                      {vaultInfo ? formatEther(vaultInfo[2]) : '0'}
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-400">Price per Token</span>
-                    <span className="text-white font-medium">
-                      {vaultInfo ? formatUnits(vaultInfo[3], 18) : '1.00'} YAKA
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {mainNFTInfo && mainNFTInfo[0] > BigInt(0) && (
-                <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
-                  <h3 className="text-xl font-semibold text-white mb-4">Main NFT Info</h3>
-                  <div className="space-y-3">
-                    <div className="flex justify-between">
-                      <span className="text-gray-400">NFT ID</span>
-                      <span className="text-white font-medium">#{mainNFTInfo[0].toString()}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-400">Locked Amount</span>
-                      <span className="text-white font-medium">
-                        {formatEther(mainNFTInfo[1])} YAKA
-                      </span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-400">Time Left</span>
-                      <span className="text-white font-medium">
-                        {formatTimeLeft(mainNFTInfo[3])}
-                      </span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-400">Voting Power</span>
-                      <span className="text-white font-medium">
-                        {formatEther(mainNFTInfo[4])}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
-                <h3 className="text-xl font-semibold text-white mb-4">Your Balance</h3>
-                <div className="space-y-3">
-                  <div className="flex justify-between">
-                    <span className="text-gray-400">YAKA Balance</span>
-                    <span className="text-white font-medium">
-                      {yakaBalance ? formatEther(yakaBalance as bigint) : '0'} YAKA
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-400">Liquid YAKA (LYT) Tokens</span>
-                    <span className="text-white font-medium">
-                      {liquidTokenBalance ? formatEther(liquidTokenBalance as bigint) : '0'}
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-400">YAKA Value</span>
-                    <span className="text-white font-medium">
-                      {liquidTokenBalance && vaultInfo ? 
-                        formatEther((liquidTokenBalance as bigint * vaultInfo[3]) / parseEther('1')) : '0'} YAKA
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-400">veYAKA NFTs</span>
-                    <span className="text-white font-medium">
-                      {nftBalance ? Number(nftBalance) : 0} NFTs
-                    </span>
-                  </div>
-                </div>
+          <section className="px-6 lg:px-12 py-20">
+            <div className="max-w-2xl mx-auto text-center">
+              <div className="bg-gray-900/50 backdrop-blur border border-gray-800 rounded-2xl p-12">
+                <svg className="w-16 h-16 text-purple-400 mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+                <h2 className="text-2xl font-bold text-white mb-4">Connect Wallet</h2>
+                <p className="text-gray-400 mb-8">Connect your wallet to access the VeYAKA liquid staking vault</p>
+                <ConnectButton />
               </div>
             </div>
+          </section>
+        ) : (
+          <section className="px-6 lg:px-12 pb-20">
+            <div className="max-w-7xl mx-auto">
+              <div className="grid lg:grid-cols-3 gap-8">
+                
+                {/* Left Sidebar - Stats */}
+                <div className="space-y-6">
+                  {/* Vault Statistics */}
+                  <div className="bg-gray-900/30 backdrop-blur border border-gray-800 rounded-2xl p-6">
+                    <h3 className="text-lg font-bold text-white mb-6 flex items-center">
+                      <div className="w-8 h-8 bg-purple-500/20 rounded-lg flex items-center justify-center mr-3">
+                        <svg className="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                        </svg>
+                      </div>
+                      Vault Stats
+                    </h3>
+                    <div className="space-y-4">
+                      <div className="flex justify-between py-2 border-b border-gray-800/50">
+                        <span className="text-gray-400 text-sm">Total LYT Supply</span>
+                        <span className="text-white font-medium text-sm">
+                          {vaultInfo ? parseFloat(formatEther(vaultInfo[0])).toFixed(2) : '0'}
+                        </span>
+                      </div>
+                      <div className="flex justify-between py-2 border-b border-gray-800/50">
+                        <span className="text-gray-400 text-sm">Total YAKA Locked</span>
+                        <span className="text-white font-medium text-sm">
+                          {vaultInfo ? parseFloat(formatEther(vaultInfo[1])).toFixed(2) : '0'}
+                        </span>
+                      </div>
+                      <div className="flex justify-between py-2 border-b border-gray-800/50">
+                        <span className="text-gray-400 text-sm">Voting Power</span>
+                        <span className="text-white font-medium text-sm">
+                          {vaultInfo ? parseFloat(formatEther(vaultInfo[2])).toFixed(2) : '0'}
+                        </span>
+                      </div>
+                      <div className="flex justify-between py-2">
+                        <span className="text-gray-400 text-sm">Price per LYT</span>
+                        <span className="text-white font-medium text-sm">
+                          {vaultInfo ? parseFloat(formatUnits(vaultInfo[3], 18)).toFixed(4) : '1.0000'} YAKA
+                        </span>
+                      </div>
+                    </div>
+                  </div>
 
-            {/* Main Interface */}
-            <div className="lg:col-span-2">
-              <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
-                {/* Tabs */}
-                <div className="flex mb-6 bg-gray-700 rounded-lg p-1">
-                  <button
-                    onClick={() => setActiveTab('deposit')}
-                    className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
-                      activeTab === 'deposit'
-                        ? 'bg-purple-600 text-white'
-                        : 'text-gray-300 hover:text-white'
-                    }`}
-                  >
-                    Deposit
-                  </button>
-                  <button
-                    onClick={() => setActiveTab('withdraw')}
-                    className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
-                      activeTab === 'withdraw'
-                        ? 'bg-purple-600 text-white'
-                        : 'text-gray-300 hover:text-white'
-                    }`}
-                  >
-                    Withdraw
-                  </button>
-                  <button
-                    onClick={() => setActiveTab('info')}
-                    className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
-                      activeTab === 'info'
-                        ? 'bg-purple-600 text-white'
-                        : 'text-gray-300 hover:text-white'
-                    }`}
-                  >
-                    Info
-                  </button>
+                  {/* Your Holdings */}
+                  <div className="bg-gray-900/30 backdrop-blur border border-gray-800 rounded-2xl p-6">
+                    <h3 className="text-lg font-bold text-white mb-6 flex items-center">
+                      <div className="w-8 h-8 bg-green-500/20 rounded-lg flex items-center justify-center mr-3">
+                        <svg className="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                        </svg>
+                      </div>
+                      Your Holdings
+                    </h3>
+                    <div className="space-y-4">
+                      <div className="flex justify-between py-2 border-b border-gray-800/50">
+                        <span className="text-gray-400 text-sm">YAKA Balance</span>
+                        <span className="text-white font-medium text-sm">
+                          {yakaBalance ? parseFloat(formatEther(yakaBalance)).toFixed(2) : '0'}
+                        </span>
+                      </div>
+                      <div className="flex justify-between py-2 border-b border-gray-800/50">
+                        <span className="text-gray-400 text-sm">Liquid YAKA (LYT)</span>
+                        <span className="text-white font-medium text-sm">
+                          {liquidTokenBalance ? parseFloat(formatEther(liquidTokenBalance)).toFixed(2) : '0'}
+                        </span>
+                      </div>
+                      <div className="flex justify-between py-2 border-b border-gray-800/50">
+                        <span className="text-gray-400 text-sm">YAKA Value</span>
+                        <span className="text-white font-medium text-sm">
+                          {liquidTokenBalance && vaultInfo ? 
+                            parseFloat(formatEther((liquidTokenBalance * vaultInfo[3]) / parseEther('1'))).toFixed(2) : '0'}
+                        </span>
+                      </div>
+                      <div className="flex justify-between py-2">
+                        <span className="text-gray-400 text-sm">veYAKA NFTs</span>
+                        <span className="text-white font-medium text-sm">
+                          {nftBalance ? Number(nftBalance) : 0}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Main NFT Info */}
+                  {mainNFTInfo && mainNFTInfo[0] > BigInt(0) && (
+                    <div className="bg-gray-900/30 backdrop-blur border border-gray-800 rounded-2xl p-6">
+                      <h3 className="text-lg font-bold text-white mb-6 flex items-center">
+                        <div className="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center mr-3">
+                          <svg className="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                          </svg>
+                        </div>
+                        Main NFT
+                      </h3>
+                      <div className="space-y-4">
+                        <div className="flex justify-between py-2 border-b border-gray-800/50">
+                          <span className="text-gray-400 text-sm">NFT ID</span>
+                          <span className="text-white font-medium text-sm">#{mainNFTInfo[0].toString()}</span>
+                        </div>
+                        <div className="flex justify-between py-2 border-b border-gray-800/50">
+                          <span className="text-gray-400 text-sm">Locked Amount</span>
+                          <span className="text-white font-medium text-sm">
+                            {parseFloat(formatEther(mainNFTInfo[1])).toFixed(2)} YAKA
+                          </span>
+                        </div>
+                        <div className="flex justify-between py-2 border-b border-gray-800/50">
+                          <span className="text-gray-400 text-sm">Time Left</span>
+                          <span className="text-white font-medium text-sm">
+                            {formatTimeLeft(mainNFTInfo[3])}
+                          </span>
+                        </div>
+                        <div className="flex justify-between py-2">
+                          <span className="text-gray-400 text-sm">Voting Power</span>
+                          <span className="text-white font-medium text-sm">
+                            {parseFloat(formatEther(mainNFTInfo[4])).toFixed(2)}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
-                {/* Deposit Tab */}
-                {activeTab === 'deposit' && (
-                  <div className="space-y-6">
-                    <div>
-                      <h3 className="text-xl font-semibold text-white mb-4">Deposit YAKA Tokens</h3>
-                      <div className="space-y-4">
-                        <div>
-                          <label className="block text-sm font-medium text-gray-300 mb-2">
-                            Amount (YAKA)
-                          </label>
-                          <input
-                            type="number"
-                            value={depositAmount}
-                            onChange={(e) => setDepositAmount(e.target.value)}
-                            placeholder="0.0"
-                            className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-purple-500"
-                          />
-                        </div>
-                        {/* Approval and deposit buttons */}
-                        {depositAmount && yakaAllowance !== undefined && parseEther(depositAmount) > yakaAllowance ? (
-                          <button
-                            onClick={handleApproveYaka}
-                            disabled={!depositAmount || !depositsEnabled || isApproving || isWritePending || isConfirming}
-                            className="w-full py-3 bg-yellow-600 text-white rounded-lg font-medium hover:bg-yellow-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                          >
-                            {isApproving || isWritePending || isConfirming ? 'Processing...' : `Approve ${depositAmount} YAKA`}
-                          </button>
-                        ) : (
-                          <button
-                            onClick={handleDeposit}
-                            disabled={!depositAmount || !depositsEnabled || isWritePending || isConfirming || Boolean(yakaBalance && parseEther(depositAmount) > yakaBalance)}
-                            className="w-full py-3 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                          >
-                            {isWritePending || isConfirming ? 'Processing...' : 'Deposit YAKA'}
-                          </button>
-                        )}
-                        
-                        {/* Balance and allowance info */}
-                        <div className="bg-gray-700 rounded-lg p-3 text-sm text-gray-300">
-                          <div className="flex justify-between">
-                            <span>Your YAKA Balance:</span>
-                            <span>{yakaBalance ? formatEther(yakaBalance) : '0'} YAKA</span>
-                          </div>
-                          <div className="flex justify-between items-center">
-                            <span>Current Allowance:</span>
-                            <div className="flex items-center space-x-2">
-                              <span>{yakaAllowance ? formatEther(yakaAllowance) : '0'} YAKA</span>
-                              <button
-                                onClick={() => refetchYakaAllowance()}
-                                className="text-purple-400 hover:text-purple-300 text-xs"
-                                title="Refresh allowance"
-                              >
-                                ↻
-                              </button>
+                {/* Main Interface */}
+                <div className="lg:col-span-2">
+                  <div className="bg-gray-900/30 backdrop-blur border border-gray-800 rounded-2xl">
+                    {/* Tabs */}
+                    <div className="flex border-b border-gray-800">
+                      {[
+                        { id: 'deposit', label: 'Deposit', icon: '⬇️' },
+                        { id: 'withdraw', label: 'Withdraw', icon: '⬆️' },
+                        { id: 'info', label: 'Info', icon: 'ℹ️' }
+                      ].map((tab) => (
+                        <button
+                          key={tab.id}
+                          onClick={() => setActiveTab(tab.id as any)}
+                          className={`flex-1 py-4 px-6 text-sm font-medium transition-colors ${
+                            activeTab === tab.id
+                              ? 'text-purple-400 border-b-2 border-purple-400 bg-purple-500/10'
+                              : 'text-gray-400 hover:text-white'
+                          }`}
+                        >
+                          <span className="mr-2">{tab.icon}</span>
+                          {tab.label}
+                        </button>
+                      ))}
+                    </div>
+
+                    <div className="p-8">
+                      {/* Deposit Tab */}
+                      {activeTab === 'deposit' && (
+                        <div className="space-y-8">
+                          {/* YAKA Deposit */}
+                          <div>
+                            <h3 className="text-xl font-bold text-white mb-6">Deposit YAKA Tokens</h3>
+                            <div className="space-y-4">
+                              <div>
+                                <label className="block text-sm font-medium text-gray-300 mb-2">
+                                  Amount (YAKA)
+                                </label>
+                                <input
+                                  type="number"
+                                  value={depositAmount}
+                                  onChange={(e) => setDepositAmount(e.target.value)}
+                                  placeholder="0.0"
+                                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-purple-500 transition-colors"
+                                />
+                              </div>
+                              
+                              {depositAmount && yakaAllowance !== undefined && parseEther(depositAmount) > yakaAllowance ? (
+                                <button
+                                  onClick={handleApproveYaka}
+                                  disabled={!depositAmount || !depositsEnabled || isApproving || isWritePending || isConfirming}
+                                  className="w-full py-3 bg-yellow-600 text-white rounded-xl font-medium hover:bg-yellow-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                                >
+                                  {isApproving || isWritePending || isConfirming ? 'Processing...' : `Approve ${depositAmount} YAKA`}
+                                </button>
+                              ) : (
+                                <button
+                                  onClick={handleDeposit}
+                                  disabled={!depositAmount || !depositsEnabled || isWritePending || isConfirming || Boolean(yakaBalance && parseEther(depositAmount) > yakaBalance)}
+                                  className="w-full py-3 bg-purple-600 text-white rounded-xl font-medium hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                                >
+                                  {isWritePending || isConfirming ? 'Processing...' : 'Deposit YAKA'}
+                                </button>
+                              )}
+                              
+                              <div className="bg-gray-800/50 rounded-xl p-4 text-sm">
+                                <div className="flex justify-between mb-2">
+                                  <span className="text-gray-400">Your YAKA Balance:</span>
+                                  <span className="text-white">{yakaBalance ? parseFloat(formatEther(yakaBalance)).toFixed(2) : '0'} YAKA</span>
+                                </div>
+                                <div className="flex justify-between mb-2">
+                                  <span className="text-gray-400">Current Allowance:</span>
+                                  <span className="text-white">{yakaAllowance ? parseFloat(formatEther(yakaAllowance)).toFixed(2) : '0'} YAKA</span>
+                                </div>
+                                {depositAmount && vaultInfo && vaultInfo[0] > BigInt(0) && (
+                                  <div className="flex justify-between pt-2 border-t border-gray-700">
+                                    <span className="text-gray-400">You will receive:</span>
+                                    <span className="text-purple-400">~{parseFloat(formatEther((parseEther(depositAmount) * vaultInfo[0]) / vaultInfo[1])).toFixed(4)} LYT</span>
+                                  </div>
+                                )}
+                              </div>
                             </div>
                           </div>
-                          {depositAmount && vaultInfo && vaultInfo[0] > BigInt(0) && (
-                            <div className="flex justify-between pt-2 border-t border-gray-600 mt-2">
-                              <span>You will receive:</span>
-                              <span>~{formatEther((parseEther(depositAmount) * vaultInfo[0]) / vaultInfo[1])} Liquid YAKA (LYT)</span>
+
+                          {/* NFT Deposit */}
+                          <div className="border-t border-gray-800 pt-8">
+                            <h3 className="text-xl font-bold text-white mb-6">Deposit veYAKA NFT</h3>
+                            <div className="space-y-4">
+                              {loadingNFTs ? (
+                                <div className="flex items-center justify-center py-8">
+                                  <div className="animate-spin rounded-full h-6 w-6 border-2 border-purple-400 border-t-transparent"></div>
+                                  <span className="ml-3 text-gray-300">Loading your NFTs...</span>
+                                </div>
+                              ) : userNFTs.length > 0 ? (
+                                <>
+                                  <div>
+                                    <label className="block text-sm font-medium text-gray-300 mb-2">
+                                      Select Your veYAKA NFT
+                                    </label>
+                                    <select
+                                      value={nftId}
+                                      onChange={(e) => setNftId(e.target.value)}
+                                      className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white focus:outline-none focus:border-purple-500 transition-colors"
+                                    >
+                                      <option value="">Select an NFT...</option>
+                                      {userNFTs.map((nft) => (
+                                        <option key={nft.id} value={nft.id}>
+                                          NFT #{nft.id} - {Number(nft.balance).toFixed(2)} YAKA (expires {nft.endTime})
+                                        </option>
+                                      ))}
+                                    </select>
+                                  </div>
+                                  
+                                  {nftId && nftApproved?.toLowerCase() !== VEYAKA_CONTRACT_ADDRESS.toLowerCase() ? (
+                                    <button
+                                      onClick={handleApproveNFT}
+                                      disabled={!nftId || !depositsEnabled || isApproving || isWritePending || isConfirming}
+                                      className="w-full py-3 bg-yellow-600 text-white rounded-xl font-medium hover:bg-yellow-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                                    >
+                                      {isApproving || isWritePending || isConfirming ? 'Processing...' : `Approve NFT #${nftId}`}
+                                    </button>
+                                  ) : nftId ? (
+                                    <button
+                                      onClick={handleDepositNFT}
+                                      disabled={!nftId || !depositsEnabled || isWritePending || isConfirming}
+                                      className="w-full py-3 bg-green-600 text-white rounded-xl font-medium hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                                    >
+                                      {isWritePending || isConfirming ? 'Processing...' : 'Deposit NFT'}
+                                    </button>
+                                  ) : null}
+                                </>
+                              ) : (
+                                <div className="text-center py-8">
+                                  <p className="text-gray-400">No veYAKA NFTs found in your wallet</p>
+                                  <p className="text-gray-500 text-sm mt-1">You need veYAKA NFTs to use this option</p>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+
+                          {!depositsEnabled && (
+                            <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-xl p-4">
+                              <p className="text-yellow-400">⚠️ Deposits are currently disabled by contract owner</p>
                             </div>
                           )}
                         </div>
-                      </div>
-                    </div>
+                      )}
 
-                    <div className="border-t border-gray-700 pt-6">
-                      <h3 className="text-xl font-semibold text-white mb-4">Deposit veYAKA NFT</h3>
-                      <div className="space-y-4">
-                        {loadingNFTs ? (
-                          <div className="flex items-center justify-center py-4">
-                            <div className="animate-spin rounded-full h-6 w-6 border-2 border-purple-400 border-t-transparent"></div>
-                            <span className="ml-2 text-gray-300">Loading your NFTs...</span>
-                          </div>
-                        ) : userNFTs.length > 0 ? (
-                          <div>
-                            <label className="block text-sm font-medium text-gray-300 mb-2">
-                              Select Your veYAKA NFT
-                            </label>
-                            <select
-                              value={nftId}
-                              onChange={(e) => setNftId(e.target.value)}
-                              className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-purple-500"
-                            >
-                              <option value="">Select an NFT...</option>
-                              {userNFTs.map((nft) => (
-                                <option key={nft.id} value={nft.id}>
-                                  NFT #{nft.id} - {Number(nft.balance).toFixed(2)} YAKA (expires {nft.endTime})
-                                </option>
-                              ))}
-                            </select>
-                          </div>
-                        ) : (
-                          <div className="text-center py-4">
-                            <p className="text-gray-400">No veYAKA NFTs found in your wallet</p>
-                            <p className="text-gray-500 text-sm mt-1">You need veYAKA NFTs to use this option</p>
-                          </div>
-                        )}
-                        
-                        {userNFTs.length > 0 && (
-                          <>
-                            {/* NFT Approval and deposit buttons */}
-                            {nftId && nftApproved?.toLowerCase() !== VEYAKA_CONTRACT_ADDRESS.toLowerCase() ? (
+                      {/* Withdraw Tab */}
+                      {activeTab === 'withdraw' && (
+                        <div className="space-y-6">
+                          <h3 className="text-xl font-bold text-white">Withdraw as NFT</h3>
+                          <div className="space-y-4">
+                            <div>
+                              <label className="block text-sm font-medium text-gray-300 mb-2">
+                                Amount (Liquid YAKA)
+                              </label>
+                              <input
+                                type="number"
+                                value={withdrawAmount}
+                                onChange={(e) => setWithdrawAmount(e.target.value)}
+                                placeholder="0.0"
+                                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-purple-500 transition-colors"
+                              />
+                            </div>
+                            
+                            {withdrawAmount && lytAllowance !== undefined && parseEther(withdrawAmount) > lytAllowance ? (
                               <button
-                                onClick={handleApproveNFT}
-                                disabled={!nftId || !depositsEnabled || isApproving || isWritePending || isConfirming}
-                                className="w-full py-3 bg-yellow-600 text-white rounded-lg font-medium hover:bg-yellow-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                                onClick={handleApproveLyt}
+                                disabled={!withdrawAmount || !withdrawalsEnabled || isApproving || isWritePending || isConfirming}
+                                className="w-full py-3 bg-yellow-600 text-white rounded-xl font-medium hover:bg-yellow-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                               >
-                                {isApproving || isWritePending || isConfirming ? 'Processing...' : `Approve NFT #${nftId}`}
+                                {isApproving || isWritePending || isConfirming ? 'Processing...' : `Approve ${withdrawAmount} LYT`}
                               </button>
                             ) : (
                               <button
-                                onClick={handleDepositNFT}
-                                disabled={!nftId || !depositsEnabled || isWritePending || isConfirming}
-                                className="w-full py-3 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                                onClick={handleWithdraw}
+                                disabled={!withdrawAmount || !withdrawalsEnabled || isWritePending || isConfirming || Boolean(liquidTokenBalance && parseEther(withdrawAmount) > liquidTokenBalance)}
+                                className="w-full py-3 bg-red-600 text-white rounded-xl font-medium hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                               >
-                                {isWritePending || isConfirming ? 'Processing...' : 'Deposit NFT'}
+                                {isWritePending || isConfirming ? 'Processing...' : 'Withdraw as NFT'}
                               </button>
-                            )}
-
-                            {/* NFT approval info */}
-                            {nftId && (
-                              <div className="bg-gray-700 rounded-lg p-3 text-sm text-gray-300">
-                                <div className="flex justify-between items-center">
-                                  <span>NFT #{nftId} Approved:</span>
-                                  <div className="flex items-center space-x-2">
-                                    <span>{nftApproved?.toLowerCase() === VEYAKA_CONTRACT_ADDRESS.toLowerCase() ? 'Yes' : 'No'}</span>
-                                    <button
-                                      onClick={() => refetchNftApproval()}
-                                      className="text-purple-400 hover:text-purple-300 text-xs"
-                                      title="Refresh approval"
-                                    >
-                                      ↻
-                                    </button>
-                                  </div>
-                                </div>
-                              </div>
                             )}
                             
-                            <button
-                              onClick={fetchUserNFTs}
-                              disabled={loadingNFTs}
-                              className="w-full py-2 text-purple-400 hover:text-purple-300 text-sm transition-colors"
-                            >
-                              {loadingNFTs ? 'Refreshing...' : '↻ Refresh NFT List'}
-                            </button>
-                          </>
-                        )}
-                      </div>
-                    </div>
-
-                    {!depositsEnabled && (
-                      <div className="bg-yellow-900/20 border border-yellow-700 rounded-lg p-4">
-                        <p className="text-yellow-400">⚠️ Deposits are currently disabled by contract owner</p>
-                        <p className="text-yellow-300/70 text-sm mt-2">
-                          Contract status: depositsEnabled = {depositsEnabled ? 'true' : 'false'}
-                        </p>
-                      </div>
-                    )}
-                    
-                    {/* Debug info */}
-                    <div className="bg-gray-700 rounded-lg p-3 text-xs text-gray-300">
-                      <div className="font-mono mb-2">Debug Info:</div>
-                      <div>Deposits Enabled: {String(depositsEnabled)}</div>
-                      <div>Withdrawals Enabled: {String(withdrawalsEnabled)}</div>
-                      <div>Contract Address: {VEYAKA_CONTRACT_ADDRESS}</div>
-                      <div>Is Connected: {String(isConnected)}</div>
-                      <div>User Address: {address || 'Not connected'}</div>
-                      {depositsError && <div className="text-red-400">Deposits Error: {depositsError.message}</div>}
-                      {withdrawalsError && <div className="text-red-400">Withdrawals Error: {withdrawalsError.message}</div>}
-                      {vaultInfoError && <div className="text-red-400">Vault Info Error: {vaultInfoError.message}</div>}
-                    </div>
-                  </div>
-                )}
-
-                {/* Withdraw Tab */}
-                {activeTab === 'withdraw' && (
-                  <div className="space-y-6">
-                    <div>
-                      <h3 className="text-xl font-semibold text-white mb-4">Withdraw as NFT</h3>
-                      <div className="space-y-4">
-                        <div>
-                          <label className="block text-sm font-medium text-gray-300 mb-2">
-                            Amount (Liquid YAKA (LYT))
-                          </label>
-                          <input
-                            type="number"
-                            value={withdrawAmount}
-                            onChange={(e) => setWithdrawAmount(e.target.value)}
-                            placeholder="0.0"
-                            className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-purple-500"
-                          />
-                        </div>
-                        <div className="bg-gray-700 rounded-lg p-3">
-                          <p className="text-sm text-gray-300">
-                            Minimum withdrawal: {minimumWithdrawal ? formatEther(minimumWithdrawal) : '1'} YAKA
-                          </p>
-                          <p className="text-sm text-gray-300">
-                            You will receive: ~{withdrawAmount && vaultInfo ? 
-                              formatEther((parseEther(withdrawAmount) * vaultInfo[3]) / parseEther('1')) : '0'} YAKA as NFT
-                          </p>
-                        </div>
-                        {/* Approval and withdraw buttons */}
-                        {withdrawAmount && lytAllowance !== undefined && parseEther(withdrawAmount) > lytAllowance ? (
-                          <button
-                            onClick={handleApproveLyt}
-                            disabled={!withdrawAmount || !withdrawalsEnabled || isApproving || isWritePending || isConfirming}
-                            className="w-full py-3 bg-yellow-600 text-white rounded-lg font-medium hover:bg-yellow-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                          >
-                            {isApproving || isWritePending || isConfirming ? 'Processing...' : `Approve ${withdrawAmount} Liquid YAKA (LYT)`}
-                          </button>
-                        ) : (
-                          <button
-                            onClick={handleWithdraw}
-                            disabled={!withdrawAmount || !withdrawalsEnabled || isWritePending || isConfirming || Boolean(liquidTokenBalance && parseEther(withdrawAmount) > liquidTokenBalance)}
-                            className="w-full py-3 bg-red-600 text-white rounded-lg font-medium hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                          >
-                            {isWritePending || isConfirming ? 'Processing...' : 'Withdraw as NFT'}
-                          </button>
-                        )}
-                        
-                        {/* Liquid YAKA (LYT) Balance and allowance info */}
-                        <div className="bg-gray-700 rounded-lg p-3 text-sm text-gray-300">
-                          <div className="flex justify-between">
-                            <span>Your Liquid YAKA (LYT) Balance:</span>
-                            <span>{liquidTokenBalance ? formatEther(liquidTokenBalance) : '0'} Liquid YAKA (LYT)</span>
+                            <div className="bg-gray-800/50 rounded-xl p-4 text-sm">
+                              <div className="flex justify-between mb-2">
+                                <span className="text-gray-400">Your LYT Balance:</span>
+                                <span className="text-white">{liquidTokenBalance ? parseFloat(formatEther(liquidTokenBalance)).toFixed(2) : '0'} LYT</span>
+                              </div>
+                              <div className="flex justify-between mb-2">
+                                <span className="text-gray-400">Minimum withdrawal:</span>
+                                <span className="text-white">{minimumWithdrawal ? parseFloat(formatEther(minimumWithdrawal)).toFixed(2) : '1'} YAKA</span>
+                              </div>
+                              {withdrawAmount && vaultInfo && (
+                                <div className="flex justify-between pt-2 border-t border-gray-700">
+                                  <span className="text-gray-400">You will receive:</span>
+                                  <span className="text-red-400">~{parseFloat(formatEther((parseEther(withdrawAmount) * vaultInfo[3]) / parseEther('1'))).toFixed(4)} YAKA as NFT</span>
+                                </div>
+                              )}
+                            </div>
                           </div>
-                          <div className="flex justify-between items-center">
-                            <span>Current Allowance:</span>
-                            <div className="flex items-center space-x-2">
-                              <span>{lytAllowance ? formatEther(lytAllowance) : '0'} Liquid YAKA (LYT)</span>
-                              <button
-                                onClick={() => refetchLytAllowance()}
-                                className="text-purple-400 hover:text-purple-300 text-xs"
-                                title="Refresh allowance"
-                              >
-                                ↻
-                              </button>
+
+                          {!withdrawalsEnabled && (
+                            <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-xl p-4">
+                              <p className="text-yellow-400">⚠️ Withdrawals are currently disabled</p>
+                            </div>
+                          )}
+                        </div>
+                      )}
+
+                      {/* Info Tab */}
+                      {activeTab === 'info' && (
+                        <div className="space-y-8">
+                          <div>
+                            <h3 className="text-xl font-bold text-white mb-6">How VeYAKA Liquid Staking Works</h3>
+                            
+                            {/* Process Flow */}
+                            <div className="bg-gray-800/50 rounded-xl p-6 mb-8">
+                              <h4 className="text-lg font-semibold text-purple-400 mb-6">🔄 The Process</h4>
+                              <div className="space-y-6">
+                                {[
+                                  {
+                                    step: '1',
+                                    title: 'Deposit YAKA or veYAKA NFTs',
+                                    desc: 'Your tokens get locked in the vault for 2 years (max voting power)'
+                                  },
+                                  {
+                                    step: '2', 
+                                    title: 'Receive Liquid YAKA (LYT) Tokens',
+                                    desc: 'Get liquid tokens representing your locked position - tradeable anytime!'
+                                  },
+                                  {
+                                    step: '3',
+                                    title: 'Vault Auto-Manages Everything', 
+                                    desc: 'Contract automatically votes, claims fees, and compounds rewards'
+                                  }
+                                ].map((item) => (
+                                  <div key={item.step} className="flex items-start space-x-4">
+                                    <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
+                                      {item.step}
+                                    </div>
+                                    <div>
+                                      <p className="font-medium text-white mb-1">{item.title}</p>
+                                      <p className="text-sm text-gray-400">{item.desc}</p>
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+
+                            {/* Benefits */}
+                            <div className="grid md:grid-cols-2 gap-6 mb-8">
+                              <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-6">
+                                <h4 className="font-semibold text-red-400 mb-4">❌ Before Liquid Staking</h4>
+                                <ul className="space-y-2 text-sm text-gray-300">
+                                  <li>• veYAKA NFTs locked for months/years</li>
+                                  <li>• No way to sell locked positions</li>
+                                  <li>• Manual voting every epoch</li>
+                                  <li>• Manual fee claiming required</li>
+                                  <li>• No liquidity for emergencies</li>
+                                </ul>
+                              </div>
+                              
+                              <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-6">
+                                <h4 className="font-semibold text-green-400 mb-4">✅ With Liquid Staking</h4>
+                                <ul className="space-y-2 text-sm text-gray-300">
+                                  <li>• LYT tokens are fully liquid & tradeable</li>
+                                  <li>• Sell your position anytime on DEXs</li>
+                                  <li>• Automated voting for maximum rewards</li>
+                                  <li>• Automatic fee claiming & compounding</li>
+                                  <li>• Instant liquidity when needed</li>
+                                </ul>
+                              </div>
+                            </div>
+
+                            {/* Contract Addresses */}
+                            <div className="bg-gray-800/50 rounded-xl p-6">
+                              <h4 className="font-semibold text-white mb-4">📋 Contract Addresses</h4>
+                              <div className="space-y-2 text-xs font-mono text-gray-300">
+                                <div className="flex justify-between">
+                                  <span>VeYAKA Vault:</span>
+                                  <span className="text-purple-400">{VEYAKA_CONTRACT_ADDRESS}</span>
+                                </div>
+                                <div className="flex justify-between">
+                                  <span>YAKA Token:</span>
+                                  <span className="text-purple-400">{YAKA_TOKEN_ADDRESS}</span>
+                                </div>
+                                <div className="flex justify-between">
+                                  <span>Voting Escrow:</span>
+                                  <span className="text-purple-400">0x86a247Ef0Fc244565BCab93936E867407ac81580</span>
+                                </div>
+                                <div className="flex justify-between">
+                                  <span>Liquid Token:</span>
+                                  <span className="text-purple-400">0xFEEc14a2E30999A84fF4D5750ffb6D3AEc681E79</span>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Warning */}
+                            <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-xl p-6">
+                              <h4 className="font-semibold text-yellow-400 mb-3">⚠️ Important Notes</h4>
+                              <ul className="space-y-1 text-sm text-gray-300">
+                                <li>• Liquid YAKA (LYT) price may differ from underlying YAKA value</li>
+                                <li>• Withdrawals return veYAKA NFTs (still locked until expiry)</li>
+                                <li>• Smart contract risks apply - only deposit what you can afford</li>
+                              </ul>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    </div>
+                      )}
 
-                    {!withdrawalsEnabled && (
-                      <div className="bg-yellow-900/20 border border-yellow-700 rounded-lg p-4">
-                        <p className="text-yellow-400">⚠️ Withdrawals are currently disabled by contract owner</p>
-                        <p className="text-yellow-300/70 text-sm mt-2">
-                          Contact the protocol team to enable withdrawals
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                )}
-
-                {/* Info Tab */}
-                {activeTab === 'info' && (
-                  <div className="space-y-6">
-                    <div>
-                      <h3 className="text-xl font-semibold text-white mb-4">How VeYAKA Liquid Staking Works</h3>
-                      <div className="space-y-6 text-gray-300">
-                        
-                        {/* Main Process Flow */}
-                        <div className="bg-gray-700 rounded-lg p-6 border border-purple-500/30">
-                          <h4 className="text-lg font-semibold text-purple-400 mb-4">🔄 The Process</h4>
-                          <div className="space-y-4">
-                            <div className="flex items-start space-x-3">
-                              <div className="w-6 h-6 bg-purple-600 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0 mt-0.5">1</div>
-                              <div>
-                                <p className="font-medium text-white">Deposit YAKA or veYAKA NFTs</p>
-                                <p className="text-sm text-gray-400">Your tokens get locked in the vault for 2 years (max voting power)</p>
-                              </div>
+                      {/* Transaction Status */}
+                      {(isWritePending || isConfirming || isConfirmed || writeError) && (
+                        <div className="mt-6 p-4 rounded-xl border">
+                          {isWritePending && (
+                            <div className="flex items-center space-x-3 text-yellow-400">
+                              <div className="animate-spin rounded-full h-5 w-5 border-2 border-yellow-400 border-t-transparent"></div>
+                              <span>Waiting for wallet confirmation...</span>
                             </div>
-                            <div className="flex items-start space-x-3">
-                              <div className="w-6 h-6 bg-purple-600 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0 mt-0.5">2</div>
-                              <div>
-                                <p className="font-medium text-white">Receive Liquid YAKA (LYT) Tokens</p>
-                                <p className="text-sm text-gray-400">Get liquid tokens representing your locked position - tradeable anytime!</p>
-                              </div>
+                          )}
+                          {isConfirming && (
+                            <div className="flex items-center space-x-3 text-blue-400">
+                              <div className="animate-spin rounded-full h-5 w-5 border-2 border-blue-400 border-t-transparent"></div>
+                              <span>Transaction confirming...</span>
                             </div>
-                            <div className="flex items-start space-x-3">
-                              <div className="w-6 h-6 bg-purple-600 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0 mt-0.5">3</div>
-                              <div>
-                                <p className="font-medium text-white">Vault Auto-Manages Everything</p>
-                                <p className="text-sm text-gray-400">Contract automatically votes, claims fees, and compounds rewards</p>
-                              </div>
+                          )}
+                          {isConfirmed && (
+                            <div className="text-green-400 flex items-center space-x-2">
+                              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                              </svg>
+                              <span>Transaction confirmed!</span>
                             </div>
-                          </div>
-                        </div>
-
-                        {/* Problem & Solution */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                          <div className="bg-red-900/20 border border-red-700/40 rounded-lg p-4">
-                            <h4 className="font-semibold text-red-400 mb-3">❌ The Problem Before</h4>
-                            <ul className="space-y-2 text-sm">
-                              <li>• veYAKA NFTs were locked for months/years</li>
-                              <li>• Impossible to sell your locked position</li>
-                              <li>• Had to manually vote every epoch</li>
-                              <li>• Manual fee claiming required</li>
-                              <li>• No liquidity for emergencies</li>
-                            </ul>
-                          </div>
-                          
-                          <div className="bg-green-900/20 border border-green-700/40 rounded-lg p-4">
-                            <h4 className="font-semibold text-green-400 mb-3">✅ The Solution Now</h4>
-                            <ul className="space-y-2 text-sm">
-                              <li>• Liquid YAKA (LYT) tokens are fully liquid & tradeable</li>
-                              <li>• Sell your position anytime on DEXs</li>
-                              <li>• Automated voting for maximum rewards</li>
-                              <li>• Automatic fee claiming & compounding</li>
-                              <li>• Instant liquidity when you need it</li>
-                            </ul>
-                          </div>
-                        </div>
-
-                        {/* Benefits */}
-                        <div className="bg-gray-700 rounded-lg p-6">
-                          <h4 className="text-lg font-semibold text-white mb-4">🎯 Key Benefits</h4>
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div className="space-y-3">
-                              <div>
-                                <p className="font-medium text-purple-400">💧 Instant Liquidity</p>
-                                <p className="text-sm text-gray-400">Trade Liquid YAKA (LYT) tokens anytime on decentralized exchanges</p>
-                              </div>
-                              <div>
-                                <p className="font-medium text-purple-400">🤖 Set & Forget</p>
-                                <p className="text-sm text-gray-400">Contract handles all voting and fee claiming automatically</p>
-                              </div>
+                          )}
+                          {writeError && (
+                            <div className="text-red-400 flex items-center space-x-2">
+                              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                              </svg>
+                              <span>Error: {writeError.message}</span>
                             </div>
-                            <div className="space-y-3">
-                              <div>
-                                <p className="font-medium text-purple-400">📈 Optimized Returns</p>
-                                <p className="text-sm text-gray-400">Maximum lock duration for highest voting rewards</p>
-                              </div>
-                              <div>
-                                <p className="font-medium text-purple-400">🔄 Auto-Compound</p>
-                                <p className="text-sm text-gray-400">Rewards automatically reinvested for compound growth</p>
-                              </div>
-                            </div>
-                          </div>
+                          )}
                         </div>
-
-                        {/* How Rewards Work */}
-                        <div className="bg-gray-700 rounded-lg p-6">
-                          <h4 className="text-lg font-semibold text-white mb-4">💰 How Rewards Work</h4>
-                          <div className="space-y-3">
-                            <p className="text-sm">
-                              <span className="font-medium text-purple-400">Voting Rewards:</span> Contract votes with all locked YAKA for maximum gauge rewards
-                            </p>
-                            <p className="text-sm">
-                              <span className="font-medium text-purple-400">Trading Fees:</span> Earns fees from DEX trading volume proportional to voting power  
-                            </p>
-                            <p className="text-sm">
-                              <span className="font-medium text-purple-400">Bribes:</span> Receives bribes from protocols wanting votes directed to their pools
-                            </p>
-                            <p className="text-sm">
-                              <span className="font-medium text-purple-400">Compounding:</span> All rewards automatically compound into more locked YAKA
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Warning */}
-                        <div className="bg-yellow-900/20 border border-yellow-700/40 rounded-lg p-4">
-                          <h4 className="font-semibold text-yellow-400 mb-2">⚠️ Important Notes</h4>
-                          <ul className="space-y-1 text-sm">
-                            <li>• Liquid YAKA (LYT) price may differ from underlying YAKA value</li>
-                            <li>• Withdrawals return veYAKA NFTs (still locked until expiry)</li>
-                            <li>• Smart contract risks apply - only deposit what you can afford</li>
-                          </ul>
-                        </div>
-                        
-                        <div className="bg-gray-700 rounded-lg p-4 mt-6">
-                          <h4 className="font-semibold text-white mb-2">📋 Contract Addresses</h4>
-                          <div className="space-y-1 text-sm font-mono break-all">
-                            <p><span className="text-gray-400">VeYAKA Vault:</span> {VEYAKA_CONTRACT_ADDRESS}</p>
-                            <p><span className="text-gray-400">YAKA Token:</span> {YAKA_TOKEN_ADDRESS}</p>
-                            <p><span className="text-gray-400">Voting Escrow:</span> 0x86a247Ef0Fc244565BCab93936E867407ac81580</p>
-                            <p><span className="text-gray-400">Voter:</span> 0x36068f15f257896E03fb7EdbA3D18898d0ade809</p>
-                            <p><span className="text-gray-400">Liquid Token:</span> 0xFEEc14a2E30999A84fF4D5750ffb6D3AEc681E79</p>
-                          </div>
-                        </div>
-                      </div>
+                      )}
                     </div>
                   </div>
-                )}
-
-                {/* Transaction Status */}
-                {(isWritePending || isConfirming || isConfirmed || writeError) && (
-                  <div className="mt-6 p-4 rounded-lg border">
-                    {isWritePending && (
-                      <div className="flex items-center space-x-2 text-yellow-400">
-                        <div className="animate-spin rounded-full h-4 w-4 border-2 border-yellow-400 border-t-transparent"></div>
-                        <span>Waiting for wallet confirmation...</span>
-                      </div>
-                    )}
-                    {isConfirming && (
-                      <div className="flex items-center space-x-2 text-blue-400">
-                        <div className="animate-spin rounded-full h-4 w-4 border-2 border-blue-400 border-t-transparent"></div>
-                        <span>Transaction confirming...</span>
-                      </div>
-                    )}
-                    {isConfirmed && (
-                      <div className="text-green-400">
-                        ✅ Transaction confirmed!
-                      </div>
-                    )}
-                    {writeError && (
-                      <div className="text-red-400">
-                        ❌ Error: {writeError.message}
-                      </div>
-                    )}
-                  </div>
-                )}
+                </div>
               </div>
             </div>
-          </div>
+          </section>
         )}
-      </div>
+      </main>
+
+      {/* Footer */}
+      <footer className="relative z-10 border-t border-gray-800 px-6 lg:px-12 py-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+            <div className="flex items-center space-x-3">
+              <div className="w-6 h-6 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center">
+                <span className="text-white font-bold text-xs">🏛️</span>
+              </div>
+              <span className="text-gray-400">© 2024 VeYAKA Protocol</span>
+            </div>
+            
+            <div className="flex items-center space-x-6">
+              <a href="https://t.me/btbfinance" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                </svg>
+              </a>
+              <a href="https://x.com/btb_finance" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
