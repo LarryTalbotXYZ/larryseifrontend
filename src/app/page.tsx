@@ -5,6 +5,7 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useState, useEffect } from 'react';
 import { useLarryContract } from '@/hooks/useLarryContract';
 import { formatEther } from 'viem';
+import { VideoLogo } from '@/components/VideoLogo';
 
 // Mathematical symbols for visual elements
 const MATH_SYMBOLS = ['∑', '∫', '∂', '∇', '∞', '∮', '∯', '∱', '∲', '∴', '∵', '⊥', '∥', '∦', '≅', '≈', '≠', '≤', '≥', '⊂', '⊃', '⊆', '⊇', '∈', '∉', '∋', '∌', '⊕', '⊗', '⊙', '⊚', '⊛', '⊜', '⊝', '⊞', '⊟', '⊠', '⊡', '∧', '∨', '¬', '∀', '∃', '∄', '∅', '∆', '∇', '∈', '∉', '∋', '∌', '⊂', '⊃', '⊄', '⊅', '⊆', '⊇', '⊈', '⊉', '⊊', '⊋', '∩', '∪', '∧', '∨', '∩', '∪', '∧', '∨', '∩', '∪'];
@@ -77,10 +78,7 @@ export default function Home() {
       <nav className="relative z-10 border-b border-red-500/30 bg-black/80 backdrop-blur-md">
         <div className="flex justify-between items-center p-6 lg:px-12">
           <Link href="/" className="flex items-center space-x-3 hover:opacity-80 transition-all duration-300 group">
-            <div className="w-12 h-12 bg-gradient-to-br from-red-600 via-purple-600 to-blue-600 rounded-lg flex items-center justify-center relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
-              <span className="text-white font-mono text-xl font-bold relative z-10">∑</span>
-            </div>
+            <VideoLogo size="medium" />
             <div className="flex flex-col">
               <span className="text-2xl font-bold tracking-tight font-mono text-white">LARRY</span>
               <span className="text-xs font-mono text-red-400">Δ-Protocol</span>
@@ -684,10 +682,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-gradient-to-br from-red-600 via-purple-600 to-blue-600 rounded-lg flex items-center justify-center relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] animate-pulse"></div>
-                <span className="text-white font-mono font-bold text-sm relative z-10">∑</span>
-              </div>
+              <VideoLogo size="small" />
               <div className="flex flex-col">
                 <span className="text-gray-400 font-mono">© 2025 LARRY_PROTOCOL</span>
                 <span className="text-xs text-red-400 font-mono">Δ-MATRIX_SYSTEM</span>
