@@ -178,9 +178,10 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
         console.log('Calculated Max Amount:', maxAmount);
 
         if (maxAmount > 0) {
-          const formattedAmount = maxAmount.toFixed(6);
-          console.log('Setting input amount to:', formattedAmount);
-          setInputAmount(formattedAmount);
+          // Round down to avoid precision errors in smart contract
+          const roundedAmount = Math.floor(maxAmount);
+          console.log('Setting input amount to:', roundedAmount);
+          setInputAmount(roundedAmount.toString());
         } else {
           console.log('Max amount is 0 or negative');
         }
@@ -210,7 +211,8 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
         setMaxTargetPayment(availableBalance);
         setMaxIter(0);
         setIsMaxCalibrating(true);
-        setInputAmount(estimatedMaxPosition.toFixed(4));
+        // Round down to avoid precision errors in smart contract
+        setInputAmount(Math.floor(estimatedMaxPosition).toString());
       } else {
         console.log('No SEI balance available for leverage');
       }
@@ -237,7 +239,11 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
       if (payment > available && payment > 0) {
         const clampScale = (available / payment) * 0.99; // 1% safety margin
         const clampedPos = position * clampScale;
-        setInputAmount(clampedPos.toFixed(4));
+        // Round down to avoid precision errors in smart contract
+        setInputAmount(Math.floor(clampedPos).toString());
+      } else {
+        // Round down to avoid precision errors in smart contract
+        setInputAmount(Math.floor(position).toString());
       }
       setIsMaxCalibrating(false);
       return;
@@ -252,7 +258,8 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
     // Apply conservative scaling to avoid overshooting
     const conservativeScale = diff > 0 ? Math.min(scale, 1.02) : Math.max(scale, 0.98);
     const newPos = position * conservativeScale;
-    setInputAmount(newPos.toFixed(4));
+    // Round down to avoid precision errors in smart contract during calibration
+    setInputAmount(Math.floor(newPos).toString());
     setMaxIter((i) => i + 1);
   }, [isMaxCalibrating, leverageFeeData, inputAmount, maxTargetPayment, maxIter]);
 
