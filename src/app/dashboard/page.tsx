@@ -164,7 +164,7 @@ export default function Dashboard() {
                 <span className="text-white font-mono font-bold text-sm relative z-10">∑</span>
               </div>
               <div className="flex flex-col">
-                <span className="text-gray-400 font-mono">© 2024 LARRY_PROTOCOL</span>
+                <span className="text-gray-400 font-mono">© 2025 LARRY_PROTOCOL</span>
                 <span className="text-xs text-red-400 font-mono">Δ-MATRIX_SYSTEM</span>
               </div>
             </div>

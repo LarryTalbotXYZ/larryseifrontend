@@ -938,7 +938,7 @@ export default function Docs() {
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] animate-pulse"></div>
                 <span className="text-black font-mono font-bold text-sm relative z-10">λ</span>
               </div>
-              <span className="text-gray-400 font-mono text-sm">© 2024 QUANTUM_PROTOCOL_ANALYSIS</span>
+              <span className="text-gray-400 font-mono text-sm">© 2025 QUANTUM_PROTOCOL_ANALYSIS</span>
             </div>
 
             <div className="flex items-center space-x-6">

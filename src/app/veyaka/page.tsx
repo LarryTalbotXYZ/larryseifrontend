@@ -1135,7 +1135,7 @@ export default function VeYakaPage() {
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] animate-pulse"></div>
                   <span className="text-white font-mono text-sm font-bold relative z-10">∑</span>
                 </div>
-                <span className="text-gray-400 font-mono text-sm">© 2024 VEYAKA_PROTOCOL::MATHEMATICAL_ENGINE</span>
+                <span className="text-gray-400 font-mono text-sm">© 2025 VEYAKA_PROTOCOL::MATHEMATICAL_ENGINE</span>
               </div>
 
               <div className="flex items-center space-x-6">
