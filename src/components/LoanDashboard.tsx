@@ -86,7 +86,7 @@ export default function LoanDashboard() {
                 <span className="text-gray-400 font-mono text-sm">COLLATERAL_ASSET</span>
               </div>
               <div className="text-2xl sm:text-3xl font-mono font-bold text-green-400">
-                {parseFloat(loan.collateral).toFixed(4)}
+                {parseFloat(loan.collateral).toFixed(2)}
               </div>
               <div className="text-green-400 font-mono text-xs mt-1">LARRY_TOKENS</div>
             </div>
@@ -101,7 +101,7 @@ export default function LoanDashboard() {
                 <span className="text-gray-400 font-mono text-sm">BORROWED_AMOUNT</span>
               </div>
               <div className="text-2xl sm:text-3xl font-mono font-bold text-red-400">
-                {parseFloat(loan.borrowed).toFixed(4)}
+                {parseFloat(loan.borrowed).toFixed(2)}
               </div>
               <div className="text-red-400 font-mono text-xs mt-1">SEI_TOKENS</div>
             </div>
@@ -176,7 +176,7 @@ export default function LoanDashboard() {
             <div className="mt-3 p-3 bg-black/50 rounded-lg border border-blue-500/20">
               <div className="text-xs font-mono text-gray-400 mb-1">EXTENSION_FEE_CALCULATION::</div>
               <div className="text-blue-400 font-mono font-bold">
-                {extensionFeeData ? (parseFloat(formatEther(extensionFeeData as bigint)).toFixed(6)) : '0.000000'} SEI
+                {extensionFeeData ? (parseFloat(formatEther(extensionFeeData as bigint)).toFixed(2)) : '0.00'} SEI
               </div>
             </div>
           </div>

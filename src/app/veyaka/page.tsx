@@ -436,7 +436,7 @@ export default function VeYakaPage() {
 
       {/* Cyberpunk Header */}
       <nav className="relative z-10 border-b border-purple-500/30 bg-black/80 backdrop-blur-md">
-        <div className="flex justify-between items-center p-6 lg:px-12">
+        <div className="flex justify-between items-center p-3 sm:p-6 lg:px-12">
           <div className="flex items-center space-x-6">
             <Link href="/" className="flex items-center space-x-3 hover:opacity-80 transition-all duration-300 group">
               <div className="w-12 h-12 bg-gradient-to-br from-purple-600 via-pink-600 to-blue-600 rounded-lg flex items-center justify-center relative overflow-hidden">
@@ -449,7 +449,7 @@ export default function VeYakaPage() {
               </div>
             </Link>
 
-            <div className="hidden md:flex items-center space-x-8">
+            <div className="hidden lg:flex items-center space-x-8">
               <Link href="/" className="text-gray-400 hover:text-green-400 transition-colors font-mono text-sm">HOME.exe</Link>
               <Link href="/docs" className="text-gray-400 hover:text-green-400 transition-colors font-mono text-sm">DOCS.exe</Link>
               <Link href="/dashboard" className="text-gray-400 hover:text-blue-400 transition-colors font-mono text-sm">TRADING.λ</Link>
@@ -463,39 +463,39 @@ export default function VeYakaPage() {
 
       <main className="relative z-10">
         {/* Cyberpunk Protocol Header */}
-        <section className="px-6 lg:px-12 py-12 lg:py-20">
+        <section className="px-4 sm:px-6 lg:px-12 py-8 sm:py-12 lg:py-20">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-16">
+            <div className="text-center mb-8 sm:mb-16">
               <div className="inline-flex items-center bg-gradient-to-r from-purple-900/30 to-pink-900/30 rounded-lg px-6 py-2 border border-purple-500/30 mb-6">
                 <span className="text-purple-400 font-mono text-sm mr-2">PROTOCOL::</span>
                 <span className="text-white font-mono">LIQUID_STAKING_ENGINE</span>
               </div>
 
-              <h1 className="text-4xl lg:text-6xl font-bold font-mono mb-6">
+              <h1 className="text-2xl sm:text-4xl lg:text-6xl font-bold font-mono mb-4 sm:mb-6">
                 <span className="text-white">LIQUID_</span>
                 <span className="bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 bg-clip-text text-transparent">
-                  STAKING_MATRIX
+                  STAKING
                 </span>
               </h1>
-              <p className="text-xl text-gray-300 font-mono max-w-3xl mx-auto">
-                <span className="text-green-400">∇</span> Transform locked veYAKA positions into liquid tokens while preserving voting power through mathematical algorithms
+              <p className="text-sm sm:text-xl text-gray-300 font-mono max-w-3xl mx-auto">
+                <span className="text-green-400">∇</span> Transform locked veYAKA into liquid tokens while preserving voting power
               </p>
             </div>
 
             {/* Protocol Status Terminal */}
-            <div className="max-w-2xl mx-auto mb-12">
-              <div className="bg-gradient-to-r from-red-900/20 to-orange-900/20 backdrop-blur-md border border-red-500/30 rounded-xl p-6 relative overflow-hidden">
+            <div className="max-w-2xl mx-auto mb-6 sm:mb-12">
+              <div className="bg-gradient-to-r from-red-900/20 to-orange-900/20 backdrop-blur-md border border-red-500/30 rounded-xl p-4 sm:p-6 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-red-500/5 to-transparent translate-x-[-100%] animate-pulse"></div>
                 <div className="relative z-10 flex items-center justify-center space-x-3">
                   <span className="text-red-400 font-mono font-bold text-lg">⚠</span>
                   <div className="text-center">
-                    <p className="text-red-300 font-mono text-sm font-bold">
-                      ALPHA_PROTOCOL::MATHEMATICAL_ENGINE
+                    <p className="text-red-300 font-mono text-xs sm:text-sm font-bold">
+                      ALPHA_PROTOCOL::MATH_ENGINE
                     </p>
                     <p className="text-gray-300 font-mono text-xs mt-1">
-                      Report anomalies to
+                      Report issues to
                       <a href="https://t.me/btbfinance" target="_blank" rel="noopener noreferrer" className="text-red-300 hover:text-red-200 underline ml-1">
-                        TELEGRAM_CHANNEL
+                        TELEGRAM
                       </a>
                     </p>
                   </div>
@@ -506,7 +506,7 @@ export default function VeYakaPage() {
         </section>
 
         {!isConnected ? (
-          <section className="px-6 lg:px-12 py-20">
+          <section className="px-4 sm:px-6 lg:px-12 py-12 sm:py-20">
             <div className="max-w-2xl mx-auto text-center">
               <div className="bg-black/80 backdrop-blur-md border border-red-500/30 rounded-xl p-12 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-red-500/5 to-transparent translate-x-[-100%] animate-pulse"></div>
@@ -520,9 +520,9 @@ export default function VeYakaPage() {
                     <span className="text-white font-mono text-2xl font-bold">🔐</span>
                   </div>
 
-                  <h2 className="text-2xl font-mono font-bold text-red-400 mb-4">WALLET_CONNECTION_REQUIRED</h2>
-                  <p className="text-gray-300 font-mono text-sm mb-8">
-                    Initialize blockchain connection to execute liquid staking mathematical algorithms and access the vault protocol.
+                  <h2 className="text-xl sm:text-2xl font-mono font-bold text-red-400 mb-4">WALLET_REQUIRED</h2>
+                  <p className="text-gray-300 font-mono text-xs sm:text-sm mb-8">
+                    Connect wallet to access liquid staking protocol and vault systems.
                   </p>
                   <ConnectButton />
                 </div>
@@ -530,14 +530,34 @@ export default function VeYakaPage() {
             </div>
           </section>
         ) : (
-          <section className="px-6 lg:px-12 pb-20">
+          <section className="px-4 sm:px-6 lg:px-12 pb-12 sm:pb-20">
             <div className="max-w-7xl mx-auto">
-              <div className="grid lg:grid-cols-3 gap-8">
+              <div className="flex flex-col lg:grid lg:grid-cols-3 gap-6 lg:gap-8">
 
-                {/* Left Sidebar - Protocol Analytics */}
-                <div className="space-y-6">
+                {/* Protocol Analytics - Mobile First */}
+                <div className="order-2 lg:order-1 space-y-4 sm:space-y-6">
+                  {/* Mobile Balance Summary */}
+                  <div className="lg:hidden bg-gradient-to-r from-green-900/20 to-blue-900/20 backdrop-blur-md border border-green-500/30 rounded-xl p-3 relative overflow-hidden">
+                    <div className="relative z-10">
+                      <div className="flex justify-between items-center text-xs font-mono">
+                        <div>
+                          <span className="text-gray-400">YAKA: </span>
+                          <span className="text-white font-bold">{yakaBalance ? parseFloat(formatEther(yakaBalance)).toFixed(1) : '0'}</span>
+                        </div>
+                        <div>
+                          <span className="text-gray-400">LYT: </span>
+                          <span className="text-blue-400 font-bold">{liquidTokenBalance ? parseFloat(formatEther(liquidTokenBalance)).toFixed(1) : '0'}</span>
+                        </div>
+                        <div>
+                          <span className="text-gray-400">NFTs: </span>
+                          <span className="text-yellow-400 font-bold">{nftBalance ? Number(nftBalance) : 0}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                   {/* Vault Statistics Terminal */}
-                  <div className="bg-gradient-to-r from-purple-900/20 to-pink-900/20 backdrop-blur-md border border-purple-500/30 rounded-xl p-6 relative overflow-hidden">
+                  <div className="hidden lg:block bg-gradient-to-r from-purple-900/20 to-pink-900/20 backdrop-blur-md border border-purple-500/30 rounded-xl p-6 relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-500/5 to-transparent translate-x-[-100%] animate-pulse"></div>
                     <div className="relative z-10">
                       <div className="flex items-center mb-6 border-b border-purple-500/30 pb-2">
@@ -566,7 +586,7 @@ export default function VeYakaPage() {
                         <div className="flex justify-between py-3">
                           <span className="text-purple-300 font-mono text-xs">PRICE_PER_LYT</span>
                           <span className="text-yellow-400 font-mono font-bold text-sm">
-                            {vaultInfo ? parseFloat(formatUnits(vaultInfo[3], 18)).toFixed(4) : '1.0000'} YAKA
+                            {vaultInfo ? parseFloat(formatUnits(vaultInfo[3], 18)).toFixed(2) : '1.00'} YAKA
                           </span>
                         </div>
                       </div>
@@ -575,7 +595,7 @@ export default function VeYakaPage() {
                   </div>
 
                   {/* Digital Asset Portfolio */}
-                  <div className="bg-gradient-to-r from-green-900/20 to-blue-900/20 backdrop-blur-md border border-green-500/30 rounded-xl p-6 relative overflow-hidden">
+                  <div className="hidden lg:block bg-gradient-to-r from-green-900/20 to-blue-900/20 backdrop-blur-md border border-green-500/30 rounded-xl p-6 relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-green-500/5 to-transparent translate-x-[-100%] animate-pulse"></div>
                     <div className="relative z-10">
                       <div className="flex items-center mb-6 border-b border-green-500/30 pb-2">
@@ -614,7 +634,7 @@ export default function VeYakaPage() {
 
                   {/* Primary NFT Lock Terminal */}
                   {mainNFTInfo && mainNFTInfo[0] > BigInt(0) && (
-                    <div className="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 backdrop-blur-md border border-blue-500/30 rounded-xl p-6 relative overflow-hidden">
+                    <div className="hidden lg:block bg-gradient-to-r from-blue-900/20 to-cyan-900/20 backdrop-blur-md border border-blue-500/30 rounded-xl p-6 relative overflow-hidden">
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/5 to-transparent translate-x-[-100%] animate-pulse"></div>
                       <div className="relative z-10">
                         <div className="flex items-center mb-6 border-b border-blue-500/30 pb-2">
@@ -651,33 +671,36 @@ export default function VeYakaPage() {
                 </div>
 
                 {/* Liquid Staking Control Matrix */}
-                <div className="lg:col-span-2">
+                <div className="order-1 lg:order-2 lg:col-span-2">
                   <div className="bg-black/80 backdrop-blur-md border border-red-500/30 rounded-xl relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-red-500/5 to-transparent translate-x-[-100%] animate-pulse"></div>
 
                     {/* Protocol Tabs */}
                     <div className="flex border-b border-red-500/30 relative z-10">
                       {[
-                        { id: 'deposit', label: 'DEPOSIT_PROTOCOL', icon: '↓', color: 'purple' },
-                        { id: 'withdraw', label: 'WITHDRAW_ENGINE', icon: '↑', color: 'blue' },
-                        { id: 'info', label: 'MATHEMATICAL_ANALYSIS', icon: 'λ', color: 'green' }
+                        { id: 'deposit', label: 'DEPOSIT', longLabel: 'DEPOSIT_PROTOCOL', icon: '↓', color: 'purple' },
+                        { id: 'withdraw', label: 'WITHDRAW', longLabel: 'WITHDRAW_ENGINE', icon: '↑', color: 'blue' },
+                        { id: 'info', label: 'INFO', longLabel: 'MATHEMATICAL_ANALYSIS', icon: 'λ', color: 'green' }
                       ].map((tab) => (
                         <button
                           key={tab.id}
                           onClick={() => setActiveTab(tab.id as 'deposit' | 'withdraw' | 'info')}
-                          className={`flex-1 py-4 px-6 font-mono font-bold text-sm transition-all duration-300 relative ${
+                          className={`flex-1 py-3 sm:py-4 px-2 sm:px-6 font-mono font-bold text-xs sm:text-sm transition-all duration-300 relative ${
                             activeTab === tab.id
                               ? `text-${tab.color}-400 border-b-2 border-${tab.color}-400 bg-${tab.color}-500/10`
                               : 'text-gray-400 hover:text-white'
                           }`}
                         >
-                          <span className="mr-2">{tab.icon}</span>
-                          {tab.label}
+                          <div className="flex flex-col sm:flex-row items-center justify-center">
+                            <span className="text-sm sm:text-base mb-1 sm:mb-0 sm:mr-2">{tab.icon}</span>
+                            <span className="hidden sm:inline">{tab.longLabel}</span>
+                            <span className="sm:hidden">{tab.label}</span>
+                          </div>
                         </button>
                       ))}
                     </div>
 
-                    <div className="p-8 relative z-10">
+                    <div className="p-4 sm:p-8 relative z-10">
                       {/* Deposit Protocol */}
                       {activeTab === 'deposit' && (
                         <div className="space-y-8">
@@ -701,7 +724,7 @@ export default function VeYakaPage() {
                                     className="w-full px-4 py-3 pr-20 bg-black/50 border border-purple-500/30 rounded-lg text-white font-mono placeholder-gray-500 focus:outline-none focus:border-purple-400 transition-all duration-300"
                                   />
                                   <button
-                                    onClick={() => yakaBalance && setDepositAmount(formatEther(yakaBalance))}
+                                    onClick={() => yakaBalance && setDepositAmount(parseFloat(formatEther(yakaBalance)).toFixed(2))}
                                     className="absolute right-2 top-1/2 -translate-y-1/2 px-3 py-1 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white text-xs font-mono font-bold rounded-lg transition-all duration-300 border border-purple-400/30"
                                   >
                                     MAX_EXECUTE
@@ -717,7 +740,7 @@ export default function VeYakaPage() {
                                 >
                                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] hover:translate-x-[100%] transition-transform duration-700"></div>
                                   <span className="relative z-10">
-                                    {isApproving || isWritePending || isConfirming ? 'PROCESSING...' : `APPROVE::${depositAmount}_YAKA`}
+                                    {isApproving || isWritePending || isConfirming ? 'PROCESSING...' : `APPROVE::${parseFloat(depositAmount).toFixed(2)}_YAKA`}
                                   </span>
                                 </button>
                               ) : (
@@ -745,7 +768,7 @@ export default function VeYakaPage() {
                                 {depositAmount && vaultInfo && vaultInfo[0] > BigInt(0) && (
                                   <div className="flex justify-between pt-2 border-t border-purple-500/20">
                                     <span className="text-purple-300">CALCULATED_OUTPUT::</span>
-                                    <span className="text-yellow-400 font-bold">~{parseFloat(formatEther((parseEther(depositAmount) * vaultInfo[0]) / vaultInfo[1])).toFixed(4)} LYT</span>
+                                    <span className="text-yellow-400 font-bold">~{parseFloat(formatEther((parseEther(depositAmount) * vaultInfo[0]) / vaultInfo[1])).toFixed(2)} LYT</span>
                                   </div>
                                 )}
                               </div>
@@ -850,7 +873,7 @@ export default function VeYakaPage() {
                                   className="w-full px-4 py-3 pr-20 bg-black/50 border border-blue-500/30 rounded-lg text-white font-mono placeholder-gray-500 focus:outline-none focus:border-blue-400 transition-all duration-300"
                                 />
                                 <button
-                                  onClick={() => liquidTokenBalance && setWithdrawAmount(formatEther(liquidTokenBalance))}
+                                  onClick={() => liquidTokenBalance && setWithdrawAmount(parseFloat(formatEther(liquidTokenBalance)).toFixed(2))}
                                   className="absolute right-2 top-1/2 -translate-y-1/2 px-3 py-1 bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-500 hover:to-pink-500 text-white text-xs font-mono font-bold rounded-lg transition-all duration-300 border border-red-400/30"
                                 >
                                   MAX_EXTRACT
@@ -866,7 +889,7 @@ export default function VeYakaPage() {
                               >
                                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] hover:translate-x-[100%] transition-transform duration-700"></div>
                                 <span className="relative z-10">
-                                  {isApproving || isWritePending || isConfirming ? 'PROCESSING...' : `APPROVE::${withdrawAmount}_LYT`}
+                                  {isApproving || isWritePending || isConfirming ? 'PROCESSING...' : `APPROVE::${parseFloat(withdrawAmount).toFixed(2)}_LYT`}
                                 </span>
                               </button>
                             ) : (
@@ -894,7 +917,7 @@ export default function VeYakaPage() {
                               {withdrawAmount && vaultInfo && (
                                 <div className="flex justify-between pt-2 border-t border-blue-500/20">
                                   <span className="text-blue-300">CALCULATED_OUTPUT::</span>
-                                  <span className="text-red-400 font-bold">~{parseFloat(formatEther((parseEther(withdrawAmount) * vaultInfo[3]) / parseEther('1'))).toFixed(4)} YAKA_NFT</span>
+                                  <span className="text-red-400 font-bold">~{parseFloat(formatEther((parseEther(withdrawAmount) * vaultInfo[3]) / parseEther('1'))).toFixed(2)} YAKA_NFT</span>
                                 </div>
                               )}
                             </div>

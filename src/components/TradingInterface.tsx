@@ -76,7 +76,7 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
     if (larryValueInETH && parseFloat(balance) > 0) {
       // User can borrow up to 99% of their LARRY collateral value in ETH
       const larryValueETH = parseFloat(formatEther(larryValueInETH as bigint));
-      const maxBorrow = (larryValueETH * 0.99).toFixed(4);
+      const maxBorrow = (larryValueETH * 0.99).toFixed(2);
       setMaxBorrowAmount(maxBorrow);
     } else {
       setMaxBorrowAmount('0');
@@ -95,11 +95,11 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
       const leverageRatio = ethPosition / totalFees;
       
       setLeverageQuote({
-        ethPosition: ethPosition.toFixed(4),
-        requiredEth: totalFees.toFixed(4),
+        ethPosition: ethPosition.toFixed(2),
+        requiredEth: totalFees.toFixed(2),
         leverageRatio: leverageRatio.toFixed(1),
-        borrowAmount: borrowAmount.toFixed(4),
-        totalFee: totalFees.toFixed(4),
+        borrowAmount: borrowAmount.toFixed(2),
+        totalFee: totalFees.toFixed(2),
         apr: '3.9'
       });
     } else if (activeTab === 'leverage') {
@@ -192,7 +192,7 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
       console.log('=== SELL TAB MAX CALCULATION ===');
       if (balance && parseFloat(balance) > 0) {
         console.log('Setting LARRY balance to input:', balance);
-        setInputAmount(balance);
+        setInputAmount(parseFloat(balance).toFixed(2));
       } else {
         console.log('No LARRY balance available or balance is 0');
       }
@@ -333,14 +333,14 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
             <div className="grid grid-cols-2 gap-4 text-sm font-mono">
               <div className="bg-gray-900/50 rounded-lg p-3 border border-green-500/20">
                 <div className="text-gray-400 mb-1">LARRY_BALANCE::</div>
-                <div className="text-green-400 font-bold">{balance} LARRY</div>
+                <div className="text-green-400 font-bold">{parseFloat(balance).toFixed(2)} LARRY</div>
               </div>
               <div className="bg-gray-900/50 rounded-lg p-3 border border-green-500/20">
                 <div className="text-gray-400 mb-1">SEI_BALANCE::</div>
                 <div className="flex items-center">
                   <div className="text-blue-400 font-bold">
                     {seiBalanceLoading ? 'LOADING...' :
-                     seiBalance ? parseFloat(formatEther(seiBalance.value)).toFixed(4) : '0.0000'} SEI
+                     seiBalance ? parseFloat(formatEther(seiBalance.value)).toFixed(2) : '0.00'} SEI
                   </div>
                   {seiBalanceLoading && (
                     <div className="ml-2 w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
@@ -410,7 +410,7 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
                 <div className="flex justify-between">
                   <span className="text-gray-400">Output:</span>
                   <span className="text-green-400 font-bold">
-                    {parseFloat(outputAmount).toFixed(4)} {activeTab === 'buy' ? 'LARRY' : 'SEI'}
+                    {parseFloat(outputAmount).toFixed(2)} {activeTab === 'buy' ? 'LARRY' : 'SEI'}
                   </span>
                 </div>
                 <div className="flex justify-between">
@@ -645,7 +645,7 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
                     e.stopPropagation();
                     console.log('MAX BUTTON CLICKED - Borrow Tab');
                     if (maxBorrowAmount && parseFloat(maxBorrowAmount) > 0) {
-                      setInputAmount(maxBorrowAmount);
+                      setInputAmount(parseFloat(maxBorrowAmount).toFixed(2));
                     } else {
                       console.log('No max borrow amount available');
                     }

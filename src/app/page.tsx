@@ -230,14 +230,14 @@ export default function Home() {
                   <div className="grid grid-cols-2 gap-6 relative z-10">
                     <div className="space-y-2 bg-gray-900/30 rounded-lg p-4 border border-gray-700/30">
                       <div className="text-2xl font-mono font-bold text-green-400">
-                        {currentPrice ? `${currentPrice.toFixed(6)}` : '0.000000'}
+                        {currentPrice ? `${currentPrice.toFixed(2)}` : '0.00'}
                       </div>
                       <div className="text-xs font-mono text-gray-400">LARRY/SEI::PRICE</div>
                     </div>
 
                     <div className="space-y-2 bg-gray-900/30 rounded-lg p-4 border border-gray-700/30">
                       <div className="text-2xl font-mono font-bold text-blue-400">
-                        {backing ? `${parseFloat(formatEther(backing as bigint)).toFixed(0)}` : '0'}
+                        {backing ? `${parseFloat(formatEther(backing as bigint)).toFixed(2)}` : '0.00'}
                       </div>
                       <div className="text-xs font-mono text-gray-400">SEI::LOCKED</div>
                     </div>
