@@ -235,6 +235,83 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Loop Leverage Section */}
+        <section className="px-6 lg:px-12 py-16 border-t border-gray-800">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
+                🔄 <span className="bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">Loop to 100x</span>
+              </h2>
+              <p className="text-xl text-gray-400">Turn 1 SEI into 100 SEI exposure with infinite leverage loops</p>
+            </div>
+
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* Left: Step by step */}
+              <div className="space-y-6">
+                <div className="bg-gray-900/30 backdrop-blur border border-gray-800 rounded-2xl p-6">
+                  <h3 className="text-2xl font-bold text-yellow-400 mb-6">The Loop Process</h3>
+                  <div className="space-y-4">
+                    {[
+                      { step: "1", action: "Buy LARRY", detail: "Start with any amount of SEI" },
+                      { step: "2", action: "Borrow 99%", detail: "Borrow 99% of LARRY value in SEI" },
+                      { step: "3", action: "Buy More LARRY", detail: "Use borrowed SEI to buy more LARRY" },
+                      { step: "4", action: "Repeat Forever", detail: "Loop until you reach desired leverage" }
+                    ].map((item, index) => (
+                      <div key={index} className="flex items-center space-x-4 p-3 bg-gray-800/50 rounded-xl">
+                        <div className="w-8 h-8 bg-yellow-500 text-black rounded-full flex items-center justify-center font-bold text-sm">
+                          {item.step}
+                        </div>
+                        <div>
+                          <p className="text-white font-semibold">{item.action}</p>
+                          <p className="text-gray-400 text-sm">{item.detail}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Right: Benefits */}
+              <div className="space-y-6">
+                <div className="bg-gradient-to-r from-green-500/10 to-green-600/10 border border-green-500/30 rounded-2xl p-6">
+                  <h3 className="text-2xl font-bold text-green-400 mb-6">Why Loop with LARRY?</h3>
+                  <div className="space-y-4">
+                    {[
+                      { icon: "🚀", title: "Prices Only Go UP", desc: "Every transaction increases backing price" },
+                      { icon: "💎", title: "99% LTV Borrowing", desc: "Highest leverage ratio in DeFi" },
+                      { icon: "⚡", title: "No Liquidation Risk", desc: "Time-based loans, not price-based" },
+                      { icon: "🔄", title: "Infinite Loops", desc: "Keep looping until you're satisfied" }
+                    ].map((item, index) => (
+                      <div key={index} className="flex items-start space-x-3">
+                        <span className="text-2xl">{item.icon}</span>
+                        <div>
+                          <p className="text-white font-semibold">{item.title}</p>
+                          <p className="text-gray-300 text-sm">{item.desc}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* CTA */}
+                <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-2xl p-6 text-center">
+                  <h4 className="text-xl font-bold text-yellow-400 mb-3">Ready to Loop?</h4>
+                  <p className="text-gray-300 mb-4">Start with any amount and leverage up to 100x</p>
+                  <Link 
+                    href="/dashboard" 
+                    className="inline-flex items-center bg-yellow-500 text-black px-6 py-3 rounded-xl font-bold hover:bg-yellow-400 transition-all transform hover:scale-105"
+                  >
+                    Start Looping Now
+                    <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Features Grid */}
         <section className="px-6 lg:px-12 py-20">
           <div className="max-w-7xl mx-auto">
