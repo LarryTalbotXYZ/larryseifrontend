@@ -11,7 +11,7 @@ import { VideoLogo } from '@/components/VideoLogo';
 const MATH_SYMBOLS = ['∑', '∫', '∂', '∇', '∞', '∮', '∯', '∱', '∲', '∴', '∵', '⊥', '∥', '∦', '≅', '≈', '≠', '≤', '≥', '⊂', '⊃', '⊆', '⊇', '∈', '∉', '∋', '∌', '⊕', '⊗', '⊙', '⊚', '⊛', '⊜', '⊝', '⊞', '⊟', '⊠', '⊡', '∧', '∨', '¬', '∀', '∃', '∄', '∅', '∆', '∇', '∈', '∉', '∋', '∌', '⊂', '⊃', '⊄', '⊅', '⊆', '⊇', '⊈', '⊉', '⊊', '⊋', '∩', '∪', '∧', '∨', '∩', '∪', '∧', '∨', '∩', '∪'];
 
 export default function Home() {
-  const { currentPrice, buyFeePercent, backing } = useLarryContract();
+  const { currentPrice, buyFeePercent, backing, totalSupply } = useLarryContract();
   const [mounted, setMounted] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [glitchActive, setGlitchActive] = useState(false);
@@ -243,8 +243,10 @@ export default function Home() {
                     </div>
 
                     <div className="space-y-2 bg-gray-900/30 rounded-lg p-4 border border-gray-700/30">
-                      <div className="text-2xl font-mono font-bold text-purple-400">1B</div>
-                      <div className="text-xs font-mono text-gray-400">MAX_SUPPLY::∞</div>
+                      <div className="text-2xl font-mono font-bold text-purple-400">
+                        {totalSupply ? `${parseFloat(formatEther(totalSupply as bigint)).toFixed(0)}` : '0'}
+                      </div>
+                      <div className="text-xs font-mono text-gray-400">CURRENT_SUPPLY::</div>
                     </div>
 
                     <div className="space-y-2 bg-gray-900/30 rounded-lg p-4 border border-gray-700/30">
@@ -648,7 +650,9 @@ export default function Home() {
                 <div className="space-y-4">
                   <div className="flex justify-between py-3 border-b border-gray-700/30 bg-gray-900/30 rounded-lg px-4">
                     <span className="text-gray-400 font-mono">MAX_SUPPLY::</span>
-                    <span className="text-red-400 font-mono">1,000,000,000</span>
+                    <span className="text-red-400 font-mono">
+                      {totalSupply ? parseFloat(formatEther(totalSupply as bigint)).toLocaleString('en-US', {maximumFractionDigits: 0}) : '0'}
+                    </span>
                   </div>
                   <div className="flex justify-between py-3 border-b border-gray-700/30 bg-gray-900/30 rounded-lg px-4">
                     <span className="text-gray-400 font-mono">COLLATERAL_RATIO::</span>
