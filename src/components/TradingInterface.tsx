@@ -293,11 +293,11 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
   }
 
   return (
-    <div className="bg-gradient-to-r from-gray-900/30 to-gray-800/30 backdrop-blur-md border border-red-500/20 rounded-xl p-6 sm:p-8 lg:p-10 relative overflow-hidden">
+    <div className="bg-gradient-to-r from-gray-900/30 to-gray-800/30 backdrop-blur-md border border-red-500/20 rounded-xl p-4 sm:p-6 lg:p-8 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-red-500/5 to-transparent translate-x-[-100%] animate-pulse"></div>
       <div className="relative z-10">
         {/* Algorithm Selection Matrix */}
-        <div className="grid grid-cols-2 sm:flex sm:space-x-4 gap-2 sm:gap-0 mb-8 sm:mb-10">
+        <div className="grid grid-cols-2 sm:flex sm:space-x-4 gap-2 sm:gap-0 mb-4 sm:mb-6">
           {[
             { tab: 'buy', symbol: '∇', label: 'BUY_ALGORITHM' },
             { tab: 'sell', symbol: '∫', label: 'SELL_ALGORITHM' },
@@ -307,23 +307,23 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`px-4 sm:px-6 py-3 sm:py-4 rounded-lg font-mono font-bold transition-all duration-300 text-sm sm:text-base border relative overflow-hidden group ${
+              className={`px-2 sm:px-6 py-2 sm:py-4 rounded-lg font-mono font-bold transition-all duration-300 text-xs sm:text-base border relative overflow-hidden group ${
                 activeTab === tab
                   ? 'bg-gradient-to-r from-red-600 to-purple-600 text-white border-red-500/30 shadow-lg shadow-red-500/25'
                   : 'bg-black/50 text-gray-400 hover:text-white border-gray-600/30 hover:border-red-500/30'
               }`}
             >
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
-              <div className="relative z-10 flex flex-col items-center space-y-1">
-                <span className="text-lg">{symbol}</span>
-                <span className="text-xs">{label}</span>
+              <div className="relative z-10 flex flex-col items-center space-y-0.5 sm:space-y-1">
+                <span className="text-sm sm:text-lg">{symbol}</span>
+                <span className="text-xs leading-tight">{label}</span>
               </div>
             </button>
           ))}
         </div>
 
-        {/* Token Status Terminal */}
-        <div className="bg-black/80 backdrop-blur-md border border-green-500/30 rounded-lg p-4 sm:p-6 mb-6 sm:mb-8 relative overflow-hidden">
+        {/* Token Status Terminal - Only show on desktop or when needed */}
+        <div className="hidden sm:block bg-black/80 backdrop-blur-md border border-green-500/30 rounded-lg p-4 sm:p-6 mb-4 sm:mb-6 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-green-500/5 to-transparent translate-x-[-100%] animate-pulse"></div>
           <div className="relative z-10">
             <div className="flex items-center mb-4 border-b border-green-500/30 pb-2">
@@ -354,12 +354,28 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
           </div>
         </div>
 
+        {/* Mobile Balance Display */}
+        <div className="sm:hidden bg-black/80 backdrop-blur-md border border-green-500/30 rounded-lg p-3 mb-4 relative overflow-hidden">
+          <div className="flex justify-between items-center text-xs font-mono">
+            <div>
+              <span className="text-gray-400">LARRY: </span>
+              <span className="text-green-400 font-bold">{parseFloat(balance).toFixed(2)}</span>
+            </div>
+            <div>
+              <span className="text-gray-400">SEI: </span>
+              <span className="text-blue-400 font-bold">
+                {seiBalance ? parseFloat(formatEther(seiBalance.value)).toFixed(2) : '0.00'}
+              </span>
+            </div>
+          </div>
+        </div>
+
         {/* Buy/Sell Algorithm Interface */}
         {(activeTab === 'buy' || activeTab === 'sell') && (
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             <div>
-              <label className="block text-gray-300 mb-3 font-mono font-bold text-sm">
-                {activeTab === 'buy' ? '∇ INPUT_VECTOR::SEI_AMOUNT' : '∫ INPUT_VECTOR::LARRY_AMOUNT'}
+              <label className="block text-gray-300 mb-2 font-mono font-bold text-xs sm:text-sm">
+                {activeTab === 'buy' ? '∇ SEI_AMOUNT' : '∫ LARRY_AMOUNT'}
               </label>
               <div className="relative">
                 <input
@@ -367,7 +383,7 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
                   placeholder="0.0"
                   value={inputAmount}
                   onChange={(e) => setInputAmount(e.target.value)}
-                  className="w-full bg-black/50 border border-green-500/30 rounded-lg px-4 sm:px-6 py-3 sm:py-4 pr-16 sm:pr-20 text-gray-300 placeholder-gray-500 focus:border-green-400 focus:outline-none text-sm sm:text-base font-mono relative z-10 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [-moz-appearance]:textfield"
+                  className="w-full bg-black/50 border border-green-500/30 rounded-lg px-3 sm:px-6 py-3 sm:py-4 pr-12 sm:pr-20 text-gray-300 placeholder-gray-500 focus:border-green-400 focus:outline-none text-sm sm:text-base font-mono relative z-10 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [-moz-appearance]:textfield"
                 />
                 <button
                   onClick={(e) => {
@@ -377,31 +393,28 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
                     handleMaxClick();
                   }}
                   disabled={false}
-                  className={`absolute right-2 top-1/2 transform -translate-y-1/2 px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-mono font-bold transition-all duration-300 border z-20 cursor-pointer ${
+                  className={`absolute right-1 sm:right-2 top-1/2 transform -translate-y-1/2 px-2 sm:px-4 py-1 sm:py-2 rounded-lg text-xs font-mono font-bold transition-all duration-300 border z-20 cursor-pointer ${
                     maxButtonClicked
                       ? 'bg-green-500 text-white border-green-400 animate-pulse'
                       : 'bg-gradient-to-r from-green-600 to-blue-600 text-white hover:from-green-500 hover:to-blue-500 border-green-500/30'
                   }`}
                 >
-                  MAX_EXECUTE
+                  MAX
                 </button>
               </div>
             </div>
 
-            <div className="bg-gradient-to-r from-green-900/20 to-blue-900/20 backdrop-blur-md border border-green-500/30 rounded-lg p-4 sm:p-6">
-              <div className="flex items-center mb-4 border-b border-green-500/30 pb-2">
-                <span className="text-green-400 font-mono font-bold text-lg mr-2">Δ</span>
-                <h4 className="text-green-400 font-mono font-bold text-sm">CALCULATION_ENGINE</h4>
-              </div>
-              <div className="space-y-3 text-sm font-mono">
-                <div className="flex justify-between py-2 border-b border-green-500/20">
-                  <span className="text-gray-400">OUTPUT_VECTOR::</span>
+            {/* Compact calculation display */}
+            <div className="bg-gradient-to-r from-green-900/20 to-blue-900/20 backdrop-blur-md border border-green-500/30 rounded-lg p-3 sm:p-6">
+              <div className="text-xs sm:text-sm font-mono space-y-2">
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Output:</span>
                   <span className="text-green-400 font-bold">
-                    {outputAmount} {activeTab === 'buy' ? 'LARRY' : 'SEI'}
+                    {parseFloat(outputAmount).toFixed(4)} {activeTab === 'buy' ? 'LARRY' : 'SEI'}
                   </span>
                 </div>
-                <div className="flex justify-between py-2">
-                  <span className="text-gray-400">FEE_ALGORITHM::</span>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Fee:</span>
                   <span className="text-blue-400 font-bold">{activeTab === 'buy' ? buyFeePercent : sellFeePercent}%</span>
                 </div>
               </div>
@@ -410,11 +423,11 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
             <button
               onClick={handleTrade}
               disabled={isPending || !inputAmount}
-              className="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white py-4 sm:py-5 rounded-lg font-mono font-bold text-base sm:text-lg hover:from-green-500 hover:to-blue-500 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed border border-green-500/30 relative overflow-hidden group"
+              className="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white py-3 sm:py-5 rounded-lg font-mono font-bold text-sm sm:text-lg hover:from-green-500 hover:to-blue-500 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed border border-green-500/30 relative overflow-hidden group"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
               <span className="relative z-10">
-                {isPending ? 'PROCESSING_TRANSACTION...' : `EXECUTE_${activeTab.toUpperCase()}_ALGORITHM`}
+                {isPending ? 'PROCESSING...' : `${activeTab.toUpperCase()}`}
               </span>
             </button>
           </div>
@@ -422,18 +435,18 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
 
         {/* Leverage Algorithm Interface */}
         {activeTab === 'leverage' && (
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             <div>
-              <label className="block text-gray-300 mb-3 font-mono font-bold text-sm">
-                ∞ POSITION_SIZE::SEI_VECTOR
+              <label className="block text-gray-300 mb-2 font-mono font-bold text-xs sm:text-sm">
+                ∞ POSITION_SIZE
               </label>
               <div className="relative">
                 <input
                   type="number"
-                  placeholder="Enter SEI amount for leveraged position"
+                  placeholder="SEI amount"
                   value={inputAmount}
                   onChange={(e) => setInputAmount(e.target.value)}
-                  className="w-full bg-black/50 border border-blue-500/30 rounded-lg px-4 sm:px-6 py-3 sm:py-4 pr-20 sm:pr-24 text-gray-300 placeholder-gray-500 focus:border-blue-400 focus:outline-none text-sm sm:text-base font-mono relative z-10 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [-moz-appearance]:textfield"
+                  className="w-full bg-black/50 border border-blue-500/30 rounded-lg px-3 sm:px-6 py-3 sm:py-4 pr-12 sm:pr-24 text-gray-300 placeholder-gray-500 focus:border-blue-400 focus:outline-none text-sm sm:text-base font-mono relative z-10 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [-moz-appearance]:textfield"
                 />
                 <button
                   onClick={(e) => {
@@ -443,24 +456,23 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
                     handleMaxClick();
                   }}
                   disabled={false}
-                  className={`absolute right-2 top-1/2 transform -translate-y-1/2 px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-mono font-bold transition-all duration-300 border z-20 cursor-pointer ${
+                  className={`absolute right-1 sm:right-2 top-1/2 transform -translate-y-1/2 px-2 sm:px-4 py-1 sm:py-2 rounded-lg text-xs font-mono font-bold transition-all duration-300 border z-20 cursor-pointer ${
                     maxButtonClicked
                       ? 'bg-blue-500 text-white border-blue-400 animate-pulse'
                       : 'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-500 hover:to-purple-500 border-blue-500/30'
                   }`}
                 >
-                  MAX_CALCULATE
+                  MAX
                 </button>
               </div>
-              <p className="text-xs text-gray-400 font-mono mt-2">
-                Total SEI position size for recursive leverage algorithm. Payment = fees + 1% collateral only.
+              <p className="text-xs text-gray-400 font-mono mt-2 hidden sm:block">
+                Position size for leverage. Payment = fees + 1% collateral.
               </p>
             </div>
 
             <div>
-              <label className="block text-gray-300 mb-3 font-mono font-bold text-sm">
-                Δ TIME_CONSTRAINT::DAYS_VECTOR
-                <span className="text-blue-400 font-bold ml-2">{days}</span>
+              <label className="block text-gray-300 mb-2 font-mono font-bold text-xs sm:text-sm">
+                Δ DAYS: <span className="text-blue-400 font-bold">{days}</span>
               </label>
               <input
                 type="range"
@@ -483,34 +495,25 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
             </div>
 
             {leverageQuote && (
-              <div className="bg-gradient-to-r from-red-900/20 to-orange-900/20 backdrop-blur-md border border-red-500/30 rounded-lg p-4 sm:p-6 space-y-4">
-                <div className="flex items-center mb-4 border-b border-red-500/30 pb-2">
-                  <span className="text-red-400 font-mono font-bold text-lg mr-2">∞</span>
-                  <h4 className="text-red-400 font-mono font-bold text-sm">LEVERAGE_CALCULATION_ENGINE</h4>
-                </div>
-
-                <div className="space-y-3 text-sm font-mono">
-                  <div className="flex justify-between py-2 border-b border-red-500/20">
-                    <span className="text-gray-400">POSITION_SIZE::</span>
-                    <span className="text-red-400 font-bold">{leverageQuote.ethPosition} SEI</span>
+              <div className="bg-gradient-to-r from-red-900/20 to-orange-900/20 backdrop-blur-md border border-red-500/30 rounded-lg p-3 sm:p-6 space-y-3 sm:space-y-4">
+                <div className="text-xs sm:text-sm font-mono space-y-2">
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">Position:</span>
+                    <span className="text-red-400 font-bold">{parseFloat(leverageQuote.ethPosition).toFixed(2)} SEI</span>
                   </div>
-                  <div className="flex justify-between py-2 border-b border-red-500/20">
-                    <span className="text-gray-400">PAYMENT_VECTOR::</span>
-                    <span className="text-orange-400 font-bold">{leverageQuote.requiredEth} SEI</span>
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">Payment:</span>
+                    <span className="text-orange-400 font-bold">{parseFloat(leverageQuote.requiredEth).toFixed(2)} SEI</span>
                   </div>
-                  <div className="flex justify-between py-2 border-b border-red-500/20">
-                    <span className="text-gray-400">LEVERAGE_RATIO::</span>
-                    <span className="text-yellow-400 font-bold text-lg">
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">Leverage:</span>
+                    <span className="text-yellow-400 font-bold text-base sm:text-lg">
                       {leverageQuote.leverageRatio}x
                     </span>
                   </div>
-                  <div className="flex justify-between py-2 border-b border-red-500/20">
-                    <span className="text-gray-400">BORROW_AMOUNT::</span>
-                    <span className="text-blue-400 font-bold">{leverageQuote.borrowAmount} SEI</span>
-                  </div>
-                  <div className="flex justify-between py-2">
-                    <span className="text-gray-400">TOTAL_FEES::</span>
-                    <span className="text-purple-400 font-bold">{leverageQuote.totalFee} SEI</span>
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">Borrow:</span>
+                    <span className="text-blue-400 font-bold">{parseFloat(leverageQuote.borrowAmount).toFixed(2)} SEI</span>
                   </div>
                 </div>
 
@@ -531,7 +534,7 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
             )}
 
             {/* Algorithm Warning */}
-            <div className="bg-gradient-to-r from-yellow-900/20 to-orange-900/20 backdrop-blur-md border border-yellow-500/30 rounded-lg p-4 sm:p-6">
+            <div className="hidden sm:block bg-gradient-to-r from-yellow-900/20 to-orange-900/20 backdrop-blur-md border border-yellow-500/30 rounded-lg p-4 sm:p-6">
               <div className="flex items-start space-x-3">
                 <span className="text-yellow-400 font-mono font-bold text-lg">⚠</span>
                 <div className="text-sm font-mono text-yellow-200 flex-1">
@@ -548,17 +551,17 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
             <button
               onClick={handleTrade}
               disabled={isPending || !inputAmount || !leverageQuote || (leverageQuote && parseFloat(leverageQuote.requiredEth) > parseFloat(formatEther(seiBalance?.value || BigInt(0)))) || hasActiveLoan}
-              className="w-full bg-gradient-to-r from-red-600 to-orange-600 text-white py-4 sm:py-5 rounded-lg font-mono font-bold text-base sm:text-lg hover:from-red-500 hover:to-orange-500 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed border border-red-500/30 relative overflow-hidden group"
+              className="w-full bg-gradient-to-r from-red-600 to-orange-600 text-white py-3 sm:py-5 rounded-lg font-mono font-bold text-sm sm:text-lg hover:from-red-500 hover:to-orange-500 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed border border-red-500/30 relative overflow-hidden group"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
               <span className="relative z-10 flex items-center justify-center">
-                <span className="text-xl mr-3">∞</span>
+                <span className="text-lg sm:text-xl mr-2 sm:mr-3">∞</span>
                 <span>
-                  {isPending ? 'EXECUTING_LEVERAGE_ALGORITHM...' :
-                   hasActiveLoan ? 'CLOSE_EXISTING_LOAN_FIRST' :
-                   !leverageQuote ? 'INPUT_POSITION_SIZE' :
-                   (leverageQuote && parseFloat(leverageQuote.requiredEth) > parseFloat(formatEther(seiBalance?.value || BigInt(0)))) ? 'INSUFFICIENT_BALANCE' :
-                   'START_RECURSIVE_LEVERAGE'}
+                  {isPending ? 'EXECUTING...' :
+                   hasActiveLoan ? 'CLOSE LOAN FIRST' :
+                   !leverageQuote ? 'ENTER AMOUNT' :
+                   (leverageQuote && parseFloat(leverageQuote.requiredEth) > parseFloat(formatEther(seiBalance?.value || BigInt(0)))) ? 'INSUFFICIENT BALANCE' :
+                   'START LEVERAGE'}
                 </span>
               </span>
             </button>
@@ -567,7 +570,7 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
 
         {/* Borrow Algorithm Interface */}
         {activeTab === 'borrow' && (
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             {/* Current Loan Status Terminal */}
             {hasActiveLoan && loan && (
               <div className="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 backdrop-blur-md border border-blue-500/30 rounded-lg p-4 sm:p-6">
@@ -576,14 +579,14 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
                   <h4 className="text-blue-400 font-mono font-bold text-sm">ACTIVE_LOAN_STATUS</h4>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4 text-sm font-mono">
+                <div className="flex flex-col sm:grid sm:grid-cols-2 gap-3 sm:gap-4 text-xs sm:text-sm font-mono">
                   <div className="bg-black/50 rounded-lg p-3 border border-blue-500/20">
-                    <div className="text-gray-400 mb-1">BORROWED_AMOUNT::</div>
-                    <div className="text-blue-400 font-bold">{parseFloat(loan.borrowed).toFixed(4)} SEI</div>
+                    <div className="text-gray-400 mb-1">Borrowed:</div>
+                    <div className="text-blue-400 font-bold">{parseFloat(loan.borrowed).toFixed(2)} SEI</div>
                   </div>
                   <div className="bg-black/50 rounded-lg p-3 border border-blue-500/20">
-                    <div className="text-gray-400 mb-1">COLLATERAL_LOCKED::</div>
-                    <div className="text-cyan-400 font-bold">{parseFloat(loan.collateral).toFixed(4)} LARRY</div>
+                    <div className="text-gray-400 mb-1">Collateral:</div>
+                    <div className="text-cyan-400 font-bold">{parseFloat(loan.collateral).toFixed(2)} LARRY</div>
                   </div>
                 </div>
 
@@ -602,14 +605,14 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
                 <h4 className="text-purple-400 font-mono font-bold text-sm">COLLATERAL_ANALYSIS_ENGINE</h4>
               </div>
 
-              <div className="space-y-3 text-sm font-mono">
-                <div className="flex justify-between py-2 border-b border-purple-500/20">
-                  <span className="text-gray-400">COLLATERAL_BALANCE::</span>
-                  <span className="text-purple-400 font-bold">{balance} LARRY</span>
+              <div className="space-y-2 text-xs sm:text-sm font-mono">
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Balance:</span>
+                  <span className="text-purple-400 font-bold">{parseFloat(balance).toFixed(2)} LARRY</span>
                 </div>
-                <div className="flex justify-between py-2 border-b border-purple-500/20">
-                  <span className="text-gray-400">{hasActiveLoan ? 'ADDITIONAL_BORROWABLE::' : 'MAX_BORROWABLE::'}</span>
-                  <span className="text-pink-400 font-bold">{maxBorrowAmount} SEI</span>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">{hasActiveLoan ? 'Additional:' : 'Max Borrow:'}</span>
+                  <span className="text-pink-400 font-bold">{parseFloat(maxBorrowAmount).toFixed(2)} SEI</span>
                 </div>
               </div>
 
@@ -624,8 +627,8 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
             </div>
           
             <div>
-              <label className="block text-gray-300 mb-3 font-mono font-bold text-sm">
-                ∑ {hasActiveLoan ? 'ADDITIONAL_BORROW_VECTOR::' : 'INITIAL_BORROW_VECTOR::'}
+              <label className="block text-gray-300 mb-2 font-mono font-bold text-xs sm:text-sm">
+                ∑ {hasActiveLoan ? 'ADDITIONAL BORROW' : 'BORROW AMOUNT'}
               </label>
               <div className="relative">
                 <input
@@ -634,7 +637,7 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
                   value={inputAmount}
                   max={maxBorrowAmount}
                   onChange={(e) => setInputAmount(e.target.value)}
-                  className="w-full bg-black/50 border border-purple-500/30 rounded-lg px-4 sm:px-6 py-3 sm:py-4 pr-20 sm:pr-24 text-gray-300 placeholder-gray-500 focus:border-purple-400 focus:outline-none text-sm sm:text-base font-mono relative z-10 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [-moz-appearance]:textfield"
+                  className="w-full bg-black/50 border border-purple-500/30 rounded-lg px-3 sm:px-6 py-3 sm:py-4 pr-12 sm:pr-24 text-gray-300 placeholder-gray-500 focus:border-purple-400 focus:outline-none text-sm sm:text-base font-mono relative z-10 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [-moz-appearance]:textfield"
                 />
                 <button
                   onClick={(e) => {
@@ -648,13 +651,13 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
                     }
                   }}
                   disabled={false}
-                  className={`absolute right-2 top-1/2 transform -translate-y-1/2 px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-mono font-bold transition-all duration-300 border z-20 cursor-pointer ${
+                  className={`absolute right-1 sm:right-2 top-1/2 transform -translate-y-1/2 px-2 sm:px-4 py-1 sm:py-2 rounded-lg text-xs font-mono font-bold transition-all duration-300 border z-20 cursor-pointer ${
                     maxButtonClicked
                       ? 'bg-purple-500 text-white border-purple-400 animate-pulse'
                       : 'bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-500 hover:to-pink-500 border-purple-500/30'
                   }`}
                 >
-                  MAX_BORROW
+                  MAX
                 </button>
               </div>
               {inputAmount && parseFloat(inputAmount) > parseFloat(maxBorrowAmount) && (
@@ -696,25 +699,25 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
                 <h4 className="text-purple-400 font-mono font-bold text-sm">COLLATERAL_CALCULATION_ENGINE</h4>
               </div>
 
-              <div className="space-y-3 text-sm font-mono">
-                <div className="flex justify-between py-2 border-b border-purple-500/20">
+              <div className="space-y-2 text-xs sm:text-sm font-mono">
+                <div className="flex justify-between">
                   <span className="text-gray-400">
-                    {hasActiveLoan ? 'ADDITIONAL_COLLATERAL::' : 'REQUIRED_COLLATERAL::'}
+                    {hasActiveLoan ? 'Add. Collateral:' : 'Required:'}
                   </span>
-                  <span className="text-purple-400 font-bold">{requiredCollateral} LARRY</span>
+                  <span className="text-purple-400 font-bold">{parseFloat(requiredCollateral).toFixed(2)} LARRY</span>
                 </div>
 
                 {!hasActiveLoan && (
-                  <div className="flex justify-between py-2 border-b border-purple-500/20">
-                    <span className="text-gray-400">INTEREST_RATE::</span>
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">Rate:</span>
                     <span className="text-pink-400 font-bold">3.9% APR</span>
                   </div>
                 )}
 
-                <div className="flex justify-between py-2">
-                  <span className="text-gray-400">BORROW_OUTPUT::</span>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Output:</span>
                   <span className="text-cyan-400 font-bold">
-                    {inputAmount ? (parseFloat(inputAmount) * 0.99).toFixed(4) : '0'} SEI
+                    {inputAmount ? (parseFloat(inputAmount) * 0.99).toFixed(2) : '0.00'} SEI
                   </span>
                 </div>
               </div>
@@ -723,16 +726,16 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
             <button
               onClick={handleTrade}
               disabled={isPending || !inputAmount || parseFloat(inputAmount) > parseFloat(maxBorrowAmount) || parseFloat(requiredCollateral) > parseFloat(balance)}
-              className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-4 sm:py-5 rounded-lg font-mono font-bold text-base sm:text-lg hover:from-purple-500 hover:to-pink-500 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed border border-purple-500/30 relative overflow-hidden group"
+              className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 sm:py-5 rounded-lg font-mono font-bold text-sm sm:text-lg hover:from-purple-500 hover:to-pink-500 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed border border-purple-500/30 relative overflow-hidden group"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
               <span className="relative z-10 flex items-center justify-center">
-                <span className="text-xl mr-3">∑</span>
+                <span className="text-lg sm:text-xl mr-2 sm:mr-3">∑</span>
                 <span>
-                  {isPending ? 'EXECUTING_BORROW_ALGORITHM...' :
-                   parseFloat(inputAmount) > parseFloat(maxBorrowAmount) ? 'COLLATERAL_INSUFFICIENT' :
-                   parseFloat(requiredCollateral) > parseFloat(balance) ? 'LARRY_BALANCE_INSUFFICIENT' :
-                   hasActiveLoan ? 'EXTEND_BORROW_POSITION' : 'INITIALIZE_LOAN_PROTOCOL'}
+                  {isPending ? 'EXECUTING...' :
+                   parseFloat(inputAmount) > parseFloat(maxBorrowAmount) ? 'INSUFFICIENT COLLATERAL' :
+                   parseFloat(requiredCollateral) > parseFloat(balance) ? 'INSUFFICIENT BALANCE' :
+                   hasActiveLoan ? 'EXTEND LOAN' : 'START LOAN'}
                 </span>
               </span>
             </button>
