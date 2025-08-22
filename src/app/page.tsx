@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
+import MobileConnectButton from '@/components/MobileConnectButton';
 import { useState, useEffect } from 'react';
 import { useLarryContract } from '@/hooks/useLarryContract';
 import { formatEther } from 'viem';
@@ -94,7 +94,7 @@ export default function Home() {
 
           <div className="flex items-center space-x-4">
             <div className="hidden sm:block">
-              <ConnectButton />
+              <MobileConnectButton />
             </div>
 
             {/* Mobile Menu Button */}
@@ -140,7 +140,7 @@ export default function Home() {
                 TRADE.λ
               </Link>
               <div className="pt-4 border-t border-red-500/30">
-                <ConnectButton />
+                <MobileConnectButton />
               </div>
             </div>
           </div>

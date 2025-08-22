@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useAccount, useReadContract, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
 import { parseEther, formatEther, formatUnits, createPublicClient, http } from 'viem';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import MobileConnectButton from '@/components/MobileConnectButton';
 import VeYakaABI from './abi.json';
 
 const VEYAKA_CONTRACT_ADDRESS = '0xa206090C1A07518E977B0942023ca190314b8934' as const;
@@ -457,7 +458,7 @@ export default function VeYakaPage() {
             </div>
           </div>
 
-          <ConnectButton />
+          <MobileConnectButton />
         </div>
       </nav>
 
@@ -524,7 +525,7 @@ export default function VeYakaPage() {
                   <p className="text-gray-300 font-mono text-xs sm:text-sm mb-8">
                     Connect wallet to access liquid staking protocol and vault systems.
                   </p>
-                  <ConnectButton />
+                  <MobileConnectButton />
                 </div>
               </div>
             </div>

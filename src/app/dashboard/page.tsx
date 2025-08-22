@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
+import MobileConnectButton from '@/components/MobileConnectButton';
 import TradingInterface from '@/components/TradingInterface';
 import LoanDashboard from '@/components/LoanDashboard';
 
@@ -78,7 +78,7 @@ export default function Dashboard() {
             <span className="text-green-400 font-mono font-medium text-sm">[ACTIVE_SESSION]</span>
           </div>
 
-          <ConnectButton />
+          <MobileConnectButton />
         </div>
       </nav>
 

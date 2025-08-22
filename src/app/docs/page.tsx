@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
+import MobileConnectButton from '@/components/MobileConnectButton';
 
 // Mathematical symbols for visual elements
 const MATH_SYMBOLS = ['∑', '∫', '∂', '∇', '∞', '∮', '∯', '∱', '∲', '∴', '∵', '⊥', '∥', '∦', '≅', '≈', '≠', '≤', '≥', '⊂', '⊃', '⊆', '⊇', '∈', '∉', '∋', '∌', '⊕', '⊗', '⊙', '⊚', '⊛', '⊜', '⊝', '⊞', '⊟', '⊠', '⊡', '∧', '∨', '¬', '∀', '∃', '∄', '∅', '∆', '∇', '∈', '∉', '∋', '∌', '⊂', '⊃', '⊄', '⊅', '⊆', '⊇'];
@@ -115,7 +115,7 @@ export default function Docs() {
 
         {/* Desktop Connect Button */}
         <div className="hidden md:block">
-          <ConnectButton />
+          <MobileConnectButton />
         </div>
       </nav>
 
@@ -134,7 +134,7 @@ export default function Docs() {
             </Link>
             <span className="block text-green-400 font-mono font-bold text-sm py-2 border-l-2 border-green-400 pl-2">DOCUMENTATION</span>
             <div className="pt-4 border-t border-gray-700">
-              <ConnectButton />
+              <MobileConnectButton />
             </div>
           </div>
         </div>
