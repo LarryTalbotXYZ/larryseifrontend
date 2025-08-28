@@ -89,6 +89,7 @@ export default function Home() {
             <span className="text-green-400 font-mono font-medium text-sm">[HOME]</span>
             <Link href="/docs" className="text-gray-400 hover:text-green-400 transition-colors font-mono text-sm">DOCS.exe</Link>
             <Link href="/veyaka" className="text-gray-400 hover:text-purple-400 transition-colors font-mono text-sm">VEYAKA.sys</Link>
+            <Link href="/launchpad" className="text-gray-400 hover:text-yellow-400 transition-colors font-mono text-sm">LAUNCH.pad</Link>
             <Link href="/dashboard" className="text-gray-400 hover:text-red-400 transition-colors font-mono text-sm">TRADE.λ</Link>
           </div>
 
@@ -131,6 +132,13 @@ export default function Home() {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 VEYAKA.sys
+              </Link>
+              <Link
+                href="/launchpad"
+                className="block text-gray-400 hover:text-yellow-400 transition-colors font-mono py-2 text-sm"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                LAUNCH.pad
               </Link>
               <Link
                 href="/dashboard"

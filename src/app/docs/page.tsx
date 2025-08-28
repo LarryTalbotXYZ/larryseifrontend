@@ -98,6 +98,7 @@ export default function Docs() {
           <Link href="/" className="text-gray-300 hover:text-green-400 transition-colors font-mono text-sm">HOME</Link>
           <Link href="/dashboard" className="text-gray-300 hover:text-blue-400 transition-colors font-mono text-sm">TRADING_ENGINE</Link>
           <Link href="/veyaka" className="text-gray-300 hover:text-purple-400 transition-colors font-mono text-sm">VE_YAKA</Link>
+          <Link href="/launchpad" className="text-gray-300 hover:text-yellow-400 transition-colors font-mono text-sm">LAUNCHPAD</Link>
           <span className="text-green-400 font-mono font-bold text-sm border-b-2 border-green-400 pb-1">DOCUMENTATION</span>
         </div>
 
@@ -131,6 +132,9 @@ export default function Docs() {
             </Link>
             <Link href="/veyaka" className="block text-gray-300 hover:text-purple-400 transition-colors font-mono text-sm py-2" onClick={() => setMobileMenuOpen(false)}>
               VE_YAKA
+            </Link>
+            <Link href="/launchpad" className="block text-gray-300 hover:text-yellow-400 transition-colors font-mono text-sm py-2" onClick={() => setMobileMenuOpen(false)}>
+              LAUNCHPAD
             </Link>
             <span className="block text-green-400 font-mono font-bold text-sm py-2 border-l-2 border-green-400 pl-2">DOCUMENTATION</span>
             <div className="pt-4 border-t border-gray-700">
