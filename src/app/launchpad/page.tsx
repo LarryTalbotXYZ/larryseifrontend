@@ -239,7 +239,7 @@ export default function Launchpad() {
                 </span>
               </h2>
               <p className="text-xl text-gray-300 font-mono max-w-4xl mx-auto">
-                Each token is backed by LARRY tokens deposited into the protocol's smart contract. 
+                Each token is backed by LARRY tokens deposited into the protocol&apos;s smart contract. 
                 This pool of LARRY ensures every token is secured by real, liquid value.
               </p>
             </div>
@@ -417,7 +417,7 @@ export default function Launchpad() {
                   <div className="space-y-4 text-sm font-mono">
                     <div className="bg-black/50 rounded-lg p-4 border border-red-500/20">
                       <div className="text-red-400 mb-2">SIMPLE_REDEMPTION::</div>
-                      <div className="text-gray-300">'Sell' tokens back to contract</div>
+                      <div className="text-gray-300">&apos;Sell&apos; tokens back to contract</div>
                       <div className="text-xs text-gray-400 mt-1">Burns tokens, returns underlying LARRY</div>
                     </div>
 
@@ -485,7 +485,7 @@ export default function Launchpad() {
 
                 <div className="bg-gradient-to-r from-green-500/20 to-blue-500/20 rounded-lg p-6 border border-green-500/30">
                   <div className="text-center text-green-400 font-mono font-bold">
-                    ✓ RESULT: Every existing token's price increased!
+                    ✓ RESULT: Every existing token&apos;s price increased!
                   </div>
                 </div>
               </div>
