@@ -1,0 +1,3 @@
+[submodule "src/app/launchpad/tokenbackend/lib/openzeppelin-contracts"]
+	path = src/app/launchpad/tokenbackend/lib/openzeppelin-contracts
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts.git
