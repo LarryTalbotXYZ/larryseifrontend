@@ -713,7 +713,7 @@ export default function VeYakaPage() {
                                 </div>
                                 {depositAmount && vaultInfo && vaultInfo[0] > BigInt(0) && (
                                   <div className="flex justify-between pt-2 border-t border-purple-500/20">
-                                    <span className="text-purple-300">You'll receive:</span>
+                                    <span className="text-purple-300">You&apos;ll receive:</span>
                                     <span className="text-yellow-400 font-bold">~{parseFloat(formatEther((parseEther(depositAmount) * vaultInfo[0]) / vaultInfo[1])).toFixed(2)} LYT</span>
                                   </div>
                                 )}
@@ -862,7 +862,7 @@ export default function VeYakaPage() {
                               </div>
                               {withdrawAmount && vaultInfo && (
                                 <div className="flex justify-between pt-2 border-t border-blue-500/20">
-                                  <span className="text-blue-300">You'll receive NFT worth:</span>
+                                  <span className="text-blue-300">You&apos;ll receive NFT worth:</span>
                                   <span className="text-red-400 font-bold">~{parseFloat(formatEther((parseEther(withdrawAmount) * vaultInfo[3]) / parseEther('1'))).toFixed(2)} YAKA</span>
                                 </div>
                               )}
