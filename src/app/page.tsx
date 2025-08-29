@@ -427,7 +427,7 @@ export default function Home() {
                   <div className="space-y-4 text-sm font-mono">
                     <div className="bg-black/50 rounded-lg p-4 border border-green-500/20">
                       <div className="text-green-400 mb-2">PRICE SAFETY:</div>
-                      <div className="text-gray-300">Price can't drop below previous level</div>
+                      <div className="text-gray-300">Price can&apos;t drop below previous level</div>
                       <div className="text-xs text-gray-400 mt-1">Smart contract prevents price crashes</div>
                     </div>
 
