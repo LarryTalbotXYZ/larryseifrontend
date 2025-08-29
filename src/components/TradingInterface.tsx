@@ -191,8 +191,8 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
     } else if (activeTab === 'sell') {
       console.log('=== SELL TAB MAX CALCULATION ===');
       if (balance && parseFloat(balance) > 0) {
-        console.log('Setting LARRY balance to input:', balance);
-        setInputAmount(parseFloat(balance).toFixed(2));
+        console.log('Setting LARRY balance to input (full precision):', balance);
+        setInputAmount(balance);
       } else {
         console.log('No LARRY balance available or balance is 0');
       }
