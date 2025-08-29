@@ -76,8 +76,9 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
     if (larryValueInETH && parseFloat(balance) > 0) {
       // User can borrow up to 99% of their LARRY collateral value in ETH
       const larryValueETH = parseFloat(formatEther(larryValueInETH as bigint));
-      const maxBorrow = (larryValueETH * 0.99).toFixed(2);
-      setMaxBorrowAmount(maxBorrow);
+      // Floor to 6 decimals to avoid exceeding contract limits; UI can show 2 decimals
+      const maxBorrowFloored = Math.floor(larryValueETH * 0.99 * 1e6) / 1e6;
+      setMaxBorrowAmount(maxBorrowFloored.toString());
     } else {
       setMaxBorrowAmount('0');
     }
@@ -91,12 +92,14 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
       const userETH = ethPosition - leverageFee;
       const overCollateralization = userETH / 100;
       const totalFees = leverageFee + overCollateralization;
+      // Round up the required ETH to 6 decimals to avoid underpaying fees (contract refunds overage)
+      const requiredEthExact = Math.ceil(totalFees * 1e6) / 1e6;
       const borrowAmount = userETH * 0.99;
       const leverageRatio = ethPosition / totalFees;
       
       setLeverageQuote({
         ethPosition: ethPosition.toFixed(2),
-        requiredEth: totalFees.toFixed(2),
+        requiredEth: requiredEthExact.toString(),
         leverageRatio: leverageRatio.toFixed(1),
         borrowAmount: borrowAmount.toFixed(2),
         totalFee: totalFees.toFixed(2),
@@ -645,7 +648,7 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
                     e.stopPropagation();
                     console.log('MAX BUTTON CLICKED - Borrow Tab');
                     if (maxBorrowAmount && parseFloat(maxBorrowAmount) > 0) {
-                      setInputAmount(parseFloat(maxBorrowAmount).toFixed(2));
+                      setInputAmount(maxBorrowAmount);
                     } else {
                       console.log('No max borrow amount available');
                     }
