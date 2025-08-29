@@ -81,16 +81,16 @@ export default function Home() {
             <VideoLogo size="medium" />
             <div className="flex flex-col">
               <span className="text-2xl font-bold tracking-tight font-mono text-white">LARRY</span>
-              <span className="text-xs font-mono text-red-400">Δ-Protocol</span>
+              <span className="text-xs font-mono text-red-400">SEI Protocol</span>
             </div>
           </Link>
 
           <div className="hidden md:flex items-center space-x-8">
             <span className="text-green-400 font-mono font-medium text-sm">[HOME]</span>
-            <Link href="/docs" className="text-gray-400 hover:text-green-400 transition-colors font-mono text-sm">DOCS.exe</Link>
-            <Link href="/veyaka" className="text-gray-400 hover:text-purple-400 transition-colors font-mono text-sm">VEYAKA.sys</Link>
-            <Link href="/launchpad" className="text-gray-400 hover:text-yellow-400 transition-colors font-mono text-sm">LAUNCH.pad</Link>
-            <Link href="/dashboard" className="text-gray-400 hover:text-red-400 transition-colors font-mono text-sm">TRADE.λ</Link>
+            <Link href="/docs" className="text-gray-400 hover:text-green-400 transition-colors font-mono text-sm">DOCS</Link>
+            <Link href="/veyaka" className="text-gray-400 hover:text-purple-400 transition-colors font-mono text-sm">VEYAKA</Link>
+            <Link href="/launchpad" className="text-gray-400 hover:text-yellow-400 transition-colors font-mono text-sm">LAUNCHPAD</Link>
+            <Link href="/dashboard" className="text-gray-400 hover:text-red-400 transition-colors font-mono text-sm">TRADING</Link>
           </div>
 
           <div className="flex items-center space-x-4">
@@ -124,28 +124,28 @@ export default function Home() {
                 className="block text-gray-400 hover:text-green-400 transition-colors font-mono py-2 text-sm"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                DOCS.exe
+                DOCS
               </Link>
               <Link
                 href="/veyaka"
                 className="block text-gray-400 hover:text-purple-400 transition-colors font-mono py-2 text-sm"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                VEYAKA.sys
+                VEYAKA
               </Link>
               <Link
                 href="/launchpad"
                 className="block text-gray-400 hover:text-yellow-400 transition-colors font-mono py-2 text-sm"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                LAUNCH.pad
+                LAUNCHPAD
               </Link>
               <Link
                 href="/dashboard"
                 className="block text-gray-400 hover:text-red-400 transition-colors font-mono py-2 text-sm"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                TRADE.λ
+                TRADING
               </Link>
               <div className="pt-4 border-t border-red-500/30">
                 <MobileConnectButton />
@@ -172,25 +172,25 @@ export default function Home() {
                   {/* Glitch effect title */}
                   <div className={`transition-all duration-200 ${glitchActive ? 'animate-pulse text-red-400' : ''}`}>
                     <h1 className="text-4xl lg:text-6xl font-bold leading-tight font-mono">
-                      <span className="text-white">Δ-PROTOCOL </span>
+                      <span className="text-white">LARRY </span>
                       <span className="bg-gradient-to-r from-red-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
-                        MATRIX
+                        PROTOCOL
                       </span>
                     </h1>
                   </div>
 
                   <div className="text-lg lg:text-xl text-gray-300 leading-relaxed max-w-2xl space-y-4 font-mono">
                     <p className="border-l-4 border-green-400 pl-4 bg-green-400/5">
-                      <span className="text-green-400">∇ PRICE_GUARANTEE</span>: f&apos;(x) &gt; 0 | Mathematically enforced upward trajectory
+                      <span className="text-green-400">📈 PRICE PROTECTION</span>: Smart contract guarantees price only goes up
                     </p>
                     <p className="border-l-4 border-blue-400 pl-4 bg-blue-400/5">
-                      <span className="text-blue-400">∞ LEVERAGE_ENGINE</span>: 1 SEI &rarr; 100 SEI through recursive mathematical operations
+                      <span className="text-blue-400">🚀 HIGH LEVERAGE</span>: Turn 1 SEI into 20-100x exposure through smart borrowing
                     </p>
                     <p className="border-l-4 border-purple-400 pl-4 bg-purple-400/5">
-                      <span className="text-purple-400">λ RECURSIVE_ALGORITHM</span>: f(f(x)) | Infinite stacking with 99% LTV ratio
+                      <span className="text-purple-400">🔄 SMART LOOPS</span>: Auto-borrow and reinvest to maximize your position
                     </p>
                     <p className="border-l-4 border-red-400 pl-4 bg-red-400/5">
-                      <span className="text-red-400">Δ TIME_BASED_LOANS</span>: No liquidation risk, pure mathematical time constraints
+                      <span className="text-red-400">⏰ TIME LOANS</span>: No liquidation risk - only time-based repayments
                     </p>
                   </div>
                 </div>
@@ -202,7 +202,7 @@ export default function Home() {
                     className="inline-flex items-center justify-center bg-gradient-to-r from-red-600 to-purple-600 text-white px-8 py-4 rounded-lg font-mono font-bold hover:from-red-500 hover:to-purple-500 transition-all duration-300 transform hover:scale-105 shadow-lg shadow-red-500/25 border border-red-500/30 relative overflow-hidden group"
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
-                    <span className="relative z-10">EXECUTE_PROTOCOL</span>
+                    <span className="relative z-10">START TRADING</span>
                     <svg className="ml-2 w-5 h-5 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                     </svg>
@@ -212,9 +212,8 @@ export default function Home() {
                     href="/docs"
                     className="inline-flex items-center justify-center border border-green-500/30 px-8 py-4 rounded-lg font-mono font-semibold hover:bg-green-500/10 transition-all duration-300 backdrop-blur-sm text-green-400 hover:text-green-300"
                   >
-                    <span className="mr-2">∫</span>
-                    READ_DOCS
-                    <span className="ml-2">dx</span>
+                    <span className="mr-2">📚</span>
+                    READ DOCS
                   </Link>
                 </div>
               </div>
@@ -270,10 +269,10 @@ export default function Home() {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-3">
                         <div className="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center border border-blue-400/30">
-                          <span className="text-blue-400 font-mono font-bold">∞</span>
+                          <span className="text-blue-400 font-mono font-bold">🚀</span>
                         </div>
                         <div>
-                          <div className="text-sm font-mono font-medium text-blue-400">LEVERAGE_LOOP.exe</div>
+                          <div className="text-sm font-mono font-medium text-blue-400">SMART LEVERAGE</div>
                           <div className="text-xs font-mono text-gray-400">20x exposure | 500 SEI → 10K SEI</div>
                         </div>
                       </div>
@@ -285,10 +284,10 @@ export default function Home() {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-3">
                         <div className="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center border border-purple-400/30">
-                          <span className="text-purple-400 font-mono font-bold">Δ</span>
+                          <span className="text-purple-400 font-mono font-bold">🗳️</span>
                         </div>
                         <div>
-                          <div className="text-sm font-mono font-medium text-purple-400">GOVERNANCE_VOTE.sys</div>
+                          <div className="text-sm font-mono font-medium text-purple-400">GOVERNANCE VOTING</div>
                           <div className="text-xs font-mono text-gray-400">Direct emissions | Auto-optimized</div>
                         </div>
                       </div>
@@ -306,16 +305,16 @@ export default function Home() {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <div className="inline-flex items-center bg-gradient-to-r from-red-900/30 to-purple-900/30 rounded-lg px-6 py-2 border border-red-500/30 mb-6">
-                <span className="text-red-400 font-mono text-sm mr-2">ALGORITHM::</span>
-                <span className="text-white font-mono">INFINITE_LOOP</span>
+                <span className="text-red-400 font-mono text-sm mr-2">SYSTEM::</span>
+                <span className="text-white font-mono">SMART_LEVERAGE</span>
               </div>
               <h2 className="text-4xl lg:text-5xl font-bold font-mono mb-6">
-                <span className="text-white">∞ </span>
+                <span className="text-white">🚀 </span>
                 <span className="bg-gradient-to-r from-red-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
-                  LEVERAGE_MATRIX
+                  LEVERAGE SYSTEM
                 </span>
               </h2>
-              <p className="text-xl text-gray-300 font-mono">Transform 1 SEI → 100 SEI through recursive mathematical operations</p>
+              <p className="text-xl text-gray-300 font-mono">Turn 1 SEI into 20-100x exposure through smart borrowing loops</p>
             </div>
 
             <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -323,15 +322,15 @@ export default function Home() {
               <div className="space-y-6">
                 <div className="bg-black/80 backdrop-blur-md border border-blue-500/30 rounded-xl p-8">
                   <div className="flex items-center mb-6 border-b border-blue-500/30 pb-2">
-                    <span className="text-blue-400 font-mono font-bold text-lg mr-2">λ</span>
-                    <h3 className="text-xl font-mono font-bold text-blue-400">RECURSIVE_ALGORITHM</h3>
+                    <span className="text-blue-400 font-mono font-bold text-lg mr-2">🔄</span>
+                    <h3 className="text-xl font-mono font-bold text-blue-400">HOW IT WORKS</h3>
                   </div>
                   <div className="space-y-4">
                     {[
-                      { step: "01", action: "INITIALIZE_POSITION", detail: "Deploy SEI capital to genesis position", color: "text-green-400" },
-                      { step: "02", action: "BORROW_MAX_LTV", detail: "Extract 99% collateral value in SEI", color: "text-blue-400" },
-                      { step: "03", action: "REINVEST_COLLATERAL", detail: "Deploy borrowed SEI into LARRY tokens", color: "text-purple-400" },
-                      { step: "04", action: "RECURSE_INFINITELY", detail: "Repeat algorithm until target leverage achieved", color: "text-red-400" }
+                      { step: "01", action: "BUY LARRY", detail: "Purchase LARRY tokens with your SEI", color: "text-green-400" },
+                      { step: "02", action: "BORROW SEI", detail: "Get 99% of your token value back as loan", color: "text-blue-400" },
+                      { step: "03", action: "BUY MORE", detail: "Use borrowed SEI to buy more LARRY tokens", color: "text-purple-400" },
+                      { step: "04", action: "REPEAT", detail: "Keep repeating to build massive exposure", color: "text-red-400" }
                     ].map((item, index) => (
                       <div key={index} className="flex items-center space-x-4 p-4 bg-gradient-to-r from-gray-900/30 to-gray-800/30 rounded-lg border border-gray-700/30 hover:border-blue-500/30 transition-all duration-300">
                         <div className={`w-12 h-12 ${item.color.replace('text-', 'bg-').replace('400', '500/20')} rounded-lg flex items-center justify-center border border-current font-mono font-bold text-sm`}>
@@ -351,17 +350,17 @@ export default function Home() {
               <div className="space-y-6">
                 <div className="bg-gradient-to-r from-green-900/20 to-emerald-900/20 border border-green-500/30 rounded-xl p-8">
                   <div className="flex items-center mb-6 border-b border-green-500/30 pb-2">
-                    <span className="text-green-400 font-mono font-bold text-lg mr-2">Δ</span>
-                    <h3 className="text-xl font-mono font-bold text-green-400">MATHEMATICAL_ADVANTAGES</h3>
+                    <span className="text-green-400 font-mono font-bold text-lg mr-2">✅</span>
+                    <h3 className="text-xl font-mono font-bold text-green-400">KEY BENEFITS</h3>
                   </div>
                   <div className="space-y-4">
                     {[
-                      { symbol: "∇", title: "MONOTONIC_FUNCTION", desc: "f'(x) > 0 | Prices mathematically guaranteed to increase", color: "text-green-400" },
-                      { symbol: "∪", title: "MAXIMUM_LEVERAGE", desc: "LTV = 99% | Highest ratio in decentralized mathematics", color: "text-blue-400" },
-                      { symbol: "∞", title: "NO_LIQUIDATION", desc: "Time-based constraints | Price-independent stability", color: "text-purple-400" },
-                      { symbol: "∑", title: "INFINITE_RECURSION", desc: "Recursive loops | Exponential position growth", color: "text-red-400" },
-                      { symbol: "λ", title: "RECURSIVE_BORROWING", desc: "f(f(x)) | Stack leverage infinitely through mathematical recursion", color: "text-yellow-400" },
-                      { symbol: "∂", title: "PARTIAL_COLLATERAL", desc: "99% borrowable | Keep 1% for infinite loops", color: "text-cyan-400" }
+                      { symbol: "📈", title: "PRICE GOES UP", desc: "Smart contract ensures token price only increases", color: "text-green-400" },
+                      { symbol: "🚀", title: "HIGH LEVERAGE", desc: "Borrow 99% of your position value for maximum exposure", color: "text-blue-400" },
+                      { symbol: "🛡️", title: "NO LIQUIDATION", desc: "Time-based loans mean no sudden liquidations", color: "text-purple-400" },
+                      { symbol: "🔄", title: "COMPOUND GROWTH", desc: "Keep borrowing and buying to build massive positions", color: "text-red-400" },
+                      { symbol: "⚡", title: "AUTO LEVERAGE", desc: "System automatically loops your borrowing for max efficiency", color: "text-yellow-400" },
+                      { symbol: "💎", title: "KEEP CONTROL", desc: "You keep 1% collateral while borrowing the other 99%", color: "text-cyan-400" }
                     ].map((item, index) => (
                       <div key={index} className="flex items-start space-x-4 p-3 bg-gray-900/30 rounded-lg hover:bg-gray-800/30 transition-all duration-300">
                         <span className={`text-2xl font-bold ${item.color}`}>{item.symbol}</span>
@@ -378,14 +377,14 @@ export default function Home() {
                 <div className="bg-gradient-to-r from-red-900/20 to-orange-900/20 border border-red-500/30 rounded-xl p-8 text-center relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-red-500/5 to-transparent translate-x-[-100%] animate-pulse"></div>
                   <div className="relative z-10">
-                    <h4 className="text-xl font-mono font-bold text-red-400 mb-3">EXECUTE_ALGORITHM?</h4>
-                    <p className="text-gray-300 mb-6 font-mono text-sm">Initialize recursive leverage protocol</p>
+                    <h4 className="text-xl font-mono font-bold text-red-400 mb-3">READY TO START?</h4>
+                    <p className="text-gray-300 mb-6 font-mono text-sm">Begin building your leveraged position</p>
                     <Link
                       href="/dashboard"
                       className="inline-flex items-center bg-gradient-to-r from-red-600 to-orange-600 text-white px-8 py-4 rounded-lg font-mono font-bold hover:from-red-500 hover:to-orange-500 transition-all duration-300 transform hover:scale-105 shadow-lg shadow-red-500/25 border border-red-500/30 relative overflow-hidden group"
                     >
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
-                      <span className="relative z-10">START_RECURSION</span>
+                      <span className="relative z-10">START TRADING</span>
                       <svg className="ml-2 w-5 h-5 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                       </svg>
@@ -406,13 +405,13 @@ export default function Home() {
                 <span className="text-white font-mono">PRICE_PROTECTION</span>
               </div>
               <h2 className="text-4xl lg:text-5xl font-bold font-mono mb-6">
-                <span className="text-white">f(x) = </span>
+                <span className="text-white">Price = </span>
                 <span className="bg-gradient-to-r from-green-500 via-yellow-500 to-red-500 bg-clip-text text-transparent">
-                  x + Δx
+                  Always ↗️
                 </span>
               </h2>
               <p className="text-xl text-gray-300 font-mono max-w-3xl mx-auto">
-                The fundamental mathematical principle: <span className="text-green-400">prices only increase</span>, creating the perfect foundation for infinite leverage strategies.
+                Smart contract ensures <span className="text-green-400">prices only go up</span>, making it safe to use maximum leverage.
               </p>
             </div>
 
@@ -421,27 +420,27 @@ export default function Home() {
               <div className="space-y-6">
                 <div className="bg-gradient-to-r from-green-900/20 to-emerald-900/20 backdrop-blur-md border border-green-500/30 rounded-xl p-8">
                   <div className="flex items-center mb-6 border-b border-green-500/30 pb-2">
-                    <span className="text-green-400 font-mono font-bold text-xl mr-2">∇</span>
-                    <h3 className="text-xl font-mono font-bold text-green-400">PRICE_MONOTONICITY</h3>
+                    <span className="text-green-400 font-mono font-bold text-xl mr-2">📈</span>
+                    <h3 className="text-xl font-mono font-bold text-green-400">PRICE PROTECTION</h3>
                   </div>
 
                   <div className="space-y-4 text-sm font-mono">
                     <div className="bg-black/50 rounded-lg p-4 border border-green-500/20">
-                      <div className="text-green-400 mb-2">SAFETY_CONSTRAINT::</div>
-                      <div className="text-gray-300">lastPrice ≤ newPrice + 10000</div>
-                      <div className="text-xs text-gray-400 mt-1">Mathematical guarantee of upward trajectory</div>
+                      <div className="text-green-400 mb-2">PRICE SAFETY:</div>
+                      <div className="text-gray-300">Price can't drop below previous level</div>
+                      <div className="text-xs text-gray-400 mt-1">Smart contract prevents price crashes</div>
                     </div>
 
                     <div className="bg-black/50 rounded-lg p-4 border border-green-500/20">
-                      <div className="text-green-400 mb-2">BACKING_MECHANISM::</div>
-                      <div className="text-gray-300">getBacking() = contract_balance + totalBorrowed</div>
-                      <div className="text-xs text-gray-400 mt-1">Self-reinforcing value accumulation</div>
+                      <div className="text-green-400 mb-2">VALUE BACKING:</div>
+                      <div className="text-gray-300">Real SEI locked + borrowed amounts = token value</div>
+                      <div className="text-xs text-gray-400 mt-1">Every token backed by actual SEI</div>
                     </div>
 
                     <div className="bg-black/50 rounded-lg p-4 border border-green-500/20">
-                      <div className="text-green-400 mb-2">PRICE_CALCULATION::</div>
-                      <div className="text-gray-300">price = (backing × 10^18) ÷ totalSupply</div>
-                      <div className="text-xs text-gray-400 mt-1">Deterministic upward price movement</div>
+                      <div className="text-green-400 mb-2">PRICE FORMULA:</div>
+                      <div className="text-gray-300">Token Price = Total SEI Value ÷ Token Supply</div>
+                      <div className="text-xs text-gray-400 mt-1">More backing = higher price automatically</div>
                     </div>
                   </div>
                 </div>
@@ -451,33 +450,33 @@ export default function Home() {
               <div className="space-y-6">
                 <div className="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 backdrop-blur-md border border-blue-500/30 rounded-xl p-8">
                   <div className="flex items-center mb-6 border-b border-blue-500/30 pb-2">
-                    <span className="text-blue-400 font-mono font-bold text-xl mr-2">∞</span>
-                    <h3 className="text-xl font-mono font-bold text-blue-400">LEVERAGE_ALGORITHMS</h3>
+                    <span className="text-blue-400 font-mono font-bold text-xl mr-2">🚀</span>
+                    <h3 className="text-xl font-mono font-bold text-blue-400">LEVERAGE SYSTEM</h3>
                   </div>
 
                   <div className="space-y-4 text-sm font-mono">
                     <div className="bg-black/50 rounded-lg p-4 border border-blue-500/20">
-                      <div className="text-blue-400 mb-2">COLLATERAL_RATIO::</div>
-                      <div className="text-gray-300">LTV = 99% | borrowAmount = collateral × 0.99</div>
-                      <div className="text-xs text-gray-400 mt-1">Maximum leverage efficiency</div>
+                      <div className="text-blue-400 mb-2">BORROW RATIO:</div>
+                      <div className="text-gray-300">Borrow 99% of your token value as SEI</div>
+                      <div className="text-xs text-gray-400 mt-1">Maximum borrowing power available</div>
                     </div>
 
                     <div className="bg-black/50 rounded-lg p-4 border border-blue-500/20">
-                      <div className="text-blue-400 mb-2">RECURSIVE_FUNCTION::</div>
-                      <div className="text-gray-300">f(x) = x + f(borrow(x)) | Infinite stacking</div>
-                      <div className="text-xs text-gray-400 mt-1">Mathematical leverage recursion</div>
+                      <div className="text-blue-400 mb-2">COMPOUND LOOP:</div>
+                      <div className="text-gray-300">Buy → Borrow → Buy More → Repeat</div>
+                      <div className="text-xs text-gray-400 mt-1">Each loop multiplies your position</div>
                     </div>
 
                     <div className="bg-black/50 rounded-lg p-4 border border-blue-500/20">
-                      <div className="text-blue-400 mb-2">TIME_BASED_LOANS::</div>
-                      <div className="text-gray-300">loanEndDate = startTime + (days × 86400)</div>
-                      <div className="text-xs text-gray-400 mt-1">No liquidation risk, pure time-based</div>
+                      <div className="text-blue-400 mb-2">LOAN TERMS:</div>
+                      <div className="text-gray-300">Set your own repayment timeline (30-365 days)</div>
+                      <div className="text-xs text-gray-400 mt-1">No liquidation - just time-based repayment</div>
                     </div>
 
                     <div className="bg-black/50 rounded-lg p-4 border border-blue-500/20">
-                      <div className="text-blue-400 mb-2">INTEREST_CALCULATION::</div>
-                      <div className="text-gray-300">interest = (0.039e18 × days) ÷ 365 + 0.001e18</div>
-                      <div className="text-xs text-gray-400 mt-1">3.9% APR with precision mathematics</div>
+                      <div className="text-blue-400 mb-2">INTEREST RATE:</div>
+                      <div className="text-gray-300">3.9% annual interest + 0.1% base fee</div>
+                      <div className="text-xs text-gray-400 mt-1">Low cost borrowing for maximum leverage</div>
                     </div>
                   </div>
                 </div>
@@ -487,34 +486,34 @@ export default function Home() {
             {/* Leverage Calculator Simulation */}
             <div className="bg-gradient-to-r from-purple-900/20 to-pink-900/20 backdrop-blur-md border border-purple-500/30 rounded-xl p-8">
               <div className="text-center mb-8">
-                <h3 className="text-2xl font-mono font-bold text-purple-400 mb-2">LEVERAGE_SIMULATION</h3>
-                <p className="text-gray-300 font-mono text-sm">Mathematical projection of recursive leverage growth</p>
+                <h3 className="text-2xl font-mono font-bold text-purple-400 mb-2">LEVERAGE EXAMPLE</h3>
+                <p className="text-gray-300 font-mono text-sm">See how your position grows with smart borrowing</p>
               </div>
 
               <div className="grid md:grid-cols-3 gap-6 text-center">
                 <div className="bg-black/50 rounded-lg p-6 border border-purple-500/20">
                   <div className="text-3xl font-mono font-bold text-green-400 mb-2">1 SEI</div>
-                  <div className="text-sm font-mono text-gray-400">INITIAL_INVESTMENT</div>
-                  <div className="text-xs font-mono text-purple-400 mt-1">Starting capital</div>
+                  <div className="text-sm font-mono text-gray-400">STARTING AMOUNT</div>
+                  <div className="text-xs font-mono text-purple-400 mt-1">Your initial investment</div>
                 </div>
 
                 <div className="bg-black/50 rounded-lg p-6 border border-purple-500/20">
                   <div className="text-3xl font-mono font-bold text-blue-400 mb-2">99 SEI</div>
-                  <div className="text-sm font-mono text-gray-400">FIRST_BORROW</div>
-                  <div className="text-xs font-mono text-purple-400 mt-1">99% of collateral value</div>
+                  <div className="text-sm font-mono text-gray-400">FIRST BORROW</div>
+                  <div className="text-xs font-mono text-purple-400 mt-1">99% of your token value</div>
                 </div>
 
                 <div className="bg-black/50 rounded-lg p-6 border border-purple-500/20">
-                  <div className="text-3xl font-mono font-bold text-red-400 mb-2">∞ SEI</div>
-                  <div className="text-sm font-mono text-gray-400">THEORETICAL_MAX</div>
-                  <div className="text-xs font-mono text-purple-400 mt-1">Infinite recursive loops</div>
+                  <div className="text-3xl font-mono font-bold text-red-400 mb-2">100+ SEI</div>
+                  <div className="text-sm font-mono text-gray-400">TOTAL EXPOSURE</div>
+                  <div className="text-xs font-mono text-purple-400 mt-1">After multiple loops</div>
                 </div>
               </div>
 
               <div className="mt-8 text-center">
                 <div className="inline-flex items-center bg-gradient-to-r from-red-600/20 to-purple-600/20 rounded-lg px-6 py-3 border border-red-500/30">
-                  <span className="text-red-400 font-mono text-sm mr-3">CALCULATION:</span>
-                  <span className="text-white font-mono">1 → 99 → 9801 → 970299 → ∞</span>
+                  <span className="text-red-400 font-mono text-sm mr-3">EXAMPLE:</span>
+                  <span className="text-white font-mono">1 SEI → 20 SEI → 100+ SEI exposure</span>
                 </div>
               </div>
             </div>
@@ -526,91 +525,91 @@ export default function Home() {
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
               <div className="inline-flex items-center bg-gradient-to-r from-purple-900/30 to-blue-900/30 rounded-lg px-6 py-2 border border-purple-500/30 mb-6">
-                <span className="text-purple-400 font-mono text-sm mr-2">MATRIX::</span>
-                <span className="text-white font-mono">PROTOCOL_ARCHITECTURE</span>
+                <span className="text-purple-400 font-mono text-sm mr-2">SYSTEM::</span>
+                <span className="text-white font-mono">HOW_IT_WORKS</span>
               </div>
               <h2 className="text-4xl lg:text-5xl font-bold font-mono mb-6">
-                <span className="text-white">Δ-PROTOCOL </span>
+                <span className="text-white">THREE-PART </span>
                 <span className="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text text-transparent">
-                  MATRIX_SYSTEM
+                  SYSTEM
                 </span>
               </h2>
               <p className="text-xl text-gray-300 font-mono max-w-3xl mx-auto">
-                Self-reinforcing mathematical algorithms converting transaction entropy into structured liquidity across distributed networks.
+                Simple three-step system that turns every transaction into more voting power and directs rewards to LARRY holders.
               </p>
             </div>
 
             <div className="grid lg:grid-cols-3 gap-8">
-              {/* Entropy Conversion */}
+              {/* Fee Collection */}
               <div className="bg-gradient-to-r from-green-900/20 to-emerald-900/20 backdrop-blur-md border border-green-500/30 rounded-xl p-8 hover:from-green-900/30 hover:to-emerald-900/30 transition-all duration-300 relative overflow-hidden group">
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-green-500/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
                 <div className="relative z-10">
                   <div className="w-14 h-14 bg-green-500/20 rounded-lg flex items-center justify-center mb-6 border border-green-400/30">
-                    <span className="text-green-400 font-mono font-bold text-xl">∫</span>
+                    <span className="text-green-400 font-mono font-bold text-xl">💰</span>
                   </div>
-                  <h3 className="text-xl font-bold font-mono text-green-400 mb-4">ENTROPY_CONVERSION</h3>
+                  <h3 className="text-xl font-bold font-mono text-green-400 mb-4">FEE COLLECTION</h3>
                   <p className="text-gray-300 mb-6 font-mono text-sm">
-                    Every transaction generates entropy, automatically converted to governance tokens maximizing voting weight in the protocol matrix.
+                    Every buy/sell transaction pays a small fee that gets converted into voting power for governance rewards.
                   </p>
                   <div className="space-y-3 text-sm">
                     <div className="flex justify-between py-2 border-b border-green-500/20">
-                      <span className="text-gray-400 font-mono">TRANSACTION_FEE</span>
+                      <span className="text-gray-400 font-mono">TRANSACTION FEE</span>
                       <span className="text-green-400 font-mono">{buyFeePercent}%</span>
                     </div>
                     <div className="flex justify-between py-2">
-                      <span className="text-gray-400 font-mono">GOVERNANCE_POWER</span>
+                      <span className="text-gray-400 font-mono">VOTING POWER</span>
                       <span className="text-green-400 font-mono">MAXIMUM</span>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Recursive Leverage Engine */}
+              {/* Borrowing System */}
               <div className="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 backdrop-blur-md border border-blue-500/30 rounded-xl p-8 hover:from-blue-900/30 hover:to-cyan-900/30 transition-all duration-300 relative overflow-hidden group">
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
                 <div className="relative z-10">
                   <div className="w-14 h-14 bg-blue-500/20 rounded-lg flex items-center justify-center mb-6 border border-blue-400/30">
-                    <span className="text-blue-400 font-mono font-bold text-xl">∞</span>
+                    <span className="text-blue-400 font-mono font-bold text-xl">🚀</span>
                   </div>
-                  <h3 className="text-xl font-bold font-mono text-blue-400 mb-4">RECURSIVE_ENGINE</h3>
+                  <h3 className="text-xl font-bold font-mono text-blue-400 mb-4">BORROWING SYSTEM</h3>
                   <p className="text-gray-300 mb-6 font-mono text-sm">
-                    Advanced recursive algorithms enable maximum leverage through time-based constraint systems with mathematical precision.
+                    Smart borrowing system lets you get up to 20x leverage with time-based loans and no liquidation risk.
                   </p>
                   <div className="space-y-3 text-sm">
                     <div className="flex justify-between py-2 border-b border-blue-500/20">
-                      <span className="text-gray-400 font-mono">MAX_LEVERAGE</span>
+                      <span className="text-gray-400 font-mono">MAX LEVERAGE</span>
                       <span className="text-blue-400 font-mono">20x</span>
                     </div>
                     <div className="flex justify-between py-2 border-b border-blue-500/20">
-                      <span className="text-gray-400 font-mono">COLLATERAL_RATIO</span>
+                      <span className="text-gray-400 font-mono">BORROW RATIO</span>
                       <span className="text-blue-400 font-mono">99%</span>
                     </div>
                     <div className="flex justify-between py-2">
-                      <span className="text-gray-400 font-mono">INTEREST_RATE</span>
+                      <span className="text-gray-400 font-mono">INTEREST RATE</span>
                       <span className="text-blue-400 font-mono">3.9%</span>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Emission Control Matrix */}
+              {/* Reward Distribution */}
               <div className="bg-gradient-to-r from-purple-900/20 to-pink-900/20 backdrop-blur-md border border-purple-500/30 rounded-xl p-8 hover:from-purple-900/30 hover:to-pink-900/30 transition-all duration-300 relative overflow-hidden group">
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-500/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
                 <div className="relative z-10">
                   <div className="w-14 h-14 bg-purple-500/20 rounded-lg flex items-center justify-center mb-6 border border-purple-400/30">
-                    <span className="text-purple-400 font-mono font-bold text-xl">Δ</span>
+                    <span className="text-purple-400 font-mono font-bold text-xl">🎯</span>
                   </div>
-                  <h3 className="text-xl font-bold font-mono text-purple-400 mb-4">EMISSION_MATRIX</h3>
+                  <h3 className="text-xl font-bold font-mono text-purple-400 mb-4">REWARD SYSTEM</h3>
                   <p className="text-gray-300 mb-6 font-mono text-sm">
-                    Accumulated mathematical power directs liquidity incentives to LARRY pools across all supported network topologies.
+                    All collected voting power automatically votes to direct trading rewards to LARRY token holders.
                   </p>
                   <div className="space-y-3 text-sm">
                     <div className="flex justify-between py-2 border-b border-purple-500/20">
-                      <span className="text-gray-400 font-mono">VOTING_STRATEGY</span>
+                      <span className="text-gray-400 font-mono">VOTING STRATEGY</span>
                       <span className="text-purple-400 font-mono">AUTOMATED</span>
                     </div>
                     <div className="flex justify-between py-2">
-                      <span className="text-gray-400 font-mono">TARGET_POOLS</span>
+                      <span className="text-gray-400 font-mono">TARGET POOLS</span>
                       <span className="text-purple-400 font-mono">LARRY/*</span>
                     </div>
                   </div>
@@ -697,7 +696,7 @@ export default function Home() {
               <VideoLogo size="small" />
               <div className="flex flex-col">
                 <span className="text-gray-400 font-mono">© 2025 LARRY_PROTOCOL</span>
-                <span className="text-xs text-red-400 font-mono">Δ-MATRIX_SYSTEM</span>
+                <span className="text-xs text-red-400 font-mono">SEI LEVERAGE SYSTEM</span>
               </div>
             </div>
 
