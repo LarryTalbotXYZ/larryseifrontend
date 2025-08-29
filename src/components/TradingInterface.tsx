@@ -357,7 +357,7 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
           </div>
         </div>
 
-        {/* Mobile Balance Display */}
+        {/* Mobile Balance ee Display */}
         <div className="sm:hidden bg-black/80 backdrop-blur-md border border-green-500/30 rounded-lg p-3 mb-4 relative overflow-hidden">
           <div className="flex justify-between items-center text-xs font-mono">
             <div>
