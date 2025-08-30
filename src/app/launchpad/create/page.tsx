@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { ethers } from 'ethers';
 import MEME_ARTIFACT from '../tokenbackend/out/meme.sol/MEME.json';
 import MobileConnectButton from '@/components/MobileConnectButton';
@@ -49,6 +49,8 @@ function SimpleLaunchForm() {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<string | null>(null);
   const [deployed, setDeployed] = useState<string | null>(null);
+  const [larryBalance, setLarryBalance] = useState<string>('0');
+  const [loadingBalance, setLoadingBalance] = useState(false);
 
   const autoSymbol = (n: string) => n.replace(/[^a-zA-Z0-9]/g, '').slice(0, 6).toUpperCase() || 'MEME';
 
@@ -56,6 +58,44 @@ function SimpleLaunchForm() {
     setName(v);
     if (!symbol || symbol === autoSymbol(name)) setSymbol(autoSymbol(v));
   };
+
+  const fetchLarryBalance = async () => {
+    try {
+      setLoadingBalance(true);
+      // @ts-ignore
+      const { ethereum } = window as any;
+      if (!ethereum) throw new Error('Wallet not found');
+      const provider = new ethers.BrowserProvider(ethereum);
+      const signer = await provider.getSigner();
+      const userAddress = await signer.getAddress();
+
+      const larryContract = new ethers.Contract(LARRY, [
+        'function balanceOf(address owner) view returns (uint256)'
+      ], provider);
+      
+      const balance = await larryContract.balanceOf(userAddress);
+      const balanceFormatted = ethers.formatUnits(balance, 18);
+      setLarryBalance(balanceFormatted);
+    } catch (e: any) {
+      console.error('Error fetching LARRY balance:', e);
+      setLarryBalance('0');
+    } finally {
+      setLoadingBalance(false);
+    }
+  };
+
+  const handleMaxClick = () => {
+    if (larryBalance && parseFloat(larryBalance) > 0) {
+      setBackingLarry(larryBalance);
+    } else {
+      fetchLarryBalance();
+    }
+  };
+
+  // Fetch balance on component mount
+  React.useEffect(() => {
+    fetchLarryBalance();
+  }, []);
 
   const deploy = async () => {
     try {
@@ -119,9 +159,39 @@ function SimpleLaunchForm() {
           <input value={symbol} onChange={(e) => setSymbol(e.target.value.toUpperCase())} className="w-full bg-black/60 border border-gray-700 rounded px-3 py-2 text-sm font-mono" />
         </div>
         <div className="space-y-2 sm:col-span-2">
-          <label className="block text-xs font-mono text-gray-400">Initial Backing (LARRY)</label>
-          <input value={backingLarry} onChange={(e) => setBackingLarry(e.target.value)} placeholder="e.g. 1" className="w-full bg-black/60 border border-gray-700 rounded px-3 py-2 text-sm font-mono" />
-          <p className="text-xs text-gray-500 font-mono mt-1">First buy: no tax. Higher initial backing can benefit early holders. Uses fixed LARRY: {LARRY}</p>
+          <label className="block text-xs font-mono text-gray-400">How Much LARRY to Put In?</label>
+          <div className="flex gap-2">
+            <input 
+              value={backingLarry} 
+              onChange={(e) => setBackingLarry(e.target.value)} 
+              placeholder="e.g. 1" 
+              className="flex-1 bg-black/60 border border-gray-700 rounded px-3 py-2 text-sm font-mono" 
+            />
+            <button
+              type="button"
+              onClick={handleMaxClick}
+              disabled={loadingBalance}
+              className="px-4 py-2 bg-green-600/20 hover:bg-green-600/30 border border-green-500/50 text-green-400 text-sm font-mono rounded transition-all duration-200"
+            >
+              {loadingBalance ? '...' : 'MAX'}
+            </button>
+          </div>
+          <p className="text-xs text-green-400 font-mono">
+            {loadingBalance ? 'Loading balance...' : 
+             larryBalance && parseFloat(larryBalance) > 0 ? 
+             `Your LARRY balance: ${parseFloat(larryBalance).toLocaleString()} LARRY` :
+             'Your LARRY balance: 0 LARRY (connect wallet to check)'}
+          </p>
+          <div className="bg-blue-900/20 border border-blue-500/30 rounded p-3 mt-2">
+            <p className="text-xs text-blue-200 font-mono mb-2">💡 <strong>What does this mean?</strong></p>
+            <ul className="text-xs text-gray-300 font-mono space-y-1">
+              <li>• <strong>Initial Backing:</strong> LARRY tokens you put in to start your meme token</li>
+              <li>• <strong>Creator advantage:</strong> You get FREE tokens equal to your backing amount</li>
+              <li>• <strong>More backing = better:</strong> Higher backing attracts buyers & makes price more stable</li>
+              <li>• <strong>MAX button:</strong> Uses all your LARRY tokens for maximum profit potential</li>
+              <li>• <strong>Buyers pay fees:</strong> All future buyers pay 2.5% trading fees, but you get your tokens for free!</li>
+            </ul>
+          </div>
         </div>
       </div>
 
