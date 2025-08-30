@@ -28,11 +28,53 @@ export default function CreateLaunchPage() {
       <main className="px-4 sm:px-6 lg:px-12 py-8 sm:py-12">
         <div className="max-w-4xl mx-auto">
           <div className="flex items-center justify-between mb-6">
-            <h1 className="text-2xl sm:text-3xl font-mono font-bold text-green-400">Launch From Frontend</h1>
+            <h1 className="text-2xl sm:text-3xl font-mono font-bold text-green-400">Launch Your Token</h1>
             <Link href="/launchpad" className="text-sm font-mono text-gray-300 hover:text-white border border-gray-700 rounded px-3 py-1">Back</Link>
           </div>
+          
+          {/* Step-by-step guide */}
+          <div className="bg-gradient-to-r from-blue-900/20 to-indigo-900/20 border border-blue-500/30 rounded-xl p-6 mb-6">
+            <h2 className="text-lg font-mono font-bold text-blue-400 mb-4">📋 How It Works (4 Simple Steps)</h2>
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div className="bg-black/40 rounded-lg p-4 border border-green-500/30">
+                <div className="flex items-center mb-2">
+                  <span className="bg-green-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-2">1</span>
+                  <span className="font-mono text-green-400">Set Name & Deploy</span>
+                </div>
+                <p className="text-xs text-gray-300 font-mono">Choose your token name, symbol, and backing amount. Deploy the contract.</p>
+              </div>
+              
+              <div className="bg-black/40 rounded-lg p-4 border border-yellow-500/30">
+                <div className="flex items-center mb-2">
+                  <span className="bg-yellow-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-2">2</span>
+                  <span className="font-mono text-yellow-400">Set Fee Address</span>
+                </div>
+                <p className="text-xs text-gray-300 font-mono">Set where trading fees go (usually your wallet address).</p>
+              </div>
+              
+              <div className="bg-black/40 rounded-lg p-4 border border-purple-500/30">
+                <div className="flex items-center mb-2">
+                  <span className="bg-purple-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-2">3</span>
+                  <span className="font-mono text-purple-400">First Buy (You)</span>
+                </div>
+                <p className="text-xs text-gray-300 font-mono">You buy first to get the best price before anyone else can trade.</p>
+              </div>
+              
+              <div className="bg-black/40 rounded-lg p-4 border border-emerald-500/30">
+                <div className="flex items-center mb-2">
+                  <span className="bg-emerald-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-2">4</span>
+                  <span className="font-mono text-emerald-400">Trading Live</span>
+                </div>
+                <p className="text-xs text-gray-300 font-mono">Others can now buy/sell. You collect fees and profit from price increases.</p>
+              </div>
+            </div>
+          </div>
+
           <div className="bg-gradient-to-r from-green-900/20 to-emerald-900/20 border border-green-500/30 rounded-xl p-6 sm:p-8">
-            <p className="text-gray-300 text-sm font-mono text-center mb-6">Backed by LARRY at 0x888d81e3ea5E8362B5f69188CBCF34Fa8da4b888. Connect wallet above.</p>
+            <div className="flex items-center justify-center mb-6">
+              <div className="bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-lg font-bold mr-3">1</div>
+              <p className="text-gray-300 text-sm font-mono">Step 1: Deploy Your Token Contract</p>
+            </div>
             <SimpleLaunchForm />
           </div>
         </div>
@@ -201,6 +243,30 @@ function SimpleLaunchForm() {
 
       {status && (
         <div className="text-sm font-mono text-gray-300">{status}{deployed ? ` — ${deployed}` : ''}</div>
+      )}
+
+      {deployed && (
+        <div className="mt-6 p-4 bg-gradient-to-r from-yellow-900/20 to-orange-900/20 border border-yellow-500/30 rounded-lg">
+          <div className="flex items-center mb-3">
+            <div className="bg-yellow-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-2">2</div>
+            <h3 className="font-mono text-yellow-400 font-bold">Next Step: Set Fee Address</h3>
+          </div>
+          <p className="text-xs text-gray-300 font-mono mb-3">
+            Your token is deployed! Now you need to set the fee address (where trading fees go) before anyone can trade.
+          </p>
+          <div className="bg-black/60 rounded p-3 border border-gray-700">
+            <p className="text-xs text-green-400 font-mono mb-1">Your Token Contract:</p>
+            <p className="text-xs text-white font-mono break-all">{deployed}</p>
+          </div>
+          <div className="mt-3 bg-blue-900/20 border border-blue-500/30 rounded p-3">
+            <p className="text-xs text-blue-200 font-mono mb-2">💡 <strong>What to do next:</strong></p>
+            <ul className="text-xs text-gray-300 font-mono space-y-1">
+              <li>• <strong>Set fee address:</strong> Usually your wallet address to collect trading fees</li>
+              <li>• <strong>Make first buy:</strong> You get the best price before others can trade</li>
+              <li>• <strong>Share your token:</strong> Others can then buy and you profit from fees + price increases</li>
+            </ul>
+          </div>
+        </div>
       )}
     </div>
   );
