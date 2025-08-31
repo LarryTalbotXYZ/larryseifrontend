@@ -190,6 +190,20 @@ export default function Docs() {
                       </div>
                     </div>
                   </div>
+                  
+                  {/* Navigation */}
+                  <div className="flex justify-between items-center mt-12 pt-6 border-t border-green-500/30">
+                    <div></div>
+                    <button
+                      onClick={() => setActiveSection('getting-started')}
+                      className="inline-flex items-center bg-green-600 hover:bg-green-500 text-white px-6 py-3 rounded-lg font-mono transition-colors"
+                    >
+                      Getting Started
+                      <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                  </div>
                 </section>
               )}
 
@@ -257,6 +271,28 @@ export default function Docs() {
                         </div>
                       </div>
                     </div>
+                  </div>
+                  
+                  {/* Navigation */}
+                  <div className="flex justify-between items-center mt-12 pt-6 border-t border-green-500/30">
+                    <button
+                      onClick={() => setActiveSection('overview')}
+                      className="inline-flex items-center bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-mono transition-colors"
+                    >
+                      <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                      </svg>
+                      Overview
+                    </button>
+                    <button
+                      onClick={() => setActiveSection('how-it-works')}
+                      className="inline-flex items-center bg-green-600 hover:bg-green-500 text-white px-6 py-3 rounded-lg font-mono transition-colors"
+                    >
+                      How It Works
+                      <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
                   </div>
                 </section>
               )}
@@ -379,6 +415,28 @@ export default function Docs() {
                         </div>
                       </div>
                     </div>
+                  </div>
+                  
+                  {/* Navigation */}
+                  <div className="flex justify-between items-center mt-12 pt-6 border-t border-green-500/30">
+                    <button
+                      onClick={() => setActiveSection('getting-started')}
+                      className="inline-flex items-center bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-mono transition-colors"
+                    >
+                      <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                      </svg>
+                      Getting Started
+                    </button>
+                    <button
+                      onClick={() => setActiveSection('leverage')}
+                      className="inline-flex items-center bg-green-600 hover:bg-green-500 text-white px-6 py-3 rounded-lg font-mono transition-colors"
+                    >
+                      Leverage System
+                      <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
                   </div>
                 </section>
               )}
@@ -547,6 +605,28 @@ export default function Docs() {
                       />
                     </div>
                   </div>
+                  
+                  {/* Navigation */}
+                  <div className="flex justify-between items-center mt-12 pt-6 border-t border-green-500/30">
+                    <button
+                      onClick={() => setActiveSection('how-it-works')}
+                      className="inline-flex items-center bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-mono transition-colors"
+                    >
+                      <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                      </svg>
+                      How It Works
+                    </button>
+                    <button
+                      onClick={() => setActiveSection('fees')}
+                      className="inline-flex items-center bg-green-600 hover:bg-green-500 text-white px-6 py-3 rounded-lg font-mono transition-colors"
+                    >
+                      Fees & Rewards
+                      <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                  </div>
                 </section>
               )}
 
@@ -695,6 +775,28 @@ export default function Docs() {
                       />
                     </div>
                   </div>
+                  
+                  {/* Navigation */}
+                  <div className="flex justify-between items-center mt-12 pt-6 border-t border-green-500/30">
+                    <button
+                      onClick={() => setActiveSection('leverage')}
+                      className="inline-flex items-center bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-mono transition-colors"
+                    >
+                      <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                      </svg>
+                      Leverage System
+                    </button>
+                    <button
+                      onClick={() => setActiveSection('safety')}
+                      className="inline-flex items-center bg-green-600 hover:bg-green-500 text-white px-6 py-3 rounded-lg font-mono transition-colors"
+                    >
+                      Safety Features
+                      <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                  </div>
                 </section>
               )}
 
@@ -823,6 +925,28 @@ export default function Docs() {
                       />
                     </div>
                   </div>
+                  
+                  {/* Navigation */}
+                  <div className="flex justify-between items-center mt-12 pt-6 border-t border-green-500/30">
+                    <button
+                      onClick={() => setActiveSection('fees')}
+                      className="inline-flex items-center bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-mono transition-colors"
+                    >
+                      <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                      </svg>
+                      Fees & Rewards
+                    </button>
+                    <button
+                      onClick={() => setActiveSection('faq')}
+                      className="inline-flex items-center bg-green-600 hover:bg-green-500 text-white px-6 py-3 rounded-lg font-mono transition-colors"
+                    >
+                      FAQ
+                      <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                  </div>
                 </section>
               )}
 
@@ -934,6 +1058,20 @@ export default function Docs() {
                         Follow on X
                       </a>
                     </div>
+                  </div>
+                  
+                  {/* Navigation */}
+                  <div className="flex justify-between items-center mt-12 pt-6 border-t border-green-500/30">
+                    <button
+                      onClick={() => setActiveSection('safety')}
+                      className="inline-flex items-center bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-mono transition-colors"
+                    >
+                      <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                      </svg>
+                      Safety Features
+                    </button>
+                    <div></div>
                   </div>
                 </section>
               )}
