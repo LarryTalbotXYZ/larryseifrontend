@@ -489,7 +489,7 @@ export default function Docs() {
                       <div className="mt-6 bg-yellow-500/10 border border-yellow-500/20 rounded p-4">
                         <h3 className="text-yellow-300 font-bold mb-2">🔒 Price Protection Mechanism</h3>
                         <p className="text-sm text-gray-300">
-                          The smart contract's safetyCheck function prevents price drops greater than 0.001% per transaction, 
+                          The smart contract&apos;s safetyCheck function prevents price drops greater than 0.001% per transaction, 
                           ensuring the price can only decrease by tiny amounts while having unlimited upside potential.
                         </p>
                       </div>
@@ -555,7 +555,7 @@ export default function Docs() {
                     <div className="bg-gray-900/50 border border-blue-500/30 rounded-lg p-6">
                       <h2 className="text-xl font-mono font-bold text-blue-400 mb-4">🎯 How Borrowing Works</h2>
                       <p className="text-gray-300 mb-6">
-                        LARRY's borrowing system lets you use your LARRY tokens as collateral to borrow SEI, 
+                        LARRY&apos;s borrowing system lets you use your LARRY tokens as collateral to borrow SEI, 
                         which you can then use to buy more LARRY and create leverage positions.
                       </p>
 
@@ -627,7 +627,7 @@ export default function Docs() {
                     <div className="bg-gray-900/50 border border-red-500/30 rounded-lg p-6">
                       <h2 className="text-xl font-mono font-bold text-red-400 mb-4">⏰ Time-Based Liquidations</h2>
                       <p className="text-gray-300 mb-6">
-                        Unlike traditional DeFi, LARRY doesn't liquidate based on price movements. 
+                        Unlike traditional DeFi, LARRY doesn&apos;t liquidate based on price movements. 
                         Instead, loans expire at midnight UTC after your chosen duration.
                       </p>
 
