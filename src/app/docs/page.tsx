@@ -449,6 +449,49 @@ export default function Docs() {
                             <p><strong>Monthly Growth:</strong> 250 SEI × 30 days = 7,500 SEI → Price: 1.0075 SEI</p>
                             <p className="text-green-400"><strong>Result: +0.75% price increase from trading fees alone</strong></p>
                           </div>
+                          
+                          {/* Trading Volume Chart */}
+                          <div className="mt-4 bg-black/50 rounded-lg p-4">
+                            <h4 className="text-green-300 font-bold mb-3 text-center">📈 Daily Fee Accumulation</h4>
+                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+                              <div className="bg-green-500/20 rounded p-2 text-center">
+                                <div className="text-green-400 font-bold">Day 1</div>
+                                <div className="text-gray-300">+250 SEI</div>
+                                <div className="text-green-300">1.00025</div>
+                              </div>
+                              <div className="bg-green-500/30 rounded p-2 text-center">
+                                <div className="text-green-400 font-bold">Day 7</div>
+                                <div className="text-gray-300">+1,750 SEI</div>
+                                <div className="text-green-300">1.00175</div>
+                              </div>
+                              <div className="bg-green-500/40 rounded p-2 text-center">
+                                <div className="text-green-400 font-bold">Day 15</div>
+                                <div className="text-gray-300">+3,750 SEI</div>
+                                <div className="text-green-300">1.00375</div>
+                              </div>
+                              <div className="bg-green-500/50 rounded p-2 text-center">
+                                <div className="text-green-400 font-bold">Day 30</div>
+                                <div className="text-gray-300">+7,500 SEI</div>
+                                <div className="text-green-300 font-bold">1.0075</div>
+                              </div>
+                            </div>
+                            <FlowDiagram
+                              title="Trading Fee Flow"
+                              nodes={[
+                                { id: 'volume', label: '100k SEI Volume', type: 'user', description: 'Daily trading' },
+                                { id: 'fees', label: '0.25% Fee', type: 'contract', description: '250 SEI captured' },
+                                { id: 'backing', label: 'Backing Pool', type: 'system', description: 'Grows daily' },
+                                { id: 'price', label: 'Price Increase', type: 'reward', description: '+0.75% monthly' }
+                              ]}
+                              connections={[
+                                { from: 'volume', to: 'fees' },
+                                { from: 'fees', to: 'backing' },
+                                { from: 'backing', to: 'price' }
+                              ]}
+                              note="Consistent trading volume creates steady, compounding price growth through fee accumulation."
+                              className="mt-4 bg-green-500/10"
+                            />
+                          </div>
                         </div>
 
                         <div className="bg-blue-500/10 border border-blue-500/20 rounded p-4">
@@ -461,6 +504,49 @@ export default function Docs() {
                             <p><strong>New Price:</strong> 990,025 ÷ 990,000 = 1.000025 SEI per LARRY</p>
                             <p className="text-blue-400"><strong>Result: Price increases even when someone sells!</strong></p>
                           </div>
+
+                          {/* Token Burn Chart */}
+                          <div className="mt-4 bg-black/50 rounded-lg p-4">
+                            <h4 className="text-blue-300 font-bold mb-3 text-center">🔥 Burn & Price Impact</h4>
+                            <div className="grid grid-cols-2 gap-4 mb-4">
+                              <div className="bg-red-500/20 rounded p-3 text-center">
+                                <div className="text-red-400 font-bold mb-2">BEFORE SELL</div>
+                                <div className="text-xs text-gray-300 space-y-1">
+                                  <div>LARRY Supply: <span className="text-white">1,000,000</span></div>
+                                  <div>SEI Backing: <span className="text-white">1,000,000</span></div>
+                                  <div className="border-t border-gray-600 pt-1">
+                                    Price: <span className="text-red-300 font-bold">1.00 SEI</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="bg-green-500/20 rounded p-3 text-center">
+                                <div className="text-green-400 font-bold mb-2">AFTER SELL</div>
+                                <div className="text-xs text-gray-300 space-y-1">
+                                  <div>LARRY Supply: <span className="text-white">990,000</span> ↓</div>
+                                  <div>SEI Backing: <span className="text-white">990,025</span> ↓</div>
+                                  <div className="border-t border-gray-600 pt-1">
+                                    Price: <span className="text-green-300 font-bold">1.000025</span> ↑
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <FlowDiagram
+                              title="Deflationary Sell Mechanism"
+                              nodes={[
+                                { id: 'sell', label: 'User Sells', type: 'user', description: '10,000 LARRY' },
+                                { id: 'burn', label: 'Tokens Burned', type: 'contract', description: 'Permanent destruction' },
+                                { id: 'ratio', label: 'Better Ratio', type: 'system', description: 'Less supply vs backing' },
+                                { id: 'benefit', label: 'Price Up', type: 'reward', description: 'Holders benefit' }
+                              ]}
+                              connections={[
+                                { from: 'sell', to: 'burn' },
+                                { from: 'burn', to: 'ratio' },
+                                { from: 'ratio', to: 'benefit' }
+                              ]}
+                              note="Selling burns tokens permanently, improving the backing-to-supply ratio for all remaining holders."
+                              className="mt-4 bg-blue-500/10"
+                            />
+                          </div>
                         </div>
 
                         <div className="bg-purple-500/10 border border-purple-500/20 rounded p-4">
@@ -472,6 +558,59 @@ export default function Docs() {
                             <p><strong>New Price:</strong> 1,049,500 ÷ 950,000 = 1.1047 SEI per LARRY</p>
                             <p className="text-purple-400"><strong>Result: +10.47% price increase for remaining holders!</strong></p>
                           </div>
+
+                          {/* Liquidation Chart */}
+                          <div className="mt-4 bg-black/50 rounded-lg p-4">
+                            <h4 className="text-purple-300 font-bold mb-3 text-center">⚡ Liquidation Impact</h4>
+                            <div className="grid grid-cols-3 gap-2 mb-4">
+                              <div className="bg-yellow-500/20 rounded p-3 text-center">
+                                <div className="text-yellow-400 font-bold mb-2">BEFORE</div>
+                                <div className="text-xs text-gray-300 space-y-1">
+                                  <div>Supply: <span className="text-white">1M</span></div>
+                                  <div>Backing: <span className="text-white">1M</span></div>
+                                  <div className="border-t border-gray-600 pt-1">
+                                    Price: <span className="text-yellow-300">1.00</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="bg-red-500/20 rounded p-3 text-center">
+                                <div className="text-red-400 font-bold mb-2">LIQUIDATION</div>
+                                <div className="text-xs text-gray-300 space-y-1">
+                                  <div>Burn: <span className="text-red-300">50k LARRY</span></div>
+                                  <div>Keep: <span className="text-green-300">49.5k SEI</span></div>
+                                  <div className="border-t border-gray-600 pt-1">
+                                    <span className="text-purple-300">Midnight UTC</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="bg-green-500/20 rounded p-3 text-center">
+                                <div className="text-green-400 font-bold mb-2">AFTER</div>
+                                <div className="text-xs text-gray-300 space-y-1">
+                                  <div>Supply: <span className="text-white">950k</span> ↓</div>
+                                  <div>Backing: <span className="text-white">1.05M</span> ↑</div>
+                                  <div className="border-t border-gray-600 pt-1">
+                                    Price: <span className="text-green-300 font-bold">1.1047</span> ↑
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <FlowDiagram
+                              title="Liquidation Benefit Flow"
+                              nodes={[
+                                { id: 'expire', label: 'Loan Expires', type: 'user', description: 'Midnight UTC' },
+                                { id: 'liquidate', label: 'Auto Liquidation', type: 'contract', description: 'Burn collateral' },
+                                { id: 'transfer', label: 'SEI Stays', type: 'system', description: 'Debt remains in pool' },
+                                { id: 'boost', label: 'Price Boost', type: 'reward', description: '+10.47% instantly' }
+                              ]}
+                              connections={[
+                                { from: 'expire', to: 'liquidate' },
+                                { from: 'liquidate', to: 'transfer' },
+                                { from: 'transfer', to: 'boost' }
+                              ]}
+                              note="Failed loans burn collateral but keep borrowed SEI, creating massive backing increases for holders."
+                              className="mt-4 bg-purple-500/10"
+                            />
+                          </div>
                         </div>
 
                         <div className="bg-red-500/10 border border-red-500/20 rounded p-4">
@@ -482,6 +621,49 @@ export default function Docs() {
                             <p><strong>Month 3:</strong> Continued compounding = 2.08% additional growth</p>
                             <p><strong>Year 1:</strong> ~27% total price appreciation from organic growth</p>
                             <p className="text-red-400"><strong>Result: Mathematical guarantee of upward pressure!</strong></p>
+                          </div>
+
+                          {/* Compound Growth Chart */}
+                          <div className="mt-4 bg-black/50 rounded-lg p-4">
+                            <h4 className="text-red-300 font-bold mb-3 text-center">📈 Compound Growth Trajectory</h4>
+                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4">
+                              <div className="bg-red-500/20 rounded p-3 text-center">
+                                <div className="text-red-400 font-bold text-xs">Month 1</div>
+                                <div className="text-white text-sm">1.02 SEI</div>
+                                <div className="text-green-300 text-xs">+2.0%</div>
+                              </div>
+                              <div className="bg-red-500/30 rounded p-3 text-center">
+                                <div className="text-red-400 font-bold text-xs">Month 3</div>
+                                <div className="text-white text-sm">1.061 SEI</div>
+                                <div className="text-green-300 text-xs">+6.1%</div>
+                              </div>
+                              <div className="bg-red-500/40 rounded p-3 text-center">
+                                <div className="text-red-400 font-bold text-xs">Month 6</div>
+                                <div className="text-white text-sm">1.126 SEI</div>
+                                <div className="text-green-300 text-xs">+12.6%</div>
+                              </div>
+                              <div className="bg-red-500/50 rounded p-3 text-center">
+                                <div className="text-red-400 font-bold text-xs">Year 1</div>
+                                <div className="text-white text-sm font-bold">1.27 SEI</div>
+                                <div className="text-green-300 text-xs font-bold">+27%</div>
+                              </div>
+                            </div>
+                            <FlowDiagram
+                              title="Compound Growth Engine"
+                              nodes={[
+                                { id: 'activity', label: 'Protocol Activity', type: 'user', description: 'Trading + Borrowing' },
+                                { id: 'mechanisms', label: 'Growth Mechanisms', type: 'contract', description: 'Fees + Burns' },
+                                { id: 'base', label: 'Higher Base Price', type: 'system', description: 'Compounding effect' },
+                                { id: 'exponential', label: 'Exponential Growth', type: 'reward', description: '27% annually' }
+                              ]}
+                              connections={[
+                                { from: 'activity', to: 'mechanisms' },
+                                { from: 'mechanisms', to: 'base' },
+                                { from: 'base', to: 'exponential', curved: true }
+                              ]}
+                              note="Each month builds on the previous month&apos;s gains, creating exponential compound growth over time."
+                              className="mt-4 bg-red-500/10"
+                            />
                           </div>
                         </div>
                       </div>
