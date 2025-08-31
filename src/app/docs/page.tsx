@@ -780,6 +780,49 @@ export default function Docs() {
                             <p><strong>Fee to protocol:</strong> ~1 SEI (30% of interest)</p>
                             <p><strong>You receive:</strong> ~986 SEI</p>
                           </div>
+
+                          {/* Basic Borrow Chart */}
+                          <div className="mt-4 bg-black/50 rounded-lg p-4">
+                            <h4 className="text-purple-300 font-bold mb-3 text-center">🏦 Basic Borrow Breakdown</h4>
+                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs mb-4">
+                              <div className="bg-blue-500/20 rounded p-3 text-center">
+                                <div className="text-blue-400 font-bold">COLLATERAL</div>
+                                <div className="text-white text-lg">1000</div>
+                                <div className="text-gray-300">LARRY tokens</div>
+                              </div>
+                              <div className="bg-green-500/20 rounded p-3 text-center">
+                                <div className="text-green-400 font-bold">MAX BORROW</div>
+                                <div className="text-white text-lg">990</div>
+                                <div className="text-gray-300">SEI (99% LTV)</div>
+                              </div>
+                              <div className="bg-red-500/20 rounded p-3 text-center">
+                                <div className="text-red-400 font-bold">INTEREST</div>
+                                <div className="text-white text-lg">3.2</div>
+                                <div className="text-gray-300">SEI (30 days)</div>
+                              </div>
+                              <div className="bg-yellow-500/20 rounded p-3 text-center">
+                                <div className="text-yellow-400 font-bold">NET RECEIVED</div>
+                                <div className="text-white text-lg font-bold">986</div>
+                                <div className="text-gray-300">SEI in hand</div>
+                              </div>
+                            </div>
+                            <FlowDiagram
+                              title="Basic Borrow Process"
+                              nodes={[
+                                { id: 'deposit', label: '1000 LARRY', type: 'user', description: 'Your collateral' },
+                                { id: 'contract', label: 'Borrow Contract', type: 'contract', description: 'Holds collateral' },
+                                { id: 'calculate', label: '99% LTV Check', type: 'system', description: '990 SEI max' },
+                                { id: 'receive', label: '986 SEI', type: 'reward', description: 'After interest' }
+                              ]}
+                              connections={[
+                                { from: 'deposit', to: 'contract' },
+                                { from: 'contract', to: 'calculate' },
+                                { from: 'calculate', to: 'receive' }
+                              ]}
+                              note="Basic borrowing gives you immediate liquidity while keeping your LARRY position through collateral."
+                              className="mt-4 bg-purple-500/10"
+                            />
+                          </div>
                         </div>
 
                         <div className="bg-green-500/10 border border-green-500/20 rounded p-4">
@@ -791,6 +834,59 @@ export default function Docs() {
                             <p><strong>Net result:</strong> 980 SEI to buy more LARRY + 987 LARRY collateral</p>
                             <p><strong>Total position:</strong> Control ~1967 SEI worth of LARRY</p>
                           </div>
+
+                          {/* Leverage Function Chart */}
+                          <div className="mt-4 bg-black/50 rounded-lg p-4">
+                            <h4 className="text-green-300 font-bold mb-3 text-center">⚡ One-Click Leverage Process</h4>
+                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+                              <div className="bg-yellow-500/20 rounded p-3 text-center">
+                                <div className="text-yellow-400 font-bold mb-2">STEP 1: INPUT</div>
+                                <div className="text-xs text-gray-300 space-y-1">
+                                  <div>You send: <span className="text-white">1,000 SEI</span></div>
+                                  <div>Plus fees: <span className="text-white">+13 SEI</span></div>
+                                  <div className="border-t border-gray-600 pt-1">
+                                    Total: <span className="text-yellow-300 font-bold">1,013 SEI</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="bg-blue-500/20 rounded p-3 text-center">
+                                <div className="text-blue-400 font-bold mb-2">STEP 2: AUTO-MINT</div>
+                                <div className="text-xs text-gray-300 space-y-1">
+                                  <div>Contract mints: <span className="text-white">987 LARRY</span></div>
+                                  <div>Held as collateral</div>
+                                  <div className="border-t border-gray-600 pt-1">
+                                    Borrows: <span className="text-blue-300 font-bold">980 SEI</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="bg-green-500/20 rounded p-3 text-center">
+                                <div className="text-green-400 font-bold mb-2">STEP 3: RESULT</div>
+                                <div className="text-xs text-gray-300 space-y-1">
+                                  <div>You get: <span className="text-white">980 SEI</span></div>
+                                  <div>Buy more LARRY: <span className="text-white">~977</span></div>
+                                  <div className="border-t border-gray-600 pt-1">
+                                    Total: <span className="text-green-300 font-bold">1,964 LARRY</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <FlowDiagram
+                              title="Leverage Function Flow"
+                              nodes={[
+                                { id: 'input', label: '1,013 SEI', type: 'user', description: 'Single transaction' },
+                                { id: 'leverage', label: 'leverage()', type: 'contract', description: 'Auto-execution' },
+                                { id: 'mint', label: 'Mint & Borrow', type: 'system', description: '987 LARRY + 980 SEI' },
+                                { id: 'double', label: '2x Position', type: 'reward', description: '~1,964 LARRY total' }
+                              ]}
+                              connections={[
+                                { from: 'input', to: 'leverage' },
+                                { from: 'leverage', to: 'mint' },
+                                { from: 'mint', to: 'double' }
+                              ]}
+                              note="One transaction automatically creates a leveraged position with optimal efficiency and minimal fees."
+                              className="mt-4 bg-green-500/10"
+                            />
+                          </div>
                         </div>
 
                         <div className="bg-yellow-500/10 border border-yellow-500/20 rounded p-4">
@@ -801,6 +897,61 @@ export default function Docs() {
                             <p><strong>Flash close fee:</strong> 12 SEI (1% of collateral value)</p>
                             <p><strong>You receive:</strong> 198 SEI (1200 - 990 - 12)</p>
                             <p><strong>Protocol burns:</strong> 1000 LARRY (deflationary)</p>
+                          </div>
+
+                          {/* Flash Close Chart */}
+                          <div className="mt-4 bg-black/50 rounded-lg p-4">
+                            <h4 className="text-yellow-300 font-bold mb-3 text-center">⚡ Flash Close Calculation</h4>
+                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4">
+                              <div className="bg-blue-500/20 rounded p-3 text-center">
+                                <div className="text-blue-400 font-bold text-xs">COLLATERAL</div>
+                                <div className="text-white text-sm">1000 LARRY</div>
+                                <div className="text-gray-300 text-xs">Worth 1200 SEI</div>
+                              </div>
+                              <div className="bg-red-500/20 rounded p-3 text-center">
+                                <div className="text-red-400 font-bold text-xs">DEBT</div>
+                                <div className="text-white text-sm">-990 SEI</div>
+                                <div className="text-gray-300 text-xs">Must repay</div>
+                              </div>
+                              <div className="bg-orange-500/20 rounded p-3 text-center">
+                                <div className="text-orange-400 font-bold text-xs">FLASH FEE</div>
+                                <div className="text-white text-sm">-12 SEI</div>
+                                <div className="text-gray-300 text-xs">1% of value</div>
+                              </div>
+                              <div className="bg-green-500/20 rounded p-3 text-center">
+                                <div className="text-green-400 font-bold text-xs">NET PROFIT</div>
+                                <div className="text-white text-sm font-bold">+198 SEI</div>
+                                <div className="text-gray-300 text-xs">You receive</div>
+                              </div>
+                            </div>
+                            <div className="bg-gray-800/50 rounded p-3 mb-4">
+                              <h5 className="text-yellow-300 font-bold mb-2 text-center">📊 Profit Breakdown</h5>
+                              <div className="flex items-center justify-center space-x-2 text-xs">
+                                <span className="text-blue-300">1200 SEI</span>
+                                <span className="text-gray-400">-</span>
+                                <span className="text-red-300">990 SEI</span>
+                                <span className="text-gray-400">-</span>
+                                <span className="text-orange-300">12 SEI</span>
+                                <span className="text-gray-400">=</span>
+                                <span className="text-green-300 font-bold">198 SEI profit</span>
+                              </div>
+                            </div>
+                            <FlowDiagram
+                              title="Flash Close Mechanism"
+                              nodes={[
+                                { id: 'initiate', label: 'Flash Close', type: 'user', description: 'Single click exit' },
+                                { id: 'burn', label: 'Burn Collateral', type: 'contract', description: '1000 LARRY destroyed' },
+                                { id: 'calculate', label: 'Calculate Profit', type: 'system', description: '1200-990-12 SEI' },
+                                { id: 'profit', label: 'Receive Profit', type: 'reward', description: '198 SEI to you' }
+                              ]}
+                              connections={[
+                                { from: 'initiate', to: 'burn' },
+                                { from: 'burn', to: 'calculate' },
+                                { from: 'calculate', to: 'profit' }
+                              ]}
+                              note="Flash close instantly converts your LARRY gains to SEI profit, perfect for taking profits without loan management."
+                              className="mt-4 bg-yellow-500/10"
+                            />
                           </div>
                         </div>
                       </div>
@@ -833,6 +984,49 @@ export default function Docs() {
                             <li>• <strong>Set reminders:</strong> Track expiry dates carefully</li>
                           </ul>
                         </div>
+                      </div>
+
+                      {/* Time-Based Liquidation Chart */}
+                      <div className="mt-6 bg-black/50 rounded-lg p-4">
+                        <h4 className="text-red-300 font-bold mb-3 text-center">⏰ Time-Based Liquidation Timeline</h4>
+                        <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 mb-4">
+                          <div className="bg-green-500/20 rounded p-3 text-center">
+                            <div className="text-green-400 font-bold text-xs">DAY 1-29</div>
+                            <div className="text-white text-sm">✅ SAFE</div>
+                            <div className="text-gray-300 text-xs">Loan active</div>
+                          </div>
+                          <div className="bg-yellow-500/20 rounded p-3 text-center">
+                            <div className="text-yellow-400 font-bold text-xs">DAY 30</div>
+                            <div className="text-white text-sm">⚠️ EXPIRES</div>
+                            <div className="text-gray-300 text-xs">Midnight UTC</div>
+                          </div>
+                          <div className="bg-red-500/20 rounded p-3 text-center">
+                            <div className="text-red-400 font-bold text-xs">AUTO-LIQ</div>
+                            <div className="text-white text-sm">🔥 BURN</div>
+                            <div className="text-gray-300 text-xs">Collateral lost</div>
+                          </div>
+                          <div className="bg-blue-500/20 rounded p-3 text-center">
+                            <div className="text-blue-400 font-bold text-xs">PROTOCOL</div>
+                            <div className="text-white text-sm">📈 GAINS</div>
+                            <div className="text-gray-300 text-xs">SEI stays</div>
+                          </div>
+                        </div>
+                        <FlowDiagram
+                          title="Liquidation Timeline"
+                          nodes={[
+                            { id: 'borrow', label: 'Loan Starts', type: 'user', description: '30-day timer' },
+                            { id: 'countdown', label: 'Time Passes', type: 'contract', description: 'Midnight UTC countdown' },
+                            { id: 'expire', label: 'Loan Expires', type: 'system', description: 'Auto-liquidation' },
+                            { id: 'burn', label: 'Assets Burned', type: 'reward', description: 'Deflationary for holders' }
+                          ]}
+                          connections={[
+                            { from: 'borrow', to: 'countdown' },
+                            { from: 'countdown', to: 'expire' },
+                            { from: 'expire', to: 'burn' }
+                          ]}
+                          note="Unlike price-based liquidations, time-based expiry gives you predictable deadlines and no sudden surprises."
+                          className="mt-4 bg-red-500/10"
+                        />
                       </div>
                     </div>
 
@@ -1088,6 +1282,69 @@ export default function Docs() {
                     <div className="bg-gray-900/50 border border-purple-500/30 rounded-lg p-6">
                       <h2 className="text-xl font-mono font-bold text-purple-400 mb-4">🧮 Advanced Leverage Calculator</h2>
                       <p className="text-gray-300 mb-4">Here&apos;s how your position grows with each loop:</p>
+                      
+                      {/* Leverage Growth Visualization */}
+                      <div className="mb-6 bg-black/50 rounded-lg p-4">
+                        <h4 className="text-purple-300 font-bold mb-3 text-center">📊 Position Growth Visualization</h4>
+                        <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 mb-4">
+                          <div className="bg-gray-500/20 rounded p-3 text-center">
+                            <div className="text-gray-400 font-bold text-xs">START</div>
+                            <div className="text-white text-sm">1,000</div>
+                            <div className="text-gray-300 text-xs">1x leverage</div>
+                            <div className="w-full bg-gray-600 rounded-full h-2 mt-2">
+                              <div className="bg-gray-400 h-2 rounded-full" style={{width: '3%'}}></div>
+                            </div>
+                          </div>
+                          <div className="bg-blue-500/20 rounded p-3 text-center">
+                            <div className="text-blue-400 font-bold text-xs">LOOP 1</div>
+                            <div className="text-white text-sm">1,986</div>
+                            <div className="text-gray-300 text-xs">2x leverage</div>
+                            <div className="w-full bg-gray-600 rounded-full h-2 mt-2">
+                              <div className="bg-blue-400 h-2 rounded-full" style={{width: '7%'}}></div>
+                            </div>
+                          </div>
+                          <div className="bg-green-500/20 rounded p-3 text-center">
+                            <div className="text-green-400 font-bold text-xs">LOOP 2</div>
+                            <div className="text-white text-sm">3,936</div>
+                            <div className="text-gray-300 text-xs">4x leverage</div>
+                            <div className="w-full bg-gray-600 rounded-full h-2 mt-2">
+                              <div className="bg-green-400 h-2 rounded-full" style={{width: '13%'}}></div>
+                            </div>
+                          </div>
+                          <div className="bg-yellow-500/20 rounded p-3 text-center">
+                            <div className="text-yellow-400 font-bold text-xs">LOOP 3</div>
+                            <div className="text-white text-sm">7,795</div>
+                            <div className="text-gray-300 text-xs">8x leverage</div>
+                            <div className="w-full bg-gray-600 rounded-full h-2 mt-2">
+                              <div className="bg-yellow-400 h-2 rounded-full" style={{width: '26%'}}></div>
+                            </div>
+                          </div>
+                          <div className="bg-red-500/20 rounded p-3 text-center">
+                            <div className="text-red-400 font-bold text-xs">LOOP 5+</div>
+                            <div className="text-white text-sm font-bold">30,000+</div>
+                            <div className="text-gray-300 text-xs">30x leverage</div>
+                            <div className="w-full bg-gray-600 rounded-full h-2 mt-2">
+                              <div className="bg-red-400 h-2 rounded-full" style={{width: '100%'}}></div>
+                            </div>
+                          </div>
+                        </div>
+                        <FlowDiagram
+                          title="Exponential Leverage Growth"
+                          nodes={[
+                            { id: 'start', label: '1,000 SEI', type: 'user', description: 'Initial investment' },
+                            { id: 'loop1', label: '2x Position', type: 'contract', description: '1,986 SEI exposure' },
+                            { id: 'loop3', label: '8x Position', type: 'system', description: '7,795 SEI exposure' },
+                            { id: 'max', label: '30x Position', type: 'reward', description: '30,000+ SEI exposure' }
+                          ]}
+                          connections={[
+                            { from: 'start', to: 'loop1' },
+                            { from: 'loop1', to: 'loop3' },
+                            { from: 'loop3', to: 'max' }
+                          ]}
+                          note="Each loop approximately doubles your position size, creating exponential growth potential."
+                          className="mt-4 bg-purple-500/10"
+                        />
+                      </div>
                       
                       {/* Mobile: Card format */}
                       <div className="block sm:hidden space-y-4">
