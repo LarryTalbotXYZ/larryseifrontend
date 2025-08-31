@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import MobileConnectButton from '@/components/MobileConnectButton';
+import FlowDiagram from '@/components/FlowDiagram';
 
 export default function Docs() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -335,6 +336,24 @@ export default function Docs() {
                         <h3 className="text-yellow-300 font-bold mb-2">📊 Example Result</h3>
                         <p className="text-sm text-gray-300">Start with 100 SEI → After 5 loops → Control ~2000 SEI worth of LARRY exposure</p>
                       </div>
+
+                      {/* Leverage Loop Diagram */}
+                      <FlowDiagram
+                        title="Leverage Loop Process"
+                        nodes={[
+                          { id: 'start', label: 'Start with SEI', type: 'user', description: '100 SEI' },
+                          { id: 'buy', label: 'Buy LARRY', type: 'contract', description: '99 LARRY tokens' },
+                          { id: 'borrow', label: 'Borrow SEI', type: 'system', description: '98 SEI (99% LTV)' },
+                          { id: 'repeat', label: 'Repeat Loop', type: 'user', description: 'Build position' }
+                        ]}
+                        connections={[
+                          { from: 'start', to: 'buy' },
+                          { from: 'buy', to: 'borrow' },
+                          { from: 'borrow', to: 'repeat', curved: true }
+                        ]}
+                        note="Each loop multiplies your exposure while the price protection mechanism keeps your position safe from sudden liquidations."
+                        className="mt-6"
+                      />
                     </div>
 
                     <div className="bg-gray-900/50 border border-purple-500/30 rounded-lg p-6">
@@ -508,6 +527,24 @@ export default function Docs() {
                           </ul>
                         </div>
                       </div>
+
+                      {/* Leverage Risk Management Diagram */}
+                      <FlowDiagram
+                        title="Safe Leverage Management"
+                        nodes={[
+                          { id: 'entry', label: 'Start Small', type: 'user', description: '10-50 SEI' },
+                          { id: 'leverage', label: 'Build Position', type: 'system', description: 'Loop carefully' },
+                          { id: 'monitor', label: 'Track Loans', type: 'contract', description: 'Set reminders' },
+                          { id: 'exit', label: 'Safe Exit', type: 'reward', description: 'Flash close or repay' }
+                        ]}
+                        connections={[
+                          { from: 'entry', to: 'leverage' },
+                          { from: 'leverage', to: 'monitor' },
+                          { from: 'monitor', to: 'exit' }
+                        ]}
+                        note="Follow this systematic approach to leverage safely: start small, build gradually, monitor closely, and always have an exit strategy."
+                        className="mt-6"
+                      />
                     </div>
                   </div>
                 </section>
@@ -638,6 +675,24 @@ export default function Docs() {
                           <strong>Result:</strong> The more the protocol is used, the more valuable LARRY becomes for all holders.
                         </p>
                       </div>
+
+                      {/* Fee Distribution Diagram */}
+                      <FlowDiagram
+                        title="Fee Distribution Flow"
+                        nodes={[
+                          { id: 'fees', label: 'Protocol Fees', type: 'contract', description: 'Trading & Interest' },
+                          { id: 'backing', label: 'Protocol Backing', type: 'reward', description: '~70%' },
+                          { id: 'lp', label: 'LP Rewards', type: 'system', description: '~25%' },
+                          { id: 'dev', label: 'Development', type: 'team', description: '~5%' }
+                        ]}
+                        connections={[
+                          { from: 'fees', to: 'backing', percentage: '70%' },
+                          { from: 'fees', to: 'lp', percentage: '25%' },
+                          { from: 'fees', to: 'dev', percentage: '5%' }
+                        ]}
+                        note="Most fees flow back to increase LARRY backing, directly benefiting all holders through price appreciation."
+                        className="mt-8"
+                      />
                     </div>
                   </div>
                 </section>
@@ -748,6 +803,24 @@ export default function Docs() {
                           only invest what you can afford to lose.
                         </p>
                       </div>
+
+                      {/* Safety Features Diagram */}
+                      <FlowDiagram
+                        title="LARRY Safety System"
+                        nodes={[
+                          { id: 'user', label: 'User Action', type: 'user', description: 'Buy/Sell/Borrow' },
+                          { id: 'contract', label: 'Smart Contract', type: 'contract', description: 'Price Protection' },
+                          { id: 'time', label: 'Time-Based Loans', type: 'system', description: 'No Liquidations' },
+                          { id: 'protection', label: 'Price Floor', type: 'reward', description: 'Always Protected' }
+                        ]}
+                        connections={[
+                          { from: 'user', to: 'contract' },
+                          { from: 'contract', to: 'time' },
+                          { from: 'contract', to: 'protection' }
+                        ]}
+                        note="Multiple layers of protection ensure user safety: price floors, time-based liquidations, and smart contract safeguards."
+                        className="mt-8"
+                      />
                     </div>
                   </div>
                 </section>
