@@ -13,6 +13,7 @@ export default function Docs() {
     { id: 'overview', label: 'Overview', icon: '📖' },
     { id: 'getting-started', label: 'Getting Started', icon: '🚀' },
     { id: 'how-it-works', label: 'How It Works', icon: '⚙️' },
+    { id: 'borrowing', label: 'Borrowing Details', icon: '🏦' },
     { id: 'leverage', label: 'Leverage System', icon: '📈' },
     { id: 'fees', label: 'Fees & Rewards', icon: '💰' },
     { id: 'safety', label: 'Safety Features', icon: '🛡️' },
@@ -373,23 +374,125 @@ export default function Docs() {
                         <p className="text-sm text-gray-300">Start with 100 SEI → After 5 loops → Control ~2000 SEI worth of LARRY exposure</p>
                       </div>
 
-                      {/* Leverage Loop Diagram */}
-                      <FlowDiagram
-                        title="Leverage Loop Process"
-                        nodes={[
-                          { id: 'start', label: 'Start with SEI', type: 'user', description: '100 SEI' },
-                          { id: 'buy', label: 'Buy LARRY', type: 'contract', description: '99 LARRY tokens' },
-                          { id: 'borrow', label: 'Borrow SEI', type: 'system', description: '98 SEI (99% LTV)' },
-                          { id: 'repeat', label: 'Repeat Loop', type: 'user', description: 'Build position' }
-                        ]}
-                        connections={[
-                          { from: 'start', to: 'buy' },
-                          { from: 'buy', to: 'borrow' },
-                          { from: 'borrow', to: 'repeat', curved: true }
-                        ]}
-                        note="Each loop multiplies your exposure while the price protection mechanism keeps your position safe from sudden liquidations."
-                        className="mt-6"
-                      />
+                      {/* How LARRY Works - Core Mechanics Diagrams */}
+                      <div className="mt-8 space-y-6">
+                        {/* Price Protection Diagram */}
+                        <FlowDiagram
+                          title="Price Protection Mechanism"
+                          nodes={[
+                            { id: 'transaction', label: 'Any Transaction', type: 'user', description: 'Buy/Sell/Liquidation' },
+                            { id: 'safetycheck', label: 'Safety Check', type: 'contract', description: 'Price validation' },
+                            { id: 'backing', label: 'Update Backing', type: 'system', description: 'SEI pool increases' },
+                            { id: 'price', label: 'Price Increase', type: 'reward', description: 'Only goes up!' }
+                          ]}
+                          connections={[
+                            { from: 'transaction', to: 'safetycheck' },
+                            { from: 'safetycheck', to: 'backing' },
+                            { from: 'backing', to: 'price' }
+                          ]}
+                          note="Smart contract prevents price drops >0.001% while allowing unlimited upside through increased backing."
+                          className="bg-green-500/10 border-green-500/20"
+                        />
+
+                        {/* Token Burn Mechanism */}
+                        <FlowDiagram
+                          title="Deflationary Token Burns"
+                          nodes={[
+                            { id: 'sell', label: 'User Sells LARRY', type: 'user', description: '10,000 LARRY' },
+                            { id: 'burn', label: 'Tokens Burned', type: 'contract', description: 'Destroyed forever' },
+                            { id: 'supply', label: 'Supply Decreases', type: 'system', description: 'Less LARRY exists' },
+                            { id: 'benefit', label: 'Holders Benefit', type: 'reward', description: 'Higher price per token' }
+                          ]}
+                          connections={[
+                            { from: 'sell', to: 'burn' },
+                            { from: 'burn', to: 'supply' },
+                            { from: 'supply', to: 'benefit' }
+                          ]}
+                          note="Every sell burns tokens permanently, making remaining tokens more valuable - price increases even on sells!"
+                          className="bg-red-500/10 border-red-500/20"
+                        />
+
+                        {/* Leverage Loop Diagram */}
+                        <FlowDiagram
+                          title="Leverage Loop Process"
+                          nodes={[
+                            { id: 'start', label: 'Start with SEI', type: 'user', description: '100 SEI' },
+                            { id: 'buy', label: 'Buy LARRY', type: 'contract', description: '99 LARRY tokens' },
+                            { id: 'borrow', label: 'Borrow SEI', type: 'system', description: '98 SEI (99% LTV)' },
+                            { id: 'repeat', label: 'Repeat Loop', type: 'reward', description: 'Build position' }
+                          ]}
+                          connections={[
+                            { from: 'start', to: 'buy' },
+                            { from: 'buy', to: 'borrow' },
+                            { from: 'borrow', to: 'repeat', curved: true }
+                          ]}
+                          note="Each loop multiplies your exposure while the price protection mechanism keeps your position safe from sudden liquidations."
+                          className="bg-blue-500/10 border-blue-500/20"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Price Appreciation Examples */}
+                    <div className="bg-gray-900/50 border border-yellow-500/30 rounded-lg p-6">
+                      <h2 className="text-xl font-mono font-bold text-yellow-400 mb-4">📊 Concrete Price Examples</h2>
+                      <p className="text-gray-300 mb-6">
+                        Based on the smart contract formula: <code className="bg-black/50 px-2 py-1 rounded text-green-400">Price = (Total SEI Backing) ÷ (Total LARRY Supply)</code>
+                      </p>
+
+                      <div className="space-y-6">
+                        <div className="bg-green-500/10 border border-green-500/20 rounded p-4">
+                          <h3 className="text-green-300 font-bold mb-3">Scenario 1: Trading Volume Impact</h3>
+                          <div className="text-sm text-gray-300 space-y-2">
+                            <p><strong>Starting State:</strong> 1M LARRY tokens, 1M SEI backing → Price: 1.00 SEI</p>
+                            <p><strong>Daily Trading:</strong> 100,000 SEI volume, 0.25% fees = 250 SEI to protocol</p>
+                            <p><strong>After Fees:</strong> 1.00025M SEI backing, 1M LARRY → Price: 1.00025 SEI</p>
+                            <p><strong>Monthly Growth:</strong> 250 SEI × 30 days = 7,500 SEI → Price: 1.0075 SEI</p>
+                            <p className="text-green-400"><strong>Result: +0.75% price increase from trading fees alone</strong></p>
+                          </div>
+                        </div>
+
+                        <div className="bg-blue-500/10 border border-blue-500/20 rounded p-4">
+                          <h3 className="text-blue-300 font-bold mb-3">Scenario 2: Token Burns from Sells</h3>
+                          <div className="text-sm text-gray-300 space-y-2">
+                            <p><strong>Starting State:</strong> 1M LARRY tokens, 1M SEI backing → Price: 1.00 SEI</p>
+                            <p><strong>Someone Sells:</strong> 10,000 LARRY for ~9,975 SEI (after 0.25% fee)</p>
+                            <p><strong>LARRY Burned:</strong> 10,000 LARRY destroyed permanently</p>
+                            <p><strong>New State:</strong> 990,000 LARRY tokens, 990,025 SEI backing</p>
+                            <p><strong>New Price:</strong> 990,025 ÷ 990,000 = 1.000025 SEI per LARRY</p>
+                            <p className="text-blue-400"><strong>Result: Price increases even when someone sells!</strong></p>
+                          </div>
+                        </div>
+
+                        <div className="bg-purple-500/10 border border-purple-500/20 rounded p-4">
+                          <h3 className="text-purple-300 font-bold mb-3">Scenario 3: Liquidation Benefits</h3>
+                          <div className="text-sm text-gray-300 space-y-2">
+                            <p><strong>Starting State:</strong> 1M LARRY tokens, 1M SEI backing</p>
+                            <p><strong>Liquidation Event:</strong> 50,000 LARRY collateral burned, 49,500 SEI debt stays</p>
+                            <p><strong>Net Effect:</strong> 950,000 LARRY tokens, 1,049,500 SEI backing</p>
+                            <p><strong>New Price:</strong> 1,049,500 ÷ 950,000 = 1.1047 SEI per LARRY</p>
+                            <p className="text-purple-400"><strong>Result: +10.47% price increase for remaining holders!</strong></p>
+                          </div>
+                        </div>
+
+                        <div className="bg-red-500/10 border border-red-500/20 rounded p-4">
+                          <h3 className="text-red-300 font-bold mb-3">Scenario 4: Compound Growth</h3>
+                          <div className="text-sm text-gray-300 space-y-2">
+                            <p><strong>Month 1:</strong> Trading fees + burns = 2% price growth</p>
+                            <p><strong>Month 2:</strong> Same activity on higher base = 2.04% additional growth</p>
+                            <p><strong>Month 3:</strong> Continued compounding = 2.08% additional growth</p>
+                            <p><strong>Year 1:</strong> ~27% total price appreciation from organic growth</p>
+                            <p className="text-red-400"><strong>Result: Mathematical guarantee of upward pressure!</strong></p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="mt-6 bg-yellow-500/10 border border-yellow-500/20 rounded p-4">
+                        <h3 className="text-yellow-300 font-bold mb-2">🔒 Price Protection Mechanism</h3>
+                        <p className="text-sm text-gray-300">
+                          The smart contract's safetyCheck function prevents price drops greater than 0.001% per transaction, 
+                          ensuring the price can only decrease by tiny amounts while having unlimited upside potential.
+                        </p>
+                      </div>
                     </div>
 
                     <div className="bg-gray-900/50 border border-purple-500/30 rounded-lg p-6">
@@ -429,6 +532,159 @@ export default function Docs() {
                       Getting Started
                     </button>
                     <button
+                      onClick={() => setActiveSection('borrowing')}
+                      className="inline-flex items-center bg-green-600 hover:bg-green-500 text-white px-6 py-3 rounded-lg font-mono transition-colors"
+                    >
+                      Borrowing Details
+                      <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                  </div>
+                </section>
+              )}
+
+              {/* Borrowing Details Section */}
+              {activeSection === 'borrowing' && (
+                <section>
+                  <h1 className="text-3xl sm:text-4xl font-mono font-bold text-green-400 mb-8">
+                    🏦 Borrowing Details
+                  </h1>
+
+                  <div className="space-y-8">
+                    <div className="bg-gray-900/50 border border-blue-500/30 rounded-lg p-6">
+                      <h2 className="text-xl font-mono font-bold text-blue-400 mb-4">🎯 How Borrowing Works</h2>
+                      <p className="text-gray-300 mb-6">
+                        LARRY's borrowing system lets you use your LARRY tokens as collateral to borrow SEI, 
+                        which you can then use to buy more LARRY and create leverage positions.
+                      </p>
+
+                      <div className="grid sm:grid-cols-2 gap-6">
+                        <div className="bg-green-500/10 border border-green-500/20 rounded p-4">
+                          <h3 className="text-green-300 font-bold mb-3">✅ Key Features</h3>
+                          <ul className="text-sm text-gray-300 space-y-2">
+                            <li>• <strong>99% LTV:</strong> Borrow up to 99% of your LARRY value</li>
+                            <li>• <strong>3.9% APR:</strong> Low annual interest rate</li>
+                            <li>• <strong>Flexible Terms:</strong> 1-365 day loan duration</li>
+                            <li>• <strong>No Price Liquidations:</strong> Only time-based expiry</li>
+                            <li>• <strong>Flash Close:</strong> Exit instantly with 1% fee</li>
+                          </ul>
+                        </div>
+
+                        <div className="bg-blue-500/10 border border-blue-500/20 rounded p-4">
+                          <h3 className="text-blue-300 font-bold mb-3">📋 Available Actions</h3>
+                          <ul className="text-sm text-gray-300 space-y-2">
+                            <li>• <strong>borrow():</strong> Initial loan against LARRY</li>
+                            <li>• <strong>borrowMore():</strong> Increase existing loan</li>
+                            <li>• <strong>leverage():</strong> Combined buy + borrow in one tx</li>
+                            <li>• <strong>repay():</strong> Partial loan repayment</li>
+                            <li>• <strong>closePosition():</strong> Full repayment</li>
+                            <li>• <strong>flashClosePosition():</strong> Instant exit</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-gray-900/50 border border-purple-500/30 rounded-lg p-6">
+                      <h2 className="text-xl font-mono font-bold text-purple-400 mb-4">🔢 Borrowing Math Examples</h2>
+                      
+                      <div className="space-y-6">
+                        <div className="bg-purple-500/10 border border-purple-500/20 rounded p-4">
+                          <h3 className="text-purple-300 font-bold mb-3">Example 1: Basic Borrow</h3>
+                          <div className="text-sm text-gray-300 space-y-2">
+                            <p><strong>You have:</strong> 1000 LARRY tokens (worth ~1000 SEI)</p>
+                            <p><strong>You can borrow:</strong> 990 SEI (99% LTV)</p>
+                            <p><strong>30-day interest:</strong> ~3.2 SEI (3.9% APR × 30/365 days)</p>
+                            <p><strong>Fee to protocol:</strong> ~1 SEI (30% of interest)</p>
+                            <p><strong>You receive:</strong> ~986 SEI</p>
+                          </div>
+                        </div>
+
+                        <div className="bg-green-500/10 border border-green-500/20 rounded p-4">
+                          <h3 className="text-green-300 font-bold mb-3">Example 2: Leverage Function</h3>
+                          <div className="text-sm text-gray-300 space-y-2">
+                            <p><strong>You send:</strong> 1000 SEI + fees (~13 SEI)</p>
+                            <p><strong>System mints:</strong> ~987 LARRY to contract as collateral</p>
+                            <p><strong>You borrow:</strong> ~980 SEI (99% of backing value)</p>
+                            <p><strong>Net result:</strong> 980 SEI to buy more LARRY + 987 LARRY collateral</p>
+                            <p><strong>Total position:</strong> Control ~1967 SEI worth of LARRY</p>
+                          </div>
+                        </div>
+
+                        <div className="bg-yellow-500/10 border border-yellow-500/20 rounded p-4">
+                          <h3 className="text-yellow-300 font-bold mb-3">Example 3: Flash Close</h3>
+                          <div className="text-sm text-gray-300 space-y-2">
+                            <p><strong>Your collateral:</strong> 1000 LARRY (worth 1200 SEI after growth)</p>
+                            <p><strong>Your debt:</strong> 990 SEI borrowed</p>
+                            <p><strong>Flash close fee:</strong> 12 SEI (1% of collateral value)</p>
+                            <p><strong>You receive:</strong> 198 SEI (1200 - 990 - 12)</p>
+                            <p><strong>Protocol burns:</strong> 1000 LARRY (deflationary)</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-gray-900/50 border border-red-500/30 rounded-lg p-6">
+                      <h2 className="text-xl font-mono font-bold text-red-400 mb-4">⏰ Time-Based Liquidations</h2>
+                      <p className="text-gray-300 mb-6">
+                        Unlike traditional DeFi, LARRY doesn't liquidate based on price movements. 
+                        Instead, loans expire at midnight UTC after your chosen duration.
+                      </p>
+
+                      <div className="grid sm:grid-cols-2 gap-6">
+                        <div className="bg-red-500/10 border border-red-500/20 rounded p-4">
+                          <h3 className="text-red-300 font-bold mb-3">What Happens at Expiry</h3>
+                          <ul className="text-sm text-gray-300 space-y-2">
+                            <li>• Your LARRY collateral gets burned</li>
+                            <li>• Borrowed SEI stays in protocol</li>
+                            <li>• This is deflationary for other LARRY holders</li>
+                            <li>• You lose your collateral but no additional penalties</li>
+                          </ul>
+                        </div>
+
+                        <div className="bg-green-500/10 border border-green-500/20 rounded p-4">
+                          <h3 className="text-green-300 font-bold mb-3">How to Avoid Liquidation</h3>
+                          <ul className="text-sm text-gray-300 space-y-2">
+                            <li>• <strong>Repay early:</strong> Use repay() or closePosition()</li>
+                            <li>• <strong>Extend loan:</strong> Pay interest to extend duration</li>
+                            <li>• <strong>Flash close:</strong> Instant exit with 1% fee</li>
+                            <li>• <strong>Set reminders:</strong> Track expiry dates carefully</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Borrowing Flow Diagram */}
+                    <FlowDiagram
+                      title="Borrowing Process Flow"
+                      nodes={[
+                        { id: 'deposit', label: 'Deposit LARRY', type: 'user', description: 'Send collateral' },
+                        { id: 'contract', label: 'Smart Contract', type: 'contract', description: 'Holds collateral' },
+                        { id: 'borrow', label: 'Receive SEI', type: 'system', description: 'Up to 99% LTV' },
+                        { id: 'repay', label: 'Repay or Expire', type: 'reward', description: 'Get collateral back' }
+                      ]}
+                      connections={[
+                        { from: 'deposit', to: 'contract' },
+                        { from: 'contract', to: 'borrow' },
+                        { from: 'borrow', to: 'repay' }
+                      ]}
+                      note="Borrowing is over-collateralized with time-based expiry instead of price-based liquidations, making it much safer than traditional DeFi."
+                      className="mt-8"
+                    />
+                  </div>
+                  
+                  {/* Navigation */}
+                  <div className="flex justify-between items-center mt-12 pt-6 border-t border-green-500/30">
+                    <button
+                      onClick={() => setActiveSection('how-it-works')}
+                      className="inline-flex items-center bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-mono transition-colors"
+                    >
+                      <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                      </svg>
+                      How It Works
+                    </button>
+                    <button
                       onClick={() => setActiveSection('leverage')}
                       className="inline-flex items-center bg-green-600 hover:bg-green-500 text-white px-6 py-3 rounded-lg font-mono transition-colors"
                     >
@@ -450,11 +706,34 @@ export default function Docs() {
 
                   <div className="space-y-8">
                     <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-6">
-                      <h2 className="text-xl font-mono font-bold text-blue-400 mb-4">🚀 How Leverage Works</h2>
+                      <h2 className="text-xl font-mono font-bold text-blue-400 mb-4">🚀 Two Ways to Get Leverage</h2>
                       <p className="text-gray-300 mb-6">
-                        Unlike traditional DeFi, LARRY&apos;s leverage system is designed to be safe and user-friendly. 
-                        You can borrow up to 99% of your LARRY value as SEI, then use that SEI to buy more LARRY.
+                        LARRY offers two distinct approaches to building leveraged positions. Understanding the difference is crucial for choosing the right strategy.
                       </p>
+
+                      <div className="grid sm:grid-cols-2 gap-6">
+                        <div className="bg-purple-500/10 border border-purple-500/20 rounded p-4">
+                          <h3 className="text-purple-300 font-bold mb-3">Method 1: leverage() Function</h3>
+                          <ul className="text-sm text-gray-300 space-y-2">
+                            <li>• <strong>Single transaction</strong> - buy and borrow combined</li>
+                            <li>• <strong>Automatic process</strong> - contract handles everything</li>
+                            <li>• <strong>Fixed 2x leverage</strong> - standardized multiplier</li>
+                            <li>• <strong>Lower fees</strong> - optimized transaction costs</li>
+                            <li>• <strong>Beginner friendly</strong> - set and forget approach</li>
+                          </ul>
+                        </div>
+
+                        <div className="bg-orange-500/10 border border-orange-500/20 rounded p-4">
+                          <h3 className="text-orange-300 font-bold mb-3">Method 2: Manual Loop</h3>
+                          <ul className="text-sm text-gray-300 space-y-2">
+                            <li>• <strong>Multiple transactions</strong> - buy → borrow → repeat</li>
+                            <li>• <strong>Manual control</strong> - you decide each step</li>
+                            <li>• <strong>Variable leverage</strong> - 2x, 5x, 10x, 20x+</li>
+                            <li>• <strong>Higher fees</strong> - multiple transaction costs</li>
+                            <li>• <strong>Advanced strategy</strong> - maximum flexibility</li>
+                          </ul>
+                        </div>
+                      </div>
 
                       <div className="grid sm:grid-cols-2 gap-6">
                         <div className="bg-green-500/10 border border-green-500/20 rounded p-4">
@@ -479,8 +758,153 @@ export default function Docs() {
                       </div>
                     </div>
 
+                    {/* Method Comparison Charts */}
+                    <div className="bg-gray-900/50 border border-green-500/30 rounded-lg p-6">
+                      <h2 className="text-xl font-mono font-bold text-green-400 mb-4">📊 Method Comparison Charts</h2>
+                      
+                      <div className="space-y-8">
+                        {/* leverage() Function Chart */}
+                        <div className="bg-purple-500/10 border border-purple-500/20 rounded p-6">
+                          <h3 className="text-purple-300 font-bold mb-4">Method 1: leverage() Function Process</h3>
+                          <div className="overflow-x-auto">
+                            <table className="w-full border-collapse border border-gray-700 rounded-lg overflow-hidden text-sm">
+                              <thead>
+                                <tr className="bg-purple-800/50">
+                                  <th className="border border-gray-700 p-3 text-purple-300 font-mono">Step</th>
+                                  <th className="border border-gray-700 p-3 text-purple-300 font-mono">Action</th>
+                                  <th className="border border-gray-700 p-3 text-purple-300 font-mono">You Send</th>
+                                  <th className="border border-gray-700 p-3 text-purple-300 font-mono">Contract Does</th>
+                                  <th className="border border-gray-700 p-3 text-purple-300 font-mono">You Get</th>
+                                </tr>
+                              </thead>
+                              <tbody className="font-mono text-sm">
+                                <tr className="hover:bg-gray-800/50">
+                                  <td className="border border-gray-700 p-3 text-gray-300">1</td>
+                                  <td className="border border-gray-700 p-3 text-gray-300">Call leverage()</td>
+                                  <td className="border border-gray-700 p-3 text-yellow-400">1,000 SEI + 13 SEI fees</td>
+                                  <td className="border border-gray-700 p-3 text-blue-400">Mints 987 LARRY as collateral</td>
+                                  <td className="border border-gray-700 p-3 text-green-400">980 SEI borrowed</td>
+                                </tr>
+                                <tr className="bg-gray-800/30 hover:bg-gray-800/50">
+                                  <td className="border border-gray-700 p-3 text-gray-300">2</td>
+                                  <td className="border border-gray-700 p-3 text-gray-300">Buy more LARRY</td>
+                                  <td className="border border-gray-700 p-3 text-yellow-400">980 SEI borrowed</td>
+                                  <td className="border border-gray-700 p-3 text-blue-400">Auto-converts to LARRY</td>
+                                  <td className="border border-gray-700 p-3 text-green-400">977 LARRY tokens</td>
+                                </tr>
+                                <tr className="hover:bg-gray-800/50">
+                                  <td className="border border-gray-700 p-3 font-bold text-purple-400" colSpan={2}>Total Result</td>
+                                  <td className="border border-gray-700 p-3 font-bold text-purple-400">1,013 SEI invested</td>
+                                  <td className="border border-gray-700 p-3 font-bold text-purple-400">2x leverage achieved</td>
+                                  <td className="border border-gray-700 p-3 font-bold text-purple-400">~1,964 LARRY controlled</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                          <div className="mt-4 bg-purple-500/10 border border-purple-500/20 rounded p-3">
+                            <p className="text-sm text-purple-200">
+                              <strong>Key Benefit:</strong> Single transaction, automatic execution, fixed 2x leverage with minimal fees.
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* Manual Loop Chart */}
+                        <div className="bg-orange-500/10 border border-orange-500/20 rounded p-6">
+                          <h3 className="text-orange-300 font-bold mb-4">Method 2: Manual Leverage Loop Process</h3>
+                          <div className="overflow-x-auto">
+                            <table className="w-full border-collapse border border-gray-700 rounded-lg overflow-hidden text-sm">
+                              <thead>
+                                <tr className="bg-orange-800/50">
+                                  <th className="border border-gray-700 p-3 text-orange-300 font-mono">Loop</th>
+                                  <th className="border border-gray-700 p-3 text-orange-300 font-mono">Transaction</th>
+                                  <th className="border border-gray-700 p-3 text-orange-300 font-mono">SEI Used</th>
+                                  <th className="border border-gray-700 p-3 text-orange-300 font-mono">LARRY Owned</th>
+                                  <th className="border border-gray-700 p-3 text-orange-300 font-mono">SEI Borrowed</th>
+                                  <th className="border border-gray-700 p-3 text-orange-300 font-mono">Total Exposure</th>
+                                </tr>
+                              </thead>
+                              <tbody className="font-mono text-sm">
+                                <tr className="hover:bg-gray-800/50">
+                                  <td className="border border-gray-700 p-3 text-gray-300">Start</td>
+                                  <td className="border border-gray-700 p-3 text-gray-300">buy()</td>
+                                  <td className="border border-gray-700 p-3 text-yellow-400">1,000</td>
+                                  <td className="border border-gray-700 p-3 text-blue-400">997</td>
+                                  <td className="border border-gray-700 p-3 text-purple-400">0</td>
+                                  <td className="border border-gray-700 p-3 text-green-400">1,000</td>
+                                </tr>
+                                <tr className="bg-gray-800/30 hover:bg-gray-800/50">
+                                  <td className="border border-gray-700 p-3 text-gray-300">1</td>
+                                  <td className="border border-gray-700 p-3 text-gray-300">borrow() + buy()</td>
+                                  <td className="border border-gray-700 p-3 text-yellow-400">987</td>
+                                  <td className="border border-gray-700 p-3 text-blue-400">1,981</td>
+                                  <td className="border border-gray-700 p-3 text-purple-400">987</td>
+                                  <td className="border border-gray-700 p-3 text-green-400">1,987</td>
+                                </tr>
+                                <tr className="hover:bg-gray-800/50">
+                                  <td className="border border-gray-700 p-3 text-gray-300">2</td>
+                                  <td className="border border-gray-700 p-3 text-gray-300">borrow() + buy()</td>
+                                  <td className="border border-gray-700 p-3 text-yellow-400">1,961</td>
+                                  <td className="border border-gray-700 p-3 text-blue-400">3,936</td>
+                                  <td className="border border-gray-700 p-3 text-purple-400">2,948</td>
+                                  <td className="border border-gray-700 p-3 text-green-400">3,948</td>
+                                </tr>
+                                <tr className="bg-gray-800/30 hover:bg-gray-800/50">
+                                  <td className="border border-gray-700 p-3 text-gray-300">3</td>
+                                  <td className="border border-gray-700 p-3 text-gray-300">borrow() + buy()</td>
+                                  <td className="border border-gray-700 p-3 text-yellow-400">3,898</td>
+                                  <td className="border border-gray-700 p-3 text-blue-400">7,824</td>
+                                  <td className="border border-gray-700 p-3 text-purple-400">6,846</td>
+                                  <td className="border border-gray-700 p-3 text-green-400">7,846</td>
+                                </tr>
+                                <tr className="hover:bg-gray-800/50">
+                                  <td className="border border-gray-700 p-3 text-gray-300">5+</td>
+                                  <td className="border border-gray-700 p-3 text-gray-300">Continue looping</td>
+                                  <td className="border border-gray-700 p-3 text-yellow-400">15,000+</td>
+                                  <td className="border border-gray-700 p-3 text-blue-400">30,000+</td>
+                                  <td className="border border-gray-700 p-3 text-purple-400">29,000+</td>
+                                  <td className="border border-gray-700 p-3 font-bold text-green-400">30,000+</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                          <div className="mt-4 bg-orange-500/10 border border-orange-500/20 rounded p-3">
+                            <p className="text-sm text-orange-200">
+                              <strong>Key Benefit:</strong> Unlimited leverage potential (10x, 20x+) with full control over position size and timing.
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* Cost Comparison */}
+                        <div className="bg-red-500/10 border border-red-500/20 rounded p-6">
+                          <h3 className="text-red-300 font-bold mb-4">💰 Cost Comparison (Starting with 1,000 SEI)</h3>
+                          <div className="grid sm:grid-cols-2 gap-6">
+                            <div className="bg-purple-500/10 border border-purple-500/20 rounded p-4">
+                              <h4 className="text-purple-300 font-bold mb-2">leverage() Function Costs</h4>
+                              <ul className="text-sm text-gray-300 space-y-1">
+                                <li>• Initial leverage fee: ~13 SEI</li>
+                                <li>• One buy transaction: ~2.5 SEI</li>
+                                <li>• <strong>Total fees: ~15.5 SEI</strong></li>
+                                <li>• <strong>Leverage achieved: 2x</strong></li>
+                                <li>• <strong>Efficiency: High</strong></li>
+                              </ul>
+                            </div>
+                            <div className="bg-orange-500/10 border border-orange-500/20 rounded p-4">
+                              <h4 className="text-orange-300 font-bold mb-2">Manual Loop Costs (5 loops)</h4>
+                              <ul className="text-sm text-gray-300 space-y-1">
+                                <li>• Multiple borrow fees: ~45 SEI</li>
+                                <li>• Multiple buy transactions: ~37.5 SEI</li>
+                                <li>• <strong>Total fees: ~82.5 SEI</strong></li>
+                                <li>• <strong>Leverage achieved: 30x</strong></li>
+                                <li>• <strong>Efficiency: Maximum gain</strong></li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
                     <div className="bg-gray-900/50 border border-purple-500/30 rounded-lg p-6">
-                      <h2 className="text-xl font-mono font-bold text-purple-400 mb-4">🧮 Leverage Calculator</h2>
+                      <h2 className="text-xl font-mono font-bold text-purple-400 mb-4">🧮 Advanced Leverage Calculator</h2>
                       <p className="text-gray-300 mb-4">Here&apos;s how your position grows with each loop:</p>
                       
                       {/* Mobile: Card format */}
@@ -603,6 +1027,43 @@ export default function Docs() {
                         note="Follow this systematic approach to leverage safely: start small, build gradually, monitor closely, and always have an exit strategy."
                         className="mt-6"
                       />
+
+                      {/* Method-Specific Flow Diagrams */}
+                      <div className="mt-8 space-y-8">
+                        <FlowDiagram
+                          title="leverage() Function Flow"
+                          nodes={[
+                            { id: 'send', label: 'Send SEI + Fees', type: 'user', description: '1,013 SEI total' },
+                            { id: 'contract', label: 'Smart Contract', type: 'contract', description: 'One transaction' },
+                            { id: 'mint', label: 'Mint LARRY', type: 'system', description: '987 LARRY collateral' },
+                            { id: 'borrow', label: 'Auto-Borrow', type: 'reward', description: '980 SEI received' }
+                          ]}
+                          connections={[
+                            { from: 'send', to: 'contract' },
+                            { from: 'contract', to: 'mint' },
+                            { from: 'contract', to: 'borrow' }
+                          ]}
+                          note="Single-transaction leverage: simple, efficient, fixed 2x multiplier with automatic execution."
+                          className="bg-purple-500/10 border-purple-500/20"
+                        />
+
+                        <FlowDiagram
+                          title="Manual Leverage Loop"
+                          nodes={[
+                            { id: 'buy1', label: 'Buy LARRY', type: 'user', description: '1,000 SEI → 997 LARRY' },
+                            { id: 'borrow1', label: 'Borrow SEI', type: 'contract', description: '987 SEI borrowed' },
+                            { id: 'buy2', label: 'Buy More LARRY', type: 'system', description: '984 LARRY more' },
+                            { id: 'loop', label: 'Repeat Loop', type: 'reward', description: 'Scale to 10x-30x' }
+                          ]}
+                          connections={[
+                            { from: 'buy1', to: 'borrow1' },
+                            { from: 'borrow1', to: 'buy2' },
+                            { from: 'buy2', to: 'loop', curved: true }
+                          ]}
+                          note="Multi-transaction approach: maximum control and unlimited leverage potential, higher fees but bigger gains."
+                          className="bg-orange-500/10 border-orange-500/20"
+                        />
+                      </div>
                     </div>
                   </div>
                   
@@ -615,7 +1076,7 @@ export default function Docs() {
                       <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                       </svg>
-                      How It Works
+                      Borrowing Details
                     </button>
                     <button
                       onClick={() => setActiveSection('fees')}
