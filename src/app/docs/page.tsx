@@ -1909,24 +1909,338 @@ export default function Docs() {
                         a: "Join the Telegram community @btbfinance for support, updates, and discussion. You can also follow @btb_finance on X (Twitter) for announcements.",
                         category: "Support"
                       }
-                    ].map((faq, index) => (
-                      <div key={index} className="bg-gray-900/50 border border-green-500/30 rounded-lg p-6">
-                        <div className="flex items-start space-x-3">
-                          <div className="bg-green-500/20 rounded-full p-2 mt-1 flex-shrink-0">
-                            <span className="text-green-400 font-bold text-sm">Q</span>
-                          </div>
-                          <div className="flex-1">
-                            <h3 className="text-green-400 font-bold mb-2">{faq.q}</h3>
-                            <div className="flex items-center space-x-2 mb-3">
-                              <span className="bg-blue-500/20 text-blue-400 px-2 py-1 rounded text-xs font-mono">
-                                {faq.category}
-                              </span>
+                    ].map((faq, index) => {
+                      // Define visual elements for each FAQ category
+                      const getVisualContent = (category: string, faqIndex: number) => {
+                        switch (category) {
+                          case 'Safety':
+                            return (
+                              <div className="mt-4">
+                                <FlowDiagram
+                                  title="Safety Layers"
+                                  nodes={[
+                                    { id: 'price', label: 'Price Floor', type: 'reward', description: 'Max 0.001% drop/tx' },
+                                    { id: 'time', label: 'Time Loans', type: 'system', description: 'No price liquidations' },
+                                    { id: 'contract', label: 'Smart Contract', type: 'contract', description: 'Audited protection' },
+                                    { id: 'user', label: 'Your Safety', type: 'user', description: 'Multiple protections' }
+                                  ]}
+                                  connections={[
+                                    { from: 'price', to: 'user' },
+                                    { from: 'time', to: 'user' },
+                                    { from: 'contract', to: 'user' }
+                                  ]}
+                                  note="Three layers of protection keep your funds safe from sudden liquidations and price manipulation."
+                                  className="mb-4"
+                                />
+                                <div className="bg-green-500/10 border border-green-500/20 rounded p-4">
+                                  <h4 className="text-green-300 font-bold mb-2">🛡️ Safety Checklist</h4>
+                                  <div className="grid sm:grid-cols-3 gap-3 text-sm">
+                                    <div className="text-gray-300">✅ No sudden liquidations</div>
+                                    <div className="text-gray-300">✅ Price floor protection</div>
+                                    <div className="text-gray-300">✅ Time-based loans only</div>
+                                  </div>
+                                </div>
+                              </div>
+                            );
+                          case 'Leverage':
+                            return (
+                              <div className="mt-4">
+                                <div className="bg-purple-500/10 border border-purple-500/20 rounded p-4 mb-4">
+                                  <h4 className="text-purple-300 font-bold mb-3">🚀 Leverage Potential Calculator</h4>
+                                  <div className="overflow-x-auto">
+                                    <table className="w-full text-sm border-collapse">
+                                      <thead>
+                                        <tr className="border-b border-purple-500/30">
+                                          <th className="text-purple-300 p-2 text-left">Loops</th>
+                                          <th className="text-purple-300 p-2 text-left">Leverage</th>
+                                          <th className="text-purple-300 p-2 text-left">LARRY Owned</th>
+                                          <th className="text-purple-300 p-2 text-left">Risk Level</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody className="font-mono">
+                                        <tr className="border-b border-purple-500/20">
+                                          <td className="p-2 text-gray-300">0</td>
+                                          <td className="p-2 text-blue-400">1x</td>
+                                          <td className="p-2 text-green-400">1,000</td>
+                                          <td className="p-2 text-green-400">Low</td>
+                                        </tr>
+                                        <tr className="border-b border-purple-500/20">
+                                          <td className="p-2 text-gray-300">2</td>
+                                          <td className="p-2 text-yellow-400">4x</td>
+                                          <td className="p-2 text-yellow-400">4,000</td>
+                                          <td className="p-2 text-yellow-400">Medium</td>
+                                        </tr>
+                                        <tr className="border-b border-purple-500/20">
+                                          <td className="p-2 text-gray-300">5</td>
+                                          <td className="p-2 text-orange-400">15x</td>
+                                          <td className="p-2 text-orange-400">15,000</td>
+                                          <td className="p-2 text-orange-400">High</td>
+                                        </tr>
+                                        <tr>
+                                          <td className="p-2 text-gray-300">10+</td>
+                                          <td className="p-2 text-red-400">50x+</td>
+                                          <td className="p-2 text-red-400">50,000+</td>
+                                          <td className="p-2 text-red-400">Extreme</td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+                                <FlowDiagram
+                                  title="Leverage Loop Process"
+                                  nodes={[
+                                    { id: 'start', label: 'Buy LARRY', type: 'user', description: '1,000 SEI → 997 LARRY' },
+                                    { id: 'borrow', label: 'Borrow SEI', type: 'contract', description: '99% LTV = 987 SEI' },
+                                    { id: 'buy', label: 'Buy More LARRY', type: 'system', description: '987 SEI → 984 LARRY' },
+                                    { id: 'loop', label: 'Repeat Process', type: 'reward', description: 'Higher leverage' }
+                                  ]}
+                                  connections={[
+                                    { from: 'start', to: 'borrow' },
+                                    { from: 'borrow', to: 'buy' },
+                                    { from: 'buy', to: 'loop' },
+                                    { from: 'loop', to: 'borrow' }
+                                  ]}
+                                  note="Each loop increases your LARRY exposure while maintaining the same initial capital."
+                                />
+                              </div>
+                            );
+                          case 'Loans':
+                            return (
+                              <div className="mt-4">
+                                <div className="bg-red-500/10 border border-red-500/20 rounded p-4 mb-4">
+                                  <h4 className="text-red-300 font-bold mb-3">⏰ Loan Timeline Example</h4>
+                                  <div className="space-y-3">
+                                    <div className="flex items-center justify-between p-3 bg-black/50 rounded">
+                                      <span className="text-gray-300 font-mono">Day 1:</span>
+                                      <span className="text-green-400">Loan starts - 30 days to repay</span>
+                                    </div>
+                                    <div className="flex items-center justify-between p-3 bg-black/50 rounded">
+                                      <span className="text-gray-300 font-mono">Day 25:</span>
+                                      <span className="text-yellow-400">5 days left - extend or repay</span>
+                                    </div>
+                                    <div className="flex items-center justify-between p-3 bg-black/50 rounded">
+                                      <span className="text-gray-300 font-mono">Day 30:</span>
+                                      <span className="text-orange-400">Midnight UTC - auto liquidation</span>
+                                    </div>
+                                    <div className="flex items-center justify-between p-3 bg-red-500/20 rounded">
+                                      <span className="text-gray-300 font-mono">After Day 30:</span>
+                                      <span className="text-red-400">LARRY burned, SEI stays in protocol</span>
+                                    </div>
+                                  </div>
+                                </div>
+                                <FlowDiagram
+                                  title="Loan Liquidation Process"
+                                  nodes={[
+                                    { id: 'expiry', label: 'Loan Expires', type: 'system', description: 'Midnight UTC' },
+                                    { id: 'burn', label: 'Burn LARRY', type: 'burn', description: 'Collateral destroyed' },
+                                    { id: 'keep', label: 'Keep SEI', type: 'contract', description: 'Protocol retains' },
+                                    { id: 'holders', label: 'LARRY Holders', type: 'reward', description: 'Benefit from burn' }
+                                  ]}
+                                  connections={[
+                                    { from: 'expiry', to: 'burn' },
+                                    { from: 'expiry', to: 'keep' },
+                                    { from: 'burn', to: 'holders' }
+                                  ]}
+                                  note="Expired loans help LARRY holders through deflationary burns and protocol growth."
+                                />
+                              </div>
+                            );
+                          case 'Rewards':
+                            return (
+                              <div className="mt-4">
+                                <div className="bg-green-500/10 border border-green-500/20 rounded p-4 mb-4">
+                                  <h4 className="text-green-300 font-bold mb-3">💰 Reward Sources Breakdown</h4>
+                                  <div className="grid sm:grid-cols-2 gap-4">
+                                    <div className="bg-black/50 rounded p-3">
+                                      <h5 className="text-blue-400 font-bold mb-2">Protocol Fees</h5>
+                                      <ul className="text-sm text-gray-300 space-y-1">
+                                        <li>• 0.25% on all trades</li>
+                                        <li>• 3.9% APR on loans</li>
+                                        <li>• 1% flash close fees</li>
+                                        <li>→ Goes to SEI backing</li>
+                                      </ul>
+                                    </div>
+                                    <div className="bg-black/50 rounded p-3">
+                                      <h5 className="text-orange-400 font-bold mb-2">Token Burns</h5>
+                                      <ul className="text-sm text-gray-300 space-y-1">
+                                        <li>• Expired loan collateral</li>
+                                        <li>• Team token burns</li>
+                                        <li>• Flash close burns</li>
+                                        <li>→ Reduces total supply</li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </div>
+                                <FlowDiagram
+                                  title="Automatic Reward System"
+                                  nodes={[
+                                    { id: 'fees', label: 'Protocol Fees', type: 'system', description: '0.25% + 3.9% APR' },
+                                    { id: 'backing', label: 'SEI Backing', type: 'contract', description: 'Increases reserves' },
+                                    { id: 'burns', label: 'Token Burns', type: 'burn', description: 'Reduces supply' },
+                                    { id: 'holders', label: 'LARRY Price ↑', type: 'reward', description: 'Automatic gains' }
+                                  ]}
+                                  connections={[
+                                    { from: 'fees', to: 'backing' },
+                                    { from: 'burns', to: 'holders' },
+                                    { from: 'backing', to: 'holders' }
+                                  ]}
+                                  note="Just hold LARRY - rewards come automatically through price appreciation from fees and burns."
+                                />
+                              </div>
+                            );
+                          case 'Fees':
+                            return (
+                              <div className="mt-4">
+                                <div className="bg-blue-500/10 border border-blue-500/20 rounded p-4 mb-4">
+                                  <h4 className="text-blue-300 font-bold mb-3">📊 Fee Calculator Example</h4>
+                                  <div className="space-y-3">
+                                    <div className="bg-black/50 rounded p-3">
+                                      <div className="flex justify-between items-center mb-2">
+                                        <span className="text-gray-300">Buy 1,000 SEI worth of LARRY:</span>
+                                        <span className="text-yellow-400 font-mono">2.5 SEI fee</span>
+                                      </div>
+                                      <div className="text-xs text-gray-400">0.25% trading fee</div>
+                                    </div>
+                                    <div className="bg-black/50 rounded p-3">
+                                      <div className="flex justify-between items-center mb-2">
+                                        <span className="text-gray-300">Borrow 987 SEI (99% LTV):</span>
+                                        <span className="text-purple-400 font-mono">38.5 SEI/year</span>
+                                      </div>
+                                      <div className="text-xs text-gray-400">3.9% annual interest</div>
+                                    </div>
+                                    <div className="bg-black/50 rounded p-3">
+                                      <div className="flex justify-between items-center mb-2">
+                                        <span className="text-gray-300">Flash close position:</span>
+                                        <span className="text-orange-400 font-mono">9.87 SEI fee</span>
+                                      </div>
+                                      <div className="text-xs text-gray-400">1% of borrowed amount</div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <FlowDiagram
+                                  title="Where Fees Go"
+                                  nodes={[
+                                    { id: 'user', label: 'You Pay Fees', type: 'user', description: '0.25% + 3.9% + 1%' },
+                                    { id: 'protocol', label: 'Protocol Treasury', type: 'contract', description: 'Collects all fees' },
+                                    { id: 'backing', label: 'SEI Backing', type: 'system', description: 'Increases reserves' },
+                                    { id: 'holders', label: 'LARRY Holders', type: 'reward', description: 'Higher token price' }
+                                  ]}
+                                  connections={[
+                                    { from: 'user', to: 'protocol' },
+                                    { from: 'protocol', to: 'backing' },
+                                    { from: 'backing', to: 'holders' }
+                                  ]}
+                                  note="All fees benefit LARRY holders by increasing the backing ratio and token price."
+                                />
+                              </div>
+                            );
+                          case 'Price':
+                            return (
+                              <div className="mt-4">
+                                <div className="bg-purple-500/10 border border-purple-500/20 rounded p-4 mb-4">
+                                  <h4 className="text-purple-300 font-bold mb-3">📈 Price Protection Mechanism</h4>
+                                  <div className="grid sm:grid-cols-3 gap-4 text-sm">
+                                    <div className="bg-green-500/10 border border-green-500/20 rounded p-3">
+                                      <div className="text-green-300 font-bold mb-1">✅ Protected</div>
+                                      <div className="text-gray-300">Max drop: 0.001%</div>
+                                      <div className="text-gray-300">Per transaction</div>
+                                    </div>
+                                    <div className="bg-yellow-500/10 border border-yellow-500/20 rounded p-3">
+                                      <div className="text-yellow-300 font-bold mb-1">⚠️ Market Risk</div>
+                                      <div className="text-gray-300">Demand can vary</div>
+                                      <div className="text-gray-300">Natural fluctuation</div>
+                                    </div>
+                                    <div className="bg-blue-500/10 border border-blue-500/20 rounded p-3">
+                                      <div className="text-blue-300 font-bold mb-1">📊 Long-term</div>
+                                      <div className="text-gray-300">Backing grows</div>
+                                      <div className="text-gray-300">Deflationary burns</div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <FlowDiagram
+                                  title="Price Protection System"
+                                  nodes={[
+                                    { id: 'trade', label: 'Trade Attempt', type: 'user', description: 'User tries to sell' },
+                                    { id: 'check', label: 'Price Check', type: 'contract', description: 'Smart contract validates' },
+                                    { id: 'protect', label: 'Price Protection', type: 'system', description: 'Max 0.001% drop' },
+                                    { id: 'safe', label: 'Safe Price', type: 'reward', description: 'Transaction allowed' }
+                                  ]}
+                                  connections={[
+                                    { from: 'trade', to: 'check' },
+                                    { from: 'check', to: 'protect' },
+                                    { from: 'protect', to: 'safe' }
+                                  ]}
+                                  note="Smart contract prevents major price drops while allowing natural market movements."
+                                />
+                              </div>
+                            );
+                          case 'Getting Started':
+                            return (
+                              <div className="mt-4">
+                                <div className="bg-green-500/10 border border-green-500/20 rounded p-4 mb-4">
+                                  <h4 className="text-green-300 font-bold mb-3">🎯 Step-by-Step Getting Started</h4>
+                                  <div className="space-y-3">
+                                    {[
+                                      { step: 1, action: 'Connect Wallet', detail: 'SEI Network with 50+ SEI recommended' },
+                                      { step: 2, action: 'Buy LARRY Tokens', detail: 'Start with 10-50 SEI to test the system' },
+                                      { step: 3, action: 'Try Basic Features', detail: 'Buy, sell, check your balance' },
+                                      { step: 4, action: 'Learn Leverage', detail: 'Borrow against LARRY, start with 2x' },
+                                      { step: 5, action: 'Earn Rewards', detail: 'Hold LARRY and earn automatically' }
+                                    ].map((item, idx) => (
+                                      <div key={idx} className="flex items-center p-3 bg-black/50 rounded">
+                                        <div className="bg-green-400 text-black rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3">
+                                          {item.step}
+                                        </div>
+                                        <div className="flex-1">
+                                          <div className="text-white font-semibold">{item.action}</div>
+                                          <div className="text-gray-400 text-sm">{item.detail}</div>
+                                        </div>
+                                      </div>
+                                    ))}
+                                  </div>
+                                </div>
+                                <FlowDiagram
+                                  title="New User Journey"
+                                  nodes={[
+                                    { id: 'wallet', label: 'Connect Wallet', type: 'user', description: 'SEI Network' },
+                                    { id: 'buy', label: 'Buy LARRY', type: 'system', description: '10-50 SEI start' },
+                                    { id: 'leverage', label: 'Try Leverage', type: 'contract', description: 'Borrow & loop' },
+                                    { id: 'earn', label: 'Earn Rewards', type: 'reward', description: 'Automatic gains' }
+                                  ]}
+                                  connections={[
+                                    { from: 'wallet', to: 'buy' },
+                                    { from: 'buy', to: 'leverage' },
+                                    { from: 'leverage', to: 'earn' }
+                                  ]}
+                                  note="Simple progression from basic holding to advanced leverage strategies."
+                                />
+                              </div>
+                            );
+                          default:
+                            return null;
+                        }
+                      };
+
+                      return (
+                        <div key={index} className="bg-gray-900/50 border border-green-500/30 rounded-lg p-6">
+                          <div className="flex items-start space-x-3">
+                            <div className="bg-green-500/20 rounded-full p-2 mt-1 flex-shrink-0">
+                              <span className="text-green-400 font-bold text-sm">Q</span>
                             </div>
-                            <p className="text-gray-300 text-sm leading-relaxed">{faq.a}</p>
+                            <div className="flex-1">
+                              <h3 className="text-green-400 font-bold mb-2">{faq.q}</h3>
+                              <div className="flex items-center space-x-2 mb-3">
+                                <span className="bg-blue-500/20 text-blue-400 px-2 py-1 rounded text-xs font-mono">
+                                  {faq.category}
+                                </span>
+                              </div>
+                              <p className="text-gray-300 text-sm leading-relaxed mb-4">{faq.a}</p>
+                              {getVisualContent(faq.category, index)}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
 
                   <div className="mt-12 bg-green-500/10 border border-green-500/30 rounded-lg p-6 text-center">
