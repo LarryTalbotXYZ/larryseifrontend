@@ -88,6 +88,7 @@ export default function Home() {
           <div className="hidden md:flex items-center space-x-8">
             <span className="text-green-400 font-mono font-medium text-sm">[HOME]</span>
             <Link href="/docs" className="text-gray-400 hover:text-green-400 transition-colors font-mono text-sm">DOCS</Link>
+            <Link href="/lev" className="text-gray-400 hover:text-blue-400 transition-colors font-mono text-sm">LEVERAGE</Link>
             <Link href="/veyaka" className="text-gray-400 hover:text-purple-400 transition-colors font-mono text-sm">VEYAKA</Link>
             <Link href="/launchpad" className="text-gray-400 hover:text-yellow-400 transition-colors font-mono text-sm">LAUNCHPAD</Link>
             <Link href="/dashboard" className="text-gray-400 hover:text-red-400 transition-colors font-mono text-sm">TRADING</Link>
@@ -125,6 +126,13 @@ export default function Home() {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 DOCS
+              </Link>
+              <Link
+                href="/lev"
+                className="block text-gray-400 hover:text-blue-400 transition-colors font-mono py-2 text-sm"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                LEVERAGE
               </Link>
               <Link
                 href="/veyaka"
