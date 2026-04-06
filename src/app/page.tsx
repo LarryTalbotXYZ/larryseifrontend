@@ -81,16 +81,13 @@ export default function Home() {
             <VideoLogo size="medium" />
             <div className="flex flex-col">
               <span className="text-2xl font-bold tracking-tight font-mono text-white">LARRY</span>
-              <span className="text-xs font-mono text-red-400">SEI Protocol</span>
+              <span className="text-xs font-mono text-red-400">ETH Protocol</span>
             </div>
           </Link>
 
           <div className="hidden md:flex items-center space-x-8">
             <span className="text-green-400 font-mono font-medium text-sm">[HOME]</span>
             <Link href="/docs" className="text-gray-400 hover:text-green-400 transition-colors font-mono text-sm">DOCS</Link>
-            <Link href="/hundred" className="text-gray-400 hover:text-orange-400 transition-colors font-mono text-sm">HUNDRED</Link>
-            <Link href="/veyaka" className="text-gray-400 hover:text-purple-400 transition-colors font-mono text-sm">VEYAKA</Link>
-            <Link href="/launchpad" className="text-gray-400 hover:text-yellow-400 transition-colors font-mono text-sm">LAUNCHPAD</Link>
             <Link href="/dashboard" className="text-gray-400 hover:text-red-400 transition-colors font-mono text-sm">TRADING</Link>
           </div>
 
@@ -128,27 +125,6 @@ export default function Home() {
                 DOCS
               </Link>
               <Link
-                href="/hundred"
-                className="block text-gray-400 hover:text-orange-400 transition-colors font-mono py-2 text-sm"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                HUNDRED
-              </Link>
-              <Link
-                href="/veyaka"
-                className="block text-gray-400 hover:text-purple-400 transition-colors font-mono py-2 text-sm"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                VEYAKA
-              </Link>
-              <Link
-                href="/launchpad"
-                className="block text-gray-400 hover:text-yellow-400 transition-colors font-mono py-2 text-sm"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                LAUNCHPAD
-              </Link>
-              <Link
                 href="/dashboard"
                 className="block text-gray-400 hover:text-red-400 transition-colors font-mono py-2 text-sm"
                 onClick={() => setMobileMenuOpen(false)}
@@ -173,7 +149,7 @@ export default function Home() {
                   {/* Status indicator with mathematical flair */}
                   <div className="inline-flex items-center bg-gradient-to-r from-red-900/30 to-purple-900/30 rounded-lg px-4 py-2 border border-red-500/30 backdrop-blur-sm">
                     <div className="w-3 h-3 bg-red-500 rounded-full mr-3 animate-pulse"></div>
-                    <span className="text-sm font-mono text-red-400">SEI_NETWORK::ACTIVE</span>
+                    <span className="text-sm font-mono text-red-400">BASE_NETWORK::ACTIVE</span>
                     <span className="ml-2 text-green-400">∫dx</span>
                   </div>
 
@@ -192,7 +168,7 @@ export default function Home() {
                       <span className="text-green-400">📈 PRICE PROTECTION</span>: Smart contract guarantees price only goes up
                     </p>
                     <p className="border-l-4 border-blue-400 pl-4 bg-blue-400/5">
-                      <span className="text-blue-400">🚀 HIGH LEVERAGE</span>: Turn 1 SEI into 20-100x exposure through smart borrowing
+                      <span className="text-blue-400">🚀 HIGH LEVERAGE</span>: Turn 1 ETH into 20-100x exposure through smart borrowing
                     </p>
                     <p className="border-l-4 border-purple-400 pl-4 bg-purple-400/5">
                       <span className="text-purple-400">🔄 SMART LOOPS</span>: Auto-borrow and reinvest to maximize your position
@@ -247,14 +223,14 @@ export default function Home() {
                       <div className="text-2xl font-mono font-bold text-green-400">
                         {currentPrice ? `${currentPrice.toFixed(7)}` : '0.0000000'}
                       </div>
-                      <div className="text-xs font-mono text-gray-400">LARRY/SEI::PRICE</div>
+                      <div className="text-xs font-mono text-gray-400">LARRY/ETH::PRICE</div>
                     </div>
 
                     <div className="space-y-2 bg-gray-900/30 rounded-lg p-4 border border-gray-700/30">
                       <div className="text-2xl font-mono font-bold text-blue-400">
-                        {backing ? `${parseFloat(formatEther(backing as bigint)).toFixed(2)}` : '0.00'}
+                        {backing ? `${parseFloat(formatEther(backing as bigint)) < 0.01 ? parseFloat(formatEther(backing as bigint)).toFixed(8) : parseFloat(formatEther(backing as bigint)).toFixed(4)}` : '0.0000'}
                       </div>
-                      <div className="text-xs font-mono text-gray-400">SEI::LOCKED</div>
+                      <div className="text-xs font-mono text-gray-400">ETH::LOCKED</div>
                     </div>
 
                     <div className="space-y-2 bg-gray-900/30 rounded-lg p-4 border border-gray-700/30">
@@ -281,7 +257,7 @@ export default function Home() {
                         </div>
                         <div>
                           <div className="text-sm font-mono font-medium text-blue-400">SMART LEVERAGE</div>
-                          <div className="text-xs font-mono text-gray-400">20x exposure | 500 SEI → 10K SEI</div>
+                          <div className="text-xs font-mono text-gray-400">20x exposure | 500 ETH → 10K ETH</div>
                         </div>
                       </div>
                       <div className="text-green-400 text-sm font-mono">[ACTIVE]</div>
@@ -322,7 +298,7 @@ export default function Home() {
                   LEVERAGE SYSTEM
                 </span>
               </h2>
-              <p className="text-xl text-gray-300 font-mono">Turn 1 SEI into 20-100x exposure through smart borrowing loops</p>
+              <p className="text-xl text-gray-300 font-mono">Turn 1 ETH into 20-100x exposure through smart borrowing loops</p>
             </div>
 
             <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -335,9 +311,9 @@ export default function Home() {
                   </div>
                   <div className="space-y-4">
                     {[
-                      { step: "01", action: "BUY LARRY", detail: "Purchase LARRY tokens with your SEI", color: "text-green-400" },
-                      { step: "02", action: "BORROW SEI", detail: "Get 99% of your token value back as loan", color: "text-blue-400" },
-                      { step: "03", action: "BUY MORE", detail: "Use borrowed SEI to buy more LARRY tokens", color: "text-purple-400" },
+                      { step: "01", action: "BUY LARRY", detail: "Purchase LARRY tokens with your ETH", color: "text-green-400" },
+                      { step: "02", action: "BORROW ETH", detail: "Get 99% of your token value back as loan", color: "text-blue-400" },
+                      { step: "03", action: "BUY MORE", detail: "Use borrowed ETH to buy more LARRY tokens", color: "text-purple-400" },
                       { step: "04", action: "REPEAT", detail: "Keep repeating to build massive exposure", color: "text-red-400" }
                     ].map((item, index) => (
                       <div key={index} className="flex items-center space-x-4 p-4 bg-gradient-to-r from-gray-900/30 to-gray-800/30 rounded-lg border border-gray-700/30 hover:border-blue-500/30 transition-all duration-300">
@@ -404,183 +380,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Coming Soon: Monad Section */}
-        <section className="px-6 lg:px-12 py-20 border-t border-purple-500/30 bg-gradient-to-b from-black via-purple-900/10 to-black">
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-16">
-              <div className="inline-flex items-center bg-gradient-to-r from-purple-900/30 to-pink-900/30 rounded-lg px-6 py-2 border border-purple-500/30 mb-6">
-                <span className="text-purple-400 font-mono text-sm mr-2">COMING_SOON::</span>
-                <span className="text-white font-mono">MONAD_INTEGRATION</span>
-              </div>
-              <h2 className="text-4xl lg:text-6xl font-bold font-mono mb-6">
-                <span className="text-white">LARRY on </span>
-                <span className="bg-gradient-to-r from-purple-500 via-pink-500 to-purple-400 bg-clip-text text-transparent">
-                  MONAD
-                </span>
-              </h2>
-              <p className="text-xl text-gray-300 font-mono max-w-4xl mx-auto">
-                Next-generation deployment with <span className="text-purple-400">enhanced rewards</span> and
-                <span className="text-pink-400"> improved stability</span> for liquidity providers.
-              </p>
-            </div>
-
-            {/* Key Features Grid */}
-            <div className="grid lg:grid-cols-3 gap-8 mb-16">
-              {/* Enhanced Rewards */}
-              <div className="bg-gradient-to-r from-purple-900/20 to-pink-900/20 backdrop-blur-md border border-purple-500/30 rounded-xl p-8 hover:from-purple-900/30 hover:to-pink-900/30 transition-all duration-300 relative overflow-hidden group">
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-500/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
-                <div className="relative z-10">
-                  <div className="w-14 h-14 bg-purple-500/20 rounded-lg flex items-center justify-center mb-6 border border-purple-400/30">
-                    <span className="text-purple-400 font-mono font-bold text-xl">💎</span>
-                  </div>
-                  <h3 className="text-xl font-bold font-mono text-purple-400 mb-4">IMPROVED VERSION</h3>
-                  <p className="text-gray-300 mb-6 font-mono text-sm">
-                    Enhanced smart contracts with optimized gas efficiency and improved reward distribution mechanics.
-                  </p>
-                  <div className="space-y-3 text-sm">
-                    <div className="flex justify-between py-2 border-b border-purple-500/20">
-                      <span className="text-gray-400 font-mono">OPTIMIZATION</span>
-                      <span className="text-purple-400 font-mono">NEXT-GEN</span>
-                    </div>
-                    <div className="flex justify-between py-2">
-                      <span className="text-gray-400 font-mono">GAS EFFICIENCY</span>
-                      <span className="text-purple-400 font-mono">MAXIMUM</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Stable LP Rewards */}
-              <div className="bg-gradient-to-r from-green-900/20 to-emerald-900/20 backdrop-blur-md border border-green-500/30 rounded-xl p-8 hover:from-green-900/30 hover:to-emerald-900/30 transition-all duration-300 relative overflow-hidden group">
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-green-500/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
-                <div className="relative z-10">
-                  <div className="w-14 h-14 bg-green-500/20 rounded-lg flex items-center justify-center mb-6 border border-green-400/30">
-                    <span className="text-green-400 font-mono font-bold text-xl">🎯</span>
-                  </div>
-                  <h3 className="text-xl font-bold font-mono text-green-400 mb-4">STABLE LP REWARDS</h3>
-                  <p className="text-gray-300 mb-6 font-mono text-sm">
-                    Enhanced yield for liquidity providers with stable, predictable returns and reduced impermanent loss.
-                  </p>
-                  <div className="space-y-3 text-sm">
-                    <div className="flex justify-between py-2 border-b border-green-500/20">
-                      <span className="text-gray-400 font-mono">LARRY LP APR</span>
-                      <span className="text-green-400 font-mono font-bold">50%+</span>
-                    </div>
-                    <div className="flex justify-between py-2">
-                      <span className="text-gray-400 font-mono">STABILITY</span>
-                      <span className="text-green-400 font-mono">ENHANCED</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Monad Performance */}
-              <div className="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 backdrop-blur-md border border-blue-500/30 rounded-xl p-8 hover:from-blue-900/30 hover:to-cyan-900/30 transition-all duration-300 relative overflow-hidden group">
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
-                <div className="relative z-10">
-                  <div className="w-14 h-14 bg-blue-500/20 rounded-lg flex items-center justify-center mb-6 border border-blue-400/30">
-                    <span className="text-blue-400 font-mono font-bold text-xl">⚡</span>
-                  </div>
-                  <h3 className="text-xl font-bold font-mono text-blue-400 mb-4">MONAD SPEED</h3>
-                  <p className="text-gray-300 mb-6 font-mono text-sm">
-                    Leverage Monad&apos;s ultra-high performance blockchain for instant transactions and lower costs.
-                  </p>
-                  <div className="space-y-3 text-sm">
-                    <div className="flex justify-between py-2 border-b border-blue-500/20">
-                      <span className="text-gray-400 font-mono">TRANSACTION SPEED</span>
-                      <span className="text-blue-400 font-mono">10,000 TPS</span>
-                    </div>
-                    <div className="flex justify-between py-2">
-                      <span className="text-gray-400 font-mono">FINALITY</span>
-                      <span className="text-blue-400 font-mono">&lt;1s</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Main CTA and Info */}
-            <div className="bg-gradient-to-r from-purple-900/20 to-pink-900/20 backdrop-blur-md border border-purple-500/30 rounded-xl p-12 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-500/5 to-transparent translate-x-[-100%] animate-pulse"></div>
-              <div className="relative z-10">
-                <div className="grid lg:grid-cols-2 gap-12 items-center">
-                  <div className="space-y-6">
-                    <h3 className="text-3xl font-mono font-bold text-purple-400 mb-4">
-                      WHY LARRY ON MONAD?
-                    </h3>
-                    <div className="space-y-4 text-sm font-mono">
-                      <div className="flex items-start space-x-4 p-4 bg-black/50 rounded-lg border border-purple-500/20">
-                        <span className="text-2xl">🚀</span>
-                        <div>
-                          <div className="text-purple-400 font-bold mb-1">Ultra-Fast Execution</div>
-                          <div className="text-gray-300">Leverage trades execute in milliseconds with Monad&apos;s parallel EVM</div>
-                        </div>
-                      </div>
-                      <div className="flex items-start space-x-4 p-4 bg-black/50 rounded-lg border border-green-500/20">
-                        <span className="text-2xl">💰</span>
-                        <div>
-                          <div className="text-green-400 font-bold mb-1">50% APR for Stable LPs</div>
-                          <div className="text-gray-300">Enhanced rewards program specifically for LARRY liquidity providers</div>
-                        </div>
-                      </div>
-                      <div className="flex items-start space-x-4 p-4 bg-black/50 rounded-lg border border-blue-500/20">
-                        <span className="text-2xl">🛡️</span>
-                        <div>
-                          <div className="text-blue-400 font-bold mb-1">Better Protocol Design</div>
-                          <div className="text-gray-300">Improved smart contracts with enhanced security and efficiency</div>
-                        </div>
-                      </div>
-                      <div className="flex items-start space-x-4 p-4 bg-black/50 rounded-lg border border-pink-500/20">
-                        <span className="text-2xl">⚡</span>
-                        <div>
-                          <div className="text-pink-400 font-bold mb-1">Lower Costs</div>
-                          <div className="text-gray-300">Significantly reduced gas fees compared to other networks</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="space-y-6">
-                    <div className="bg-black/80 backdrop-blur-md border border-purple-500/30 rounded-xl p-8 text-center">
-                      <div className="text-6xl font-mono font-bold text-purple-400 mb-4">50%</div>
-                      <div className="text-xl font-mono text-gray-300 mb-2">STABLE LP APR</div>
-                      <div className="text-sm font-mono text-gray-400">For LARRY Liquidity Providers</div>
-                    </div>
-
-                    <div className="text-center space-y-4">
-                      <a
-                        href="https://www.monad.xyz/brand-and-media-kit"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-lg font-mono font-bold hover:from-purple-500 hover:to-pink-500 transition-all duration-300 transform hover:scale-105 shadow-lg shadow-purple-500/25 border border-purple-500/30 relative overflow-hidden group"
-                      >
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
-                        <span className="relative z-10">LEARN ABOUT MONAD</span>
-                        <svg className="ml-2 w-5 h-5 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                        </svg>
-                      </a>
-                      <div className="text-gray-400 font-mono text-xs">
-                        Coming soon to the fastest EVM blockchain
-                      </div>
-                    </div>
-
-                    <div className="bg-gradient-to-r from-gray-900/50 to-gray-800/50 rounded-xl p-6 border border-gray-600/30">
-                      <div className="flex items-center justify-between mb-3">
-                        <span className="text-gray-400 text-sm font-mono">STATUS::DEPLOYMENT</span>
-                        <span className="text-yellow-400 text-sm font-mono animate-pulse">COMING_SOON</span>
-                      </div>
-                      <div className="text-xs font-mono text-gray-300">
-                        Enhanced LARRY protocol with improved rewards and stability features
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* Price Protection & Leverage Showcase */}
         <section className="px-6 lg:px-12 py-20 border-t border-red-500/30">
           <div className="max-w-7xl mx-auto">
@@ -618,13 +417,13 @@ export default function Home() {
 
                     <div className="bg-black/50 rounded-lg p-4 border border-green-500/20">
                       <div className="text-green-400 mb-2">VALUE BACKING:</div>
-                      <div className="text-gray-300">Real SEI locked + borrowed amounts = token value</div>
-                      <div className="text-xs text-gray-400 mt-1">Every token backed by actual SEI</div>
+                      <div className="text-gray-300">Real ETH locked + borrowed amounts = token value</div>
+                      <div className="text-xs text-gray-400 mt-1">Every token backed by actual ETH</div>
                     </div>
 
                     <div className="bg-black/50 rounded-lg p-4 border border-green-500/20">
                       <div className="text-green-400 mb-2">PRICE FORMULA:</div>
-                      <div className="text-gray-300">Token Price = Total SEI Value ÷ Token Supply</div>
+                      <div className="text-gray-300">Token Price = Total ETH Value ÷ Token Supply</div>
                       <div className="text-xs text-gray-400 mt-1">More backing = higher price automatically</div>
                     </div>
                   </div>
@@ -642,7 +441,7 @@ export default function Home() {
                   <div className="space-y-4 text-sm font-mono">
                     <div className="bg-black/50 rounded-lg p-4 border border-blue-500/20">
                       <div className="text-blue-400 mb-2">BORROW RATIO:</div>
-                      <div className="text-gray-300">Borrow 99% of your token value as SEI</div>
+                      <div className="text-gray-300">Borrow 99% of your token value as ETH</div>
                       <div className="text-xs text-gray-400 mt-1">Maximum borrowing power available</div>
                     </div>
 
@@ -677,19 +476,19 @@ export default function Home() {
 
               <div className="grid md:grid-cols-3 gap-6 text-center">
                 <div className="bg-black/50 rounded-lg p-6 border border-purple-500/20">
-                  <div className="text-3xl font-mono font-bold text-green-400 mb-2">1 SEI</div>
+                  <div className="text-3xl font-mono font-bold text-green-400 mb-2">1 ETH</div>
                   <div className="text-sm font-mono text-gray-400">STARTING AMOUNT</div>
                   <div className="text-xs font-mono text-purple-400 mt-1">Your initial investment</div>
                 </div>
 
                 <div className="bg-black/50 rounded-lg p-6 border border-purple-500/20">
-                  <div className="text-3xl font-mono font-bold text-blue-400 mb-2">99 SEI</div>
+                  <div className="text-3xl font-mono font-bold text-blue-400 mb-2">99 ETH</div>
                   <div className="text-sm font-mono text-gray-400">FIRST BORROW</div>
                   <div className="text-xs font-mono text-purple-400 mt-1">99% of your token value</div>
                 </div>
 
                 <div className="bg-black/50 rounded-lg p-6 border border-purple-500/20">
-                  <div className="text-3xl font-mono font-bold text-red-400 mb-2">100+ SEI</div>
+                  <div className="text-3xl font-mono font-bold text-red-400 mb-2">100+ ETH</div>
                   <div className="text-sm font-mono text-gray-400">TOTAL EXPOSURE</div>
                   <div className="text-xs font-mono text-purple-400 mt-1">After multiple loops</div>
                 </div>
@@ -698,7 +497,7 @@ export default function Home() {
               <div className="mt-8 text-center">
                 <div className="inline-flex items-center bg-gradient-to-r from-red-600/20 to-purple-600/20 rounded-lg px-6 py-3 border border-red-500/30">
                   <span className="text-red-400 font-mono text-sm mr-3">EXAMPLE:</span>
-                  <span className="text-white font-mono">1 SEI → 20 SEI → 100+ SEI exposure</span>
+                  <span className="text-white font-mono">1 ETH → 20 ETH → 100+ ETH exposure</span>
                 </div>
               </div>
             </div>
@@ -827,7 +626,7 @@ export default function Home() {
                 <div className="space-y-4">
                   <div className="flex justify-between py-3 border-b border-gray-700/30 bg-gray-900/30 rounded-lg px-4">
                     <span className="text-gray-400 font-mono">NETWORK::</span>
-                    <span className="text-green-400 font-mono">SEI_BLOCKCHAIN</span>
+                    <span className="text-green-400 font-mono">BASE_BLOCKCHAIN</span>
                   </div>
                   <div className="flex justify-between py-3 border-b border-gray-700/30 bg-gray-900/30 rounded-lg px-4">
                     <span className="text-gray-400 font-mono">TOKEN_SYMBOL::</span>
@@ -881,7 +680,7 @@ export default function Home() {
               <VideoLogo size="small" />
               <div className="flex flex-col">
                 <span className="text-gray-400 font-mono">© 2025 LARRY_PROTOCOL</span>
-                <span className="text-xs text-red-400 font-mono">SEI LEVERAGE SYSTEM</span>
+                <span className="text-xs text-red-400 font-mono">ETH LEVERAGE SYSTEM</span>
               </div>
             </div>
 

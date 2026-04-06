@@ -86,7 +86,7 @@ export default function LoanDashboard() {
                 <span className="text-gray-400 font-mono text-sm">COLLATERAL_ASSET</span>
               </div>
               <div className="text-2xl sm:text-3xl font-mono font-bold text-green-400">
-                {parseFloat(loan.collateral).toFixed(2)}
+                {parseFloat(loan.collateral) < 0.01 ? parseFloat(loan.collateral).toFixed(8) : parseFloat(loan.collateral).toFixed(4)}
               </div>
               <div className="text-green-400 font-mono text-xs mt-1">LARRY_TOKENS</div>
             </div>
@@ -101,9 +101,9 @@ export default function LoanDashboard() {
                 <span className="text-gray-400 font-mono text-sm">BORROWED_AMOUNT</span>
               </div>
               <div className="text-2xl sm:text-3xl font-mono font-bold text-red-400">
-                {parseFloat(loan.borrowed).toFixed(2)}
+                {parseFloat(loan.borrowed) < 0.01 ? parseFloat(loan.borrowed).toFixed(8) : parseFloat(loan.borrowed).toFixed(4)}
               </div>
-              <div className="text-red-400 font-mono text-xs mt-1">SEI_TOKENS</div>
+              <div className="text-red-400 font-mono text-xs mt-1">ETH_TOKENS</div>
             </div>
           </div>
 
@@ -176,7 +176,7 @@ export default function LoanDashboard() {
             <div className="mt-3 p-3 bg-black/50 rounded-lg border border-blue-500/20">
               <div className="text-xs font-mono text-gray-400 mb-1">EXTENSION_FEE_CALCULATION::</div>
               <div className="text-blue-400 font-mono font-bold">
-                {extensionFeeData ? (parseFloat(formatEther(extensionFeeData as bigint)).toFixed(2)) : '0.00'} SEI
+                {extensionFeeData ? (parseFloat(formatEther(extensionFeeData as bigint)) < 0.01 ? parseFloat(formatEther(extensionFeeData as bigint)).toFixed(8) : parseFloat(formatEther(extensionFeeData as bigint)).toFixed(4)) : '0.0000'} ETH
               </div>
             </div>
           </div>
@@ -185,7 +185,7 @@ export default function LoanDashboard() {
           <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
             <input
               type="number"
-              placeholder="Partial repayment amount (SEI)"
+              placeholder="Partial repayment amount (ETH)"
               value={repayAmount}
               onChange={(e) => setRepayAmount(e.target.value)}
               max={loan.borrowed}
@@ -236,7 +236,7 @@ export default function LoanDashboard() {
             <div className="text-sm font-mono text-red-200 flex-1">
               <p className="font-bold mb-2 text-red-400">FLASH_CLOSE_ALGORITHM::</p>
               <p className="text-xs text-gray-300 leading-relaxed">
-                Automatic collateral liquidation protocol executes LARRY to SEI conversion with 1% algorithmic fee.
+                Automatic collateral liquidation protocol executes LARRY to ETH conversion with 1% algorithmic fee.
                 Time-constraint independent termination mechanism.
                 <span className="text-red-400 block mt-2">f(x) = liquidation(collateral) → debt_resolution</span>
               </p>

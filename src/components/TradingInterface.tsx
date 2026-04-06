@@ -18,8 +18,8 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
   const { balance, loan, hasActiveLoan } = useUserLarryData(address);
   const { useBuyAmount, useSellAmount, useBorrowCollateral, useLeverageFee } = useTradeCalculations();
   
-  // Get SEI balance for buy max button
-  const { data: seiBalance, isLoading: seiBalanceLoading, error: seiBalanceError } = useBalance({
+  // Get ETH balance for buy max button
+  const { data: ethBalance, isLoading: ethBalanceLoading, error: ethBalanceError } = useBalance({
     address: address,
     query: {
       enabled: !!address && isConnected,
@@ -32,12 +32,12 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
     console.log('Max Button Debug:', {
       address,
       isConnected,
-      seiBalance,
-      seiBalanceLoading,
-      seiBalanceError,
-      balance: seiBalance ? formatEther(seiBalance.value) : 'No balance'
+      ethBalance,
+      ethBalanceLoading,
+      ethBalanceError,
+      balance: ethBalance ? formatEther(ethBalance.value) : 'No balance'
     });
-  }, [address, isConnected, seiBalance, seiBalanceLoading, seiBalanceError]);
+  }, [address, isConnected, ethBalance, ethBalanceLoading, ethBalanceError]);
   
   const [inputAmount, setInputAmount] = useState('');
   const [days, setDays] = useState('365');
@@ -168,15 +168,15 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
 
     console.log('=== MAX BUTTON CLICKED ===');
     console.log('Active Tab:', activeTab);
-    console.log('SEI Balance:', seiBalance);
-    console.log('SEI Balance Value:', seiBalance?.value);
+    console.log('ETH Balance:', ethBalance);
+    console.log('ETH Balance Value:', ethBalance?.value);
     console.log('LARRY Balance:', balance);
 
     if (activeTab === 'buy') {
       console.log('=== BUY TAB MAX CALCULATION ===');
-      if (seiBalance?.value) {
-        const rawBalance = parseFloat(formatEther(seiBalance.value));
-        console.log('Raw SEI Balance:', rawBalance);
+      if (ethBalance?.value) {
+        const rawBalance = parseFloat(formatEther(ethBalance.value));
+        console.log('Raw ETH Balance:', rawBalance);
         const maxAmount = Math.max(0, rawBalance - 0.01);
         console.log('Calculated Max Amount:', maxAmount);
 
@@ -189,7 +189,7 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
           console.log('Max amount is 0 or negative');
         }
       } else {
-        console.log('No SEI balance value available');
+        console.log('No ETH balance value available');
       }
     } else if (activeTab === 'sell') {
       console.log('=== SELL TAB MAX CALCULATION ===');
@@ -201,9 +201,9 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
       }
     } else if (activeTab === 'leverage') {
       console.log('=== LEVERAGE TAB MAX CALCULATION ===');
-      if (seiBalance?.value) {
-        const availableBalance = Math.max(0, parseFloat(formatEther(seiBalance.value)) - 0.01);
-        console.log('Available SEI Balance:', availableBalance);
+      if (ethBalance?.value) {
+        const availableBalance = Math.max(0, parseFloat(formatEther(ethBalance.value)) - 0.01);
+        console.log('Available ETH Balance:', availableBalance);
         const daysNum = parseInt(days) || 0;
         const aprPercent = 3.9;
         const interestPercent = aprPercent * (daysNum / 365);
@@ -217,7 +217,7 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
         // Round down to avoid precision errors in smart contract
         setInputAmount(Math.floor(estimatedMaxPosition).toString());
       } else {
-        console.log('No SEI balance available for leverage');
+        console.log('No ETH balance available for leverage');
       }
     }
   };
@@ -336,20 +336,20 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
             <div className="grid grid-cols-2 gap-4 text-sm font-mono">
               <div className="bg-gray-900/50 rounded-lg p-3 border border-green-500/20">
                 <div className="text-gray-400 mb-1">LARRY_BALANCE::</div>
-                <div className="text-green-400 font-bold">{parseFloat(balance).toFixed(2)} LARRY</div>
+                <div className="text-green-400 font-bold">{parseFloat(balance) < 0.01 ? parseFloat(balance).toFixed(8) : parseFloat(balance).toFixed(4)} LARRY</div>
               </div>
               <div className="bg-gray-900/50 rounded-lg p-3 border border-green-500/20">
-                <div className="text-gray-400 mb-1">SEI_BALANCE::</div>
+                <div className="text-gray-400 mb-1">ETH_BALANCE::</div>
                 <div className="flex items-center">
                   <div className="text-blue-400 font-bold">
-                    {seiBalanceLoading ? 'LOADING...' :
-                     seiBalance ? parseFloat(formatEther(seiBalance.value)).toFixed(2) : '0.00'} SEI
+                    {ethBalanceLoading ? 'LOADING...' :
+                     ethBalance ? (parseFloat(formatEther(ethBalance.value)) < 0.01 ? parseFloat(formatEther(ethBalance.value)).toFixed(8) : parseFloat(formatEther(ethBalance.value)).toFixed(4)) : '0.0000'} ETH
                   </div>
-                  {seiBalanceLoading && (
+                  {ethBalanceLoading && (
                     <div className="ml-2 w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
                   )}
                 </div>
-                {seiBalanceError && (
+                {ethBalanceError && (
                   <div className="text-red-400 text-xs mt-1">ERROR_LOADING_BALANCE</div>
                 )}
               </div>
@@ -362,12 +362,12 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
           <div className="flex justify-between items-center text-xs font-mono">
             <div>
               <span className="text-gray-400">LARRY: </span>
-              <span className="text-green-400 font-bold">{parseFloat(balance).toFixed(2)}</span>
+              <span className="text-green-400 font-bold">{parseFloat(balance) < 0.01 ? parseFloat(balance).toFixed(6) : parseFloat(balance).toFixed(4)}</span>
             </div>
             <div>
-              <span className="text-gray-400">SEI: </span>
+              <span className="text-gray-400">ETH: </span>
               <span className="text-blue-400 font-bold">
-                {seiBalance ? parseFloat(formatEther(seiBalance.value)).toFixed(2) : '0.00'}
+                {ethBalance ? (parseFloat(formatEther(ethBalance.value)) < 0.01 ? parseFloat(formatEther(ethBalance.value)).toFixed(6) : parseFloat(formatEther(ethBalance.value)).toFixed(4)) : '0.0000'}
               </span>
             </div>
           </div>
@@ -378,7 +378,7 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
           <div className="space-y-4 sm:space-y-6">
             <div>
               <label className="block text-gray-300 mb-2 font-mono font-bold text-xs sm:text-sm">
-                {activeTab === 'buy' ? '∇ SEI_AMOUNT' : '∫ LARRY_AMOUNT'}
+                {activeTab === 'buy' ? '∇ ETH_AMOUNT' : '∫ LARRY_AMOUNT'}
               </label>
               <div className="relative">
                 <input
@@ -413,7 +413,7 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
                 <div className="flex justify-between">
                   <span className="text-gray-400">Output:</span>
                   <span className="text-green-400 font-bold">
-                    {parseFloat(outputAmount).toFixed(2)} {activeTab === 'buy' ? 'LARRY' : 'SEI'}
+                    {parseFloat(outputAmount) < 0.01 ? parseFloat(outputAmount).toFixed(8) : parseFloat(outputAmount).toFixed(4)} {activeTab === 'buy' ? 'LARRY' : 'ETH'}
                   </span>
                 </div>
                 <div className="flex justify-between">
@@ -446,7 +446,7 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
               <div className="relative">
                 <input
                   type="number"
-                  placeholder="SEI amount"
+                  placeholder="ETH amount"
                   value={inputAmount}
                   onChange={(e) => setInputAmount(e.target.value)}
                   className="w-full bg-black/50 border border-blue-500/30 rounded-lg px-3 sm:px-6 py-3 sm:py-4 pr-12 sm:pr-24 text-gray-300 placeholder-gray-500 focus:border-blue-400 focus:outline-none text-sm sm:text-base font-mono relative z-10 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [-moz-appearance]:textfield"
@@ -502,11 +502,11 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
                 <div className="text-xs sm:text-sm font-mono space-y-2">
                   <div className="flex justify-between">
                     <span className="text-gray-400">Position:</span>
-                    <span className="text-red-400 font-bold">{parseFloat(leverageQuote.ethPosition).toFixed(2)} SEI</span>
+                    <span className="text-red-400 font-bold">{parseFloat(leverageQuote.ethPosition) < 0.01 ? parseFloat(leverageQuote.ethPosition).toFixed(8) : parseFloat(leverageQuote.ethPosition).toFixed(4)} ETH</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-400">Payment:</span>
-                    <span className="text-orange-400 font-bold">{parseFloat(leverageQuote.requiredEth).toFixed(2)} SEI</span>
+                    <span className="text-orange-400 font-bold">{parseFloat(leverageQuote.requiredEth) < 0.01 ? parseFloat(leverageQuote.requiredEth).toFixed(8) : parseFloat(leverageQuote.requiredEth).toFixed(4)} ETH</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-400">Leverage:</span>
@@ -516,7 +516,7 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-400">Borrow:</span>
-                    <span className="text-blue-400 font-bold">{parseFloat(leverageQuote.borrowAmount).toFixed(2)} SEI</span>
+                    <span className="text-blue-400 font-bold">{parseFloat(leverageQuote.borrowAmount) < 0.01 ? parseFloat(leverageQuote.borrowAmount).toFixed(8) : parseFloat(leverageQuote.borrowAmount).toFixed(4)} ETH</span>
                   </div>
                 </div>
 
@@ -543,7 +543,7 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
                 <div className="text-sm font-mono text-yellow-200 flex-1">
                   <p className="font-bold mb-2 text-yellow-400">RECURSIVE_LEVERAGE_ALGORITHM::</p>
                   <p className="text-xs text-gray-300 leading-relaxed">
-                    Position size specification triggers LARRY collateral minting and SEI borrowing execution.
+                    Position size specification triggers LARRY collateral minting and ETH borrowing execution.
                     Payment structure: fees + 1% collateral only. Time-based liquidation constraints apply.
                     <span className="text-yellow-400 block mt-2">f(x) = borrow(x) → recursive_position_growth</span>
                   </p>
@@ -553,7 +553,7 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
 
             <button
               onClick={handleTrade}
-              disabled={isPending || !inputAmount || !leverageQuote || (leverageQuote && parseFloat(leverageQuote.requiredEth) > parseFloat(formatEther(seiBalance?.value || BigInt(0)))) || hasActiveLoan}
+              disabled={isPending || !inputAmount || !leverageQuote || (leverageQuote && parseFloat(leverageQuote.requiredEth) > parseFloat(formatEther(ethBalance?.value || BigInt(0)))) || hasActiveLoan}
               className="w-full bg-gradient-to-r from-red-600 to-orange-600 text-white py-3 sm:py-5 rounded-lg font-mono font-bold text-sm sm:text-lg hover:from-red-500 hover:to-orange-500 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed border border-red-500/30 relative overflow-hidden group"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
@@ -563,7 +563,7 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
                   {isPending ? 'EXECUTING...' :
                    hasActiveLoan ? 'CLOSE LOAN FIRST' :
                    !leverageQuote ? 'ENTER AMOUNT' :
-                   (leverageQuote && parseFloat(leverageQuote.requiredEth) > parseFloat(formatEther(seiBalance?.value || BigInt(0)))) ? 'INSUFFICIENT BALANCE' :
+                   (leverageQuote && parseFloat(leverageQuote.requiredEth) > parseFloat(formatEther(ethBalance?.value || BigInt(0)))) ? 'INSUFFICIENT BALANCE' :
                    'START LEVERAGE'}
                 </span>
               </span>
@@ -585,11 +585,11 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
                 <div className="flex flex-col sm:grid sm:grid-cols-2 gap-3 sm:gap-4 text-xs sm:text-sm font-mono">
                   <div className="bg-black/50 rounded-lg p-3 border border-blue-500/20">
                     <div className="text-gray-400 mb-1">Borrowed:</div>
-                    <div className="text-blue-400 font-bold">{parseFloat(loan.borrowed).toFixed(2)} SEI</div>
+                    <div className="text-blue-400 font-bold">{parseFloat(loan.borrowed) < 0.01 ? parseFloat(loan.borrowed).toFixed(8) : parseFloat(loan.borrowed).toFixed(4)} ETH</div>
                   </div>
                   <div className="bg-black/50 rounded-lg p-3 border border-blue-500/20">
                     <div className="text-gray-400 mb-1">Collateral:</div>
-                    <div className="text-cyan-400 font-bold">{parseFloat(loan.collateral).toFixed(2)} LARRY</div>
+                    <div className="text-cyan-400 font-bold">{parseFloat(loan.collateral) < 0.01 ? parseFloat(loan.collateral).toFixed(8) : parseFloat(loan.collateral).toFixed(4)} LARRY</div>
                   </div>
                 </div>
 
@@ -615,7 +615,7 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-400">{hasActiveLoan ? 'Additional:' : 'Max Borrow:'}</span>
-                  <span className="text-pink-400 font-bold">{parseFloat(maxBorrowAmount).toFixed(2)} SEI</span>
+                  <span className="text-pink-400 font-bold">{parseFloat(maxBorrowAmount).toFixed(2)} ETH</span>
                 </div>
               </div>
 
@@ -665,7 +665,7 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
               </div>
               {inputAmount && parseFloat(inputAmount) > parseFloat(maxBorrowAmount) && (
                 <div className="text-red-400 text-xs font-mono mt-2">
-                  COLLATERAL_LIMIT_EXCEEDED:: Cannot exceed {maxBorrowAmount} SEI
+                  COLLATERAL_LIMIT_EXCEEDED:: Cannot exceed {maxBorrowAmount} ETH
                 </div>
               )}
             </div>
@@ -720,7 +720,7 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
                 <div className="flex justify-between">
                   <span className="text-gray-400">Output:</span>
                   <span className="text-cyan-400 font-bold">
-                    {inputAmount ? (parseFloat(inputAmount) * 0.99).toFixed(2) : '0.00'} SEI
+                    {inputAmount ? (parseFloat(inputAmount) * 0.99).toFixed(2) : '0.00'} ETH
                   </span>
                 </div>
               </div>

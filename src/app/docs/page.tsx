@@ -50,8 +50,6 @@ export default function Docs() {
           <div className="hidden md:flex items-center space-x-6">
             <Link href="/" className="text-gray-300 hover:text-green-400 transition-colors font-mono text-sm">HOME</Link>
             <Link href="/dashboard" className="text-gray-300 hover:text-blue-400 transition-colors font-mono text-sm">TRADING</Link>
-            <Link href="/veyaka" className="text-gray-300 hover:text-purple-400 transition-colors font-mono text-sm">VEYAKA</Link>
-            <Link href="/launchpad" className="text-gray-300 hover:text-yellow-400 transition-colors font-mono text-sm">LAUNCHPAD</Link>
             <span className="text-green-400 font-mono font-bold text-sm border-b-2 border-green-400 pb-1">DOCS</span>
           </div>
 
@@ -74,8 +72,6 @@ export default function Docs() {
             <div className="px-4 py-6 space-y-4">
               <Link href="/" className="block text-gray-300 hover:text-green-400 transition-colors font-mono text-sm py-2" onClick={() => setMobileMenuOpen(false)}>HOME</Link>
               <Link href="/dashboard" className="block text-gray-300 hover:text-blue-400 transition-colors font-mono text-sm py-2" onClick={() => setMobileMenuOpen(false)}>TRADING</Link>
-              <Link href="/veyaka" className="block text-gray-300 hover:text-purple-400 transition-colors font-mono text-sm py-2" onClick={() => setMobileMenuOpen(false)}>VEYAKA</Link>
-              <Link href="/launchpad" className="block text-gray-300 hover:text-yellow-400 transition-colors font-mono text-sm py-2" onClick={() => setMobileMenuOpen(false)}>LAUNCHPAD</Link>
               <span className="block text-green-400 font-mono font-bold text-sm py-2 border-l-2 border-green-400 pl-2">DOCS</span>
               <div className="pt-4 border-t border-gray-700">
                 <MobileConnectButton />
@@ -152,8 +148,8 @@ export default function Docs() {
                       <h2 className="text-xl font-mono font-bold text-blue-400">Simple Explanation</h2>
                     </div>
                     <p className="text-gray-300 text-base leading-relaxed mb-4">
-                      LARRY is a smart token on SEI Network that lets you multiply your SEI holdings through safe borrowing. 
-                      Think of it like a savings account that also gives you leverage - you can turn 1 SEI into 20+ SEI exposure 
+                      LARRY is a smart token on ETH Network that lets you multiply your ETH holdings through safe borrowing. 
+                      Think of it like a savings account that also gives you leverage - you can turn 1 ETH into 20+ ETH exposure 
                       without the risk of sudden liquidations.
                     </p>
                     <div className="grid sm:grid-cols-2 gap-4">
@@ -183,7 +179,7 @@ export default function Docs() {
                     <div className="grid sm:grid-cols-2 gap-4 text-sm">
                       <div>
                         <h3 className="text-blue-300 font-bold mb-2">New Users</h3>
-                        <p className="text-gray-300">Want to grow SEI holdings safely without complex strategies</p>
+                        <p className="text-gray-300">Want to grow ETH holdings safely without complex strategies</p>
                       </div>
                       <div>
                         <h3 className="text-blue-300 font-bold mb-2">Experienced Traders</h3>
@@ -219,11 +215,11 @@ export default function Docs() {
                     <div className="bg-gray-900/50 border border-green-500/30 rounded-lg p-6">
                       <h2 className="text-xl font-mono font-bold text-green-400 mb-4">Step 1: Connect Your Wallet</h2>
                       <p className="text-gray-300 mb-4">
-                        You&apos;ll need a wallet with SEI tokens. Popular choices include Keplr, Leap, or Compass.
+                        You&apos;ll need a wallet with ETH tokens. Popular choices include Keplr, Leap, or Compass.
                       </p>
                       <div className="bg-green-500/10 border border-green-500/20 rounded p-4">
                         <p className="text-sm text-green-300">
-                          💡 <strong>Tip:</strong> Start with a small amount (like 10-50 SEI) to test the system before going bigger.
+                          💡 <strong>Tip:</strong> Start with a small amount (like 10-50 ETH) to test the system before going bigger.
                         </p>
                       </div>
                     </div>
@@ -231,7 +227,7 @@ export default function Docs() {
                     <div className="bg-gray-900/50 border border-blue-500/30 rounded-lg p-6">
                       <h2 className="text-xl font-mono font-bold text-blue-400 mb-4">Step 2: Buy LARRY Tokens</h2>
                       <p className="text-gray-300 mb-4">
-                        Use the trading interface to swap your SEI for LARRY tokens. The smart contract ensures 
+                        Use the trading interface to swap your ETH for LARRY tokens. The smart contract ensures 
                         you always get a fair price that only goes up over time.
                       </p>
                       <Link 
@@ -245,7 +241,7 @@ export default function Docs() {
                     <div className="bg-gray-900/50 border border-purple-500/30 rounded-lg p-6">
                       <h2 className="text-xl font-mono font-bold text-purple-400 mb-4">Step 3: Start Leveraging (Optional)</h2>
                       <p className="text-gray-300 mb-4">
-                        Once you own LARRY, you can borrow SEI against it (up to 99% of the value) and buy more LARRY. 
+                        Once you own LARRY, you can borrow ETH against it (up to 99% of the value) and buy more LARRY. 
                         This creates a leverage loop that multiplies your position.
                       </p>
                       <div className="bg-yellow-500/10 border border-yellow-500/20 rounded p-4">
@@ -314,7 +310,7 @@ export default function Docs() {
                       <div className="space-y-3">
                         <div className="bg-black/50 border border-green-500/20 rounded p-4">
                           <h3 className="text-green-300 font-bold mb-2">When You Buy LARRY</h3>
-                          <p className="text-sm text-gray-300">Your SEI goes into the contract → More backing → Price can only increase</p>
+                          <p className="text-sm text-gray-300">Your ETH goes into the contract → More backing → Price can only increase</p>
                         </div>
                         <div className="bg-black/50 border border-red-500/20 rounded p-4">
                           <h3 className="text-red-300 font-bold mb-2">When You Sell LARRY</h3>
@@ -330,15 +326,15 @@ export default function Docs() {
                     <div className="bg-gray-900/50 border border-blue-500/30 rounded-lg p-6">
                       <h2 className="text-xl font-mono font-bold text-blue-400 mb-4">🔄 The Leverage Loop</h2>
                       <p className="text-gray-300 mb-4">
-                        This is how you can multiply your SEI exposure safely:
+                        This is how you can multiply your ETH exposure safely:
                       </p>
                       
                       {/* Mobile: Card Layout */}
                       <div className="block sm:hidden space-y-4">
                         {[
-                          { step: 1, action: 'Buy LARRY', detail: 'Trade SEI for LARRY tokens', color: 'green' },
-                          { step: 2, action: 'Borrow SEI', detail: 'Use LARRY as collateral (up to 99%)', color: 'blue' },
-                          { step: 3, action: 'Buy More LARRY', detail: 'Use borrowed SEI to buy more LARRY', color: 'purple' },
+                          { step: 1, action: 'Buy LARRY', detail: 'Trade ETH for LARRY tokens', color: 'green' },
+                          { step: 2, action: 'Borrow ETH', detail: 'Use LARRY as collateral (up to 99%)', color: 'blue' },
+                          { step: 3, action: 'Buy More LARRY', detail: 'Use borrowed ETH to buy more LARRY', color: 'purple' },
                           { step: 4, action: 'Repeat', detail: 'Keep looping to build bigger position', color: 'red' }
                         ].map((item) => (
                           <div key={item.step} className={`bg-${item.color}-500/10 border border-${item.color}-500/20 rounded p-4`}>
@@ -353,11 +349,11 @@ export default function Docs() {
                         <div className="flex items-center justify-between text-center">
                           <div className="bg-green-500/10 border border-green-500/20 rounded p-4 flex-1 mx-2">
                             <div className="text-green-400 font-bold mb-1">1. Buy LARRY</div>
-                            <div className="text-xs text-gray-300">Trade SEI for LARRY</div>
+                            <div className="text-xs text-gray-300">Trade ETH for LARRY</div>
                           </div>
                           <div className="text-green-400 text-xl">→</div>
                           <div className="bg-blue-500/10 border border-blue-500/20 rounded p-4 flex-1 mx-2">
-                            <div className="text-blue-400 font-bold mb-1">2. Borrow SEI</div>
+                            <div className="text-blue-400 font-bold mb-1">2. Borrow ETH</div>
                             <div className="text-xs text-gray-300">Use LARRY as collateral</div>
                           </div>
                           <div className="text-blue-400 text-xl">→</div>
@@ -371,7 +367,7 @@ export default function Docs() {
 
                       <div className="mt-6 bg-yellow-500/10 border border-yellow-500/20 rounded p-4">
                         <h3 className="text-yellow-300 font-bold mb-2">📊 Example Result</h3>
-                        <p className="text-sm text-gray-300">Start with 100 SEI → After 5 loops → Control ~2000 SEI worth of LARRY exposure</p>
+                        <p className="text-sm text-gray-300">Start with 100 ETH → After 5 loops → Control ~2000 ETH worth of LARRY exposure</p>
                       </div>
 
                       {/* How LARRY Works - Core Mechanics Diagrams */}
@@ -382,7 +378,7 @@ export default function Docs() {
                           nodes={[
                             { id: 'transaction', label: 'Any Transaction', type: 'user', description: 'Buy/Sell/Liquidation' },
                             { id: 'safetycheck', label: 'Safety Check', type: 'contract', description: 'Price validation' },
-                            { id: 'backing', label: 'Update Backing', type: 'system', description: 'SEI pool increases' },
+                            { id: 'backing', label: 'Update Backing', type: 'system', description: 'ETH pool increases' },
                             { id: 'price', label: 'Price Increase', type: 'reward', description: 'Only goes up!' }
                           ]}
                           connections={[
@@ -416,9 +412,9 @@ export default function Docs() {
                         <FlowDiagram
                           title="Leverage Loop Process"
                           nodes={[
-                            { id: 'start', label: 'Start with SEI', type: 'user', description: '100 SEI' },
+                            { id: 'start', label: 'Start with ETH', type: 'user', description: '100 ETH' },
                             { id: 'buy', label: 'Buy LARRY', type: 'contract', description: '99 LARRY tokens' },
-                            { id: 'borrow', label: 'Borrow SEI', type: 'system', description: '98 SEI (99% LTV)' },
+                            { id: 'borrow', label: 'Borrow ETH', type: 'system', description: '98 ETH (99% LTV)' },
                             { id: 'repeat', label: 'Repeat Loop', type: 'reward', description: 'Build position' }
                           ]}
                           connections={[
@@ -436,17 +432,17 @@ export default function Docs() {
                     <div className="bg-gray-900/50 border border-yellow-500/30 rounded-lg p-6">
                       <h2 className="text-xl font-mono font-bold text-yellow-400 mb-4">📊 Concrete Price Examples</h2>
                       <p className="text-gray-300 mb-6">
-                        Based on the smart contract formula: <code className="bg-black/50 px-2 py-1 rounded text-green-400">Price = (Total SEI Backing) ÷ (Total LARRY Supply)</code>
+                        Based on the smart contract formula: <code className="bg-black/50 px-2 py-1 rounded text-green-400">Price = (Total ETH Backing) ÷ (Total LARRY Supply)</code>
                       </p>
 
                       <div className="space-y-6">
                         <div className="bg-green-500/10 border border-green-500/20 rounded p-4">
                           <h3 className="text-green-300 font-bold mb-3">Scenario 1: Trading Volume Impact</h3>
                           <div className="text-sm text-gray-300 space-y-2">
-                            <p><strong>Starting State:</strong> 1M LARRY tokens, 1M SEI backing → Price: 1.00 SEI</p>
-                            <p><strong>Daily Trading:</strong> 100,000 SEI volume, 0.25% fees = 250 SEI to protocol</p>
-                            <p><strong>After Fees:</strong> 1.00025M SEI backing, 1M LARRY → Price: 1.00025 SEI</p>
-                            <p><strong>Monthly Growth:</strong> 250 SEI × 30 days = 7,500 SEI → Price: 1.0075 SEI</p>
+                            <p><strong>Starting State:</strong> 1M LARRY tokens, 1M ETH backing → Price: 1.00 ETH</p>
+                            <p><strong>Daily Trading:</strong> 100,000 ETH volume, 0.25% fees = 250 ETH to protocol</p>
+                            <p><strong>After Fees:</strong> 1.00025M ETH backing, 1M LARRY → Price: 1.00025 ETH</p>
+                            <p><strong>Monthly Growth:</strong> 250 ETH × 30 days = 7,500 ETH → Price: 1.0075 ETH</p>
                             <p className="text-green-400"><strong>Result: +0.75% price increase from trading fees alone</strong></p>
                           </div>
                           
@@ -456,30 +452,30 @@ export default function Docs() {
                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
                               <div className="bg-green-500/20 rounded p-2 text-center">
                                 <div className="text-green-400 font-bold">Day 1</div>
-                                <div className="text-gray-300">+250 SEI</div>
+                                <div className="text-gray-300">+250 ETH</div>
                                 <div className="text-green-300">1.00025</div>
                               </div>
                               <div className="bg-green-500/30 rounded p-2 text-center">
                                 <div className="text-green-400 font-bold">Day 7</div>
-                                <div className="text-gray-300">+1,750 SEI</div>
+                                <div className="text-gray-300">+1,750 ETH</div>
                                 <div className="text-green-300">1.00175</div>
                               </div>
                               <div className="bg-green-500/40 rounded p-2 text-center">
                                 <div className="text-green-400 font-bold">Day 15</div>
-                                <div className="text-gray-300">+3,750 SEI</div>
+                                <div className="text-gray-300">+3,750 ETH</div>
                                 <div className="text-green-300">1.00375</div>
                               </div>
                               <div className="bg-green-500/50 rounded p-2 text-center">
                                 <div className="text-green-400 font-bold">Day 30</div>
-                                <div className="text-gray-300">+7,500 SEI</div>
+                                <div className="text-gray-300">+7,500 ETH</div>
                                 <div className="text-green-300 font-bold">1.0075</div>
                               </div>
                             </div>
                             <FlowDiagram
                               title="Trading Fee Flow"
                               nodes={[
-                                { id: 'volume', label: '100k SEI Volume', type: 'user', description: 'Daily trading' },
-                                { id: 'fees', label: '0.25% Fee', type: 'contract', description: '250 SEI captured' },
+                                { id: 'volume', label: '100k ETH Volume', type: 'user', description: 'Daily trading' },
+                                { id: 'fees', label: '0.25% Fee', type: 'contract', description: '250 ETH captured' },
                                 { id: 'backing', label: 'Backing Pool', type: 'system', description: 'Grows daily' },
                                 { id: 'price', label: 'Price Increase', type: 'reward', description: '+0.75% monthly' }
                               ]}
@@ -497,11 +493,11 @@ export default function Docs() {
                         <div className="bg-blue-500/10 border border-blue-500/20 rounded p-4">
                           <h3 className="text-blue-300 font-bold mb-3">Scenario 2: Token Burns from Sells</h3>
                           <div className="text-sm text-gray-300 space-y-2">
-                            <p><strong>Starting State:</strong> 1M LARRY tokens, 1M SEI backing → Price: 1.00 SEI</p>
-                            <p><strong>Someone Sells:</strong> 10,000 LARRY for ~9,975 SEI (after 0.25% fee)</p>
+                            <p><strong>Starting State:</strong> 1M LARRY tokens, 1M ETH backing → Price: 1.00 ETH</p>
+                            <p><strong>Someone Sells:</strong> 10,000 LARRY for ~9,975 ETH (after 0.25% fee)</p>
                             <p><strong>LARRY Burned:</strong> 10,000 LARRY destroyed permanently</p>
-                            <p><strong>New State:</strong> 990,000 LARRY tokens, 990,025 SEI backing</p>
-                            <p><strong>New Price:</strong> 990,025 ÷ 990,000 = 1.000025 SEI per LARRY</p>
+                            <p><strong>New State:</strong> 990,000 LARRY tokens, 990,025 ETH backing</p>
+                            <p><strong>New Price:</strong> 990,025 ÷ 990,000 = 1.000025 ETH per LARRY</p>
                             <p className="text-blue-400"><strong>Result: Price increases even when someone sells!</strong></p>
                           </div>
 
@@ -513,9 +509,9 @@ export default function Docs() {
                                 <div className="text-red-400 font-bold mb-2">BEFORE SELL</div>
                                 <div className="text-xs text-gray-300 space-y-1">
                                   <div>LARRY Supply: <span className="text-white">1,000,000</span></div>
-                                  <div>SEI Backing: <span className="text-white">1,000,000</span></div>
+                                  <div>ETH Backing: <span className="text-white">1,000,000</span></div>
                                   <div className="border-t border-gray-600 pt-1">
-                                    Price: <span className="text-red-300 font-bold">1.00 SEI</span>
+                                    Price: <span className="text-red-300 font-bold">1.00 ETH</span>
                                   </div>
                                 </div>
                               </div>
@@ -523,7 +519,7 @@ export default function Docs() {
                                 <div className="text-green-400 font-bold mb-2">AFTER SELL</div>
                                 <div className="text-xs text-gray-300 space-y-1">
                                   <div>LARRY Supply: <span className="text-white">990,000</span> ↓</div>
-                                  <div>SEI Backing: <span className="text-white">990,025</span> ↓</div>
+                                  <div>ETH Backing: <span className="text-white">990,025</span> ↓</div>
                                   <div className="border-t border-gray-600 pt-1">
                                     Price: <span className="text-green-300 font-bold">1.000025</span> ↑
                                   </div>
@@ -552,10 +548,10 @@ export default function Docs() {
                         <div className="bg-purple-500/10 border border-purple-500/20 rounded p-4">
                           <h3 className="text-purple-300 font-bold mb-3">Scenario 3: Liquidation Benefits</h3>
                           <div className="text-sm text-gray-300 space-y-2">
-                            <p><strong>Starting State:</strong> 1M LARRY tokens, 1M SEI backing</p>
-                            <p><strong>Liquidation Event:</strong> 50,000 LARRY collateral burned, 49,500 SEI debt stays</p>
-                            <p><strong>Net Effect:</strong> 950,000 LARRY tokens, 1,049,500 SEI backing</p>
-                            <p><strong>New Price:</strong> 1,049,500 ÷ 950,000 = 1.1047 SEI per LARRY</p>
+                            <p><strong>Starting State:</strong> 1M LARRY tokens, 1M ETH backing</p>
+                            <p><strong>Liquidation Event:</strong> 50,000 LARRY collateral burned, 49,500 ETH debt stays</p>
+                            <p><strong>Net Effect:</strong> 950,000 LARRY tokens, 1,049,500 ETH backing</p>
+                            <p><strong>New Price:</strong> 1,049,500 ÷ 950,000 = 1.1047 ETH per LARRY</p>
                             <p className="text-purple-400"><strong>Result: +10.47% price increase for remaining holders!</strong></p>
                           </div>
 
@@ -577,7 +573,7 @@ export default function Docs() {
                                 <div className="text-red-400 font-bold mb-2">LIQUIDATION</div>
                                 <div className="text-xs text-gray-300 space-y-1">
                                   <div>Burn: <span className="text-red-300">50k LARRY</span></div>
-                                  <div>Keep: <span className="text-green-300">49.5k SEI</span></div>
+                                  <div>Keep: <span className="text-green-300">49.5k ETH</span></div>
                                   <div className="border-t border-gray-600 pt-1">
                                     <span className="text-purple-300">Midnight UTC</span>
                                   </div>
@@ -599,7 +595,7 @@ export default function Docs() {
                               nodes={[
                                 { id: 'expire', label: 'Loan Expires', type: 'user', description: 'Midnight UTC' },
                                 { id: 'liquidate', label: 'Auto Liquidation', type: 'contract', description: 'Burn collateral' },
-                                { id: 'transfer', label: 'SEI Stays', type: 'system', description: 'Debt remains in pool' },
+                                { id: 'transfer', label: 'ETH Stays', type: 'system', description: 'Debt remains in pool' },
                                 { id: 'boost', label: 'Price Boost', type: 'reward', description: '+10.47% instantly' }
                               ]}
                               connections={[
@@ -607,7 +603,7 @@ export default function Docs() {
                                 { from: 'liquidate', to: 'transfer' },
                                 { from: 'transfer', to: 'boost' }
                               ]}
-                              note="Failed loans burn collateral but keep borrowed SEI, creating massive backing increases for holders."
+                              note="Failed loans burn collateral but keep borrowed ETH, creating massive backing increases for holders."
                               className="mt-4 bg-purple-500/10"
                             />
                           </div>
@@ -629,22 +625,22 @@ export default function Docs() {
                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4">
                               <div className="bg-red-500/20 rounded p-3 text-center">
                                 <div className="text-red-400 font-bold text-xs">Month 1</div>
-                                <div className="text-white text-sm">1.02 SEI</div>
+                                <div className="text-white text-sm">1.02 ETH</div>
                                 <div className="text-green-300 text-xs">+2.0%</div>
                               </div>
                               <div className="bg-red-500/30 rounded p-3 text-center">
                                 <div className="text-red-400 font-bold text-xs">Month 3</div>
-                                <div className="text-white text-sm">1.061 SEI</div>
+                                <div className="text-white text-sm">1.061 ETH</div>
                                 <div className="text-green-300 text-xs">+6.1%</div>
                               </div>
                               <div className="bg-red-500/40 rounded p-3 text-center">
                                 <div className="text-red-400 font-bold text-xs">Month 6</div>
-                                <div className="text-white text-sm">1.126 SEI</div>
+                                <div className="text-white text-sm">1.126 ETH</div>
                                 <div className="text-green-300 text-xs">+12.6%</div>
                               </div>
                               <div className="bg-red-500/50 rounded p-3 text-center">
                                 <div className="text-red-400 font-bold text-xs">Year 1</div>
-                                <div className="text-white text-sm font-bold">1.27 SEI</div>
+                                <div className="text-white text-sm font-bold">1.27 ETH</div>
                                 <div className="text-green-300 text-xs font-bold">+27%</div>
                               </div>
                             </div>
@@ -737,7 +733,7 @@ export default function Docs() {
                     <div className="bg-gray-900/50 border border-blue-500/30 rounded-lg p-6">
                       <h2 className="text-xl font-mono font-bold text-blue-400 mb-4">🎯 How Borrowing Works</h2>
                       <p className="text-gray-300 mb-6">
-                        LARRY&apos;s borrowing system lets you use your LARRY tokens as collateral to borrow SEI, 
+                        LARRY&apos;s borrowing system lets you use your LARRY tokens as collateral to borrow ETH, 
                         which you can then use to buy more LARRY and create leverage positions.
                       </p>
 
@@ -774,11 +770,11 @@ export default function Docs() {
                         <div className="bg-purple-500/10 border border-purple-500/20 rounded p-4">
                           <h3 className="text-purple-300 font-bold mb-3">Example 1: Basic Borrow</h3>
                           <div className="text-sm text-gray-300 space-y-2">
-                            <p><strong>You have:</strong> 1000 LARRY tokens (worth ~1000 SEI)</p>
-                            <p><strong>You can borrow:</strong> 990 SEI (99% LTV)</p>
-                            <p><strong>30-day interest:</strong> ~3.2 SEI (3.9% APR × 30/365 days)</p>
-                            <p><strong>Fee to protocol:</strong> ~1 SEI (30% of interest)</p>
-                            <p><strong>You receive:</strong> ~986 SEI</p>
+                            <p><strong>You have:</strong> 1000 LARRY tokens (worth ~1000 ETH)</p>
+                            <p><strong>You can borrow:</strong> 990 ETH (99% LTV)</p>
+                            <p><strong>30-day interest:</strong> ~3.2 ETH (3.9% APR × 30/365 days)</p>
+                            <p><strong>Fee to protocol:</strong> ~1 ETH (30% of interest)</p>
+                            <p><strong>You receive:</strong> ~986 ETH</p>
                           </div>
 
                           {/* Basic Borrow Chart */}
@@ -793,17 +789,17 @@ export default function Docs() {
                               <div className="bg-green-500/20 rounded p-3 text-center">
                                 <div className="text-green-400 font-bold">MAX BORROW</div>
                                 <div className="text-white text-lg">990</div>
-                                <div className="text-gray-300">SEI (99% LTV)</div>
+                                <div className="text-gray-300">ETH (99% LTV)</div>
                               </div>
                               <div className="bg-red-500/20 rounded p-3 text-center">
                                 <div className="text-red-400 font-bold">INTEREST</div>
                                 <div className="text-white text-lg">3.2</div>
-                                <div className="text-gray-300">SEI (30 days)</div>
+                                <div className="text-gray-300">ETH (30 days)</div>
                               </div>
                               <div className="bg-yellow-500/20 rounded p-3 text-center">
                                 <div className="text-yellow-400 font-bold">NET RECEIVED</div>
                                 <div className="text-white text-lg font-bold">986</div>
-                                <div className="text-gray-300">SEI in hand</div>
+                                <div className="text-gray-300">ETH in hand</div>
                               </div>
                             </div>
                             <FlowDiagram
@@ -811,8 +807,8 @@ export default function Docs() {
                               nodes={[
                                 { id: 'deposit', label: '1000 LARRY', type: 'user', description: 'Your collateral' },
                                 { id: 'contract', label: 'Borrow Contract', type: 'contract', description: 'Holds collateral' },
-                                { id: 'calculate', label: '99% LTV Check', type: 'system', description: '990 SEI max' },
-                                { id: 'receive', label: '986 SEI', type: 'reward', description: 'After interest' }
+                                { id: 'calculate', label: '99% LTV Check', type: 'system', description: '990 ETH max' },
+                                { id: 'receive', label: '986 ETH', type: 'reward', description: 'After interest' }
                               ]}
                               connections={[
                                 { from: 'deposit', to: 'contract' },
@@ -828,11 +824,11 @@ export default function Docs() {
                         <div className="bg-green-500/10 border border-green-500/20 rounded p-4">
                           <h3 className="text-green-300 font-bold mb-3">Example 2: Leverage Function</h3>
                           <div className="text-sm text-gray-300 space-y-2">
-                            <p><strong>You send:</strong> 1000 SEI + fees (~13 SEI)</p>
+                            <p><strong>You send:</strong> 1000 ETH + fees (~13 ETH)</p>
                             <p><strong>System mints:</strong> ~987 LARRY to contract as collateral</p>
-                            <p><strong>You borrow:</strong> ~980 SEI (99% of backing value)</p>
-                            <p><strong>Net result:</strong> 980 SEI to buy more LARRY + 987 LARRY collateral</p>
-                            <p><strong>Total position:</strong> Control ~1967 SEI worth of LARRY</p>
+                            <p><strong>You borrow:</strong> ~980 ETH (99% of backing value)</p>
+                            <p><strong>Net result:</strong> 980 ETH to buy more LARRY + 987 LARRY collateral</p>
+                            <p><strong>Total position:</strong> Control ~1967 ETH worth of LARRY</p>
                           </div>
 
                           {/* Leverage Function Chart */}
@@ -842,10 +838,10 @@ export default function Docs() {
                               <div className="bg-yellow-500/20 rounded p-3 text-center">
                                 <div className="text-yellow-400 font-bold mb-2">STEP 1: INPUT</div>
                                 <div className="text-xs text-gray-300 space-y-1">
-                                  <div>You send: <span className="text-white">1,000 SEI</span></div>
-                                  <div>Plus fees: <span className="text-white">+13 SEI</span></div>
+                                  <div>You send: <span className="text-white">1,000 ETH</span></div>
+                                  <div>Plus fees: <span className="text-white">+13 ETH</span></div>
                                   <div className="border-t border-gray-600 pt-1">
-                                    Total: <span className="text-yellow-300 font-bold">1,013 SEI</span>
+                                    Total: <span className="text-yellow-300 font-bold">1,013 ETH</span>
                                   </div>
                                 </div>
                               </div>
@@ -855,14 +851,14 @@ export default function Docs() {
                                   <div>Contract mints: <span className="text-white">987 LARRY</span></div>
                                   <div>Held as collateral</div>
                                   <div className="border-t border-gray-600 pt-1">
-                                    Borrows: <span className="text-blue-300 font-bold">980 SEI</span>
+                                    Borrows: <span className="text-blue-300 font-bold">980 ETH</span>
                                   </div>
                                 </div>
                               </div>
                               <div className="bg-green-500/20 rounded p-3 text-center">
                                 <div className="text-green-400 font-bold mb-2">STEP 3: RESULT</div>
                                 <div className="text-xs text-gray-300 space-y-1">
-                                  <div>You get: <span className="text-white">980 SEI</span></div>
+                                  <div>You get: <span className="text-white">980 ETH</span></div>
                                   <div>Buy more LARRY: <span className="text-white">~977</span></div>
                                   <div className="border-t border-gray-600 pt-1">
                                     Total: <span className="text-green-300 font-bold">1,964 LARRY</span>
@@ -873,9 +869,9 @@ export default function Docs() {
                             <FlowDiagram
                               title="Leverage Function Flow"
                               nodes={[
-                                { id: 'input', label: '1,013 SEI', type: 'user', description: 'Single transaction' },
+                                { id: 'input', label: '1,013 ETH', type: 'user', description: 'Single transaction' },
                                 { id: 'leverage', label: 'leverage()', type: 'contract', description: 'Auto-execution' },
-                                { id: 'mint', label: 'Mint & Borrow', type: 'system', description: '987 LARRY + 980 SEI' },
+                                { id: 'mint', label: 'Mint & Borrow', type: 'system', description: '987 LARRY + 980 ETH' },
                                 { id: 'double', label: '2x Position', type: 'reward', description: '~1,964 LARRY total' }
                               ]}
                               connections={[
@@ -892,10 +888,10 @@ export default function Docs() {
                         <div className="bg-yellow-500/10 border border-yellow-500/20 rounded p-4">
                           <h3 className="text-yellow-300 font-bold mb-3">Example 3: Flash Close</h3>
                           <div className="text-sm text-gray-300 space-y-2">
-                            <p><strong>Your collateral:</strong> 1000 LARRY (worth 1200 SEI after growth)</p>
-                            <p><strong>Your debt:</strong> 990 SEI borrowed</p>
-                            <p><strong>Flash close fee:</strong> 12 SEI (1% of collateral value)</p>
-                            <p><strong>You receive:</strong> 198 SEI (1200 - 990 - 12)</p>
+                            <p><strong>Your collateral:</strong> 1000 LARRY (worth 1200 ETH after growth)</p>
+                            <p><strong>Your debt:</strong> 990 ETH borrowed</p>
+                            <p><strong>Flash close fee:</strong> 12 ETH (1% of collateral value)</p>
+                            <p><strong>You receive:</strong> 198 ETH (1200 - 990 - 12)</p>
                             <p><strong>Protocol burns:</strong> 1000 LARRY (deflationary)</p>
                           </div>
 
@@ -906,34 +902,34 @@ export default function Docs() {
                               <div className="bg-blue-500/20 rounded p-3 text-center">
                                 <div className="text-blue-400 font-bold text-xs">COLLATERAL</div>
                                 <div className="text-white text-sm">1000 LARRY</div>
-                                <div className="text-gray-300 text-xs">Worth 1200 SEI</div>
+                                <div className="text-gray-300 text-xs">Worth 1200 ETH</div>
                               </div>
                               <div className="bg-red-500/20 rounded p-3 text-center">
                                 <div className="text-red-400 font-bold text-xs">DEBT</div>
-                                <div className="text-white text-sm">-990 SEI</div>
+                                <div className="text-white text-sm">-990 ETH</div>
                                 <div className="text-gray-300 text-xs">Must repay</div>
                               </div>
                               <div className="bg-orange-500/20 rounded p-3 text-center">
                                 <div className="text-orange-400 font-bold text-xs">FLASH FEE</div>
-                                <div className="text-white text-sm">-12 SEI</div>
+                                <div className="text-white text-sm">-12 ETH</div>
                                 <div className="text-gray-300 text-xs">1% of value</div>
                               </div>
                               <div className="bg-green-500/20 rounded p-3 text-center">
                                 <div className="text-green-400 font-bold text-xs">NET PROFIT</div>
-                                <div className="text-white text-sm font-bold">+198 SEI</div>
+                                <div className="text-white text-sm font-bold">+198 ETH</div>
                                 <div className="text-gray-300 text-xs">You receive</div>
                               </div>
                             </div>
                             <div className="bg-gray-800/50 rounded p-3 mb-4">
                               <h5 className="text-yellow-300 font-bold mb-2 text-center">📊 Profit Breakdown</h5>
                               <div className="flex items-center justify-center space-x-2 text-xs">
-                                <span className="text-blue-300">1200 SEI</span>
+                                <span className="text-blue-300">1200 ETH</span>
                                 <span className="text-gray-400">-</span>
-                                <span className="text-red-300">990 SEI</span>
+                                <span className="text-red-300">990 ETH</span>
                                 <span className="text-gray-400">-</span>
-                                <span className="text-orange-300">12 SEI</span>
+                                <span className="text-orange-300">12 ETH</span>
                                 <span className="text-gray-400">=</span>
-                                <span className="text-green-300 font-bold">198 SEI profit</span>
+                                <span className="text-green-300 font-bold">198 ETH profit</span>
                               </div>
                             </div>
                             <FlowDiagram
@@ -941,15 +937,15 @@ export default function Docs() {
                               nodes={[
                                 { id: 'initiate', label: 'Flash Close', type: 'user', description: 'Single click exit' },
                                 { id: 'burn', label: 'Burn Collateral', type: 'contract', description: '1000 LARRY destroyed' },
-                                { id: 'calculate', label: 'Calculate Profit', type: 'system', description: '1200-990-12 SEI' },
-                                { id: 'profit', label: 'Receive Profit', type: 'reward', description: '198 SEI to you' }
+                                { id: 'calculate', label: 'Calculate Profit', type: 'system', description: '1200-990-12 ETH' },
+                                { id: 'profit', label: 'Receive Profit', type: 'reward', description: '198 ETH to you' }
                               ]}
                               connections={[
                                 { from: 'initiate', to: 'burn' },
                                 { from: 'burn', to: 'calculate' },
                                 { from: 'calculate', to: 'profit' }
                               ]}
-                              note="Flash close instantly converts your LARRY gains to SEI profit, perfect for taking profits without loan management."
+                              note="Flash close instantly converts your LARRY gains to ETH profit, perfect for taking profits without loan management."
                               className="mt-4 bg-yellow-500/10"
                             />
                           </div>
@@ -969,7 +965,7 @@ export default function Docs() {
                           <h3 className="text-red-300 font-bold mb-3">What Happens at Expiry</h3>
                           <ul className="text-sm text-gray-300 space-y-2">
                             <li>• Your LARRY collateral gets burned</li>
-                            <li>• Borrowed SEI stays in protocol</li>
+                            <li>• Borrowed ETH stays in protocol</li>
                             <li>• This is deflationary for other LARRY holders</li>
                             <li>• You lose your collateral but no additional penalties</li>
                           </ul>
@@ -1008,7 +1004,7 @@ export default function Docs() {
                           <div className="bg-blue-500/20 rounded p-3 text-center">
                             <div className="text-blue-400 font-bold text-xs">PROTOCOL</div>
                             <div className="text-white text-sm">📈 GAINS</div>
-                            <div className="text-gray-300 text-xs">SEI stays</div>
+                            <div className="text-gray-300 text-xs">ETH stays</div>
                           </div>
                         </div>
                         <FlowDiagram
@@ -1036,7 +1032,7 @@ export default function Docs() {
                       nodes={[
                         { id: 'deposit', label: 'Deposit LARRY', type: 'user', description: 'Send collateral' },
                         { id: 'contract', label: 'Smart Contract', type: 'contract', description: 'Holds collateral' },
-                        { id: 'borrow', label: 'Receive SEI', type: 'system', description: 'Up to 99% LTV' },
+                        { id: 'borrow', label: 'Receive ETH', type: 'system', description: 'Up to 99% LTV' },
                         { id: 'repay', label: 'Repay or Expire', type: 'reward', description: 'Get collateral back' }
                       ]}
                       connections={[
@@ -1157,20 +1153,20 @@ export default function Docs() {
                                 <tr className="hover:bg-gray-800/50">
                                   <td className="border border-gray-700 p-3 text-gray-300">1</td>
                                   <td className="border border-gray-700 p-3 text-gray-300">Call leverage()</td>
-                                  <td className="border border-gray-700 p-3 text-yellow-400">1,000 SEI + 13 SEI fees</td>
+                                  <td className="border border-gray-700 p-3 text-yellow-400">1,000 ETH + 13 ETH fees</td>
                                   <td className="border border-gray-700 p-3 text-blue-400">Mints 987 LARRY as collateral</td>
-                                  <td className="border border-gray-700 p-3 text-green-400">980 SEI borrowed</td>
+                                  <td className="border border-gray-700 p-3 text-green-400">980 ETH borrowed</td>
                                 </tr>
                                 <tr className="bg-gray-800/30 hover:bg-gray-800/50">
                                   <td className="border border-gray-700 p-3 text-gray-300">2</td>
                                   <td className="border border-gray-700 p-3 text-gray-300">Buy more LARRY</td>
-                                  <td className="border border-gray-700 p-3 text-yellow-400">980 SEI borrowed</td>
+                                  <td className="border border-gray-700 p-3 text-yellow-400">980 ETH borrowed</td>
                                   <td className="border border-gray-700 p-3 text-blue-400">Auto-converts to LARRY</td>
                                   <td className="border border-gray-700 p-3 text-green-400">977 LARRY tokens</td>
                                 </tr>
                                 <tr className="hover:bg-gray-800/50">
                                   <td className="border border-gray-700 p-3 font-bold text-purple-400" colSpan={2}>Total Result</td>
-                                  <td className="border border-gray-700 p-3 font-bold text-purple-400">1,013 SEI invested</td>
+                                  <td className="border border-gray-700 p-3 font-bold text-purple-400">1,013 ETH invested</td>
                                   <td className="border border-gray-700 p-3 font-bold text-purple-400">2x leverage achieved</td>
                                   <td className="border border-gray-700 p-3 font-bold text-purple-400">~1,964 LARRY controlled</td>
                                 </tr>
@@ -1193,9 +1189,9 @@ export default function Docs() {
                                 <tr className="bg-orange-800/50">
                                   <th className="border border-gray-700 p-3 text-orange-300 font-mono">Loop</th>
                                   <th className="border border-gray-700 p-3 text-orange-300 font-mono">Transaction</th>
-                                  <th className="border border-gray-700 p-3 text-orange-300 font-mono">SEI Used</th>
+                                  <th className="border border-gray-700 p-3 text-orange-300 font-mono">ETH Used</th>
                                   <th className="border border-gray-700 p-3 text-orange-300 font-mono">LARRY Owned</th>
-                                  <th className="border border-gray-700 p-3 text-orange-300 font-mono">SEI Borrowed</th>
+                                  <th className="border border-gray-700 p-3 text-orange-300 font-mono">ETH Borrowed</th>
                                   <th className="border border-gray-700 p-3 text-orange-300 font-mono">Total Exposure</th>
                                 </tr>
                               </thead>
@@ -1252,14 +1248,14 @@ export default function Docs() {
 
                         {/* Cost Comparison */}
                         <div className="bg-red-500/10 border border-red-500/20 rounded p-6">
-                          <h3 className="text-red-300 font-bold mb-4">💰 Cost Comparison (Starting with 1,000 SEI)</h3>
+                          <h3 className="text-red-300 font-bold mb-4">💰 Cost Comparison (Starting with 1,000 ETH)</h3>
                           <div className="grid sm:grid-cols-2 gap-6">
                             <div className="bg-purple-500/10 border border-purple-500/20 rounded p-4">
                               <h4 className="text-purple-300 font-bold mb-2">leverage() Function Costs</h4>
                               <ul className="text-sm text-gray-300 space-y-1">
-                                <li>• Initial leverage fee: ~13 SEI</li>
-                                <li>• One buy transaction: ~2.5 SEI</li>
-                                <li>• <strong>Total fees: ~15.5 SEI</strong></li>
+                                <li>• Initial leverage fee: ~13 ETH</li>
+                                <li>• One buy transaction: ~2.5 ETH</li>
+                                <li>• <strong>Total fees: ~15.5 ETH</strong></li>
                                 <li>• <strong>Leverage achieved: 2x</strong></li>
                                 <li>• <strong>Efficiency: High</strong></li>
                               </ul>
@@ -1267,9 +1263,9 @@ export default function Docs() {
                             <div className="bg-orange-500/10 border border-orange-500/20 rounded p-4">
                               <h4 className="text-orange-300 font-bold mb-2">Manual Loop Costs (5 loops)</h4>
                               <ul className="text-sm text-gray-300 space-y-1">
-                                <li>• Multiple borrow fees: ~45 SEI</li>
-                                <li>• Multiple buy transactions: ~37.5 SEI</li>
-                                <li>• <strong>Total fees: ~82.5 SEI</strong></li>
+                                <li>• Multiple borrow fees: ~45 ETH</li>
+                                <li>• Multiple buy transactions: ~37.5 ETH</li>
+                                <li>• <strong>Total fees: ~82.5 ETH</strong></li>
                                 <li>• <strong>Leverage achieved: 30x</strong></li>
                                 <li>• <strong>Efficiency: Maximum gain</strong></li>
                               </ul>
@@ -1331,10 +1327,10 @@ export default function Docs() {
                         <FlowDiagram
                           title="Exponential Leverage Growth"
                           nodes={[
-                            { id: 'start', label: '1,000 SEI', type: 'user', description: 'Initial investment' },
-                            { id: 'loop1', label: '2x Position', type: 'contract', description: '1,986 SEI exposure' },
-                            { id: 'loop3', label: '8x Position', type: 'system', description: '7,795 SEI exposure' },
-                            { id: 'max', label: '30x Position', type: 'reward', description: '30,000+ SEI exposure' }
+                            { id: 'start', label: '1,000 ETH', type: 'user', description: 'Initial investment' },
+                            { id: 'loop1', label: '2x Position', type: 'contract', description: '1,986 ETH exposure' },
+                            { id: 'loop3', label: '8x Position', type: 'system', description: '7,795 ETH exposure' },
+                            { id: 'max', label: '30x Position', type: 'reward', description: '30,000+ ETH exposure' }
                           ]}
                           connections={[
                             { from: 'start', to: 'loop1' },
@@ -1349,16 +1345,16 @@ export default function Docs() {
                       {/* Mobile: Card format */}
                       <div className="block sm:hidden space-y-4">
                         {[
-                          { loop: 'Start', sei: '1,000', larry: '0', borrowed: '0', total: '1,000' },
-                          { loop: 'Loop 1', sei: '0', larry: '996', borrowed: '986', total: '1,986' },
-                          { loop: 'Loop 2', sei: '0', larry: '1,978', borrowed: '1,958', total: '3,936' },
-                          { loop: 'Loop 3', sei: '0', larry: '3,917', borrowed: '3,878', total: '7,795' },
-                          { loop: 'Loop 5', sei: '0', larry: '15,000+', borrowed: '14,850+', total: '30,000+' }
+                          { loop: 'Start', eth: '1,000', larry: '0', borrowed: '0', total: '1,000' },
+                          { loop: 'Loop 1', eth: '0', larry: '996', borrowed: '986', total: '1,986' },
+                          { loop: 'Loop 2', eth: '0', larry: '1,978', borrowed: '1,958', total: '3,936' },
+                          { loop: 'Loop 3', eth: '0', larry: '3,917', borrowed: '3,878', total: '7,795' },
+                          { loop: 'Loop 5', eth: '0', larry: '15,000+', borrowed: '14,850+', total: '30,000+' }
                         ].map((row, index) => (
                           <div key={index} className="bg-black/50 border border-purple-500/20 rounded p-4">
                             <div className="text-purple-400 font-bold mb-2">{row.loop}</div>
                             <div className="grid grid-cols-2 gap-2 text-sm">
-                              <div><span className="text-gray-400">SEI:</span> <span className="text-green-400">{row.sei}</span></div>
+                              <div><span className="text-gray-400">ETH:</span> <span className="text-green-400">{row.eth}</span></div>
                               <div><span className="text-gray-400">LARRY:</span> <span className="text-blue-400">{row.larry}</span></div>
                               <div><span className="text-gray-400">Borrowed:</span> <span className="text-purple-400">{row.borrowed}</span></div>
                               <div><span className="text-gray-400">Total Exposure:</span> <span className="text-yellow-400">{row.total}</span></div>
@@ -1373,9 +1369,9 @@ export default function Docs() {
                           <thead>
                             <tr className="bg-gray-800">
                               <th className="border border-gray-700 p-3 text-purple-400 font-mono text-sm">Loop</th>
-                              <th className="border border-gray-700 p-3 text-green-400 font-mono text-sm">SEI Held</th>
+                              <th className="border border-gray-700 p-3 text-green-400 font-mono text-sm">ETH Held</th>
                               <th className="border border-gray-700 p-3 text-blue-400 font-mono text-sm">LARRY Held</th>
-                              <th className="border border-gray-700 p-3 text-purple-400 font-mono text-sm">SEI Borrowed</th>
+                              <th className="border border-gray-700 p-3 text-purple-400 font-mono text-sm">ETH Borrowed</th>
                               <th className="border border-gray-700 p-3 text-yellow-400 font-mono text-sm">Total Exposure</th>
                             </tr>
                           </thead>
@@ -1441,9 +1437,9 @@ export default function Docs() {
                         <div>
                           <h3 className="text-green-300 font-bold mb-3">Risk Mitigation</h3>
                           <ul className="text-sm text-gray-300 space-y-2">
-                            <li>• <strong>Start small:</strong> Test with 10-50 SEI first</li>
+                            <li>• <strong>Start small:</strong> Test with 10-50 ETH first</li>
                             <li>• <strong>Set reminders:</strong> Track loan expiry dates</li>
-                            <li>• <strong>Keep reserves:</strong> Always have SEI for repayment</li>
+                            <li>• <strong>Keep reserves:</strong> Always have ETH for repayment</li>
                             <li>• <strong>Monitor closely:</strong> Check positions regularly</li>
                           </ul>
                         </div>
@@ -1453,7 +1449,7 @@ export default function Docs() {
                       <FlowDiagram
                         title="Safe Leverage Management"
                         nodes={[
-                          { id: 'entry', label: 'Start Small', type: 'user', description: '10-50 SEI' },
+                          { id: 'entry', label: 'Start Small', type: 'user', description: '10-50 ETH' },
                           { id: 'leverage', label: 'Build Position', type: 'system', description: 'Loop carefully' },
                           { id: 'monitor', label: 'Track Loans', type: 'contract', description: 'Set reminders' },
                           { id: 'exit', label: 'Safe Exit', type: 'reward', description: 'Flash close or repay' }
@@ -1472,10 +1468,10 @@ export default function Docs() {
                         <FlowDiagram
                           title="leverage() Function Flow"
                           nodes={[
-                            { id: 'send', label: 'Send SEI + Fees', type: 'user', description: '1,013 SEI total' },
+                            { id: 'send', label: 'Send ETH + Fees', type: 'user', description: '1,013 ETH total' },
                             { id: 'contract', label: 'Smart Contract', type: 'contract', description: 'One transaction' },
                             { id: 'mint', label: 'Mint LARRY', type: 'system', description: '987 LARRY collateral' },
-                            { id: 'borrow', label: 'Auto-Borrow', type: 'reward', description: '980 SEI received' }
+                            { id: 'borrow', label: 'Auto-Borrow', type: 'reward', description: '980 ETH received' }
                           ]}
                           connections={[
                             { from: 'send', to: 'contract' },
@@ -1489,8 +1485,8 @@ export default function Docs() {
                         <FlowDiagram
                           title="Manual Leverage Loop"
                           nodes={[
-                            { id: 'buy1', label: 'Buy LARRY', type: 'user', description: '1,000 SEI → 997 LARRY' },
-                            { id: 'borrow1', label: 'Borrow SEI', type: 'contract', description: '987 SEI borrowed' },
+                            { id: 'buy1', label: 'Buy LARRY', type: 'user', description: '1,000 ETH → 997 LARRY' },
+                            { id: 'borrow1', label: 'Borrow ETH', type: 'contract', description: '987 ETH borrowed' },
                             { id: 'buy2', label: 'Buy More LARRY', type: 'system', description: '984 LARRY more' },
                             { id: 'loop', label: 'Repeat Loop', type: 'reward', description: 'Scale to 10x-30x' }
                           ]}
@@ -1548,7 +1544,7 @@ export default function Docs() {
                       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
                         {[
                           { action: 'Buy/Sell LARRY', fee: '0.25%', purpose: 'Supports price growth', color: 'green' },
-                          { action: 'Borrow SEI', fee: '3.9% APR', purpose: 'Interest to protocol', color: 'blue' },
+                          { action: 'Borrow ETH', fee: '3.9% APR', purpose: 'Interest to protocol', color: 'blue' },
                           { action: 'Flash Close Loan', fee: '1%', purpose: 'Quick exit option', color: 'purple' },
                           { action: 'Liquidation', fee: '0%', purpose: 'Automatic at midnight', color: 'red' }
                         ].map((item, index) => (
@@ -1582,7 +1578,7 @@ export default function Docs() {
                           </p>
                           <div className="bg-black/50 rounded p-3">
                             <p className="text-xs text-green-200 font-mono">
-                              Price = (Total SEI Backing) ÷ (Total LARRY Supply)
+                              Price = (Total ETH Backing) ÷ (Total LARRY Supply)
                             </p>
                           </div>
                         </div>
@@ -1603,7 +1599,7 @@ export default function Docs() {
                             </div>
                             <div className="bg-black/50 rounded p-2">
                               <div className="text-blue-200 font-bold">Dragon Swap</div>
-                              <div className="text-gray-300">LARRY/SEI rewards</div>
+                              <div className="text-gray-300">LARRY/ETH rewards</div>
                             </div>
                           </div>
                         </div>
@@ -1866,12 +1862,12 @@ export default function Docs() {
                       },
                       {
                         q: "How much can I leverage?",
-                        a: "You can borrow up to 99% of your LARRY token value as SEI. By repeating this process (looping), you can achieve 10-20x leverage or more. The exact amount depends on fees and your risk tolerance.",
+                        a: "You can borrow up to 99% of your LARRY token value as ETH. By repeating this process (looping), you can achieve 10-20x leverage or more. The exact amount depends on fees and your risk tolerance.",
                         category: "Leverage"
                       },
                       {
                         q: "What happens if I can&apos;t repay my loan?",
-                        a: "Loans are automatically liquidated at midnight UTC after expiry. Your LARRY collateral gets burned (deflationary for other holders) and the borrowed SEI stays in the protocol. You can also flash close early for a 1% fee.",
+                        a: "Loans are automatically liquidated at midnight UTC after expiry. Your LARRY collateral gets burned (deflationary for other holders) and the borrowed ETH stays in the protocol. You can also flash close early for a 1% fee.",
                         category: "Loans"
                       },
                       {
@@ -1891,17 +1887,17 @@ export default function Docs() {
                       },
                       {
                         q: "How do I get started?",
-                        a: "1) Connect your wallet with SEI tokens, 2) Buy some LARRY through the trading interface, 3) Optionally start leveraging by borrowing SEI against your LARRY, 4) Monitor your positions and earn rewards automatically.",
+                        a: "1) Connect your wallet with ETH tokens, 2) Buy some LARRY through the trading interface, 3) Optionally start leveraging by borrowing ETH against your LARRY, 4) Monitor your positions and earn rewards automatically.",
                         category: "Getting Started"
                       },
                       {
                         q: "What&apos;s the minimum amount to start?",
-                        a: "There&apos;s no official minimum, but we recommend starting with at least 10-50 SEI to cover gas fees and test the system. You can always add more later as you get comfortable.",
+                        a: "There&apos;s no official minimum, but we recommend starting with at least 10-50 ETH to cover gas fees and test the system. You can always add more later as you get comfortable.",
                         category: "Getting Started"
                       },
                       {
                         q: "Is this available on other chains?",
-                        a: "LARRY is currently only on SEI Network, which offers ultra-low fees perfect for leverage looping. There are no plans for other chains at this time.",
+                        a: "LARRY is currently only on ETH Network, which offers ultra-low fees perfect for leverage looping. There are no plans for other chains at this time.",
                         category: "Technical"
                       },
                       {
@@ -1989,9 +1985,9 @@ export default function Docs() {
                                 <FlowDiagram
                                   title="Leverage Loop Process"
                                   nodes={[
-                                    { id: 'start', label: 'Buy LARRY', type: 'user', description: '1,000 SEI → 997 LARRY' },
-                                    { id: 'borrow', label: 'Borrow SEI', type: 'contract', description: '99% LTV = 987 SEI' },
-                                    { id: 'buy', label: 'Buy More LARRY', type: 'system', description: '987 SEI → 984 LARRY' },
+                                    { id: 'start', label: 'Buy LARRY', type: 'user', description: '1,000 ETH → 997 LARRY' },
+                                    { id: 'borrow', label: 'Borrow ETH', type: 'contract', description: '99% LTV = 987 ETH' },
+                                    { id: 'buy', label: 'Buy More LARRY', type: 'system', description: '987 ETH → 984 LARRY' },
                                     { id: 'loop', label: 'Repeat Process', type: 'reward', description: 'Higher leverage' }
                                   ]}
                                   connections={[
@@ -2024,7 +2020,7 @@ export default function Docs() {
                                     </div>
                                     <div className="flex items-center justify-between p-3 bg-red-500/20 rounded">
                                       <span className="text-gray-300 font-mono">After Day 30:</span>
-                                      <span className="text-red-400">LARRY burned, SEI stays in protocol</span>
+                                      <span className="text-red-400">LARRY burned, ETH stays in protocol</span>
                                     </div>
                                   </div>
                                 </div>
@@ -2033,7 +2029,7 @@ export default function Docs() {
                                   nodes={[
                                     { id: 'expiry', label: 'Loan Expires', type: 'system', description: 'Midnight UTC' },
                                     { id: 'burn', label: 'Burn LARRY', type: 'burn', description: 'Collateral destroyed' },
-                                    { id: 'keep', label: 'Keep SEI', type: 'contract', description: 'Protocol retains' },
+                                    { id: 'keep', label: 'Keep ETH', type: 'contract', description: 'Protocol retains' },
                                     { id: 'holders', label: 'LARRY Holders', type: 'reward', description: 'Benefit from burn' }
                                   ]}
                                   connections={[
@@ -2057,7 +2053,7 @@ export default function Docs() {
                                         <li>• 0.25% on all trades</li>
                                         <li>• 3.9% APR on loans</li>
                                         <li>• 1% flash close fees</li>
-                                        <li>→ Goes to SEI backing</li>
+                                        <li>→ Goes to ETH backing</li>
                                       </ul>
                                     </div>
                                     <div className="bg-black/50 rounded p-3">
@@ -2075,7 +2071,7 @@ export default function Docs() {
                                   title="Automatic Reward System"
                                   nodes={[
                                     { id: 'fees', label: 'Protocol Fees', type: 'system', description: '0.25% + 3.9% APR' },
-                                    { id: 'backing', label: 'SEI Backing', type: 'contract', description: 'Increases reserves' },
+                                    { id: 'backing', label: 'ETH Backing', type: 'contract', description: 'Increases reserves' },
                                     { id: 'burns', label: 'Token Burns', type: 'burn', description: 'Reduces supply' },
                                     { id: 'holders', label: 'LARRY Price ↑', type: 'reward', description: 'Automatic gains' }
                                   ]}
@@ -2096,22 +2092,22 @@ export default function Docs() {
                                   <div className="space-y-3">
                                     <div className="bg-black/50 rounded p-3">
                                       <div className="flex justify-between items-center mb-2">
-                                        <span className="text-gray-300">Buy 1,000 SEI worth of LARRY:</span>
-                                        <span className="text-yellow-400 font-mono">2.5 SEI fee</span>
+                                        <span className="text-gray-300">Buy 1,000 ETH worth of LARRY:</span>
+                                        <span className="text-yellow-400 font-mono">2.5 ETH fee</span>
                                       </div>
                                       <div className="text-xs text-gray-400">0.25% trading fee</div>
                                     </div>
                                     <div className="bg-black/50 rounded p-3">
                                       <div className="flex justify-between items-center mb-2">
-                                        <span className="text-gray-300">Borrow 987 SEI (99% LTV):</span>
-                                        <span className="text-purple-400 font-mono">38.5 SEI/year</span>
+                                        <span className="text-gray-300">Borrow 987 ETH (99% LTV):</span>
+                                        <span className="text-purple-400 font-mono">38.5 ETH/year</span>
                                       </div>
                                       <div className="text-xs text-gray-400">3.9% annual interest</div>
                                     </div>
                                     <div className="bg-black/50 rounded p-3">
                                       <div className="flex justify-between items-center mb-2">
                                         <span className="text-gray-300">Flash close position:</span>
-                                        <span className="text-orange-400 font-mono">9.87 SEI fee</span>
+                                        <span className="text-orange-400 font-mono">9.87 ETH fee</span>
                                       </div>
                                       <div className="text-xs text-gray-400">1% of borrowed amount</div>
                                     </div>
@@ -2122,7 +2118,7 @@ export default function Docs() {
                                   nodes={[
                                     { id: 'user', label: 'You Pay Fees', type: 'user', description: '0.25% + 3.9% + 1%' },
                                     { id: 'protocol', label: 'Protocol Treasury', type: 'contract', description: 'Collects all fees' },
-                                    { id: 'backing', label: 'SEI Backing', type: 'system', description: 'Increases reserves' },
+                                    { id: 'backing', label: 'ETH Backing', type: 'system', description: 'Increases reserves' },
                                     { id: 'holders', label: 'LARRY Holders', type: 'reward', description: 'Higher token price' }
                                   ]}
                                   connections={[
@@ -2181,8 +2177,8 @@ export default function Docs() {
                                   <h4 className="text-green-300 font-bold mb-3">🎯 Step-by-Step Getting Started</h4>
                                   <div className="space-y-3">
                                     {[
-                                      { step: 1, action: 'Connect Wallet', detail: 'SEI Network with 50+ SEI recommended' },
-                                      { step: 2, action: 'Buy LARRY Tokens', detail: 'Start with 10-50 SEI to test the system' },
+                                      { step: 1, action: 'Connect Wallet', detail: 'ETH Network with 50+ ETH recommended' },
+                                      { step: 2, action: 'Buy LARRY Tokens', detail: 'Start with 10-50 ETH to test the system' },
                                       { step: 3, action: 'Try Basic Features', detail: 'Buy, sell, check your balance' },
                                       { step: 4, action: 'Learn Leverage', detail: 'Borrow against LARRY, start with 2x' },
                                       { step: 5, action: 'Earn Rewards', detail: 'Hold LARRY and earn automatically' }
@@ -2202,8 +2198,8 @@ export default function Docs() {
                                 <FlowDiagram
                                   title="New User Journey"
                                   nodes={[
-                                    { id: 'wallet', label: 'Connect Wallet', type: 'user', description: 'SEI Network' },
-                                    { id: 'buy', label: 'Buy LARRY', type: 'system', description: '10-50 SEI start' },
+                                    { id: 'wallet', label: 'Connect Wallet', type: 'user', description: 'ETH Network' },
+                                    { id: 'buy', label: 'Buy LARRY', type: 'system', description: '10-50 ETH start' },
                                     { id: 'leverage', label: 'Try Leverage', type: 'contract', description: 'Borrow & loop' },
                                     { id: 'earn', label: 'Earn Rewards', type: 'reward', description: 'Automatic gains' }
                                   ]}

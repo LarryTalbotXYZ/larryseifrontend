@@ -6,29 +6,12 @@ import { WagmiProvider } from 'wagmi';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { ReactNode } from 'react';
 
-const seiNetwork = {
-  id: 1329,
-  name: 'Sei Network',
-  iconUrl: 'https://assets.coingecko.com/coins/images/28205/large/Sei_Logo_-_Transparent.png',
-  iconBackground: '#fff',
-  nativeCurrency: { name: 'Sei', symbol: 'SEI', decimals: 18 },
-  rpcUrls: {
-    default: { http: ['https://evm-rpc.sei-apis.com'] },
-  },
-  blockExplorers: {
-    default: { name: 'Seitrace', url: 'https://seitrace.com' },
-  },
-  contracts: {
-    larryTalbot: {
-      address: '0x888d81e3ea5E8362B5f69188CBCF34Fa8da4b888' as `0x${string}`,
-    },
-  },
-};
+import { base } from 'wagmi/chains';
 
 const config = getDefaultConfig({
   appName: 'Larry Talbot DeFi',
   projectId: 'e78d121a165909ad1ec1cd20c2af0f9a',
-  chains: [seiNetwork],
+  chains: [base],
   ssr: true,
 });
 

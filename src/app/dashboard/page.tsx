@@ -74,7 +74,6 @@ export default function Dashboard() {
           <div className="hidden md:flex items-center space-x-8">
             <Link href="/" className="text-gray-400 hover:text-green-400 transition-colors font-mono text-sm">HOME.exe</Link>
             <Link href="/docs" className="text-gray-400 hover:text-green-400 transition-colors font-mono text-sm">DOCS.exe</Link>
-            <Link href="/veyaka" className="text-gray-400 hover:text-purple-400 transition-colors font-mono text-sm">VEYAKA.sys</Link>
             <span className="text-green-400 font-mono font-medium text-sm">[ACTIVE_SESSION]</span>
           </div>
 
