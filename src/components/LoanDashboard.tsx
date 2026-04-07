@@ -1,7 +1,7 @@
 'use client';
 
 import { useAccount } from 'wagmi';
-import { Clock, DollarSign, Shield, TrendingDown, Zap, X, Plus } from 'lucide-react';
+import { Clock, Shield, AlertTriangle, XCircle, Zap, RefreshCw, Layers } from 'lucide-react';
 import { useUserLarryData, useLarryContract, useTradeCalculations } from '@/hooks/useLarryContract';
 import { useState } from 'react';
 import { formatEther } from 'viem';
@@ -14,7 +14,6 @@ export default function LoanDashboard() {
   const [repayAmount, setRepayAmount] = useState('');
   const [extendDays, setExtendDays] = useState('30');
 
-  // Get the actual extension fee from the contract
   const { data: extensionFeeData } = useExtensionFee(
     loan?.borrowed || '0', 
     parseInt(extendDays) || 0
@@ -54,205 +53,158 @@ export default function LoanDashboard() {
   }
 
   return (
-    <div className="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 backdrop-blur-md border border-blue-500/30 rounded-xl p-4 sm:p-6 mb-6 sm:mb-8 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/5 to-transparent translate-x-[-100%] animate-pulse"></div>
-      <div className="relative z-10">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 sm:mb-6 gap-2 sm:gap-0">
-          <div className="flex items-center">
-            <span className="text-blue-400 font-mono font-bold text-xl mr-3">∞</span>
-            <h3 className="text-xl sm:text-2xl font-mono font-bold text-blue-400">
-              RECURSIVE_LEVERAGE_POSITION
-            </h3>
+    <div className="glass-panel p-6 sm:p-8 w-full max-w-xl mx-auto mt-8 border border-blue-500/20 bg-gradient-to-br from-slate-900/80 to-blue-900/10">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-2">
+        <div className="flex items-center space-x-3">
+          <div className="w-10 h-10 rounded-xl bg-blue-500/20 flex items-center justify-center">
+            <Layers className="w-5 h-5 text-blue-400" />
           </div>
-          {isExpired && (
-            <span className="bg-gradient-to-r from-red-600 to-red-700 text-white px-4 py-2 rounded-lg text-sm font-mono font-bold border border-red-500/30">
-              TIME_CONSTRAINT_EXCEEDED
-            </span>
-          )}
-          {isExpiringSoon && !isExpired && (
-            <span className="bg-gradient-to-r from-orange-600 to-yellow-600 text-white px-4 py-2 rounded-lg text-sm font-mono font-bold border border-orange-500/30">
-              EXPIRATION_WARNING
-            </span>
-          )}
+          <h3 className="text-xl font-bold text-white">
+            Active Position
+          </h3>
         </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-4 sm:mb-6">
-          {/* Collateral */}
-          <div className="bg-black/50 backdrop-blur-sm border border-green-500/30 rounded-lg p-4 sm:p-6 relative overflow-hidden group">
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-green-500/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
-            <div className="relative z-10">
-              <div className="flex items-center mb-3">
-                <span className="text-green-400 font-mono font-bold text-lg mr-2">∂</span>
-                <span className="text-gray-400 font-mono text-sm">COLLATERAL_ASSET</span>
-              </div>
-              <div className="text-2xl sm:text-3xl font-mono font-bold text-green-400">
-                {parseFloat(loan.collateral) < 0.01 ? parseFloat(loan.collateral).toFixed(8) : parseFloat(loan.collateral).toFixed(4)}
-              </div>
-              <div className="text-green-400 font-mono text-xs mt-1">LARRY_TOKENS</div>
-            </div>
-          </div>
-
-          {/* Borrowed */}
-          <div className="bg-black/50 backdrop-blur-sm border border-red-500/30 rounded-lg p-4 sm:p-6 relative overflow-hidden group">
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-red-500/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
-            <div className="relative z-10">
-              <div className="flex items-center mb-3">
-                <span className="text-red-400 font-mono font-bold text-lg mr-2">∑</span>
-                <span className="text-gray-400 font-mono text-sm">BORROWED_AMOUNT</span>
-              </div>
-              <div className="text-2xl sm:text-3xl font-mono font-bold text-red-400">
-                {parseFloat(loan.borrowed) < 0.01 ? parseFloat(loan.borrowed).toFixed(8) : parseFloat(loan.borrowed).toFixed(4)}
-              </div>
-              <div className="text-red-400 font-mono text-xs mt-1">ETH_TOKENS</div>
-            </div>
-          </div>
-
-          {/* Time Remaining */}
-          <div className="bg-black/50 backdrop-blur-sm border border-blue-500/30 rounded-lg p-4 sm:p-6 relative overflow-hidden group">
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
-            <div className="relative z-10">
-              <div className="flex items-center mb-3">
-                <span className="text-blue-400 font-mono font-bold text-lg mr-2">Δ</span>
-                <span className="text-gray-400 font-mono text-sm">TIME_CONSTRAINT</span>
-              </div>
-              <div className={`text-2xl sm:text-3xl font-mono font-bold ${isExpired ? 'text-red-400' : isExpiringSoon ? 'text-orange-400' : 'text-blue-400'}`}>
-                {isExpired ? 'EXCEEDED' : `${daysUntilExpiry}`}
-              </div>
-              <div className={`font-mono text-xs mt-1 ${isExpired ? 'text-red-400' : isExpiringSoon ? 'text-orange-400' : 'text-blue-400'}`}>
-                {isExpired ? 'TIME_CONSTRAINT_VIOLATED' : 'DAYS_REMAINING'}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Protocol Parameters */}
-        <div className="bg-gradient-to-r from-purple-900/20 to-pink-900/20 backdrop-blur-md border border-purple-500/30 rounded-lg p-4 sm:p-6 mb-6">
-          <div className="flex items-center mb-4 border-b border-purple-500/30 pb-2">
-            <span className="text-purple-400 font-mono font-bold text-lg mr-2">λ</span>
-            <h4 className="text-purple-400 font-mono font-bold text-sm">PROTOCOL_CONSTRAINTS</h4>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4 text-sm font-mono">
-            <div className="flex justify-between py-2 border-b border-purple-500/20">
-              <span className="text-gray-400">EXPIRATION_TIMESTAMP::</span>
-              <span className="text-purple-400 font-bold">{loan.endDate.toLocaleDateString()}</span>
-            </div>
-            <div className="flex justify-between py-2 border-b border-purple-500/20">
-              <span className="text-gray-400">COLLATERAL_RATIO::</span>
-              <span className="text-pink-400 font-bold">99%</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Algorithm Controls */}
-        <div className="space-y-4">
-          {/* Extend Time Constraint */}
-          <div className="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 backdrop-blur-md border border-blue-500/30 rounded-lg p-4 sm:p-6">
-            <div className="flex items-center mb-4 border-b border-blue-500/30 pb-2">
-              <span className="text-blue-400 font-mono font-bold text-lg mr-2">+</span>
-              <h4 className="text-blue-400 font-mono font-bold text-sm">EXTEND_TIME_CONSTRAINT</h4>
-            </div>
-
-            <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
-              <input
-                type="number"
-                placeholder="Additional days"
-                value={extendDays}
-                onChange={(e) => setExtendDays(e.target.value)}
-                min="1"
-                max="365"
-                className="flex-1 bg-black/50 border border-blue-500/30 rounded-lg px-4 sm:px-6 py-3 sm:py-4 text-gray-300 placeholder-gray-500 focus:border-blue-400 focus:outline-none text-sm sm:text-base font-mono relative z-10"
-              />
-              <button
-                onClick={handleExtendLoan}
-                disabled={isPending || !extendDays || parseInt(extendDays) <= 0}
-                className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-4 sm:px-6 py-3 sm:py-4 rounded-lg font-mono font-bold hover:from-blue-500 hover:to-cyan-500 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed border border-blue-500/30 relative overflow-hidden group"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
-                <span className="relative z-10">EXECUTE_EXTENSION</span>
-              </button>
-            </div>
-
-            <div className="mt-3 p-3 bg-black/50 rounded-lg border border-blue-500/20">
-              <div className="text-xs font-mono text-gray-400 mb-1">EXTENSION_FEE_CALCULATION::</div>
-              <div className="text-blue-400 font-mono font-bold">
-                {extensionFeeData ? (parseFloat(formatEther(extensionFeeData as bigint)) < 0.01 ? parseFloat(formatEther(extensionFeeData as bigint)).toFixed(8) : parseFloat(formatEther(extensionFeeData as bigint)).toFixed(4)) : '0.0000'} ETH
-              </div>
-            </div>
-          </div>
-
-          {/* Partial Debt Repayment */}
-          <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
-            <input
-              type="number"
-              placeholder="Partial repayment amount (ETH)"
-              value={repayAmount}
-              onChange={(e) => setRepayAmount(e.target.value)}
-              max={loan.borrowed}
-              className="flex-1 bg-black/50 border border-gray-500/30 rounded-lg px-4 sm:px-6 py-3 sm:py-4 text-gray-300 placeholder-gray-500 focus:border-gray-400 focus:outline-none text-sm sm:text-base font-mono relative z-10"
-            />
-            <button
-              onClick={handleRepay}
-              disabled={isPending || !repayAmount || parseFloat(repayAmount) <= 0}
-              className="bg-gradient-to-r from-gray-600 to-gray-700 text-white px-4 sm:px-6 py-3 sm:py-4 rounded-lg font-mono font-bold hover:from-gray-500 hover:to-gray-600 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed border border-gray-500/30 relative overflow-hidden group"
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
-              <span className="relative z-10">PARTIAL_REPAYMENT</span>
-            </button>
-          </div>
-
-          {/* Position Termination */}
-          <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
-            <button
-              onClick={handleFullRepay}
-              disabled={isPending}
-              className="flex-1 bg-gradient-to-r from-green-600 to-emerald-600 text-white py-3 sm:py-4 rounded-lg font-mono font-bold hover:from-green-500 hover:to-emerald-500 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed border border-green-500/30 relative overflow-hidden group"
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
-              <span className="relative z-10 flex items-center justify-center">
-                <span className="text-lg mr-2">×</span>
-                <span>CLOSE_POSITION_FULL_REPAY</span>
-              </span>
-            </button>
-
-            <button
-              onClick={handleFlashClose}
-              disabled={isPending}
-              className="flex-1 bg-gradient-to-r from-red-600 to-orange-600 text-white py-3 sm:py-4 rounded-lg font-mono font-bold hover:from-red-500 hover:to-orange-500 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed border border-red-500/30 relative overflow-hidden group"
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
-              <span className="relative z-10 flex items-center justify-center">
-                <span className="text-lg mr-2">↓</span>
-                <span>FLASH_CLOSE_PROTOCOL</span>
-              </span>
-            </button>
-          </div>
+        
+        {isExpired && (
+          <span className="bg-red-500/10 text-red-400 px-4 py-2 rounded-lg text-sm font-semibold border border-red-500/20 flex items-center">
+            <AlertTriangle className="w-4 h-4 mr-2" /> Expired
+          </span>
+        )}
+        {isExpiringSoon && !isExpired && (
+          <span className="bg-orange-500/10 text-orange-400 px-4 py-2 rounded-lg text-sm font-semibold border border-orange-500/20 flex items-center">
+            <Clock className="w-4 h-4 mr-2" /> Expiring Soon
+          </span>
+        )}
       </div>
 
-        {/* Protocol Information */}
-        <div className="mt-4 bg-gradient-to-r from-red-900/20 to-orange-900/20 backdrop-blur-md border border-red-500/30 rounded-lg p-4 sm:p-6">
-          <div className="flex items-start space-x-3">
-            <span className="text-red-400 font-mono font-bold text-lg">⚠</span>
-            <div className="text-sm font-mono text-red-200 flex-1">
-              <p className="font-bold mb-2 text-red-400">FLASH_CLOSE_ALGORITHM::</p>
-              <p className="text-xs text-gray-300 leading-relaxed">
-                Automatic collateral liquidation protocol executes LARRY to ETH conversion with 1% algorithmic fee.
-                Time-constraint independent termination mechanism.
-                <span className="text-red-400 block mt-2">f(x) = liquidation(collateral) → debt_resolution</span>
-              </p>
+      {/* Metrics Grid */}
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+        <div className="bg-slate-800/40 border border-slate-700/50 rounded-xl p-4">
+          <p className="text-sm font-medium text-slate-400 mb-2 flex items-center">
+            <Shield className="w-4 h-4 mr-1 text-green-400" /> 
+            Collateral
+          </p>
+          <div className="text-2xl font-bold text-white">
+            {parseFloat(loan.collateral).toFixed(8).replace(/\.?0+$/, '') || '0'}
+          </div>
+          <div className="text-slate-500 text-xs mt-1">LARRY</div>
+        </div>
+
+        <div className="bg-slate-800/40 border border-slate-700/50 rounded-xl p-4">
+          <p className="text-sm font-medium text-slate-400 mb-2 flex items-center">
+            <AlertTriangle className="w-4 h-4 mr-1 text-red-400" /> 
+            Debt
+          </p>
+          <div className="text-2xl font-bold text-white">
+            {parseFloat(loan.borrowed).toFixed(8).replace(/\.?0+$/, '') || '0'}
+          </div>
+          <div className="text-slate-500 text-xs mt-1">ETH</div>
+        </div>
+
+        <div className="bg-slate-800/40 border border-slate-700/50 rounded-xl p-4 col-span-2 lg:col-span-1">
+          <p className="text-sm font-medium text-slate-400 mb-2 flex items-center">
+            <Clock className="w-4 h-4 mr-1 text-blue-400" /> 
+            Time Left
+          </p>
+          <div className={`text-2xl font-bold ${isExpired ? 'text-red-400' : isExpiringSoon ? 'text-orange-400' : 'text-white'}`}>
+            {isExpired ? '0' : `${daysUntilExpiry}`}
+          </div>
+          <div className={`text-xs mt-1 ${isExpired ? 'text-red-400' : 'text-slate-500'}`}>
+            {isExpired ? 'Loan Overdue' : 'Days Remaining'}
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-blue-500/5 border border-blue-500/20 rounded-xl p-4 mb-8">
+        <div className="flex justify-between items-center text-sm">
+          <span className="text-slate-400">Position Expiration</span>
+          <span className="font-semibold text-white">{loan.endDate.toLocaleDateString()}</span>
+        </div>
+      </div>
+
+      {/* Action Area */}
+      <div className="space-y-6">
+        {/* Extend Loan */}
+        <div className="bg-slate-800/30 border border-slate-700/50 rounded-xl p-5">
+          <h4 className="text-sm font-semibold text-white mb-4">Extend Position Time</h4>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <input
+              type="number"
+              placeholder="Days"
+              min="1"
+              max="365"
+              value={extendDays}
+              onChange={(e) => {
+                const val = e.target.value;
+                if (!val || parseInt(val) >= 0) setExtendDays(val);
+              }}
+              className="flex-1 bg-slate-900/80 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:border-blue-500 outline-none font-medium"
+            />
+            <button
+              onClick={handleExtendLoan}
+              disabled={isPending || !extendDays || parseInt(extendDays) <= 0}
+              className="bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold transition-colors disabled:opacity-50 min-w-32"
+            >
+              Extend
+            </button>
+          </div>
+          {!!extensionFeeData && parseInt(extendDays) > 0 && (
+            <div className="text-sm text-slate-400 mt-3">
+              Fee: <span className="font-semibold text-blue-400">{(parseFloat(formatEther(extensionFeeData as bigint))).toFixed(8).replace(/\.?0+$/, '') || '0'} ETH</span>
+            </div>
+          )}
+        </div>
+
+        {/* Repayment Features */}
+        <div className="grid sm:grid-cols-2 gap-4">
+          <div className="bg-slate-800/30 border border-slate-700/50 rounded-xl p-5">
+            <h4 className="text-sm font-semibold text-white mb-4">Partial Repay</h4>
+            <div className="flex flex-col gap-3">
+              <input
+                type="number"
+                placeholder="ETH Amount"
+                min="0"
+                max={loan.borrowed}
+                value={repayAmount}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  if (!val || parseFloat(val) >= 0) setRepayAmount(val);
+                }}
+                className="w-full bg-slate-900/80 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:border-violet-500 outline-none font-medium"
+              />
+              <button
+                onClick={handleRepay}
+                disabled={isPending || !repayAmount || parseFloat(repayAmount) <= 0}
+                className="w-full bg-slate-700 hover:bg-slate-600 text-white py-3 rounded-lg font-semibold transition-colors disabled:opacity-50"
+              >
+                Submit Payment
+              </button>
+            </div>
+          </div>
+
+          <div className="bg-slate-800/30 border border-slate-700/50 rounded-xl p-5 flex flex-col justify-between">
+            <div>
+              <h4 className="text-sm font-semibold text-white mb-2">Close Position</h4>
+              <p className="text-xs text-slate-400 mb-4">You can fully repay manually or flash close by sacrificing 1% collateral.</p>
+            </div>
+            <div className="flex flex-col gap-3">
+              <button
+                onClick={handleFullRepay}
+                disabled={isPending}
+                className="w-full border border-green-500/50 text-green-400 hover:bg-green-500/10 py-2.5 rounded-lg font-semibold transition-colors disabled:opacity-50 flex items-center justify-center text-sm"
+              >
+                <RefreshCw className="w-4 h-4 mr-2" /> Full Repayment
+              </button>
+              <button
+                onClick={handleFlashClose}
+                disabled={isPending}
+                className="w-full bg-red-500/10 border border-red-500/50 text-red-500 hover:bg-red-500/20 py-2.5 rounded-lg font-semibold transition-colors disabled:opacity-50 flex items-center justify-center text-sm"
+              >
+                <Zap className="w-4 h-4 mr-2" /> Flash Close
+              </button>
             </div>
           </div>
         </div>
 
-        {isPending && (
-          <div className="mt-4 p-4 bg-gradient-to-r from-yellow-900/20 to-orange-900/20 backdrop-blur-md border border-yellow-500/30 rounded-lg relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-yellow-500/5 to-transparent translate-x-[-100%] animate-pulse"></div>
-            <div className="relative z-10 flex items-center">
-              <span className="text-yellow-400 font-mono font-bold text-lg mr-3">⟳</span>
-              <p className="text-yellow-400 font-mono font-bold text-sm">TRANSACTION_EXECUTION_IN_PROGRESS...</p>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

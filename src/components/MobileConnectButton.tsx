@@ -32,10 +32,10 @@ export default function MobileConnectButton() {
                 return (
                   <button
                     onClick={openConnectModal}
-                    className="bg-gradient-to-r from-red-600 to-purple-600 hover:from-red-500 hover:to-purple-500 text-white px-3 sm:px-6 py-2 sm:py-3 rounded-lg font-mono font-bold text-xs sm:text-sm transition-all duration-300 border border-red-500/30"
+                    className="bg-violet-600 hover:bg-violet-500 text-white px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl font-medium text-sm transition-all shadow-md shadow-violet-500/20"
                   >
-                    <span className="hidden sm:inline">CONNECT_WALLET</span>
-                    <span className="sm:hidden">CONNECT</span>
+                    <span className="hidden sm:inline">Connect Wallet</span>
+                    <span className="sm:hidden">Connect</span>
                   </button>
                 );
               }
@@ -44,19 +44,19 @@ export default function MobileConnectButton() {
                 return (
                   <button
                     onClick={openChainModal}
-                    className="bg-red-600 hover:bg-red-500 text-white px-3 sm:px-6 py-2 sm:py-3 rounded-lg font-mono font-bold text-xs sm:text-sm transition-all duration-300 border border-red-500/30"
+                    className="bg-red-500/10 hover:bg-red-500/20 text-red-500 px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl font-medium text-sm transition-all border border-red-500/30"
                   >
-                    <span className="hidden sm:inline">WRONG_NETWORK</span>
-                    <span className="sm:hidden">NETWORK</span>
+                    <span className="hidden sm:inline">Wrong Network</span>
+                    <span className="sm:hidden">Network</span>
                   </button>
                 );
               }
 
               return (
-                <div className="flex items-center space-x-1 sm:space-x-2">
+                <div className="flex items-center space-x-2 bg-slate-800/60 p-1 sm:p-1.5 rounded-xl border border-slate-700/50 backdrop-blur-md">
                   {chain.hasIcon && (
                     <div
-                      className="w-4 h-4 sm:w-6 sm:h-6 rounded-full overflow-hidden border border-gray-600/30 hidden sm:block"
+                      className="w-5 h-5 sm:w-6 sm:h-6 rounded-full overflow-hidden ml-1 hidden sm:block"
                       style={{
                         background: chain.iconBackground,
                       }}
@@ -73,20 +73,18 @@ export default function MobileConnectButton() {
 
                   <button
                     onClick={openAccountModal}
-                    className="bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-600 hover:to-gray-700 text-white px-2 sm:px-4 py-2 sm:py-3 rounded-lg font-mono font-bold text-xs sm:text-sm transition-all duration-300 border border-gray-600/30"
+                    className="bg-slate-700/50 hover:bg-slate-600/50 text-slate-200 px-3 py-1.5 sm:py-1.5 rounded-lg font-medium text-xs sm:text-sm transition-all"
                   >
-                    {/* Mobile: Show only first 4 and last 4 characters */}
                     <span className="sm:hidden">
                       {account.address.slice(0, 4)}...{account.address.slice(-4)}
                     </span>
-                    {/* Desktop: Show more characters */}
                     <span className="hidden sm:inline">
-                      {account.displayName || `${account.address.slice(0, 6)}...${account.address.slice(-4)}`}
+                      {account.displayName}
                     </span>
                   </button>
 
                   {account.displayBalance && (
-                    <div className="text-white font-mono text-xs sm:text-sm hidden sm:block">
+                    <div className="text-violet-300 font-medium text-xs sm:text-sm hidden sm:block px-2">
                       {account.displayBalance}
                     </div>
                   )}

@@ -9,18 +9,18 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Larry Talbot - Werewolf DeFi on Base",
-  description: "Transform under the moon with Larry Talbot. Buy, leverage, and borrow LARRY tokens on Base.",
-  keywords: "DeFi, Base, Larry Talbot, werewolf, crypto, lending, borrowing, leverage",
+  title: "LARRY Protocol - Advanced Base DeFi",
+  description: "Next-generation leverage and liquidity protocol on Base. Trade, borrow, and build positions with automated price protection.",
+  keywords: "DeFi, Base, LARRY, crypto, lending, borrowing, advanced leverage, web3, finance",
   openGraph: {
-    title: "Larry Talbot - Werewolf DeFi on Base",
-    description: "Transform under the moon with Larry Talbot DeFi protocol",
+    title: "LARRY Protocol - Advanced Base DeFi",
+    description: "Next-generation leverage and liquidity protocol on Base.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Larry Talbot - Werewolf DeFi on Base",
-    description: "Transform under the moon with Larry Talbot DeFi protocol",
+    title: "LARRY Protocol - Advanced Base DeFi",
+    description: "Next-generation leverage and liquidity protocol on Base.",
   },
 };
 
