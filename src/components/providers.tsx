@@ -6,12 +6,12 @@ import { WagmiProvider } from 'wagmi';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { ReactNode } from 'react';
 
-import { base } from 'wagmi/chains';
+import { base, mainnet, sei } from 'wagmi/chains';
 
 const config = getDefaultConfig({
   appName: 'Larry Talbot DeFi',
   projectId: 'e78d121a165909ad1ec1cd20c2af0f9a',
-  chains: [base],
+  chains: [base, mainnet, sei],
   ssr: true,
 });
 

@@ -4,11 +4,15 @@ import Link from 'next/link';
 import MobileConnectButton from '@/components/MobileConnectButton';
 import { useState, useEffect } from 'react';
 import { useLarryContract } from '@/hooks/useLarryContract';
+import { useChainId, useChains } from 'wagmi';
 import { formatEther } from 'viem';
 import { Zap, Shield, TrendingUp, Layers, Menu, X, ArrowRight, ChevronRight, Activity } from 'lucide-react';
 
 export default function Home() {
   const { currentPrice, buyFeePercent, backing, totalSupply } = useLarryContract();
+  const chainId = useChainId();
+  const chains = useChains();
+  const chainName = chains.find(c => c.id === chainId)?.name ?? 'Base Network';
   const [mounted, setMounted] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -77,7 +81,7 @@ export default function Home() {
           <div className="relative z-10 max-w-5xl mx-auto space-y-8">
             <div className="inline-flex items-center px-4 py-2 rounded-full border border-violet-500/30 bg-violet-500/10 text-violet-300 text-sm font-medium backdrop-blur-md mb-4">
               <span className="flex h-2 w-2 rounded-full bg-violet-500 mr-2 animate-pulse"></span>
-              Live on Base Network
+              Live on {chainName}
             </div>
             
             <h1 className="text-5xl lg:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight">

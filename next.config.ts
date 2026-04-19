@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   env: {
     LARRY_CONTRACT_ADDRESS: process.env.LARRY_CONTRACT_ADDRESS,
   },
-  /* config options here */
+  allowedDevOrigins: ['172.20.10.6'],
 };
 
 export default nextConfig;

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useAccount, useBalance } from 'wagmi';
+import { useAccount, useBalance, useChainId, useChains } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { Activity, ArrowDownUp, RefreshCw, Layers } from 'lucide-react';
 import { useLarryContract, useUserLarryData, useTradeCalculations } from '@/hooks/useLarryContract';
@@ -14,6 +14,11 @@ interface TradingInterfaceProps {
 
 export default function TradingInterface({ activeTab, setActiveTab }: TradingInterfaceProps) {
   const { address, isConnected } = useAccount();
+  const chainId = useChainId();
+  const chains = useChains();
+  const currentChain = chains.find(c => c.id === chainId);
+  const nativeSymbol = currentChain?.nativeCurrency?.symbol ?? 'ETH';
+  const chainName = currentChain?.name ?? 'Base Network';
   const { buyLarry, sellLarry, openLeverage, createLoan, borrowMore, isPending, isConfirmed, buyFeePercent, sellFeePercent, leverageFeePercent } = useLarryContract();
   const { balance, loan, hasActiveLoan } = useUserLarryData(address);
   const { useBuyAmount, useSellAmount, useBorrowCollateral, useLeverageFee } = useTradeCalculations();
@@ -170,7 +175,7 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
           <Activity className="w-8 h-8 text-violet-400" />
         </div>
         <h3 className="text-2xl font-bold text-white mb-4">Connect Wallet</h3>
-        <p className="text-slate-400 mb-8 max-w-sm">Connect your Web3 wallet via the Base Network to access the LARRY trading protocol and advanced leverage options.</p>
+        <p className="text-slate-400 mb-8 max-w-sm">Connect your Web3 wallet to access the LARRY trading protocol and advanced leverage options.</p>
         <ConnectButton.Custom>
           {({ openConnectModal }) => (
             <button
@@ -197,7 +202,7 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
       {/* Balances header */}
       <div className="flex justify-between items-center mb-6 text-sm font-medium">
         <div className="flex bg-slate-800/50 rounded-lg p-2 border border-slate-700/50">
-          <span className="text-slate-400 mr-2">ETH:</span>
+          <span className="text-slate-400 mr-2">{nativeSymbol}:</span>
           <span className="text-white">
             {ethBalanceLoading ? '...' : ethBalance ? parseFloat(formatEther(ethBalance.value)).toFixed(8).replace(/\.?0+$/, '') || '0' : '0.00'}
           </span>
@@ -229,7 +234,7 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
         {/* Main Input */}
         <div className="space-y-2">
           <div className="flex justify-between text-sm font-medium text-slate-400">
-            <label>{activeTab === 'buy' || activeTab === 'leverage' ? 'Amount (ETH)' : 'Amount (LARRY)'}</label>
+            <label>{activeTab === 'buy' || activeTab === 'leverage' ? `Amount (${nativeSymbol})` : 'Amount (LARRY)'}</label>
           </div>
           <div className="relative">
             <input
@@ -276,7 +281,7 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
             <div className="flex justify-between text-sm">
               <span className="text-slate-400">You will receive</span>
               <span className="font-semibold text-white">
-                ~{parseFloat(outputAmount).toFixed(8).replace(/\.?0+$/, '') || '0'} {activeTab === 'buy' ? 'LARRY' : 'ETH'}
+                ~{parseFloat(outputAmount).toFixed(8).replace(/\.?0+$/, '') || '0'} {activeTab === 'buy' ? 'LARRY' : nativeSymbol}
               </span>
             </div>
             <div className="flex justify-between text-sm">
@@ -290,11 +295,11 @@ export default function TradingInterface({ activeTab, setActiveTab }: TradingInt
           <div className="bg-slate-800/40 border border-slate-700/50 rounded-xl p-4 space-y-3">
             <div className="flex justify-between text-sm">
               <span className="text-slate-400">Target Exposure</span>
-              <span className="font-semibold text-white">{parseFloat(leverageQuote.ethPosition).toFixed(8).replace(/\.?0+$/, '') || '0'} ETH</span>
+              <span className="font-semibold text-white">{parseFloat(leverageQuote.ethPosition).toFixed(8).replace(/\.?0+$/, '') || '0'} {nativeSymbol}</span>
             </div>
             <div className="flex justify-between text-sm">
               <span className="text-slate-400">Total Payment</span>
-              <span className="font-semibold text-white">{parseFloat(leverageQuote.requiredEth).toFixed(8).replace(/\.?0+$/, '') || '0'} ETH</span>
+              <span className="font-semibold text-white">{parseFloat(leverageQuote.requiredEth).toFixed(8).replace(/\.?0+$/, '') || '0'} {nativeSymbol}</span>
             </div>
             <div className="flex justify-between text-sm">
               <span className="text-slate-400">Leverage Multiplier</span>

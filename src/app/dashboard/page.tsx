@@ -6,10 +6,14 @@ import MobileConnectButton from '@/components/MobileConnectButton';
 import TradingInterface from '@/components/TradingInterface';
 import LoanDashboard from '@/components/LoanDashboard';
 import { Activity, BookOpen, Menu, X } from 'lucide-react';
+import { useChainId, useChains } from 'wagmi';
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState('buy');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const chainId = useChainId();
+  const chains = useChains();
+  const chainName = chains.find(c => c.id === chainId)?.name ?? 'Base Network';
 
   return (
     <div className="min-h-screen flex flex-col text-slate-100 bg-slate-950">
@@ -70,7 +74,7 @@ export default function Dashboard() {
             </div>
             <div className="inline-flex items-center px-4 py-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-medium">
               <span className="w-2 h-2 rounded-full bg-emerald-500 mr-2 animate-pulse"></span>
-              Base Network
+              {chainName}
             </div>
           </div>
 
